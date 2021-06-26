@@ -9,7 +9,7 @@
 	</RecipeDef>
 
 	<RecipeDef ParentName="UT_OrganRecipeBase">
-		<defName>UT_OrganicHeart</defName>
+		<defName>UT_GrowOrganicHeart</defName>
 		<label>organic heart</label>
 		<descriptionHyperlinks>
 			<ThingDef>Heart</ThingDef>
@@ -21,7 +21,7 @@
 	</RecipeDef>
 	
 	<RecipeDef ParentName="UT_OrganRecipeBase">
-		<defName>UT_OrganicLung</defName>
+		<defName>UT_GrowOrganicLung</defName>
 		<label>organic lung</label>
 		<descriptionHyperlinks>
 			<ThingDef>Lung</ThingDef>
@@ -33,7 +33,7 @@
 	</RecipeDef>
 	
 	<RecipeDef ParentName="UT_OrganRecipeBase">
-		<defName>UT_OrganicKidney</defName>
+		<defName>UT_GrowOrganicKidney</defName>
 		<label>organic kidney</label>
 		<descriptionHyperlinks>
 			<ThingDef>Kidney</ThingDef>
@@ -41,11 +41,11 @@
 		<products>
 			<Kidney>1</Kidney>
 		</products>
-		<workAmount>1500</workAmount>
+		<workAmount>1400</workAmount>
 	</RecipeDef>
 
 	<RecipeDef ParentName="UT_OrganRecipeBase">
-		<defName>UT_OrganicLiver</defName>
+		<defName>UT_GrowOrganicLiver</defName>
 		<label>organic liver</label>
 		<descriptionHyperlinks>
 			<ThingDef>Liver</ThingDef>
@@ -53,7 +53,79 @@
 		<products>
 			<Liver>1</Liver>
 		</products>
-		<workAmount>1500</workAmount>
+		<workAmount>1400</workAmount>
+	</RecipeDef>
+	
+	<RecipeDef ParentName="UT_OrganRecipeBase">
+		<defName>UT_GrowOrganicStomach</defName>
+		<label>organic stomach</label>
+		<descriptionHyperlinks>
+			<ThingDef>UT_OrganicStomach</ThingDef>
+		</descriptionHyperlinks>
+		<products>
+			<UT_OrganicStomach>1</UT_OrganicStomach>
+		</products>
+		<workAmount>1600</workAmount>
+	</RecipeDef>
+	
+	<RecipeDef ParentName="UT_OrganRecipeBase">
+		<defName>UT_GrowOrganicArm</defName>
+		<label>organic arm</label>
+		<descriptionHyperlinks>
+			<ThingDef>UT_OrganicArm</ThingDef>
+		</descriptionHyperlinks>
+		<products>
+			<UT_OrganicArm>1</UT_OrganicArm>
+		</products>
+		<workAmount>2000</workAmount>
+	</RecipeDef>
+	
+	<RecipeDef ParentName="UT_OrganRecipeBase">
+		<defName>UT_GrowOrganicLeg</defName>
+		<label>organic leg</label>
+		<descriptionHyperlinks>
+			<ThingDef>UT_OrganicLeg</ThingDef>
+		</descriptionHyperlinks>
+		<products>
+			<UT_OrganicLeg>1</UT_OrganicLeg>
+		</products>
+		<workAmount>2200</workAmount>
+	</RecipeDef>
+	
+	<RecipeDef ParentName="UT_OrganRecipeBase">
+		<defName>UT_GrowOrganicEye</defName>
+		<label>organic eye</label>
+		<descriptionHyperlinks>
+			<ThingDef>UT_OrganicEye</ThingDef>
+		</descriptionHyperlinks>
+		<products>
+			<UT_OrganicEye>1</UT_OrganicEye>
+		</products>
+		<workAmount>850</workAmount>
+	</RecipeDef>
+	
+	<RecipeDef ParentName="UT_OrganRecipeBase">
+		<defName>UT_GrowOrganicEar</defName>
+		<label>organic ear</label>
+		<descriptionHyperlinks>
+			<ThingDef>UT_OrganicEar</ThingDef>
+		</descriptionHyperlinks>
+		<products>
+			<UT_OrganicEar>1</UT_OrganicEar>
+		</products>
+		<workAmount>450</workAmount>
+	</RecipeDef>
+	
+	<RecipeDef ParentName="UT_OrganRecipeBase">
+		<defName>UT_GrowOrganicNose</defName>
+		<label>organic nose</label>
+		<descriptionHyperlinks>
+			<ThingDef>UT_OrganicNose</ThingDef>
+		</descriptionHyperlinks>
+		<products>
+			<UT_OrganicNose>1</UT_OrganicNose>
+		</products>
+		<workAmount>450</workAmount>
 	</RecipeDef>
 
 </Defs>
