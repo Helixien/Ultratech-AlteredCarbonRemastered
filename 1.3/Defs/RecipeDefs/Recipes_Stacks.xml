@@ -2,20 +2,20 @@
 <Defs>
 
 	<RecipeDef ParentName="SurgeryInstallImplantBase">
-		<defName>AC_InstallEmptyCorticalStack</defName>
+		<defName>UT_InstallEmptyCorticalStack</defName>
 		<label>install empty cortical stack</label>
 		<description>Install an empty cortical stack.</description>
 		<descriptionHyperlinks>
-			<ThingDef>AC_EmptyCorticalStack</ThingDef>
+			<ThingDef>UT_EmptyCorticalStack</ThingDef>
 		</descriptionHyperlinks>
 		<workerClass>AlteredCarbon.Recipe_InstallCorticalStack</workerClass>
 		<jobString>Installing cortical stack.</jobString>
-		<uiIconThing>AC_EmptyCorticalStack</uiIconThing>
+		<uiIconThing>UT_EmptyCorticalStack</uiIconThing>
 		<ingredients>
 			<li>
 				<filter>
 					<thingDefs>
-						<li>AC_EmptyCorticalStack</li>
+						<li>UT_EmptyCorticalStack</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -23,30 +23,30 @@
 		</ingredients>
 		<fixedIngredientFilter>
 			<thingDefs>
-				<li>AC_EmptyCorticalStack</li>
+				<li>UT_EmptyCorticalStack</li>
 			</thingDefs>
 		</fixedIngredientFilter>
 		<appliedOnFixedBodyParts>
 			<li>Neck</li>
 		</appliedOnFixedBodyParts>
-		<addsHediff>AC_CorticalStack</addsHediff>
+		<addsHediff>UT_CorticalStack</addsHediff>
 	</RecipeDef>
 
 	<RecipeDef ParentName="SurgeryInstallImplantBase">
-		<defName>AC_InstallCorticalStack</defName>
+		<defName>UT_InstallCorticalStack</defName>
 		<label>install filled cortical stack</label>
 		<description>Install a cortical stack.</description>
 		<descriptionHyperlinks>
-			<ThingDef>AC_FilledCorticalStack</ThingDef>
+			<ThingDef>UT_FilledCorticalStack</ThingDef>
 		</descriptionHyperlinks>
 		<workerClass>AlteredCarbon.Recipe_InstallCorticalStack</workerClass>
 		<jobString>Installing cortical stack.</jobString>
-		<uiIconThing>AC_FilledCorticalStack</uiIconThing>
+		<uiIconThing>UT_FilledCorticalStack</uiIconThing>
 		<ingredients>
 			<li>
 				<filter>
 					<thingDefs>
-						<li>AC_FilledCorticalStack</li>
+						<li>UT_FilledCorticalStack</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
@@ -54,26 +54,26 @@
 		</ingredients>
 		<fixedIngredientFilter>
 			<thingDefs>
-				<li>AC_FilledCorticalStack</li>
+				<li>UT_FilledCorticalStack</li>
 			</thingDefs>
 		</fixedIngredientFilter>
 		<appliedOnFixedBodyParts>
 			<li>Neck</li>
 		</appliedOnFixedBodyParts>
-		<addsHediff>AC_CorticalStack</addsHediff>
+		<addsHediff>UT_CorticalStack</addsHediff>
 	</RecipeDef>
 
 	<RecipeDef ParentName="SurgeryRemoveImplantBase">
-		<defName>AC_RemoveCorticalStack</defName>
+		<defName>UT_RemoveCorticalStack</defName>
 		<label>remove cortical stack</label>
 		<description>Remove cortical stack.</description>
 		<descriptionHyperlinks>
-			<ThingDef>AC_FilledCorticalStack</ThingDef>
+			<ThingDef>UT_FilledCorticalStack</ThingDef>
 		</descriptionHyperlinks>
 		<workerClass>AlteredCarbon.Recipe_RemoveCorticalStack</workerClass>
 		<jobString>Removing cortical stack.</jobString>
-		<uiIconThing>AC_FilledCorticalStack</uiIconThing>
-		<removesHediff>AC_CorticalStack</removesHediff>
+		<uiIconThing>UT_FilledCorticalStack</uiIconThing>
+		<removesHediff>UT_CorticalStack</removesHediff>
 	</RecipeDef>
 
 </Defs>

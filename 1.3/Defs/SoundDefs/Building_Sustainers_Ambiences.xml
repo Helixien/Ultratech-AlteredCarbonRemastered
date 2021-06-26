@@ -2,7 +2,7 @@
 <Defs>
 
 	<SoundDef>
-		<defName>AC_SleeveGrowingVat_Ambience_Start</defName>
+		<defName>UT_SleeveGrowingVat_Ambience_Start</defName>
 		<context>MapOnly</context>
 		<subSounds>
 			<li>
@@ -19,7 +19,7 @@
 	</SoundDef>
 
 	<SoundDef>
-		<defName>AC_SleeveGrowingVat_Ambience_Stop</defName>
+		<defName>UT_SleeveGrowingVat_Ambience_Stop</defName>
 		<context>MapOnly</context>
 		<subSounds>
 			<li>
@@ -36,12 +36,12 @@
 	</SoundDef>
 
 	<SoundDef>
-		<defName>AC_SleeveGrowingVat_Ambience</defName>
+		<defName>UT_SleeveGrowingVat_Ambience</defName>
 		<sustain>True</sustain>
 		<context>MapOnly</context>
 		<priorityMode>PrioritizeNearest</priorityMode>
-		<sustainStartSound>AC_SleeveGrowingVat_Ambience_Start</sustainStartSound>
-		<sustainStopSound>AC_SleeveGrowingVat_Ambience_Stop</sustainStopSound>
+		<sustainStartSound>UT_SleeveGrowingVat_Ambience_Start</sustainStartSound>
+		<sustainStopSound>UT_SleeveGrowingVat_Ambience_Stop</sustainStopSound>
 		<subSounds>
 			<li>
 				<muteWhenPaused>True</muteWhenPaused>

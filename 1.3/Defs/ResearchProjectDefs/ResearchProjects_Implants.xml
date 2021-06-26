@@ -2,7 +2,7 @@
 <Defs>
 
 	<ResearchProjectDef>
-		<defName>AC_Hacking</defName>
+		<defName>UT_Hacking</defName>
 		<label>hacking</label>
 		<description>Craft ultra-tech neck implants which store a human's consciousness, effectively removing someone from their body.</description>
 		<baseCost>3000</baseCost>
@@ -16,7 +16,7 @@
 	</ResearchProjectDef>
 
 	<ResearchProjectDef>
-		<defName>AC_OrganProduction</defName>
+		<defName>UT_OrganProduction</defName>
 		<label>human sleeves</label>
 		<description>Craft ultra-tech neck implants which store a human's consciousness, effectively removing someone from their body.</description>
 		<baseCost>3000</baseCost>
@@ -30,12 +30,12 @@
 	</ResearchProjectDef>
 
 	<ResearchProjectDef>
-		<defName>AC_SleeveProduction</defName>
+		<defName>UT_SleeveProduction</defName>
 		<label>human sleeves</label>
 		<description>Craft ultra-tech neck implants which store a human's consciousness, effectively removing someone from their body.</description>
 		<baseCost>6000</baseCost>
 		<prerequisites>
-			<li>AC_OrganProduction</li>
+			<li>UT_OrganProduction</li>
 			<li>Fabrication</li>
 		</prerequisites>
 		<techLevel>Ultra</techLevel>
@@ -51,12 +51,12 @@
 	</ResearchProjectDef>
 	
 	<ResearchProjectDef>
-		<defName>AC_CorticalStackMatrix</defName>
+		<defName>UT_CorticalStackMatrix</defName>
 		<label>quantum matrix</label>
 		<description>Craft ultra-tech neck implants which store a human's consciousness, effectively removing someone from their body.</description>
 		<baseCost>6000</baseCost>
 		<prerequisites>
-			<li>AC_OrganProduction</li>
+			<li>UT_OrganProduction</li>
 			<li>Fabrication</li>
 		</prerequisites>
 		<techLevel>Ultra</techLevel>

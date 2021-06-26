@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-	<ThingDef Name="AC_BrainTemplatesBase" ParentName="ResourceBase" Abstract="True">
+	<ThingDef Name="UT_BrainTemplatesBase" ParentName="ResourceBase" Abstract="True">
 		<graphicData>
 			<texPath>Things/Item/BrainTemplates/BrainTemplate_Default</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -18,26 +18,26 @@
 			<MarketValue>800</MarketValue>
 		</statBases>
 		<thingCategories>
-			<li>AC_BrainTemplates</li>
+			<li>UT_BrainTemplates</li>
 		</thingCategories>
 		<tickerType>Rare</tickerType>
 		<tradeTags Inherit="False">
-			<li>AC_TemplatesUltra</li>
+			<li>UT_TemplatesUltra</li>
 			<li>ExoticMisc</li>
 		</tradeTags>
 		<thingSetMakerTags>
 			<li>RewardStandardLowFreq</li>
 		</thingSetMakerTags>
-		<storedConceptLearnOpportunity>AC_UsingBrainTemplates</storedConceptLearnOpportunity>
+		<storedConceptLearnOpportunity>UT_UsingBrainTemplates</storedConceptLearnOpportunity>
 	</ThingDef>
 
-	<ThingDef ParentName="AC_BrainTemplatesBase">
-		<defName>AC_BrainTemplateCombat</defName>
+	<ThingDef ParentName="UT_BrainTemplatesBase">
+		<defName>UT_BrainTemplateCombat</defName>
 		<label>brain template (combat)</label>
 		<comps>
 			<li Class="AlteredCarbon.CompProperties_BrainTemplate">
 				<hediffs>
-					<li>AC_BrainTemplateCombat</li>
+					<li>UT_BrainTemplateCombat</li>
 				</hediffs>
 				<skillsOffsets>
 					<Melee>5</Melee>
@@ -51,13 +51,13 @@
 		</comps>
 	</ThingDef>
 
-	<ThingDef ParentName="AC_BrainTemplatesBase">
-		<defName>AC_BrainTemplateWorker</defName>
+	<ThingDef ParentName="UT_BrainTemplatesBase">
+		<defName>UT_BrainTemplateWorker</defName>
 		<label>brain template (worker)</label>
 		<comps>
 			<li Class="AlteredCarbon.CompProperties_BrainTemplate">
 				<hediffs>
-					<li>AC_BrainTemplateWorker</li>
+					<li>UT_BrainTemplateWorker</li>
 				</hediffs>
 				<skillsOffsets>
 					<Construction>5</Construction>
@@ -73,13 +73,13 @@
 		</comps>
 	</ThingDef>
 
-	<ThingDef ParentName="AC_BrainTemplatesBase">
-		<defName>AC_BrainTemplateInfiltrator</defName>
+	<ThingDef ParentName="UT_BrainTemplatesBase">
+		<defName>UT_BrainTemplateInfiltrator</defName>
 		<label>brain template (infiltrator)</label>
 		<comps>
 			<li Class="AlteredCarbon.CompProperties_BrainTemplate">
 				<hediffs>
-					<li>AC_BrainTemplateInfiltrator</li>
+					<li>UT_BrainTemplateInfiltrator</li>
 				</hediffs>
 				<skillsOffsets>
 					<Melee>2</Melee>

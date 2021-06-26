@@ -2,7 +2,7 @@
 <Defs>
 
 	<HediffDef>
-		<defName>AC_SleeveBodyData</defName>
+		<defName>UT_SleeveBodyData</defName>
 		<label>Dev_SleeveBodyData</label>
 		<hediffClass>AlteredCarbon.Hediff_SleeveBodyStats</hediffClass>
 		<defaultLabelColor>(0.44, 0.81, 0.81)</defaultLabelColor>
@@ -18,14 +18,14 @@
 		</stages>
 	</HediffDef>
 
-	<HediffDef Name="AC_BrainTemplate_Base" ParentName="DiseaseBase" Abstract="True">
+	<HediffDef Name="UT_BrainTemplate_Base" ParentName="DiseaseBase" Abstract="True">
 		<isBad>false</isBad>
 		<makesSickThought>false</makesSickThought>
 		<defaultLabelColor>(0.44, 0.81, 0.81)</defaultLabelColor>
 	</HediffDef>
 
-	<HediffDef ParentName="AC_BrainTemplate_Base">
-		<defName>AC_BrainTemplateCombat</defName>
+	<HediffDef ParentName="UT_BrainTemplate_Base">
+		<defName>UT_BrainTemplateCombat</defName>
 		<label>sleeve type (combat)</label>
 		<description>This body was grown specifically for combat.</description>
 		<priceImpact>true</priceImpact>
@@ -48,8 +48,8 @@
 		</stages>
 	</HediffDef>
 
-	<HediffDef ParentName="AC_BrainTemplate_Base">
-		<defName>AC_BrainTemplateWorker</defName>
+	<HediffDef ParentName="UT_BrainTemplate_Base">
+		<defName>UT_BrainTemplateWorker</defName>
 		<label>sleeve type (worker)</label>
 		<description>This body was grown specifically for manual labour.</description>
 		<priceImpact>true</priceImpact>
@@ -70,8 +70,8 @@
 		</stages>
 	</HediffDef>
 
-	<HediffDef ParentName="AC_BrainTemplate_Base">
-		<defName>AC_BrainTemplateInfiltrator</defName>
+	<HediffDef ParentName="UT_BrainTemplate_Base">
+		<defName>UT_BrainTemplateInfiltrator</defName>
 		<label>sleeve type (infiltrator)</label>
 		<description>This body was grown specifically for stealth and infiltration.</description>
 		<priceImpact>true</priceImpact>

@@ -2,7 +2,7 @@
 <Defs>
 
 	<ThoughtDef ParentName="DeathMemoryFamily">
-		<defName>AC_MyOriginalDied</defName>
+		<defName>UT_MyOriginalDied</defName>
 		<nullifyingTraits>
 			<li>Psychopath</li>
 			<li>Bloodlust</li>
@@ -17,7 +17,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef ParentName="DeathMemoryFamily">
-		<defName>AC_MyCopyDied</defName>
+		<defName>UT_MyCopyDied</defName>
 		<nullifyingTraits>
 			<li>Psychopath</li>
 			<li>Bloodlust</li>

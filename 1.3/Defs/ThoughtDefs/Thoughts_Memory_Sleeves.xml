@@ -2,7 +2,7 @@
 <Defs>
 
 	<ThoughtDef>
-		<defName>AC_WrongRace</defName>
+		<defName>UT_WrongRace</defName>
 		<durationDays>120</durationDays>
 		<stackLimit>1</stackLimit>
 		<nullifyingTraits>
@@ -18,7 +18,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_WrongGender</defName>
+		<defName>UT_WrongGender</defName>
 		<durationDays>120</durationDays>
 		<stackLimit>1</stackLimit>
 		<nullifyingTraits>
@@ -36,7 +36,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_WrongGenderDouble</defName>
+		<defName>UT_WrongGenderDouble</defName>
 		<durationDays>120</durationDays>
 		<stackLimit>1</stackLimit>
 		<nullifyingTraits>
@@ -54,7 +54,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_NewSleeve</defName>
+		<defName>UT_NewSleeve</defName>
 		<durationDays>30</durationDays>
 		<stackLimit>1</stackLimit>
 		<nullifyingTraits>
@@ -70,7 +70,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_NewSleeveDouble</defName>
+		<defName>UT_NewSleeveDouble</defName>
 		<durationDays>30</durationDays>
 		<stackLimit>1</stackLimit>
 		<nullifyingTraits>
@@ -88,7 +88,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_MansBody</defName>
+		<defName>UT_MansBody</defName>
 		<workerClass>AlteredCarbon.ThoughtWorker_MansBody</workerClass>
 		<stackLimit>1</stackLimit>
 		<stages>
@@ -101,7 +101,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_WomansBody</defName>
+		<defName>UT_WomansBody</defName>
 		<workerClass>AlteredCarbon.ThoughtWorker_WomansBody</workerClass>
 		<stackLimit>1</stackLimit>
 		<stages>
@@ -114,7 +114,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_JustCopy</defName>
+		<defName>UT_JustCopy</defName>
 		<durationDays>60</durationDays>
 		<stackLimit>1</stackLimit>
 		<nullifyingTraits>
@@ -131,7 +131,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_LostMySpouse</defName>
+		<defName>UT_LostMySpouse</defName>
 		<durationDays>30</durationDays>
 		<stackLimit>1</stackLimit>
 		<stages>
@@ -144,7 +144,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_LostMyFiance</defName>
+		<defName>UT_LostMyFiance</defName>
 		<durationDays>30</durationDays>
 		<stackLimit>1</stackLimit>
 		<stages>
@@ -157,7 +157,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_LostMyLover</defName>
+		<defName>UT_LostMyLover</defName>
 		<durationDays>30</durationDays>
 		<stackLimit>1</stackLimit>
 		<stages>

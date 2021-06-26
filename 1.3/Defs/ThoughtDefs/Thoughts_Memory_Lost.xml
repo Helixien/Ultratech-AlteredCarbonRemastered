@@ -2,7 +2,7 @@
 <Defs>
 
 	<ThoughtDef ParentName="LostMemoryFamily">
-		<defName>AC_MyOriginalLostMale</defName>
+		<defName>UT_MyOriginalLostMale</defName>
 		<stages>
 			<li>
 				<label>my original copy {0} lost</label>
@@ -13,7 +13,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef ParentName="LostMemoryFamily">
-		<defName>AC_MyOriginalLostFemale</defName>
+		<defName>UT_MyOriginalLostFemale</defName>
 		<stages>
 			<li>
 				<label>my original copy {0} lost</label>
@@ -24,7 +24,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef ParentName="LostMemoryFamily">
-		<defName>AC_MyCopyLostMale</defName>
+		<defName>UT_MyCopyLostMale</defName>
 		<stages>
 			<li>
 				<label>my copy {0} lost</label>
@@ -35,7 +35,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef ParentName="LostMemoryFamily">
-		<defName>AC_MyCopyLostFemale</defName>
+		<defName>UT_MyCopyLostFemale</defName>
 		<stages>
 			<li>
 				<label>my copy {0} lost</label>

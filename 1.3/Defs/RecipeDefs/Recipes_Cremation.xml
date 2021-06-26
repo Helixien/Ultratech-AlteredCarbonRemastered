@@ -2,7 +2,7 @@
 <Defs>
 
 	<RecipeDef>
-		<defName>AC_BurnEmptyCorticalStacks</defName>
+		<defName>UT_BurnEmptyCorticalStacks</defName>
 		<label>burn empty cortical stacks</label>
 		<description>Cremate empty cortical stacks.</description>
 		<jobString>Burning cortical stacks.</jobString>
@@ -14,20 +14,20 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>AC_EmptyCorticalStack</li>
+						<li>UT_EmptyCorticalStack</li>
 					</thingDefs>
 				</filter>
 			</li>
 		</ingredients>
 		<defaultIngredientFilter>
 			<thingDefs>
-				<li>AC_EmptyCorticalStack</li>
+				<li>UT_EmptyCorticalStack</li>
 			</thingDefs>
 		</defaultIngredientFilter>
 	</RecipeDef>
 
 	<RecipeDef>
-		<defName>AC_BurnFilledCorticalStack</defName>
+		<defName>UT_BurnFilledCorticalStack</defName>
 		<label>burn filled cortical stack</label>
 		<description>Cremate a filled cortical stack.</description>
 		<jobString>Burning cortical stacks.</jobString>
@@ -39,14 +39,14 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>AC_FilledCorticalStack</li>
+						<li>UT_FilledCorticalStack</li>
 					</thingDefs>
 				</filter>
 			</li>
 		</ingredients>
 		<defaultIngredientFilter>
 			<thingDefs>
-				<li>AC_FilledCorticalStack</li>
+				<li>UT_FilledCorticalStack</li>
 			</thingDefs>
 		</defaultIngredientFilter>
 	</RecipeDef>

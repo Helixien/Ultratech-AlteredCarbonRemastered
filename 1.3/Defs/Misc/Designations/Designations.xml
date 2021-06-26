@@ -2,7 +2,7 @@
 <Defs>
 
 	<DesignationDef>
-		<defName>AC_ExtractStackDesignation</defName>
+		<defName>UT_ExtractStackDesignation</defName>
 		<texturePath>UI/Icons/ExtractStacks_2</texturePath>
 		<targetType>Thing</targetType>
 	</DesignationDef>

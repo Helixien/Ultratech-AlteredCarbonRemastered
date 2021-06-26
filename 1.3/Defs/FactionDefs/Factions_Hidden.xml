@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-	<FactionDef Abstract="True" Name="AC_SleeveBase">
-		<defName>AC_EmptySleeves</defName>
+	<FactionDef Abstract="True" Name="UT_SleeveBase">
+		<defName>UT_EmptySleeves</defName>
 		<label>empty sleeves</label>
 		<pawnSingular>sleeve</pawnSingular>
 		<pawnsPlural>sleeves</pawnsPlural>

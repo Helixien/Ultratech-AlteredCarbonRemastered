@@ -2,7 +2,7 @@
 <Defs>
 
 	<ThingDef ParentName="ResourceBase">
-		<defName>AC_AncientStack</defName>
+		<defName>UT_AncientStack</defName>
 		<label>ancient cortical stack</label>
 		<description>An ancient, ultra tech implant that once store a human's consciousness. For whatever reason, is it age, lack of maintenance or damage, it is corrupted, but there might still be data worth salvaging on it.</description>
 		<graphicData>
@@ -29,13 +29,13 @@
 			<ComponentSpacer>4</ComponentSpacer>
 		</costList>
 		<thingCategories>
-			<li>AC_BodyPartsUltra</li>
+			<li>UT_BodyPartsUltra</li>
 		</thingCategories>
 		<drawGUIOverlay>true</drawGUIOverlay>
 		<tradeability>Sellable</tradeability>
 		<techLevel>Ultra</techLevel>
 		<tradeTags inherit="False"/>
-		<storedConceptLearnOpportunity>AC_AncientStacks</storedConceptLearnOpportunity>
+		<storedConceptLearnOpportunity>UT_AncientStacks</storedConceptLearnOpportunity>
 	</ThingDef>
 
 </Defs>

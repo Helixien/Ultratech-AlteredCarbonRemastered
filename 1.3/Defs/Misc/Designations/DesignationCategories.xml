@@ -2,7 +2,7 @@
 <Defs>
 
 	<DesignationCategoryDef>
-		<defName>AC_Ultra</defName>
+		<defName>UT_Ultra</defName>
 		<label>ultra</label>
 		<order>45</order>
 		<specialDesignatorClasses>

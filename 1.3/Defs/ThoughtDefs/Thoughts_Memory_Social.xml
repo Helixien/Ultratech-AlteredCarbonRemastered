@@ -2,7 +2,7 @@
 <Defs>
 
 	<ThoughtDef>
-		<defName>AC_KilledMyOriginal</defName>
+		<defName>UT_KilledMyOriginal</defName>
 		<thoughtClass>Thought_MemorySocial</thoughtClass>
 		<durationDays>120</durationDays>
 		<stackLimit>300</stackLimit>
@@ -16,7 +16,7 @@
 	</ThoughtDef>
 
 	<ThoughtDef>
-		<defName>AC_KilledMyCopy</defName>
+		<defName>UT_KilledMyCopy</defName>
 		<thoughtClass>Thought_MemorySocial</thoughtClass>
 		<durationDays>120</durationDays>
 		<stackLimit>300</stackLimit>

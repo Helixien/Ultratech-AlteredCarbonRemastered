@@ -2,13 +2,13 @@
 <Defs>
 
 	<PawnRelationDef>
-		<defName>AC_Original</defName>
+		<defName>UT_Original</defName>
 		<label>original</label>
 		<importance>185</importance>
-		<diedThought>AC_MyOriginalDied</diedThought>
-		<killedThought>AC_KilledMyOriginal</killedThought>
-		<lostThought>AC_MyOriginalLostMale</lostThought>
-		<lostThoughtFemale>AC_MyOriginalLostFemale</lostThoughtFemale>
+		<diedThought>UT_MyOriginalDied</diedThought>
+		<killedThought>UT_KilledMyOriginal</killedThought>
+		<lostThought>UT_MyOriginalLostMale</lostThought>
+		<lostThoughtFemale>UT_MyOriginalLostFemale</lostThoughtFemale>
 		<soldThoughts>
 			<li>SoldMyLovedOne</li>
 		</soldThoughts>
@@ -21,13 +21,13 @@
 	</PawnRelationDef>
 
 	<PawnRelationDef>
-		<defName>AC_Copy</defName>
+		<defName>UT_Copy</defName>
 		<label>copy</label>
 		<importance>185</importance>
-		<diedThought>AC_MyCopyDied</diedThought>
-		<killedThought>AC_KilledMyCopy</killedThought>
-		<lostThought>AC_MyCopyLostMale</lostThought>
-		<lostThoughtFemale>AC_MyCopyLostFemale</lostThoughtFemale>
+		<diedThought>UT_MyCopyDied</diedThought>
+		<killedThought>UT_KilledMyCopy</killedThought>
+		<lostThought>UT_MyCopyLostMale</lostThought>
+		<lostThoughtFemale>UT_MyCopyLostFemale</lostThoughtFemale>
 		<soldThoughts>
 			<li>SoldMyLovedOne</li>
 		</soldThoughts>

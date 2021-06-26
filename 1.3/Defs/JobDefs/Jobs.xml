@@ -2,49 +2,49 @@
 <Defs>
 
 	<JobDef>
-		<defName>AC_ExtractStack</defName>
+		<defName>UT_ExtractStack</defName>
 		<driverClass>AlteredCarbon.JobDriver_ExtractStack</driverClass>
 		<reportString>extracts cortical stack from TargetA</reportString>
 	</JobDef>
 
 	<JobDef>
-		<defName>AC_WipeStack</defName>
+		<defName>UT_WipeStack</defName>
 		<driverClass>AlteredCarbon.JobDriver_WipeStack</driverClass>
 		<reportString>wipes cortical stack</reportString>
 	</JobDef>
 
 	<JobDef>
-		<defName>AC_DestroyStack</defName>
+		<defName>UT_DestroyStack</defName>
 		<driverClass>AlteredCarbon.JobDriver_DestroyStack</driverClass>
 		<reportString>destroys cortical stack</reportString>
 	</JobDef>
 
 	<JobDef>
-		<defName>AC_DuplicateStack</defName>
+		<defName>UT_DuplicateStack</defName>
 		<driverClass>AlteredCarbon.JobDriver_DuplicateStack</driverClass>
 		<reportString>duplicating cortical stack</reportString>
 	</JobDef>
 
 	<JobDef>
-		<defName>AC_ReleaseSleeve</defName>
+		<defName>UT_ReleaseSleeve</defName>
 		<driverClass>AlteredCarbon.JobDriver_ReleaseSleeve</driverClass>
 		<reportString>releasing sleeve</reportString>
 	</JobDef>
 
 	<JobDef>
-		<defName>AC_InsertBrainTemplate</defName>
+		<defName>UT_InsertBrainTemplate</defName>
 		<driverClass>AlteredCarbon.JobDriver_InsertBrainTemplate</driverClass>
 		<reportString>inserting brain template</reportString>
 	</JobDef>
 
 	<JobDef>
-		<defName>AC_ExtractActiveBrainTemplate</defName>
+		<defName>UT_ExtractActiveBrainTemplate</defName>
 		<driverClass>AlteredCarbon.JobDriver_ExtractActiveBrainTemplate</driverClass>
 		<reportString>extracting brain template from incubator</reportString>
 	</JobDef>
 
 	<WorkGiverDef>
-		<defName>AC_ExtractActiveBrainTemplate</defName>
+		<defName>UT_ExtractActiveBrainTemplate</defName>
 		<label>extracting brain template from incubator</label>
 		<giverClass>AlteredCarbon.WorkGiver_ExtractBrainTemplate</giverClass>
 		<workType>Hauling</workType>
@@ -57,7 +57,7 @@
 	</WorkGiverDef>
 
 	<WorkGiverDef>
-		<defName>AC_InsertBrainTemplate</defName>
+		<defName>UT_InsertBrainTemplate</defName>
 		<label>inserting brain template in incubator</label>
 		<giverClass>AlteredCarbon.WorkGiver_InsertBrainTemplate</giverClass>
 		<workType>Hauling</workType>
@@ -70,7 +70,7 @@
 	</WorkGiverDef>
 
 	<WorkGiverDef>
-		<defName>AC_ExtractStack</defName>
+		<defName>UT_ExtractStack</defName>
 		<label>extracting cortical stack</label>
 		<giverClass>AlteredCarbon.WorkGiver_ExtractStack</giverClass>
 		<workType>Hauling</workType>
@@ -83,7 +83,7 @@
 	</WorkGiverDef>
 
 	<WorkGiverDef>
-		<defName>AC_DuplicateStacks</defName>
+		<defName>UT_DuplicateStacks</defName>
 		<label>duplicate stacks</label>
 		<giverClass>AlteredCarbon.WorkGiver_DuplicateStacks</giverClass>
 		<workType>Research</workType>
@@ -96,7 +96,7 @@
 	</WorkGiverDef>
 
 	<WorkGiverDef>
-		<defName>AC_HaulStacksToStorage</defName>
+		<defName>UT_HaulStacksToStorage</defName>
 		<label>haul stacks</label>
 		<giverClass>AlteredCarbon.WorkGiver_HaulStacks</giverClass>
 		<workType>Hauling</workType>
@@ -109,13 +109,13 @@
 	</WorkGiverDef>
 
 	<WorkGiverDef>
-		<defName>AC_DoBillsDecryptionBench</defName>
+		<defName>UT_DoBillsDecryptionBench</defName>
 		<label>hack stacks</label>
 		<giverClass>WorkGiver_DoBill</giverClass>
 		<workType>Research</workType>
 		<priorityInType>50</priorityInType>
 		<fixedBillGiverDefs>
-			<li>AC_DecryptionBench</li>
+			<li>UT_DecryptionBench</li>
 		</fixedBillGiverDefs>
 		<verb>hacking stacks</verb>
 		<gerund>hacking stacks at</gerund>

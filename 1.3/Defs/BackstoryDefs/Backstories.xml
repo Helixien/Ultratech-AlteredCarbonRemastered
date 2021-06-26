@@ -2,7 +2,7 @@
 <Defs>
 
 	<AlteredCarbon.BackstoryDef>
-		<defName>AC_EmptySleeveChildhood</defName>
+		<defName>UT_EmptySleeveChildhood</defName>
 		<title>Empty Sleeve</title>
 		<titleShort>Empty Sleeve</titleShort>
 		<baseDescription>Grown in a vat, this body is basically brain-dead and can not live on its own.</baseDescription>
@@ -27,7 +27,7 @@
 			<li>Civil</li>
 		</spawnCategories>
 		<shuffleable>false</shuffleable>
-		<saveKeyIdentifier>AC_VatGrown45</saveKeyIdentifier>
+		<saveKeyIdentifier>UT_VatGrown45</saveKeyIdentifier>
 	</AlteredCarbon.BackstoryDef>
 
 </Defs>

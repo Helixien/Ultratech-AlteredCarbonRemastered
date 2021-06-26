@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-	<!-- ==================================== Spacer =====================================-->
-	<ThingDef Name="AC_ApparelArmorProtectorateBase" ParentName="ArmorMachineableBase" Abstract="True">
+	<ThingDef Name="UT_ApparelArmorProtectorateBase" ParentName="ArmorMachineableBase" Abstract="True">
 		<techLevel>Spacer</techLevel>
 		<recipeMaker>
 			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
@@ -92,14 +91,14 @@
 		</comps>
 	</ThingDef>
 
-	<ThingDef ParentName="AC_ApparelArmorProtectorateBase">
-		<defName>AC_Apparel_ProtectorateArmor</defName>
+	<ThingDef ParentName="UT_ApparelArmorProtectorateBase">
+		<defName>UT_Apparel_ProtectorateArmor</defName>
 		<label>protectorate armor</label>
 		<description>A suit of light, powered armor used on the core worlds. Layered plasteel-weave plates are effective at stopping attacks, with few vulnerable joint sections. Neuro-memetic assistors allow a human to wear the armor and still move easily.</description>
 		<apparel>
 			<tags>
 				<li>SpacerMilitary</li>
-				<li>AC_SpacerProtectorate</li>
+				<li>UT_SpacerProtectorate</li>
 			</tags>
 		</apparel>
 	</ThingDef>

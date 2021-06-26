@@ -2,7 +2,7 @@
 <Defs>
 
 	<ThingDef ParentName="BuildingBase">
-		<defName>AC_SleeveIncubator</defName>
+		<defName>UT_SleeveIncubator</defName>
 		<label>sleeve incubator</label>
 		<description>An ultra-tech vat tank connected to advanced life support systems and an AI core. Used by the rich 1% on ultra-tech worlds and less trustworthy individuals on rimworlds to grow custom sleeves, the sleeve incubator is capable of growing any human body one can imagine.</description>
 		<thingClass>AlteredCarbon.Building_SleeveGrower</thingClass>
@@ -34,7 +34,7 @@
 		</costList>
 		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
 		<techLevel>Ultra</techLevel>
-		<designationCategory>AC_Ultra</designationCategory>
+		<designationCategory>UT_Ultra</designationCategory>
 		<altitudeLayer>Building</altitudeLayer>
 		<neverMultiSelect>true</neverMultiSelect>
 		<rotatable>true</rotatable>
@@ -46,16 +46,16 @@
 		<blockWind>true</blockWind>
 		<surfaceType>Item</surfaceType>
 		<researchPrerequisites>
-			<li>AC_SleeveProduction</li>
+			<li>UT_SleeveProduction</li>
 		</researchPrerequisites>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<uiIconPath>Things/Building/Misc/SleeveGrowerUI_Icon</uiIconPath>
 		<uiIconScale>1</uiIconScale>
 		<building>
-			<spawnedConceptLearnOpportunity>AC_SleeveGrowing</spawnedConceptLearnOpportunity>
-			<boughtConceptLearnOpportunity>AC_SleeveGrowing</boughtConceptLearnOpportunity>
+			<spawnedConceptLearnOpportunity>UT_SleeveGrowing</spawnedConceptLearnOpportunity>
+			<boughtConceptLearnOpportunity>UT_SleeveGrowing</boughtConceptLearnOpportunity>
 			<ai_chillDestination>false</ai_chillDestination>
-			<soundAmbient>AC_SleeveGrowingVat_Ambience</soundAmbient>
+			<soundAmbient>UT_SleeveGrowingVat_Ambience</soundAmbient>
 			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
 		</building>
 		<placeWorkers>
@@ -94,7 +94,7 @@
 	</ThingDef>
 	
 	<ThingDef ParentName="BuildingBase">
-		<defName>AC_OrganIncubator</defName>
+		<defName>UT_OrganIncubator</defName>
 		<label>organ incubator</label>
 		<description>A small ultra-tech vat tank used to grow organs of any kind in a short period of time. Requires neutroamine to work.</description>
 		<tickerType>Normal</tickerType>
@@ -118,7 +118,7 @@
 		</costList>
 		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
 		<techLevel>Ultra</techLevel>
-		<designationCategory>AC_Ultra</designationCategory>
+		<designationCategory>UT_Ultra</designationCategory>
 		<altitudeLayer>Building</altitudeLayer>
 		<neverMultiSelect>true</neverMultiSelect>
 		<rotatable>true</rotatable>
@@ -129,7 +129,7 @@
 		<constructEffect>ConstructMetal</constructEffect>
 		<blockWind>true</blockWind>
 		<researchPrerequisites>
-			<li>AC_OrganProduction</li>
+			<li>UT_OrganProduction</li>
 		</researchPrerequisites>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<uiIconPath>Things/Building/Misc/OrganIncubator/OrganIncubatorUI_Icon</uiIconPath>
@@ -173,7 +173,7 @@
 	</ThingDef>
 
 	<ThingDef ParentName="BedWithQualityBase">
-		<defName>AC_SleeveCasket</defName>
+		<defName>UT_SleeveCasket</defName>
 		<label>sleeve casket</label>
 		<description>An ultra-tech casket used for storing grown sleeves before their stack is installed. It uses crypto tech technology to suspend the needs of the sleeves body, while still allowing for the installation of implants or bionics.</description>
 		<thingClass>AlteredCarbon.Building_SleeveCasket</thingClass>
@@ -203,7 +203,7 @@
 			<ComponentIndustrial>3</ComponentIndustrial>
 		</costList>
 		<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
-		<designationCategory>AC_Ultra</designationCategory>
+		<designationCategory>UT_Ultra</designationCategory>
 		<techLevel>Ultra</techLevel>
 		<altitudeLayer>Building</altitudeLayer>
 		<rotatable>true</rotatable>
@@ -212,11 +212,11 @@
 		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
 		<constructEffect>ConstructMetal</constructEffect>
 		<researchPrerequisites>
-			<li>AC_SleeveProduction</li>
+			<li>UT_SleeveProduction</li>
 		</researchPrerequisites>
 		<building>
-			<spawnedConceptLearnOpportunity>AC_UsingSleeveCaskets</spawnedConceptLearnOpportunity>
-			<boughtConceptLearnOpportunity>AC_UsingSleeveCaskets</boughtConceptLearnOpportunity>
+			<spawnedConceptLearnOpportunity>UT_UsingSleeveCaskets</spawnedConceptLearnOpportunity>
+			<boughtConceptLearnOpportunity>UT_UsingSleeveCaskets</boughtConceptLearnOpportunity>
 			<bed_showSleeperBody>True</bed_showSleeperBody>
 			<bed_healPerDay>20</bed_healPerDay>
 			<bed_defaultMedical>true</bed_defaultMedical>
@@ -244,7 +244,7 @@
 	</ThingDef>
 
 	<ThingDef ParentName="BuildingBase">
-		<defName>AC_CorticalStackStorage</defName>
+		<defName>UT_CorticalStackStorage</defName>
 		<label>quantum storage matrix</label>
 		<description>A ultra-tech, quantum computing matrix made to store cortical stacks. If in range of auto-linked stacks, the matrix can make emergency backups in case of catastrophic stack faliure. Can be linked to a rVR server.</description>
 		<thingClass>AlteredCarbon.Building_StackStorage</thingClass>
@@ -276,7 +276,7 @@
 		</costList>
 		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
 		<techLevel>Ultra</techLevel>
-		<designationCategory>AC_Ultra</designationCategory>
+		<designationCategory>UT_Ultra</designationCategory>
 		<altitudeLayer>Building</altitudeLayer>
 		<neverMultiSelect>true</neverMultiSelect>
 		<rotatable>true</rotatable>
@@ -287,7 +287,7 @@
 		<constructEffect>ConstructMetal</constructEffect>
 		<blockWind>true</blockWind>
 		<researchPrerequisites>
-			<li>AC_CorticalStackMatrix</li>
+			<li>UT_CorticalStackMatrix</li>
 		</researchPrerequisites>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<uiIconPath>Things/Building/Misc/StackMatrix/StackStorageUI_Icon</uiIconPath>
@@ -314,7 +314,7 @@
 				<fuelCapacity>10</fuelCapacity>
 				<fuelFilter>
 					<thingDefs>
-						<li>AC_EmptyCorticalStack</li>
+						<li>UT_EmptyCorticalStack</li>
 					</thingDefs>
 				</fuelFilter>
 				<initialFuelPercent>0</initialFuelPercent>
@@ -331,7 +331,7 @@
 	</ThingDef>
 
 	<ThingDef ParentName="BenchBase">
-		<defName>AC_DecryptionBench</defName>
+		<defName>UT_DecryptionBench</defName>
 		<label>decryption bench</label>
 		<description>A workbench equipped with advanced tools for decrypting ultra-tech gear and items.</description>
 		<thingClass>Building_WorkTable</thingClass>
@@ -360,7 +360,7 @@
 		</costList>
 		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
 		<techLevel>Ultra</techLevel>	
-		<designationCategory>AC_Ultra</designationCategory>
+		<designationCategory>UT_Ultra</designationCategory>
 		<altitudeLayer>Building</altitudeLayer>		
 		<passability>PassThroughOnly</passability>
 		<fillPercent>0.5</fillPercent>
@@ -374,13 +374,13 @@
 		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
 		<surfaceType>Item</surfaceType>
 		<researchPrerequisites>
-			<li>AC_Hacking</li>
+			<li>UT_Hacking</li>
 		</researchPrerequisites>
 		<building>
 			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
 		</building>
 		<recipes>
-			<li>AC_DecryptAncientStack</li>
+			<li>UT_DecryptAncientStack</li>
 		</recipes>
 		<inspectorTabs>
 			<li>ITab_Bills</li>

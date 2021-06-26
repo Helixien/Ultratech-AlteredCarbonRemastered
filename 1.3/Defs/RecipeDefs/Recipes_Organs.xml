@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-	<RecipeDef Name="AC_OrganRecipeBase" Abstract="True">
+	<RecipeDef Name="UT_OrganRecipeBase" Abstract="True">
 		<recipeUsers>
-			<li>AC_OrganIncubator</li>
+			<li>UT_OrganIncubator</li>
 		</recipeUsers>
-		<researchPrerequisite>AC_OrganProduction</researchPrerequisite>
+		<researchPrerequisite>UT_OrganProduction</researchPrerequisite>
 	</RecipeDef>
 
-	<RecipeDef ParentName="AC_OrganRecipeBase">
-		<defName>AC_OrganicHeart</defName>
+	<RecipeDef ParentName="UT_OrganRecipeBase">
+		<defName>UT_OrganicHeart</defName>
 		<label>organic heart</label>
 		<descriptionHyperlinks>
 			<ThingDef>Heart</ThingDef>
@@ -20,8 +20,8 @@
 		<workAmount>1800</workAmount>
 	</RecipeDef>
 	
-	<RecipeDef ParentName="AC_OrganRecipeBase">
-		<defName>AC_OrganicLung</defName>
+	<RecipeDef ParentName="UT_OrganRecipeBase">
+		<defName>UT_OrganicLung</defName>
 		<label>organic lung</label>
 		<descriptionHyperlinks>
 			<ThingDef>Lung</ThingDef>
@@ -32,8 +32,8 @@
 		<workAmount>1200</workAmount>
 	</RecipeDef>
 	
-	<RecipeDef ParentName="AC_OrganRecipeBase">
-		<defName>AC_OrganicKidney</defName>
+	<RecipeDef ParentName="UT_OrganRecipeBase">
+		<defName>UT_OrganicKidney</defName>
 		<label>organic kidney</label>
 		<descriptionHyperlinks>
 			<ThingDef>Kidney</ThingDef>
@@ -44,8 +44,8 @@
 		<workAmount>1500</workAmount>
 	</RecipeDef>
 
-	<RecipeDef ParentName="AC_OrganRecipeBase">
-		<defName>AC_OrganicLiver</defName>
+	<RecipeDef ParentName="UT_OrganRecipeBase">
+		<defName>UT_OrganicLiver</defName>
 		<label>organic liver</label>
 		<descriptionHyperlinks>
 			<ThingDef>Liver</ThingDef>

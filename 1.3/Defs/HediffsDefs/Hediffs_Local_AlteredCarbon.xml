@@ -2,15 +2,15 @@
 <Defs>
 
 	<HediffDef ParentName="ImplantHediffBase">
-		<defName>AC_CorticalStack</defName>
+		<defName>UT_CorticalStack</defName>
 		<label>cortical stack</label>
 		<labelNoun>a cortical stack</labelNoun>
 		<hediffClass>AlteredCarbon.Hediff_CorticalStack</hediffClass>
 		<description>An installed cortical stack.</description>
 		<descriptionHyperlinks>
-			<ThingDef>AC_FilledCorticalStack</ThingDef>
+			<ThingDef>UT_FilledCorticalStack</ThingDef>
 		</descriptionHyperlinks>
-		<spawnThingOnRemoved>AC_FilledCorticalStack</spawnThingOnRemoved>
+		<spawnThingOnRemoved>UT_FilledCorticalStack</spawnThingOnRemoved>
 		<isBad>false</isBad>
 		<addedPartProps>
 			<solid>true</solid>
@@ -20,7 +20,7 @@
 	</HediffDef>
 
 	<HediffDef ParentName="DiseaseBase">
-		<defName>AC_Sleeve_Quality_Low</defName>
+		<defName>UT_Sleeve_Quality_Low</defName>
 		<label>sleeve quality</label>
 		<defaultLabelColor>(0.44, 0.81, 0.81)</defaultLabelColor>
 		<description>This body was grown fast and poorly. It is frail and sickly.</description>
@@ -57,7 +57,7 @@
 	</HediffDef>
 
 	<HediffDef ParentName="DiseaseBase">
-		<defName>AC_Sleeve_Quality_Standart</defName>
+		<defName>UT_Sleeve_Quality_Standart</defName>
 		<label>sleeve quality</label>
 		<defaultLabelColor>(0.44, 0.81, 0.81)</defaultLabelColor>
 		<description>A baseline body grown properly.</description>
@@ -73,7 +73,7 @@
 	</HediffDef>
 
 	<HediffDef ParentName="DiseaseBase">
-		<defName>AC_Sleeve_Quality_High</defName>
+		<defName>UT_Sleeve_Quality_High</defName>
 		<label>sleeve quality</label>
 		<defaultLabelColor>(0.44, 0.81, 0.81)</defaultLabelColor>
 		<description>A body grown to perfection. It is strong and has no flaws.</description>
@@ -109,7 +109,7 @@
 	</HediffDef>
 
 	<HediffDef ParentName="DiseaseBase">
-		<defName>AC_EmptySleeve</defName>
+		<defName>UT_EmptySleeve</defName>
 		<label>empty sleeve</label>
 		<description>An empty sleeve.</description>
 		<isBad>false</isBad>
