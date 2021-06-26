@@ -55,7 +55,6 @@
 			<spawnedConceptLearnOpportunity>UT_SleeveGrowing</spawnedConceptLearnOpportunity>
 			<boughtConceptLearnOpportunity>UT_SleeveGrowing</boughtConceptLearnOpportunity>
 			<ai_chillDestination>false</ai_chillDestination>
-			<soundAmbient>UT_SleeveGrowingVat_Ambience</soundAmbient>
 			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
 		</building>
 		<placeWorkers>
