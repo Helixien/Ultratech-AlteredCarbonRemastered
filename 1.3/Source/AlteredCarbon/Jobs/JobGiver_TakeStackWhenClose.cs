@@ -14,7 +14,7 @@ namespace AlteredCarbon
             {
                 return null;
             }
-            var corticalStacks = pawn.Map.listerThings.ThingsOfDef(AC_DefOf.AC_FilledCorticalStack).Cast<CorticalStack>()
+            var corticalStacks = pawn.Map.listerThings.ThingsOfDef(AC_DefOf.UT_FilledCorticalStack).Cast<CorticalStack>()
                 .Where(x => x.PersonaData.faction == pawn.Faction && x.Position.DistanceTo(pawn.Position) < 10);
             if (corticalStacks.Any())
             {

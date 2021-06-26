@@ -11,7 +11,7 @@ namespace AlteredCarbon
         {
             get
             {
-                return ThingRequest.ForDef(AC_DefOf.AC_SleeveIncubator);
+                return ThingRequest.ForDef(AC_DefOf.UT_SleeveIncubator);
             }
         }
 
@@ -52,7 +52,7 @@ namespace AlteredCarbon
         {
             var sleeveIncubator = t as Building_SleeveGrower;
             Thing brainTemplate = this.FindBrainTemplate(pawn, sleeveIncubator.activeBrainTemplateToBeProcessed);
-            return new Job(AC_DefOf.AC_InsertBrainTemplate, sleeveIncubator, brainTemplate);
+            return new Job(AC_DefOf.UT_InsertBrainTemplate, sleeveIncubator, brainTemplate);
         }
 
         private Thing FindBrainTemplate(Pawn pawn, ThingDef brainTemplate)

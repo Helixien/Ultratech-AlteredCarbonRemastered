@@ -32,7 +32,7 @@ namespace AlteredCarbon
             corticalStacks.Add(this);
             try
             {
-                if (!respawningAfterLoad && !PersonaData.hasPawn && this.def == AC_DefOf.AC_FilledCorticalStack)
+                if (!respawningAfterLoad && !PersonaData.hasPawn && this.def == AC_DefOf.UT_FilledCorticalStack)
                 {
                     var pawnKind = DefDatabase<PawnKindDef>.AllDefs.Where(x => x.RaceProps.Humanlike).RandomElement();
                     var faction = Find.FactionManager.AllFactions.Where(x => x.def.humanlikeFaction).RandomElement();
@@ -48,7 +48,7 @@ namespace AlteredCarbon
             {
                 Log.Error("Exception spawning " + this + ": " + ex);
             }
-            if (this.def == AC_DefOf.AC_FilledCorticalStack && this.stackCount != 1)
+            if (this.def == AC_DefOf.UT_FilledCorticalStack && this.stackCount != 1)
             {
                 this.stackCount = 1;
             }
@@ -192,7 +192,7 @@ namespace AlteredCarbon
                     }
                     else
                     {
-                        var newStack = ThingMaker.MakeThing(AC_DefOf.AC_EmptyCorticalStack);
+                        var newStack = ThingMaker.MakeThing(AC_DefOf.UT_EmptyCorticalStack);
                         GenSpawn.Spawn(newStack, this.Position, this.Map);
                         Find.Selector.Select(newStack);
                         AlteredCarbonManager.Instance.stacksIndex.Remove(PersonaData.pawnID);

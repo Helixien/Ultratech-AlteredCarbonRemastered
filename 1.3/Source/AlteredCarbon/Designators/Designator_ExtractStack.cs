@@ -13,7 +13,7 @@ namespace AlteredCarbon
 	{
 		public override int DraggableDimensions => 2;
 
-		protected override DesignationDef Designation => AC_DefOf.AC_ExtractStackDesignation;
+		protected override DesignationDef Designation => AC_DefOf.UT_ExtractStackDesignation;
 
 		public Designator_ExtractStack()
 		{
@@ -54,7 +54,7 @@ namespace AlteredCarbon
 			{
 				return false;
 			}
-			if (t is Corpse corpse && corpse.InnerPawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.AC_CorticalStack) != null)
+			if (t is Corpse corpse && corpse.InnerPawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) != null)
             {
 				return true;
             }

@@ -128,7 +128,7 @@ namespace AlteredCarbon
             float successChance = 1f - Mathf.Abs((doer.skills.GetSkill(SkillDefOf.Intellectual).levelInt / 2f) - 11f) / 10f;
             if (Rand.Chance(successChance))
             {
-                var stackCopyTo = (CorticalStack)ThingMaker.MakeThing(AC_DefOf.AC_FilledCorticalStack);
+                var stackCopyTo = (CorticalStack)ThingMaker.MakeThing(AC_DefOf.UT_FilledCorticalStack);
                 stackCopyTo.PersonaData.hasPawn = true;
                 this.innerContainer.TryAdd(stackCopyTo);
                 stackCopyTo.PersonaData.CopyDataFrom(stackToDuplicate.PersonaData, true);
@@ -141,7 +141,7 @@ namespace AlteredCarbon
 
         public void PerformStackBackup(Hediff_CorticalStack hediff_CorticalStack)
         {
-            var stackCopyTo = (CorticalStack)ThingMaker.MakeThing(AC_DefOf.AC_FilledCorticalStack);
+            var stackCopyTo = (CorticalStack)ThingMaker.MakeThing(AC_DefOf.UT_FilledCorticalStack);
             stackCopyTo.PersonaData.hasPawn = true;
             this.innerContainer.TryAdd(stackCopyTo);
             stackCopyTo.PersonaData.CopyDataFrom(hediff_CorticalStack.PersonaData);

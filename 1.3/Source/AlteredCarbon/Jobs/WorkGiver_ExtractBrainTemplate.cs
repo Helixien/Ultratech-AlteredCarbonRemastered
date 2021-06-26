@@ -11,7 +11,7 @@ namespace AlteredCarbon
         {
             get
             {
-                return ThingRequest.ForDef(AC_DefOf.AC_SleeveIncubator);
+                return ThingRequest.ForDef(AC_DefOf.UT_SleeveIncubator);
             }
         }
 
@@ -53,7 +53,7 @@ namespace AlteredCarbon
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
             var sleeveIncubator = t as Building_SleeveGrower;
-            return new Job(AC_DefOf.AC_ExtractActiveBrainTemplate, sleeveIncubator);
+            return new Job(AC_DefOf.UT_ExtractActiveBrainTemplate, sleeveIncubator);
         }
     }
 }

@@ -11,76 +11,71 @@ namespace AlteredCarbon
 	[DefOf]
 	public static class AC_DefOf
 	{
-		public static JobDef AC_ExtractStack;
+		public static JobDef UT_ExtractStack;
 
-		public static JobDef AC_ReleaseSleeve;
+		public static JobDef UT_WipeStack;
 
-		public static JobDef AC_WipeStack;
+		public static JobDef UT_DuplicateStack;
 
-		public static JobDef AC_DestroyStack;
+		public static JobDef UT_InsertBrainTemplate;
 
-		public static JobDef AC_DuplicateStack;
+		public static JobDef UT_ExtractActiveBrainTemplate;
 
-		public static JobDef AC_InsertBrainTemplate;
+		public static HediffDef UT_CorticalStack;
 
-		public static JobDef AC_ExtractActiveBrainTemplate;
+		public static HediffDef UT_Sleeve_Quality_Low;
 
-		public static HediffDef AC_CorticalStack;
+		public static HediffDef UT_Sleeve_Quality_Standart;
 
-		public static HediffDef AC_Sleeve_Quality_Low;
+		public static HediffDef UT_Sleeve_Quality_High;
 
-		public static HediffDef AC_Sleeve_Quality_Standart;
+		public static HediffDef UT_EmptySleeve;
 
-		public static HediffDef AC_Sleeve_Quality_High;
+		public static HediffDef UT_SleeveBodyData;
 
-		public static HediffDef AC_EmptySleeve;
+		public static ThingDef UT_EmptyCorticalStack;
 
-		public static HediffDef AC_SleeveBodyData;
+		public static ThingDef UT_FilledCorticalStack;
 
-		public static ThingDef AC_EmptyCorticalStack;
+		public static ThingDef UT_AncientStack;
 
-		public static ThingDef AC_FilledCorticalStack;
+		public static ThingDef UT_SleeveIncubator;
 
-		public static ThingDef AC_AncientStack;
+		public static ThoughtDef UT_WrongGender;
 
-		public static ThingDef AC_SleeveIncubator;
-		//public static ThingDef AC_SleeveCasket;
+		public static ThoughtDef UT_WrongGenderDouble;
 
-		public static ThoughtDef AC_WrongGender;
+		public static ThoughtDef UT_WrongRace;
 
-		public static ThoughtDef AC_WrongGenderDouble;
+		public static ThoughtDef UT_NewSleeve;
 
-		public static ThoughtDef AC_WrongRace;
+		public static ThoughtDef UT_NewSleeveDouble;
 
-		public static ThoughtDef AC_NewSleeve;
+		public static ThoughtDef UT_MansBody;
 
-		public static ThoughtDef AC_NewSleeveDouble;
+		public static ThoughtDef UT_WomansBody;
 
-		public static ThoughtDef AC_MansBody;
+		public static ThoughtDef UT_JustCopy;
 
-		public static ThoughtDef AC_WomansBody;
+		public static ThoughtDef UT_LostMySpouse;
 
-		public static ThoughtDef AC_JustCopy;
+		public static ThoughtDef UT_LostMyFiance;
 
-		public static ThoughtDef AC_LostMySpouse;
+		public static ThoughtDef UT_LostMyLover;
 
-		public static ThoughtDef AC_LostMyFiance;
+		public static RecipeDef UT_InstallCorticalStack;
 
-		public static ThoughtDef AC_LostMyLover;
+		public static RecipeDef UT_InstallEmptyCorticalStack;
 
-		public static RecipeDef AC_InstallCorticalStack;
+		public static PawnRelationDef UT_Original;
 
-		public static RecipeDef AC_InstallEmptyCorticalStack;
+		public static PawnRelationDef UT_Copy;
 
-		public static PawnRelationDef AC_Original;
+		public static DesignationDef UT_ExtractStackDesignation;
 
-		public static PawnRelationDef AC_Copy;
+		public static ConceptDef UT_DeadPawnWithStack;
 
-		public static DesignationDef AC_ExtractStackDesignation;
-
-		public static ConceptDef AC_DeadPawnWithStack;
-
-		public static DutyDef AC_TakeStacks;
+		public static DutyDef UT_TakeStacks;
 	}
 }
 

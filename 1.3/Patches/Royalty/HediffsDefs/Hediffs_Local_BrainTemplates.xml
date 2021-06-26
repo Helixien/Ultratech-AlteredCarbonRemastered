@@ -8,8 +8,8 @@
 		<match Class="PatchOperationAdd">
 			<xpath>/Defs</xpath>
 			<value>
-				<HediffDef ParentName="AC_BrainTemplate_Base">
-					<defName>AC_BrainTemplatePsycaster</defName>
+				<HediffDef ParentName="UT_BrainTemplate_Base">
+					<defName>UT_BrainTemplatePsycaster</defName>
 					<label>sleeve type (psycaster)</label>
 					<description>This body was grown specifically for psycaster.</description>
 					<priceImpact>true</priceImpact>

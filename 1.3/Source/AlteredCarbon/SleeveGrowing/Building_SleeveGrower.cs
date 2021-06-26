@@ -518,7 +518,7 @@ namespace AlteredCarbon
 				{
 					PawnComponentsUtility.AddComponentsForSpawn(pawn);
 					pawn.filth.GainFilth(filth_Slime);
-					this.InnerPawn.health.AddHediff(AC_DefOf.AC_EmptySleeve);
+					this.InnerPawn.health.AddHediff(AC_DefOf.UT_EmptySleeve);
 				}
 			}
 			if (!base.Destroyed)

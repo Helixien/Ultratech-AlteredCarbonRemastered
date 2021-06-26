@@ -25,7 +25,7 @@ namespace AlteredCarbon
                     skillRecord.levelInt = Rand.RangeInclusive(15, 20);
                     skillRecord.passion = (Passion)Rand.RangeInclusive(1, 2);
                 }
-                var corticalStack = ThingMaker.MakeThing(AC_DefOf.AC_FilledCorticalStack) as CorticalStack;
+                var corticalStack = ThingMaker.MakeThing(AC_DefOf.UT_FilledCorticalStack) as CorticalStack;
                 corticalStack.PersonaData.CopyPawn(pawn);
                 corticalStack.PersonaData.gender = pawn.gender;
                 corticalStack.PersonaData.race = pawn.kindDef.race;
@@ -49,7 +49,7 @@ namespace AlteredCarbon
             }, () => TryGetUnfinishedSpacerResearch(out var projectDef) ? 0.4f : 0));
             actions.Add(new Pair<Action, Func<float>>(delegate
             {
-                var emptyStack = ThingMaker.MakeThing(AC_DefOf.AC_EmptyCorticalStack);
+                var emptyStack = ThingMaker.MakeThing(AC_DefOf.UT_EmptyCorticalStack);
                 GenPlace.TryPlaceThing(emptyStack, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
             }, () => 0.5f));
             actions.Add(new Pair<Action, Func<float>>(delegate

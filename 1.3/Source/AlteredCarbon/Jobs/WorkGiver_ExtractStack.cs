@@ -12,7 +12,7 @@ namespace AlteredCarbon
 
 		public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
 		{
-			foreach (Designation item in pawn.Map.designationManager.SpawnedDesignationsOfDef(AC_DefOf.AC_ExtractStackDesignation))
+			foreach (Designation item in pawn.Map.designationManager.SpawnedDesignationsOfDef(AC_DefOf.UT_ExtractStackDesignation))
 			{
 				if (!item.target.HasThing)
 				{
@@ -32,12 +32,12 @@ namespace AlteredCarbon
 
 		public override bool ShouldSkip(Pawn pawn, bool forced = false)
 		{
-			return !pawn.Map.designationManager.AnySpawnedDesignationOfDef(AC_DefOf.AC_ExtractStackDesignation);
+			return !pawn.Map.designationManager.AnySpawnedDesignationOfDef(AC_DefOf.UT_ExtractStackDesignation);
 		}
 
 		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
 		{
-			if (t.Map.designationManager.DesignationOn(t, AC_DefOf.AC_ExtractStackDesignation) == null)
+			if (t.Map.designationManager.DesignationOn(t, AC_DefOf.UT_ExtractStackDesignation) == null)
 			{
 				return false;
 			}
@@ -45,7 +45,7 @@ namespace AlteredCarbon
 			{
 				return false;
 			}
-			if (t is Corpse corpse && corpse.InnerPawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.AC_CorticalStack) != null)
+			if (t is Corpse corpse && corpse.InnerPawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) != null)
 			{
 				return true;
 			}
@@ -54,7 +54,7 @@ namespace AlteredCarbon
 
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
 		{
-			return JobMaker.MakeJob(AC_DefOf.AC_ExtractStack, t);
+			return JobMaker.MakeJob(AC_DefOf.UT_ExtractStack, t);
 		}
 	}
 }

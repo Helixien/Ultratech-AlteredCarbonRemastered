@@ -13,7 +13,7 @@ namespace AlteredCarbon
 {
 	public class LordToil_TakeStack : LordToil
 	{
-		protected DutyDef DutyDef => AC_DefOf.AC_TakeStacks;
+		protected DutyDef DutyDef => AC_DefOf.UT_TakeStacks;
 
 		public override bool ForceHighStoryDanger => false;
 
@@ -53,7 +53,7 @@ namespace AlteredCarbon
 				target = pawn.carryTracker.CarriedThing;
 				return true;
 			}
-			var corticalStacks = pawn.Map.listerThings.ThingsOfDef(AC_DefOf.AC_FilledCorticalStack).Cast<CorticalStack>().Where(x => x.PersonaData.faction == pawn.Faction);
+			var corticalStacks = pawn.Map.listerThings.ThingsOfDef(AC_DefOf.UT_FilledCorticalStack).Cast<CorticalStack>().Where(x => x.PersonaData.faction == pawn.Faction);
 			if (corticalStacks.Any())
 			{
 				var stack = corticalStacks.FirstOrDefault(x => pawn.CanReserveAndReach(x, PathEndMode.Touch, Danger.Deadly));

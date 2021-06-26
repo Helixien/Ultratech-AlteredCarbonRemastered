@@ -28,7 +28,7 @@ namespace AlteredCarbon
         }
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            return JobMaker.MakeJob(AC_DefOf.AC_DuplicateStack, t);
+            return JobMaker.MakeJob(AC_DefOf.UT_DuplicateStack, t);
         }
     }
 }

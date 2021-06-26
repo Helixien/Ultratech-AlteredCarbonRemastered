@@ -85,7 +85,7 @@ namespace AlteredCarbon
                     IntVec3 loc = CellFinder.RandomClosewalkCellNear(parms.spawnCenter, map, 8);
                     GenSpawn.Spawn(item, loc, map, parms.spawnRotation);
 
-                    item.mindState.duty = new PawnDuty(AC_DefOf.AC_TakeStacks, stacks.RandomElement().Position);
+                    item.mindState.duty = new PawnDuty(AC_DefOf.UT_TakeStacks, stacks.RandomElement().Position);
                 }
                 list.AddRange(temp);
             }
@@ -93,7 +93,7 @@ namespace AlteredCarbon
         }
         public List<CorticalStack> GetStacks(Map map, out Faction faction)
         {
-            var corticalStacks = map.listerThings.ThingsOfDef(AC_DefOf.AC_FilledCorticalStack).Cast<CorticalStack>()
+            var corticalStacks = map.listerThings.ThingsOfDef(AC_DefOf.UT_FilledCorticalStack).Cast<CorticalStack>()
                 .Where(x => x.PersonaData.faction != null && x.PersonaData.faction.def.humanlikeFaction && !x.PersonaData.faction.IsPlayer 
                 && x.PersonaData.faction.RelationKindWith(Faction.OfPlayer) != FactionRelationKind.Hostile);
             Dictionary<Faction, List<CorticalStack>> factionCandidates = new Dictionary<Faction, List<CorticalStack>>();

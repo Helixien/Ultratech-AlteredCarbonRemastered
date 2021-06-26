@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Patch>
 
 	<Operation Class="PatchOperationFindMod">
@@ -11,8 +11,8 @@
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs/ThingDef[defName="ElectricCrematorium"]/recipes</xpath>
 					<value>
-						<li>AC_BurnEmptyCorticalStacks</li>
-						<li>AC_BurnFilledCorticalStack</li>
+						<li>UT_BurnEmptyCorticalStacks</li>
+						<li>UT_BurnFilledCorticalStack</li>
 					</value>
 				</li>
 			</operations>

@@ -337,10 +337,10 @@
     <Compile Include="Jobs\JobDriver_InsertBrainTemplate.cs" />
     <Compile Include="Jobs\WorkGiver_ExtractBrainTemplate.cs" />
     <Compile Include="Jobs\WorkGiver_InsertBrainTemplate.cs" />
+    <Compile Include="Recipes\Recipe_DecryptAncientCorticalStack.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksHostile.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksColonist.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksStranger.cs" />
-    <Compile Include="Recipes\Recipe_DecryptCorticalStack.cs" />
     <Compile Include="SleeveGrowing\Building_SleeveCasket.cs" />
     <Compile Include="SleeveGrowing\Building_StackStorage.cs" />
     <Compile Include="SleeveGrowing\ITab_StackStorageContents.cs" />

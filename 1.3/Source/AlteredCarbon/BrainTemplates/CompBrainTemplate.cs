@@ -13,7 +13,7 @@ namespace AlteredCarbon
 		public CompProperties_BrainTemplate Props => (CompProperties_BrainTemplate)this.props;
 		public void SaveBodyData(Pawn pawn)
         {
-			var hediff = HediffMaker.MakeHediff(AC_DefOf.AC_SleeveBodyData, pawn) as Hediff_SleeveBodyStats;
+			var hediff = HediffMaker.MakeHediff(AC_DefOf.UT_SleeveBodyData, pawn) as Hediff_SleeveBodyStats;
 			foreach (var hediffDefname in Props.hediffs)
             {
 				var hediffDef = DefDatabase<HediffDef>.GetNamed(hediffDefname, false);

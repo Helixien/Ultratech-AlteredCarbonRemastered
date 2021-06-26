@@ -35,7 +35,7 @@ namespace AlteredCarbon
 					return;
 				}
 
-				var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.AC_CorticalStack) as Hediff_CorticalStack;
+				var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
 				if (hediff != null)
 				{
 					if (hediff.def.spawnThingOnRemoved != null)

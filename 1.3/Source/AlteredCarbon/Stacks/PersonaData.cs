@@ -478,12 +478,12 @@ namespace AlteredCarbon
             {
                 if (this.gender == pawn.gender)
                 {
-                    this.thoughts.RemoveAll(x => x.def == AC_DefOf.AC_WrongGender);
-                    this.thoughts.RemoveAll(x => x.def == AC_DefOf.AC_WrongGenderDouble);
+                    this.thoughts.RemoveAll(x => x.def == AC_DefOf.UT_WrongGender);
+                    this.thoughts.RemoveAll(x => x.def == AC_DefOf.UT_WrongGenderDouble);
                 }
                 if (this.race == pawn.kindDef.race)
                 {
-                    this.thoughts.RemoveAll(x => x.def == AC_DefOf.AC_WrongRace);
+                    this.thoughts.RemoveAll(x => x.def == AC_DefOf.UT_WrongRace);
                 }
 
                 foreach (var thought in this.thoughts)
@@ -643,7 +643,7 @@ namespace AlteredCarbon
                 {
                     try
                     {
-                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.AC_WrongGenderDouble);
+                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_WrongGenderDouble);
                     }
                     catch (Exception ex)
                     {
@@ -655,7 +655,7 @@ namespace AlteredCarbon
 
                     try
                     {
-                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.AC_WrongGender);
+                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_WrongGender);
                     }
                     catch (Exception ex)
                     {
@@ -668,7 +668,7 @@ namespace AlteredCarbon
             {
                 try
                 {
-                    pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.AC_WrongRace);
+                    pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_WrongRace);
                 }
                 catch (Exception ex)
                 {

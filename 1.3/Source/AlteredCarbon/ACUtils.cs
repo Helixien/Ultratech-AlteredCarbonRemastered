@@ -14,7 +14,7 @@ namespace AlteredCarbon
 	{
         public static bool IsCopy(this Pawn pawn)
         {
-            var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.AC_CorticalStack) as Hediff_CorticalStack;
+            var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
             if (hediff != null && AlteredCarbonManager.Instance.stacksRelationships.TryGetValue(hediff.PersonaData.stackGroupID, out var stackData))
             {
                 if (stackData.originalPawn != null && pawn != stackData.originalPawn)

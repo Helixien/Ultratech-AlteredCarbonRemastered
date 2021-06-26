@@ -12,15 +12,15 @@
                     <xpath>/Defs/TraderKindDef[defName="Orbital_Empire"]/stockGenerators</xpath>
                     <value>
 						<li Class="StockGenerator_BuySingleDef">
-							<thingDef>AC_EmptyCorticalStack</thingDef>
+							<thingDef>UT_EmptyCorticalStack</thingDef>
 						</li>
 						<li Class="StockGenerator_Tag">
-							<tradeTag>AC_TemplatesUltra</tradeTag>
+							<tradeTag>UT_TemplatesUltra</tradeTag>
 							<thingDefCountRange>0~2</thingDefCountRange>
 							<countRange>0~2</countRange>
 						</li>
 						<li Class="StockGenerator_BuyTradeTag">
-							<tag>AC_TemplatesUltra</tag>
+							<tag>UT_TemplatesUltra</tag>
 						</li>
                     </value>
                 </li>

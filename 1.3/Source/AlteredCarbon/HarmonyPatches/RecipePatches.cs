@@ -36,7 +36,7 @@ namespace AlteredCarbon
 		}
 		private static bool Prefix(RecipeDef __instance, Thing thing, ref bool __result)
 		{
-			if (__instance == AC_DefOf.AC_InstallEmptyCorticalStack && thing is Pawn pawn)
+			if (__instance == AC_DefOf.UT_InstallEmptyCorticalStack && thing is Pawn pawn)
 			{
 				if (unstackableRaces.Contains(pawn.def) || pawn.IsEmptySleeve())
 				{
@@ -44,7 +44,7 @@ namespace AlteredCarbon
 					return false;
 				}
 			}
-			else if (__instance == AC_DefOf.AC_InstallCorticalStack && thing is Pawn pawn2)
+			else if (__instance == AC_DefOf.UT_InstallCorticalStack && thing is Pawn pawn2)
             {
 				if (unstackableRaces.Contains(pawn2.def))
 				{

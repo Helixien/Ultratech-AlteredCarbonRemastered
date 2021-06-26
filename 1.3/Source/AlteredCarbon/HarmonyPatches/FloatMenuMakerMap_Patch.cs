@@ -19,7 +19,7 @@ namespace AlteredCarbon
             {
                 foreach (LocalTargetInfo localTargetInfo in GenUI.TargetsAt(clickPos, UninstallStack(pawn), true))
                 {
-                    JobDef jobDef = AC_DefOf.AC_ExtractStack;
+                    JobDef jobDef = AC_DefOf.UT_ExtractStack;
                     Action action = delegate ()
                     {
                         Job job = JobMaker.MakeJob(jobDef, localTargetInfo);

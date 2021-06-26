@@ -84,11 +84,11 @@ namespace AlteredCarbon
                             || pawn.story.traits.HasTrait(TraitDefOf.BodyPurist)
                             || (nerves != null && nerves.Degree == -2))
                     {
-                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.AC_NewSleeveDouble);
+                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_NewSleeveDouble);
                     }
                     else
                     {
-                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.AC_NewSleeve);
+                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_NewSleeve);
                     }
                 }
                 else
@@ -107,7 +107,7 @@ namespace AlteredCarbon
                     AlteredCarbonManager.Instance.TryAddRelationships(pawn);
                 }
 
-                var additionalSleeveBodyData = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.AC_SleeveBodyData) as Hediff_SleeveBodyStats;
+                var additionalSleeveBodyData = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_SleeveBodyData) as Hediff_SleeveBodyStats;
                 if (additionalSleeveBodyData != null)
                 {
                     additionalSleeveBodyData.ApplyEffects();

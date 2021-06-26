@@ -123,7 +123,7 @@ namespace AlteredCarbon
 				return false;
 			}
 			var stackHediff = pawn.health.hediffSet.hediffs.FirstOrDefault((Hediff x) =>
-				x.def == AC_DefOf.AC_CorticalStack);
+				x.def == AC_DefOf.UT_CorticalStack);
 			if (stackHediff != null && pawn.Dead)
 			{
 				__result = "AlteredCarbon.Sleeve".Translate();
@@ -199,10 +199,10 @@ namespace AlteredCarbon
 					DeadPawnMessageReplacement.disableKilledEffect = true;
 				}
 				var stackHediff = __instance.health.hediffSet.hediffs.FirstOrDefault((Hediff x) =>
-					x.def == AC_DefOf.AC_CorticalStack);
+					x.def == AC_DefOf.UT_CorticalStack);
 				if (stackHediff != null)
 				{
-					LessonAutoActivator.TeachOpportunity(AC_DefOf.AC_DeadPawnWithStack, __instance, OpportunityType.Important);
+					LessonAutoActivator.TeachOpportunity(AC_DefOf.UT_DeadPawnWithStack, __instance, OpportunityType.Important);
 					AlteredCarbonManager.Instance.deadPawns.Add(__instance);
 				}
 			}

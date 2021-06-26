@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Patch>
 
     <Operation Class="PatchOperationFindMod">
@@ -11,8 +11,8 @@
                 <li Class="PatchOperationAdd">
                     <xpath>/Defs/QuestScriptDef[defName="Intro_Deserter"]/root[@Class="QuestNode_Sequence"]/nodes/li[@Class="QuestNode_SetItemStashContents"]/items</xpath>
                     <value>
-						<li>AC_EmptyCorticalStack</li>
-						<li>AC_EmptyCorticalStack</li>
+						<li>UT_EmptyCorticalStack</li>
+						<li>UT_EmptyCorticalStack</li>
                     </value>
                 </li>
             </operations>

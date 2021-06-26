@@ -504,15 +504,15 @@ namespace AlteredCarbon
             HediffDef qualityDiff;
             if (qualityLevel == -1)
             {
-                qualityDiff = AC_DefOf.AC_Sleeve_Quality_Low;
+                qualityDiff = AC_DefOf.UT_Sleeve_Quality_Low;
             }
             else if (qualityLevel == 1)
             {
-                qualityDiff = AC_DefOf.AC_Sleeve_Quality_High;
+                qualityDiff = AC_DefOf.UT_Sleeve_Quality_High;
             }
             else
             {
-                qualityDiff = AC_DefOf.AC_Sleeve_Quality_Standart;
+                qualityDiff = AC_DefOf.UT_Sleeve_Quality_Standart;
             }
 
             RemoveAllHediffs(newSleeve);

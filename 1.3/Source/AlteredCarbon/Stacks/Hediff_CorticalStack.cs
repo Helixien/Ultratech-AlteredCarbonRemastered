@@ -46,7 +46,7 @@ namespace AlteredCarbon
         {
             this.Part = pawn.def.race.body.AllParts.FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Neck);
             base.PostAdd(dinfo);
-            var emptySleeveHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.AC_EmptySleeve);
+            var emptySleeveHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_EmptySleeve);
             if (emptySleeveHediff != null)
             {
                 pawn.health.RemoveHediff(emptySleeveHediff);

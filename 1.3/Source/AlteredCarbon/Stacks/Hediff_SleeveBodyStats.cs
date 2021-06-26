@@ -71,7 +71,7 @@ namespace AlteredCarbon
                 }
             }
 
-            var corticalHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.AC_CorticalStack) as Hediff_CorticalStack;
+            var corticalHediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
             if (corticalHediff != null)
             {
                 corticalHediff.PersonaData.negativeSkillsOffsets = negativeSkillsOffset;

@@ -25,7 +25,7 @@ namespace AlteredCarbon
                 if (extension.SpawnsWithStack && Rand.Chance((float)extension.ChanceToSpawnWithStack / 100f))
                 {
                     BodyPartRecord neckRecord = __instance.def.race.body.AllParts.FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Neck);
-                    var hediff = HediffMaker.MakeHediff(AC_DefOf.AC_CorticalStack, __instance, neckRecord) as Hediff_CorticalStack;
+                    var hediff = HediffMaker.MakeHediff(AC_DefOf.UT_CorticalStack, __instance, neckRecord) as Hediff_CorticalStack;
                     hediff.PersonaData.gender = __instance.gender;
                     hediff.PersonaData.race = __instance.kindDef.race;
                     if (AlteredCarbonManager.Instance.stacksRelationships != null)
@@ -58,7 +58,7 @@ namespace AlteredCarbon
                 if (titleAwardedWhenUpdating.defName == "Baron" || titleAwardedWhenUpdating.defName == "Count")
                 {
                     ThingOwner<Thing> innerContainer = __instance.bestower.inventory.innerContainer;
-                    innerContainer.TryAdd(ThingMaker.MakeThing(AC_DefOf.AC_EmptyCorticalStack), 1);
+                    innerContainer.TryAdd(ThingMaker.MakeThing(AC_DefOf.UT_EmptyCorticalStack), 1);
                 }
             }
         }
@@ -76,7 +76,7 @@ namespace AlteredCarbon
                 ThingOwner<Thing> innerContainer = __instance.bestower.inventory.innerContainer;
                 for (int num = innerContainer.Count - 1; num >= 0; num--)
                 {
-                    if (innerContainer[num].def == AC_DefOf.AC_EmptyCorticalStack)
+                    if (innerContainer[num].def == AC_DefOf.UT_EmptyCorticalStack)
                     {
                         innerContainer.TryDrop(innerContainer[num], ThingPlaceMode.Near, out Thing lastResultingThing);
                     }
@@ -94,9 +94,9 @@ namespace AlteredCarbon
             if (__instance.royalTitle.defName == "Baron" || __instance.royalTitle.defName == "Count")
             {
                 var list = __result.ToList();
-                var item = QuestPartUtility.GetStandardRewardStackElement(AC_DefOf.AC_EmptyCorticalStack.label.CapitalizeFirst(), AC_DefOf.AC_EmptyCorticalStack.uiIcon, () => AC_DefOf.AC_EmptyCorticalStack.description, delegate
+                var item = QuestPartUtility.GetStandardRewardStackElement(AC_DefOf.UT_EmptyCorticalStack.label.CapitalizeFirst(), AC_DefOf.UT_EmptyCorticalStack.uiIcon, () => AC_DefOf.UT_EmptyCorticalStack.description, delegate
                 {
-                    Find.WindowStack.Add(new Dialog_InfoCard(AC_DefOf.AC_EmptyCorticalStack));
+                    Find.WindowStack.Add(new Dialog_InfoCard(AC_DefOf.UT_EmptyCorticalStack));
                 });
                 list.Insert(1, item);
                 __result = list;

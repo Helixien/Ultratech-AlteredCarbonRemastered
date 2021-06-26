@@ -14,7 +14,7 @@ namespace AlteredCarbon
         {
             if (__instance.Part?.def == BodyPartDefOf.Neck && __instance is Hediff_MissingPart)
             {
-                var stackHediff = __instance.pawn.health.hediffSet.hediffs.FirstOrDefault((Hediff x) => x.def == AC_DefOf.AC_CorticalStack) as Hediff_CorticalStack;
+                var stackHediff = __instance.pawn.health.hediffSet.hediffs.FirstOrDefault((Hediff x) => x.def == AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
                 if (stackHediff != null)
                 {
                     stackHediff.TryRecoverOrSpawnOnGround();
@@ -34,7 +34,7 @@ namespace AlteredCarbon
         {
             if (!___pawn.health.hediffSet.GetNotMissingParts().Any(x => x.def == BodyPartDefOf.Neck))
             {
-                var stackHediff = ___pawn.health.hediffSet.hediffs.FirstOrDefault((Hediff x) => x.def == AC_DefOf.AC_CorticalStack) as Hediff_CorticalStack;
+                var stackHediff = ___pawn.health.hediffSet.hediffs.FirstOrDefault((Hediff x) => x.def == AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
                 if (stackHediff != null)
                 {
                     stackHediff.TryRecoverOrSpawnOnGround();
