@@ -2,7 +2,7 @@
 <ModMetaData>
 
 	<name>Ultratech: Altered Carbon</name>
-	<author>Helixien, Taranchuk, Saakra, OskarPotocki</author>
+	<author>Helixien, Taranchuk, Saakra,ISOREX, OskarPotocki</author>
 	<supportedVersions>
 		<li>1.1</li>
 		<li>1.2</li>
@@ -10,7 +10,7 @@
 	</supportedVersions>
 	<packageId>Hlx.UltratechAlteredCarbon</packageId>
 	<description/>
-	<url>https://steamcommunity.com/sharedfiles/filedetails/?id=2196278117</url>
+	<url/>
 	<modDependencies>
 		<li>
 			<packageId>brrainz.harmony</packageId>
@@ -20,10 +20,10 @@
 		</li>
 	</modDependencies>
 	<loadAfter>
+		<li>brrainz.harmony</li> 
 		<li>Ludeon.RimWorld</li>
 		<li>Ludeon.RimWorld.Royalty</li>
-		<li>brrainz.harmony</li>        
-		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+		<li>Ludeon.RimWorld.Ideology</li>       
 		<li>OskarPotocki.VanillaExpandedFramework</li>
 		<li>vanillaexpanded.achievements</li>
 	</loadAfter>
