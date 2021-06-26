@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Ideology</li>
+		</mods>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs</xpath>
+			<value>
+
+				<HistoryEventDef>
+					<defName>AC_InstalledCorticalStack</defName>
+					<label>installed cortical stack</label>
+				</HistoryEventDef>
+
+				<!-- Issue -->
+				<IssueDef>
+					<defName>AC_StackUsage</defName>
+					<label>stack usage</label>
+					<iconPath>UI/Issues/StackUsage</iconPath>
+				</IssueDef>
+
+				<!-- Precepts -->
+				<PreceptDef>
+					<defName>AC_StackUsage_Abhorrent</defName>
+					<issue>AC_StackUsage</issue>
+					<label>abhorrent</label>
+					<description>To make oneself immortal with technology is against moral laws.</description>
+					<impact>High</impact>
+					<displayOrderInIssue>20</displayOrderInIssue>
+					<displayOrderInImpact>100</displayOrderInImpact>
+					<conflictingMemes>
+						<li>Transhumanist</li>
+					</conflictingMemes>
+					<associatedMemes>
+						<li>FleshPurity</li>
+					</associatedMemes>
+					<comps>
+						<li Class="PreceptComp_SelfTookMemoryThought">
+							<eventDef>AC_InstalledCorticalStack</eventDef>
+							<thought>AC_InstalledStack_Abhorrent</thought>
+						</li>
+						<li Class="PreceptComp_KnowsMemoryThought">
+							<eventDef>AC_InstalledCorticalStack</eventDef>
+							<thought>AC_InstalledStack_Know_Abhorrent</thought>
+						</li>
+						<li Class="PreceptComp_SituationalThought">
+							<thought>AC_HasStack_Abhorrent</thought>
+						</li>
+						<li Class="PreceptComp_SituationalThought">
+							<thought>AC_HasStack_Abhorrent_Social</thought>
+						</li>
+					</comps>
+				</PreceptDef>
+
+				<PreceptDef>
+					<defName>AC_StackUsage_Disapproved</defName>
+					<issue>AC_StackUsage</issue>
+					<label>disapproved</label>
+					<description>To make oneself immortal with technology is an ugly, dirty act.</description>
+					<impact>Medium</impact>
+					<displayOrderInIssue>10</displayOrderInIssue>
+					<displayOrderInImpact>100</displayOrderInImpact>
+					<conflictingMemes>
+						<li>Transhumanist</li>
+					</conflictingMemes>
+					<associatedMemes>
+						<li>FleshPurity</li>
+					</associatedMemes>
+					<comps>
+						<li Class="PreceptComp_SelfTookMemoryThought">
+							<eventDef>AC_InstalledCorticalStack</eventDef>
+							<thought>AC_InstalledStack_Disapproved</thought>
+						</li>
+						<li Class="PreceptComp_KnowsMemoryThought">
+							<eventDef>AC_InstalledCorticalStack</eventDef>
+							<thought>AC_InstalledStack_Know_Disapproved</thought>
+						</li>
+						<li Class="PreceptComp_SituationalThought">
+							<thought>AC_HasStack_Disapproved</thought>
+						</li>
+						<li Class="PreceptComp_SituationalThought">
+							<thought>AC_HasStack_Disapproved_Social</thought>
+						</li>
+					</comps>
+				</PreceptDef>
+
+				<PreceptDef>
+					<defName>AC_StackUsage_Approved</defName>
+					<issue>AC_StackUsage</issue>
+					<label>approved</label>
+					<description>Humans should strive to reach immortallity by improving our flawed natural bodies.</description>
+					<impact>Medium</impact>
+					<displayOrderInIssue>0</displayOrderInIssue>
+					<displayOrderInImpact>100</displayOrderInImpact>
+					<conflictingMemes>
+						<li>FleshPurity</li>
+					</conflictingMemes>
+					<associatedMemes>
+						<li>Transhumanist</li>
+					</associatedMemes>
+					<comps>
+						<li Class="PreceptComp_SituationalThought">
+							<thought>AC_HasNoStack_Disapproved</thought>
+						</li>
+						<li Class="PreceptComp_SituationalThought">
+							<thought>AC_HasNoStack_Disapproved_Social</thought>
+						</li>
+					</comps>
+				</PreceptDef>
+
+				<!-- Related: Installed Stack -->
+				<ThoughtDef>
+					<defName>AC_InstalledStack_Abhorrent</defName>
+					<durationDays>6</durationDays>
+					<stages>
+						<li>
+							<label>installed cortical stack</label>
+							<description>I had to install a cortical stack. This was deeply offensive to my beliefs.</description>
+							<baseMoodEffect>-30</baseMoodEffect>
+						</li>
+					</stages>
+					<nullifyingTraits>
+						<li>Transhumanist</li>
+					</nullifyingTraits>
+				</ThoughtDef>
+
+				<ThoughtDef>
+					<defName>AC_InstalledStack_Know_Abhorrent</defName>
+					<thoughtClass>Thought_MemorySocial</thoughtClass>
+					<durationDays>20</durationDays>
+					<stackLimit>100</stackLimit>
+					<stackLimitForSameOtherPawn>2</stackLimitForSameOtherPawn>
+					<stages>
+						<li>
+							<label>installed cortical stack</label>
+							<baseOpinionOffset>-80</baseOpinionOffset>
+						</li>
+					</stages>
+					<nullifyingTraits>
+						<li>Transhumanist</li>
+					</nullifyingTraits>
+				</ThoughtDef>
+
+				<ThoughtDef>
+					<defName>AC_InstalledStack_Disapproved</defName>
+					<durationDays>6</durationDays>
+					<stages>
+						<li>
+							<label>installed cortical stack</label>
+							<description>I had to install a cortical stack. This was clearly against my beliefs.</description>
+							<baseMoodEffect>-5</baseMoodEffect>
+						</li>
+					</stages>
+					<nullifyingTraits>
+						<li>Transhumanist</li>
+					</nullifyingTraits>
+				</ThoughtDef>
+
+				<ThoughtDef>
+					<defName>AC_InstalledStack_Know_Disapproved</defName>
+					<thoughtClass>Thought_MemorySocial</thoughtClass>
+					<durationDays>20</durationDays>
+					<stackLimit>100</stackLimit>
+					<stackLimitForSameOtherPawn>3</stackLimitForSameOtherPawn>
+					<stages>
+						<li>
+							<label>installed cortical stack</label>
+							<baseOpinionOffset>-10</baseOpinionOffset>
+						</li>
+					</stages>
+					<nullifyingTraits>
+						<li>Transhumanist</li>
+					</nullifyingTraits>
+				</ThoughtDef>
+
+				<!-- Related: Has cortical stack -->
+				<ThoughtDef>
+					<defName>AC_HasStack_Abhorrent</defName>
+					<workerClass>AlteredCarbon.ThoughtWorker_Precept_HasCorticalStack</workerClass>
+					<stages>
+						<li>
+							<label>cortical stack</label>
+							<description>I have cortical stack installed in me. It's an abhorrent offense against everything I believe!</description>
+							<baseMoodEffect>-18</baseMoodEffect>
+						</li>
+					</stages>
+					<nullifyingTraits>
+						<li>Transhumanist</li>
+					</nullifyingTraits>
+				</ThoughtDef>
+
+				<ThoughtDef>
+					<defName>AC_HasStack_Abhorrent_Social</defName>
+					<thoughtClass>Thought_SituationalSocial</thoughtClass>
+					<workerClass>AlteredCarbon.ThoughtWorker_Precept_HasCorticalStack_Social</workerClass>
+					<stages>
+						<li>
+							<label>cortical stack</label>
+							<baseOpinionOffset>-80</baseOpinionOffset>
+						</li>
+					</stages>
+					<nullifyingTraits>
+						<li>Transhumanist</li>
+					</nullifyingTraits>
+				</ThoughtDef>
+
+				<ThoughtDef>
+					<defName>AC_HasStack_Disapproved</defName>
+					<workerClass>AlteredCarbon.ThoughtWorker_Precept_HasCorticalStack</workerClass>
+					<stages>
+						<li>
+							<label>cortical stack</label>
+							<description>I have cortical stack installed in me. I don't believe such things are acceptable.</description>
+							<baseMoodEffect>-4</baseMoodEffect>
+						</li>
+					</stages>
+					<nullifyingTraits>
+						<li>Transhumanist</li>
+					</nullifyingTraits>
+				</ThoughtDef>
+
+				<ThoughtDef>
+					<defName>AC_HasStack_Disapproved_Social</defName>
+					<thoughtClass>Thought_SituationalSocial</thoughtClass>
+					<workerClass>AlteredCarbon.ThoughtWorker_Precept_HasCorticalStack_Social</workerClass>
+					<stages>
+						<li>
+							<label>cortical stack</label>
+							<baseOpinionOffset>-10</baseOpinionOffset>
+						</li>
+					</stages>
+					<nullifyingTraits>
+						<li>Transhumanist</li>
+					</nullifyingTraits>
+				</ThoughtDef>
+
+				<ThoughtDef>
+					<defName>AC_HasNoStack_Disapproved</defName>
+					<workerClass>AlteredCarbon.ThoughtWorker_Precept_HasNoCorticalStack</workerClass>
+					<minExpectationForNegativeThought>Moderate</minExpectationForNegativeThought>
+					<stages>
+						<li>
+							<label>no cortical stack</label>
+							<description>I don't have a cortical stack. It's against my beliefs to be able to die so easily.</description>
+							<baseMoodEffect>-3</baseMoodEffect>
+						</li>
+					</stages>
+					<nullifyingTraits>
+						<li>BodyPurist</li>
+					</nullifyingTraits>
+				</ThoughtDef>
+
+				<ThoughtDef>
+					<defName>AC_HasNoStack_Disapproved_Social</defName>
+					<thoughtClass>Thought_SituationalSocial</thoughtClass>
+					<workerClass>AlteredCarbon.ThoughtWorker_Precept_HasNoCorticalStack_Social</workerClass>
+					<minExpectationForNegativeThought>Moderate</minExpectationForNegativeThought>
+					<stages>
+						<li>
+							<label>no cortical stack</label>
+							<baseOpinionOffset>-10</baseOpinionOffset>
+						</li>
+					</stages>
+					<nullifyingTraits>
+						<li>BodyPurist</li>
+					</nullifyingTraits>
+				</ThoughtDef>
+
+			</value>
+		</match>
+	</Operation>
+</Patch>

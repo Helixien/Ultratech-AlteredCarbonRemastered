@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<JobDef>
+		<defName>AC_ExtractStack</defName>
+		<driverClass>AlteredCarbon.JobDriver_ExtractStack</driverClass>
+		<reportString>extracts cortical stack from TargetA</reportString>
+	</JobDef>
+
+	<JobDef>
+		<defName>AC_WipeStack</defName>
+		<driverClass>AlteredCarbon.JobDriver_WipeStack</driverClass>
+		<reportString>wipes cortical stack</reportString>
+	</JobDef>
+
+	<JobDef>
+		<defName>AC_DestroyStack</defName>
+		<driverClass>AlteredCarbon.JobDriver_DestroyStack</driverClass>
+		<reportString>destroys cortical stack</reportString>
+	</JobDef>
+
+	<JobDef>
+		<defName>AC_DuplicateStack</defName>
+		<driverClass>AlteredCarbon.JobDriver_DuplicateStack</driverClass>
+		<reportString>duplicating cortical stack</reportString>
+	</JobDef>
+
+	<JobDef>
+		<defName>AC_ReleaseSleeve</defName>
+		<driverClass>AlteredCarbon.JobDriver_ReleaseSleeve</driverClass>
+		<reportString>releasing sleeve</reportString>
+	</JobDef>
+
+	<JobDef>
+		<defName>AC_InsertBrainTemplate</defName>
+		<driverClass>AlteredCarbon.JobDriver_InsertBrainTemplate</driverClass>
+		<reportString>inserting brain template</reportString>
+	</JobDef>
+
+	<JobDef>
+		<defName>AC_ExtractActiveBrainTemplate</defName>
+		<driverClass>AlteredCarbon.JobDriver_ExtractActiveBrainTemplate</driverClass>
+		<reportString>extracting brain template from incubator</reportString>
+	</JobDef>
+
+	<WorkGiverDef>
+		<defName>AC_ExtractActiveBrainTemplate</defName>
+		<label>extracting brain template from incubator</label>
+		<giverClass>AlteredCarbon.WorkGiver_ExtractBrainTemplate</giverClass>
+		<workType>Hauling</workType>
+		<verb>extract brain template from incubator</verb>
+		<gerund>extracting brain template from incubator</gerund>
+		<priorityInType>20</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
+	<WorkGiverDef>
+		<defName>AC_InsertBrainTemplate</defName>
+		<label>inserting brain template in incubator</label>
+		<giverClass>AlteredCarbon.WorkGiver_InsertBrainTemplate</giverClass>
+		<workType>Hauling</workType>
+		<verb>insert brain template in incubator</verb>
+		<gerund>inserting brain template in incubator</gerund>
+		<priorityInType>20</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
+	<WorkGiverDef>
+		<defName>AC_ExtractStack</defName>
+		<label>extracting cortical stack</label>
+		<giverClass>AlteredCarbon.WorkGiver_ExtractStack</giverClass>
+		<workType>Hauling</workType>
+		<verb>extract cortical stack</verb>
+		<gerund>extracting cortical stack</gerund>
+		<priorityInType>20</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
+	<WorkGiverDef>
+		<defName>AC_DuplicateStacks</defName>
+		<label>duplicate stacks</label>
+		<giverClass>AlteredCarbon.WorkGiver_DuplicateStacks</giverClass>
+		<workType>Research</workType>
+		<verb>duplicate</verb>
+		<gerund>duplicating</gerund>
+		<priorityInType>999</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
+	<WorkGiverDef>
+		<defName>AC_HaulStacksToStorage</defName>
+		<label>haul stacks</label>
+		<giverClass>AlteredCarbon.WorkGiver_HaulStacks</giverClass>
+		<workType>Hauling</workType>
+		<verb>haul</verb>
+		<gerund>hauling</gerund>
+		<priorityInType>999</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
+	<WorkGiverDef>
+		<defName>AC_DoBillsDecryptionBench</defName>
+		<label>hack stacks</label>
+		<giverClass>WorkGiver_DoBill</giverClass>
+		<workType>Research</workType>
+		<priorityInType>50</priorityInType>
+		<fixedBillGiverDefs>
+			<li>AC_DecryptionBench</li>
+		</fixedBillGiverDefs>
+		<verb>hacking stacks</verb>
+		<gerund>hacking stacks at</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<prioritizeSustains>true</prioritizeSustains>
+	</WorkGiverDef>
+</Defs>

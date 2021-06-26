@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<RecipeDef Name="AC_RecipeHacking" Abstract="True">
+		<workSpeedStat>ResearchSpeed</workSpeedStat>
+		<effectWorking>AC_Hacking</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+	</RecipeDef>
+
+	<RecipeDef>
+		<defName>AC_DecryptAncientStack</defName>
+		<label>decrypt ancient stack</label>
+		<description>PLACEHOLDER</description>
+		<jobString>decrypting ancient stack.</jobString>
+		<workerClass>AlteredCarbon.Recipe_DecryptCorticalStack</workerClass>
+		<workAmount>180</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>AC_AncientStack</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+
+		<skillRequirements>
+			<Intellectual>8</Intellectual>
+		</skillRequirements>
+	</RecipeDef>
+	
+<!--
+	<RecipeDef>
+		<defName>AC_DecryptAncientStackBackup</defName>
+		<label>decrypt ancient stack</label>
+		<description>PLACEHOLDER</description>
+		<jobString>decrypting ancient stack.</jobString>
+		<workerClass>AlteredCarbon.Recipe_DecryptCorticalStack</workerClass>
+		<workAmount>180</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>AC_BodyPartsUltra</li>
+					</categories>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>AC_BodyPartsUltra</li>
+			</categories>
+			<disallowedThingDefs>
+				<li>AC_FilledCorticalStack</li>
+				<li>AC_EmptyCorticalStack</li>
+			</disallowedThingDefs>
+		</fixedIngredientFilter>
+		<defaultIngredientFilter>
+			<thingDefs>
+				<li>AC_AncientStack</li>
+			</thingDefs>
+			<disallowedThingDefs>
+				<li>AC_EmptyCorticalStack</li>
+				<li>AC_FilledCorticalStack</li>
+			</disallowedThingDefs>
+		</defaultIngredientFilter>
+		<skillRequirements>
+			<Intellectual>8</Intellectual>
+		</skillRequirements>
+	</RecipeDef>
+	-->
+</Defs>
