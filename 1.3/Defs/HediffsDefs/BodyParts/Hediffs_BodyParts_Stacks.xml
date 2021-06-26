@@ -40,6 +40,14 @@
 					<li MayRequire="VanillaExpanded.VanillaTraitsExpanded">VTE_Squeamish</li>
 					<li MayRequire="VanillaExpanded.VanillaTraitsExpanded">VTE_ThickSkinned</li>
 					<li MayRequire="VanillaExpanded.VanillaTraitsExpanded">VTE_ThinSkinned</li>
+					<li MayRequire="Sierra.RTGT">RT_Nearsighted</li>
+					<li MayRequire="Sierra.RTGT">RT_Farsighted</li>
+					<li MayRequire="Sierra.RTGT">RT_Muscular</li>
+					<li MayRequire="Sierra.RTGT">RT_Frail</li>
+					<li MayRequire="Sierra.RTGT">RT_Hardy</li>
+					<li MayRequire="Sierra.RTGT">RT_Feeble</li>
+					<li MayRequire="Sierra.RTGT">RT_Healthy</li>
+					<li MayRequire="Sierra.RTGT">RT_ChronicallyIll</li>
 				</ignoresTraits> 
 			</li>
 		</modExtensions>
