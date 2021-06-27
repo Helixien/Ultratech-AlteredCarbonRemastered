@@ -9,12 +9,11 @@ using Verse;
 
 namespace AlteredCarbon
 {
-	public class SpecialThingFilterWorker_StacksHostile : SpecialThingFilterWorker
+	public class SpecialThingFilterWorker_StacksHostile : SpecialThingFilterWorker_Stacks
 	{
 		public override bool Matches(Thing t)
 		{
-			Log.Message("T: " + t);
-			return true;
+			return base.Matches(t) && t is CorticalStack stack && stack.PersonaData.hasPawn && stack.PersonaData.faction != null && stack.PersonaData.faction.HostileTo(Faction.OfPlayer);
 		}
 	}
 }

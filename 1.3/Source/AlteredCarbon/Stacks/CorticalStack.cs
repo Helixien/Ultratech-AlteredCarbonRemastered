@@ -27,6 +27,92 @@ namespace AlteredCarbon
                 return personaData;
             }
         }
+
+        private GraphicData hostileGraphicData;
+        private GraphicData friendlyGraphicData;
+        private GraphicData strangerGraphicData;
+
+        private Graphic hostileGraphic;
+        private Graphic friendlyGraphic;
+        private Graphic strangerGraphic;
+
+        public override Graphic Graphic
+        {
+            get
+            {
+                var personaData = this.PersonaData;
+                if (personaData.hasPawn)
+                {
+                    if (personaData.faction == Faction.OfPlayer)
+                    {
+                        if (friendlyGraphic is null)
+                        {
+                            if (friendlyGraphicData is null)
+                            {
+                                friendlyGraphicData = GetGraphicDataWithOtherPath("Things/Item/Stacks/FriendlyStack");
+                            }
+                            friendlyGraphic = friendlyGraphicData.GraphicColoredFor(this);
+                        }
+                        return friendlyGraphic;
+                    }
+                    else if (personaData.faction is null || !personaData.faction.HostileTo(Faction.OfPlayer))
+                    {
+                        if (strangerGraphic is null)
+                        {
+                            if (strangerGraphicData is null)
+                            {
+                                strangerGraphicData = GetGraphicDataWithOtherPath("Things/Item/Stacks/NeutralStack");
+                            }
+                            strangerGraphic = strangerGraphicData.GraphicColoredFor(this);
+                        }
+                        return strangerGraphic;
+                    }
+                    else
+                    {
+                        if (hostileGraphic is null)
+                        {
+                            if (hostileGraphicData is null)
+                            {
+                                hostileGraphicData = GetGraphicDataWithOtherPath("Things/Item/Stacks/HostileStack");
+                            }
+                            hostileGraphic = hostileGraphicData.GraphicColoredFor(this);
+                        }
+                        return hostileGraphic;
+                    }
+                }
+                else
+                {
+                    return base.Graphic;
+                } 
+            }
+        }
+
+        private GraphicData GetGraphicDataWithOtherPath(string texPath)
+        {
+            return new GraphicData
+            {
+                texPath = texPath,
+                graphicClass = def.graphicData.graphicClass,
+                shadowData = def.graphicData.shadowData,
+                shaderType = def.graphicData.shaderType,
+                shaderParameters = def.graphicData.shaderParameters,
+                onGroundRandomRotateAngle = def.graphicData.onGroundRandomRotateAngle,
+                linkType = def.graphicData.linkType,
+                linkFlags = def.graphicData.linkFlags,
+                flipExtraRotation = def.graphicData.flipExtraRotation,
+                drawSize = def.graphicData.drawSize,
+                drawRotated = !def.graphicData.drawRotated,
+                drawOffsetWest = def.graphicData.drawOffsetWest,
+                drawOffsetSouth = def.graphicData.drawOffsetSouth,
+                drawOffsetNorth = def.graphicData.drawOffsetNorth,
+                drawOffsetEast = def.graphicData.drawOffsetEast,
+                drawOffset = def.graphicData.drawOffset,
+                damageData = def.graphicData.damageData,
+                colorTwo = def.graphicData.colorTwo,
+                color = def.graphicData.color,
+                allowFlip = def.graphicData.allowFlip
+            };
+        }
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             corticalStacks.Add(this);
@@ -54,47 +140,6 @@ namespace AlteredCarbon
             }
             base.SpawnSetup(map, respawningAfterLoad);
         }
-
-        //public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn myPawn)
-        //{
-        //    if (!ReachabilityUtility.CanReach(myPawn, this, PathEndMode.InteractionCell, Danger.Deadly, false))
-        //    {
-        //        FloatMenuOption floatMenuOption = new FloatMenuOption(Translator.Translate("CannotUseNoPath"), null,
-        //            MenuOptionPriority.Default, null, null, 0f, null, null);
-        //        yield return floatMenuOption;
-        //    }
-        //    else if (this.def == AlteredCarbonDefOf.AC_FilledCorticalStack && myPawn.skills.GetSkill(SkillDefOf.Intellectual).Level >= 5)
-        //    {
-        //        string label = "AlteredCarbon.WipeStack".Translate();
-        //        Action action = delegate ()
-        //        {
-        //            Job job = JobMaker.MakeJob(AlteredCarbonDefOf.AC_WipeStack, this);
-        //            job.count = 1;
-        //            myPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-        //        };
-        //        yield return FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption
-        //                (label, action, MenuOptionPriority.Default, null, null, 0f, null, null), myPawn,
-        //                this, "ReservedBy");
-        //    }
-        //    else if (this.def == AlteredCarbonDefOf.AC_FilledCorticalStack && myPawn.skills.GetSkill(SkillDefOf.Intellectual).Level < 5)
-        //    {
-        //        FloatMenuOption floatMenuOption = new FloatMenuOption("AlteredCarbon.CantWipeStackTooDumb".Translate(), null,
-        //            MenuOptionPriority.Default, null, null, 0f, null, null);
-        //        yield return floatMenuOption;
-        //    }
-        //    string label2 = "AlteredCarbon.DestroyStack".Translate();
-        //    Action action2 = delegate ()
-        //    {
-        //        Job job = JobMaker.MakeJob(AlteredCarbonDefOf.AC_DestroyStack, this);
-        //        job.count = 1;
-        //        myPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
-        //    };
-        //    yield return FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption
-        //            (label2, action2, MenuOptionPriority.Default, null, null, 0f, null, null), myPawn,
-        //            this, "ReservedBy");
-        //    yield break;
-        //}
-
         public override string GetInspectString()
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -176,30 +221,11 @@ namespace AlteredCarbon
         }
         public void EmptyStack(Pawn affecter, bool affectFactionRelationship = false)
         {
-            Find.WindowStack.Add(new Dialog_MessageBox("AlteredCarbon.EmptyStackConfirmation".Translate(),
-                "No".Translate(), null,
-                "Yes".Translate(), delegate ()
-                {
-                    float damageChance = Mathf.Abs((affecter.skills.GetSkill(SkillDefOf.Intellectual).levelInt / 2f) - 11f) / 10f;
-                    if (Rand.Chance(damageChance))
-                    {
-                        Find.LetterStack.ReceiveLetter("AlteredCarbon.DestroyedStack".Translate(),
-                        "AlteredCarbon.DestroyedWipingStackDesc".Translate(affecter.Named("PAWN")),
-                        LetterDefOf.NegativeEvent, affecter);
-                        AlteredCarbonManager.Instance.stacksIndex.Remove(PersonaData.pawnID);
-                        this.KillInnerPawn(affectFactionRelationship, affecter);
-                        this.Destroy();
-                    }
-                    else
-                    {
-                        var newStack = ThingMaker.MakeThing(AC_DefOf.UT_EmptyCorticalStack);
-                        GenSpawn.Spawn(newStack, this.Position, this.Map);
-                        Find.Selector.Select(newStack);
-                        AlteredCarbonManager.Instance.stacksIndex.Remove(PersonaData.pawnID);
-                        this.KillInnerPawn(affectFactionRelationship, affecter);
-                        this.Destroy();
-                    }
-                }, null, false, null, null));
+            var newStack = ThingMaker.MakeThing(AC_DefOf.UT_EmptyCorticalStack);
+            GenPlace.TryPlaceThing(newStack, affecter.Position, affecter.Map, ThingPlaceMode.Near);
+            AlteredCarbonManager.Instance.stacksIndex.Remove(PersonaData.pawnID);
+            this.KillInnerPawn(affectFactionRelationship, affecter);
+            this.Destroy();
         }
         public override void ExposeData()
         {

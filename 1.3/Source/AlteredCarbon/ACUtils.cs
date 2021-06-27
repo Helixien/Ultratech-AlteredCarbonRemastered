@@ -9,9 +9,69 @@ using Verse;
 
 namespace AlteredCarbon
 {
+
 	[StaticConstructorOnStartup]
 	internal static class ACUtils
 	{
+        static ACUtils()
+        {
+            foreach (var li in AC_DefOf.UT_HackBiocodedThings.ingredients)
+            {
+                li.filter = new ThingFilterBiocodable();
+                var list = Traverse.Create(li.filter).Field("thingDefs").GetValue<List<ThingDef>>();
+                if (list is null)
+                {
+                    list = new List<ThingDef>();
+                    Traverse.Create(li.filter).Field("thingDefs").SetValue(list);
+                }
+                foreach (var thingDef in DefDatabase<ThingDef>.AllDefs.Where(x => x.comps != null && x.HasAssignableCompFrom(typeof(CompBiocodable))))
+                {
+                    li.filter.SetAllow(thingDef, true);
+                    list.Add(thingDef);
+                }
+            }
+            AC_DefOf.UT_HackBiocodedThings.fixedIngredientFilter = new ThingFilterBiocodable();
+            var list2 = Traverse.Create(AC_DefOf.UT_HackBiocodedThings.fixedIngredientFilter).Field("thingDefs").GetValue<List<ThingDef>>();
+            if (list2 is null)
+            {
+                list2 = new List<ThingDef>();
+                Traverse.Create(AC_DefOf.UT_HackBiocodedThings.fixedIngredientFilter).Field("thingDefs").SetValue(list2);
+            }
+
+            foreach (var thingDef in DefDatabase<ThingDef>.AllDefs.Where(x => x.comps != null && x.HasAssignableCompFrom(typeof(CompBiocodable))))
+            {
+                list2.Add(thingDef);
+                AC_DefOf.UT_HackBiocodedThings.fixedIngredientFilter.SetAllow(thingDef, true);
+            }
+
+
+            AC_DefOf.UT_HackBiocodedThings.defaultIngredientFilter = new ThingFilterBiocodable();
+            var list3 = Traverse.Create(AC_DefOf.UT_HackBiocodedThings.defaultIngredientFilter).Field("thingDefs").GetValue<List<ThingDef>>();
+            if (list3 is null)
+            {
+                list3 = new List<ThingDef>();
+                Traverse.Create(AC_DefOf.UT_HackBiocodedThings.defaultIngredientFilter).Field("thingDefs").SetValue(list2);
+            }
+
+            foreach (var thingDef in DefDatabase<ThingDef>.AllDefs.Where(x => x.comps != null && x.HasAssignableCompFrom(typeof(CompBiocodable))))
+            {
+                list3.Add(thingDef);
+                AC_DefOf.UT_HackBiocodedThings.defaultIngredientFilter.SetAllow(thingDef, true);
+            }
+
+            foreach (var li in AC_DefOf.UT_WipeFilledCorticalStack.ingredients)
+            {
+                li.filter.SetAllow(AC_DefOf.UT_AllowStacksColonist, false);
+            }
+            AC_DefOf.UT_WipeFilledCorticalStack.defaultIngredientFilter.SetAllow(AC_DefOf.UT_AllowStacksColonist, false);
+        }
+
+        public static bool IsUltraTech(this Thing thing)
+        {
+            return thing.def == AC_DefOf.UT_SleeveIncubator || thing.def == AC_DefOf.UT_OrganIncubator
+                || thing.def == AC_DefOf.UT_SleeveCasket || thing.def == AC_DefOf.UT_SleeveCasket
+                || thing.def == AC_DefOf.UT_CorticalStackStorage || thing.def == AC_DefOf.UT_DecryptionBench;
+        }
         public static bool IsCopy(this Pawn pawn)
         {
             var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;

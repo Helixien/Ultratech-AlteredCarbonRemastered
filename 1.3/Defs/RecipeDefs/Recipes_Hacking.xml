@@ -12,7 +12,7 @@
 		<label>decrypt ancient stack</label>
 		<description>PLACEHOLDER</description>
 		<jobString>decrypting ancient stack.</jobString>
-		<workerClass>AlteredCarbon.Recipe_DecryptCorticalStack</workerClass>
+		<workerClass>AlteredCarbon.Recipe_DecryptAncientCorticalStack</workerClass>
 		<workAmount>180</workAmount>
 		<ingredients>
 			<li>
@@ -24,51 +24,86 @@
 				<count>1</count>
 			</li>
 		</ingredients>
-
 		<skillRequirements>
 			<Intellectual>8</Intellectual>
 		</skillRequirements>
 	</RecipeDef>
-	
-<!--
+
 	<RecipeDef>
-		<defName>UT_DecryptAncientStackBackup</defName>
-		<label>decrypt ancient stack</label>
+		<defName>UT_HackBiocodedThings</defName>
+		<label>hack biocoded things</label>
 		<description>PLACEHOLDER</description>
-		<jobString>decrypting ancient stack.</jobString>
-		<workerClass>AlteredCarbon.Recipe_DecryptCorticalStack</workerClass>
+		<jobString>hacking biocoded things.</jobString>
+		<workerClass>AlteredCarbon.Recipe_HackBiocodedThings</workerClass>
 		<workAmount>180</workAmount>
 		<ingredients>
 			<li>
 				<filter>
-					<categories>
-						<li>UT_BodyPartsUltra</li>
-					</categories>
+					<thingDefs>
+						<li>Apparel_PowerArmorHelmet</li>
+						<li>Gun_TripleRocket</li>
+					</thingDefs>
 				</filter>
 				<count>1</count>
 			</li>
 		</ingredients>
 		<fixedIngredientFilter>
-			<categories>
-				<li>UT_BodyPartsUltra</li>
-			</categories>
-			<disallowedThingDefs>
+			<thingDefs>
+				<li>Apparel_PowerArmorHelmet</li>
+				<li>Gun_TripleRocket</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<skillRequirements>
+			<Intellectual>10</Intellectual>
+		</skillRequirements>
+	</RecipeDef>
+
+	<RecipeDef>
+		<defName>UT_WipeFilledCorticalStack</defName>
+		<label>wipe filled cortical stack</label>
+		<description>PLACEHOLDER</description>
+		<jobString>wiping filled cortical stack.</jobString>
+		<workerClass>AlteredCarbon.Recipe_WipeFilledCorticalStack</workerClass>
+		<workAmount>180</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>UT_FilledCorticalStack</li>
+						<li>UT_EmptyCorticalStack</li>
+					</thingDefs>
+					<specialFiltersToAllow>
+						<li>UT_AllowStacksColonist</li>
+						<li>UT_AllowStacksStranger</li>
+						<li>UT_AllowStacksHostile</li>
+					</specialFiltersToAllow>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
 				<li>UT_FilledCorticalStack</li>
-				<li>UT_EmptyCorticalStack</li>
-			</disallowedThingDefs>
+			</thingDefs>
+			<specialFiltersToAllow>
+				<li>UT_AllowStacksColonist</li>
+				<li>UT_AllowStacksStranger</li>
+				<li>UT_AllowStacksHostile</li>
+			</specialFiltersToAllow>
 		</fixedIngredientFilter>
 		<defaultIngredientFilter>
 			<thingDefs>
-				<li>UT_AncientStack</li>
-			</thingDefs>
-			<disallowedThingDefs>
-				<li>UT_EmptyCorticalStack</li>
 				<li>UT_FilledCorticalStack</li>
-			</disallowedThingDefs>
+			</thingDefs>
+			<specialFiltersToAllow>
+				<li>UT_AllowStacksColonist</li>
+				<li>UT_AllowStacksStranger</li>
+				<li>UT_AllowStacksHostile</li>
+			</specialFiltersToAllow>
 		</defaultIngredientFilter>
 		<skillRequirements>
 			<Intellectual>8</Intellectual>
 		</skillRequirements>
 	</RecipeDef>
-	-->
+
 </Defs>

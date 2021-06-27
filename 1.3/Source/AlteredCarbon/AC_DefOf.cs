@@ -13,8 +13,6 @@ namespace AlteredCarbon
 	{
 		public static JobDef UT_ExtractStack;
 
-		public static JobDef UT_WipeStack;
-
 		public static JobDef UT_DuplicateStack;
 
 		public static JobDef UT_InsertBrainTemplate;
@@ -40,6 +38,16 @@ namespace AlteredCarbon
 		public static ThingDef UT_AncientStack;
 
 		public static ThingDef UT_SleeveIncubator;
+		public static ThingDef UT_OrganIncubator;
+		public static ThingDef UT_SleeveCasket;
+		public static ThingDef UT_CorticalStackStorage;
+		public static ThingDef UT_DecryptionBench;
+
+		public static RecipeDef UT_HackBiocodedThings;
+
+		public static RecipeDef UT_WipeFilledCorticalStack;
+
+		public static SpecialThingFilterDef UT_AllowStacksColonist;
 
 		public static ThoughtDef UT_WrongGender;
 

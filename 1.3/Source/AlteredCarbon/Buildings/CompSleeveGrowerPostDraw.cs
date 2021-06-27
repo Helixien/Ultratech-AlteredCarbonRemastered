@@ -18,7 +18,7 @@ namespace AlteredCarbon
 			{
 				if (glass == null)
 				{
-					glass = GraphicDatabase.Get<Graphic_Single>("Things/Building/Misc/SleeveGrowingVatTop", ShaderDatabase.CutoutComplex, this.parent.def.graphicData.drawSize, Color.white);
+					glass = GraphicDatabase.Get<Graphic_Single>("Things/Building/Misc/SleeveGrower/SleeveGrowingVatTop", ShaderDatabase.CutoutComplex, this.parent.def.graphicData.drawSize, Color.white);
 				}
 				return glass;
 			}

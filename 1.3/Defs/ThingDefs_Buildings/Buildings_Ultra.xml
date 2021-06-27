@@ -333,7 +333,7 @@
 		<defName>UT_DecryptionBench</defName>
 		<label>decryption bench</label>
 		<description>A workbench equipped with advanced tools for decrypting ultra-tech gear and items.</description>
-		<thingClass>Building_WorkTable</thingClass>
+		<thingClass>AlteredCarbon.Building_DecryptionBench</thingClass>
 		<graphicData>
 			<texPath>Things/Building/Production/HackingWorkbench</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
@@ -380,6 +380,8 @@
 		</building>
 		<recipes>
 			<li>UT_DecryptAncientStack</li>
+			<li>UT_HackBiocodedThings</li>
+			<li>UT_WipeFilledCorticalStack</li>
 		</recipes>
 		<inspectorTabs>
 			<li>ITab_Bills</li>

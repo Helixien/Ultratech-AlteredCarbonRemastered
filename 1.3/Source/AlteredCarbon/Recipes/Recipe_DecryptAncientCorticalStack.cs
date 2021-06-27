@@ -92,18 +92,25 @@ namespace AlteredCarbon
                 Dictionary<ResearchProjectDef, float> dictionary = fieldInfo.GetValue(Find.ResearchManager) as Dictionary<ResearchProjectDef, float>;
                 if (dictionary.ContainsKey(proj))
                 {
+                    Log.Message(" - AddResearchProgress - dictionary[proj] += (proj.baseCost - Find.ResearchManager.GetProgress(proj)) * researchProgressMultiplier; - 5", true);
                     dictionary[proj] += (proj.baseCost - Find.ResearchManager.GetProgress(proj)) * researchProgressMultiplier;
                 }
                 else
                 {
+                    Log.Message(" - AddResearchProgress - dictionary[proj] = proj.baseCost * researchProgressMultiplier; - 6", true);
                     dictionary[proj] = proj.baseCost * researchProgressMultiplier;
                 }
                 if (proj.IsFinished)
                 {
+                    Log.Message("Finishing: " + proj);
+                    var prevProj = Find.ResearchManager.currentProj;
+                    Find.ResearchManager.currentProj = proj;
                     Find.ResearchManager.FinishProject(proj, doCompletionDialog: true);
+                    Find.ResearchManager.currentProj =  prevProj;
                 }
             }
         }
+
         private bool TryGetUnfinishedSpacerResearch(out ResearchProjectDef researchProjectDef)
         {
             return DefDatabase<ResearchProjectDef>.AllDefs.Where(x => x.techLevel > TechLevel.Spacer && !x.IsFinished).TryRandomElement(out researchProjectDef);

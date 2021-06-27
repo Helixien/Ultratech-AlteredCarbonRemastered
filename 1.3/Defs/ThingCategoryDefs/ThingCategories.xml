@@ -12,7 +12,7 @@
 	<ThingCategoryDef>
 		<defName>UT_BodyPartsUltra</defName>
 		<label>cortical stack</label>
-		<parent>BodyParts</parent>
+		<parent>Items</parent>
 	</ThingCategoryDef>
 
 </Defs>

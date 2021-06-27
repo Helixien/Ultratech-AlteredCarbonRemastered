@@ -95,7 +95,6 @@ namespace AlteredCarbon
         {
             get
             {
-                Log.Message(this + " - " + this.name);
                 if (TitleShort?.CapitalizeFirst().NullOrEmpty() ?? false)
                 {
                     return this.name.ToStringShort.Colorize(GetFactionRelationColor(this.faction));
@@ -111,11 +110,11 @@ namespace AlteredCarbon
                 {
                     return title;
                 }
-                if (BackstoryDatabase.TryGetWithIdentifier(this.adulthood, out var newAdulthood, true))
+                if (!this.adulthood.NullOrEmpty() && BackstoryDatabase.TryGetWithIdentifier(this.adulthood, out var newAdulthood, true))
                 {
                     return newAdulthood.TitleShortFor(gender);
                 }
-                if (BackstoryDatabase.TryGetWithIdentifier(this.adulthood, out var newChildhood, true))
+                if (!this.childhood.NullOrEmpty() && BackstoryDatabase.TryGetWithIdentifier(this.childhood, out var newChildhood, true))
                 {
                     return newChildhood.TitleShortFor(gender);
                 }
@@ -587,11 +586,26 @@ namespace AlteredCarbon
             if (pawn.playerSettings == null) pawn.playerSettings = new Pawn_PlayerSettings(pawn);
             pawn.playerSettings.hostilityResponse = (HostilityResponseMode)this.hostilityMode;
 
-            BackstoryDatabase.TryGetWithIdentifier(this.childhood, out var newChildhood, true);
-            pawn.story.childhood = newChildhood;
+            if (!this.childhood.NullOrEmpty())
+            {
+                BackstoryDatabase.TryGetWithIdentifier(this.childhood, out var newChildhood, true);
+                pawn.story.childhood = newChildhood;
+            }
+            else
+            {
+                pawn.story.childhood = null;
+            }
 
-            BackstoryDatabase.TryGetWithIdentifier(this.adulthood, out var newAdulthood, true);
-            pawn.story.adulthood = newAdulthood;
+            if (!this.adulthood.NullOrEmpty())
+            {
+                BackstoryDatabase.TryGetWithIdentifier(this.adulthood, out var newAdulthood, true);
+                pawn.story.adulthood = newAdulthood;
+            }
+            else
+            {
+                pawn.story.adulthood = null;
+            }
+
             pawn.story.title = this.title;
 
             if (pawn.workSettings == null) pawn.workSettings = new Pawn_WorkSettings();

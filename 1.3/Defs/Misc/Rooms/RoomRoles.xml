@@ -3,8 +3,8 @@
 
 	<RoomRoleDef>
 		<defName>UT_Laboratory</defName>
-		<label>Laboratory Room</label>
-		<workerClass>VanillaPowerExpanded.RoomRoleWorker_ReactorRoom</workerClass>
+		<label>Ultra Laboratory Room</label>
+		<workerClass>AlteredCarbon.RoomRoleWorker_UltraTech</workerClass>
 		<relatedStats>
 			<li>Cleanliness</li>
 			<li>Space</li>

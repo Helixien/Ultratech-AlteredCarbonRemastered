@@ -250,10 +250,10 @@ namespace AlteredCarbon
 
         public void RegisterSleeve(Pawn pawn, int stackGroupID = -1)
         {
-            if (AlteredCarbonManager.Instance.pawnsWithStacks == null) AlteredCarbonManager.Instance.pawnsWithStacks = new HashSet<Pawn>();
-            if (AlteredCarbonManager.Instance.emptySleeves == null) AlteredCarbonManager.Instance.emptySleeves = new HashSet<Pawn>();
-            AlteredCarbonManager.Instance.pawnsWithStacks.Remove(pawn);
-            AlteredCarbonManager.Instance.emptySleeves.Add(pawn);
+            if (this.pawnsWithStacks == null) this.pawnsWithStacks = new HashSet<Pawn>();
+            if (this.emptySleeves == null) this.emptySleeves = new HashSet<Pawn>();
+            this.pawnsWithStacks.Remove(pawn);
+            this.emptySleeves.Add(pawn);
             if (stackGroupID != -1 && this.stacksRelationships.ContainsKey(stackGroupID))
             {
                 if (this.stacksRelationships[stackGroupID].deadPawns == null)
@@ -266,9 +266,9 @@ namespace AlteredCarbon
         {
             if (corticalStack.PersonaData.stackGroupID != 0) return corticalStack.PersonaData.stackGroupID;
 
-            if (AlteredCarbonManager.Instance.stacksRelationships != null)
+            if (this.stacksRelationships != null)
             {
-                return AlteredCarbonManager.Instance.stacksRelationships.Count + 1;
+                return this.stacksRelationships.Count + 1;
             }
             else
             {

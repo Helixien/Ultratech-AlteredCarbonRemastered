@@ -305,6 +305,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buildings\Building_DecryptionBench.cs" />
     <Compile Include="Designators\Designator_ExtractStack.cs" />
     <Compile Include="HarmonyPatches\Job_Patches.cs" />
     <Compile Include="HarmonyPatches\Gizmo_Patches.cs" />
@@ -319,6 +320,7 @@
     <Compile Include="Jobs\WorkGiver_DuplicateStacks.cs" />
     <Compile Include="Jobs\WorkGiver_HaulStacks.cs" />
     <Compile Include="Lords\LordJob_TakeStacks.cs" />
+    <Compile Include="Misc\RoomRoleWorker_UltraTech.cs" />
     <Compile Include="ModCompatibility.cs" />
     <Compile Include="AC_DefOf.cs" />
     <Compile Include="AlteredCarbonMod.cs" />
@@ -332,27 +334,29 @@
     <Compile Include="HarmonyPatches\Patch_Bed.cs" />
     <Compile Include="HarmonyPatches\RecipePatches.cs" />
     <Compile Include="HarmonyPatches\Patch_CheckRecalculateMoodThoughts.cs" />
-    <Compile Include="Jobs\JobDriver_DestroyStack.cs" />
     <Compile Include="Jobs\JobDriver_ExtractActiveBrainTemplate.cs" />
     <Compile Include="Jobs\JobDriver_InsertBrainTemplate.cs" />
     <Compile Include="Jobs\WorkGiver_ExtractBrainTemplate.cs" />
     <Compile Include="Jobs\WorkGiver_InsertBrainTemplate.cs" />
+    <Compile Include="Recipes\Recipe_WipeFilledCorticalStack.cs" />
+    <Compile Include="Recipes\Recipe_HackBiocodedThings.cs" />
     <Compile Include="Recipes\Recipe_DecryptAncientCorticalStack.cs" />
+    <Compile Include="Recipes\SpecialThingFilterWorker_Stacks.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksHostile.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksColonist.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksStranger.cs" />
-    <Compile Include="SleeveGrowing\Building_SleeveCasket.cs" />
-    <Compile Include="SleeveGrowing\Building_StackStorage.cs" />
-    <Compile Include="SleeveGrowing\ITab_StackStorageContents.cs" />
-    <Compile Include="SleeveGrowing\CompProperties_SleeveCasketPostDraw.cs" />
-    <Compile Include="SleeveGrowing\CompProperties_SleeveGrowerPostDraw.cs" />
-    <Compile Include="SleeveGrowing\CompSleeveCasketPostDraw.cs" />
-    <Compile Include="SleeveGrowing\CompSleeveGrowerPostDraw.cs" />
+    <Compile Include="Buildings\Building_SleeveCasket.cs" />
+    <Compile Include="Buildings\Building_StackStorage.cs" />
+    <Compile Include="Buildings\ITab_StackStorageContents.cs" />
+    <Compile Include="Buildings\CompProperties_SleeveCasketPostDraw.cs" />
+    <Compile Include="Buildings\CompProperties_SleeveGrowerPostDraw.cs" />
+    <Compile Include="Buildings\CompSleeveCasketPostDraw.cs" />
+    <Compile Include="Buildings\CompSleeveGrowerPostDraw.cs" />
     <Compile Include="Jobs\JobDriver_ReleaseSleeve.cs" />
-    <Compile Include="SleeveGrowing\GraphicDatabaseHeadRecords.cs" />
+    <Compile Include="Buildings\GraphicDatabaseHeadRecords.cs" />
     <Compile Include="HarmonyPatches\CheckForStateChange_Patch.cs" />
-    <Compile Include="SleeveGrowing\Building_SleeveGrower.cs" />
-    <Compile Include="SleeveGrowing\CustomizeSleeveWindow.cs" />
+    <Compile Include="Buildings\Building_SleeveGrower.cs" />
+    <Compile Include="Buildings\CustomizeSleeveWindow.cs" />
     <Compile Include="ExcludeRacesModExtension.cs" />
     <Compile Include="RoyalTitlePermitWorker_CallNeuroformers.cs" />
     <Compile Include="Stacks\BackstoryDef.cs" />
@@ -361,7 +365,6 @@
     <Compile Include="Stacks\PersonaData.cs" />
     <Compile Include="Stacks\StacksData.cs" />
     <Compile Include="Jobs\JobDriver_DuplicateStack.cs" />
-    <Compile Include="Jobs\JobDriver_WipeStack.cs" />
     <Compile Include="Thoughts\ThoughtWorker_WomansBody.cs" />
     <Compile Include="Thoughts\ThoughtWorker_MansBody.cs" />
     <Compile Include="HarmonyPatches\SpawnStacks.cs" />
