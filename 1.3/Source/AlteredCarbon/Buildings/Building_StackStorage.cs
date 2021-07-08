@@ -19,7 +19,7 @@ namespace AlteredCarbon
             this.innerContainer = new ThingOwner<Thing>(this, false, LookMode.Deep);
         }
 
-        public bool allowColonistCorticalStacks;
+        public bool allowColonistCorticalStacks = true;
         public bool allowStrangerCorticalStacks;
         public bool allowHostileCorticalStacks;
         public CompRefuelable compRefuelable;
@@ -200,10 +200,10 @@ namespace AlteredCarbon
             {
                 this
             });
-            Scribe_Values.Look(ref this.contentsKnown, "contentsKnown", false, false);
+            Scribe_Values.Look(ref this.contentsKnown, "contentsKnown", false);
             Scribe_Values.Look(ref this.allowColonistCorticalStacks, "allowColonistCorticalStacks", true);
-            Scribe_Values.Look(ref this.allowHostileCorticalStacks, "allowHostileCorticalStacks", false, false);
-            Scribe_Values.Look(ref this.allowStrangerCorticalStacks, "allowStrangerCorticalStacks", false, false);
+            Scribe_Values.Look(ref this.allowHostileCorticalStacks, "allowHostileCorticalStacks", false);
+            Scribe_Values.Look(ref this.allowStrangerCorticalStacks, "allowStrangerCorticalStacks", false);
             Scribe_References.Look(ref this.stackToDuplicate, "stackToDuplicate");
         }
 

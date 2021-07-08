@@ -6,7 +6,6 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 
-
 namespace AlteredCarbon
 {
 	public static class ModCompatibility

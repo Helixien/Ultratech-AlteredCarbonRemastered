@@ -38,7 +38,10 @@
 		<altitudeLayer>Building</altitudeLayer>
 		<neverMultiSelect>true</neverMultiSelect>
 		<rotatable>true</rotatable>
-		<passability>Impassable</passability>
+		
+		<passability>PassThroughOnly</passability>
+		<pathCost>100</pathCost>
+		
 		<castEdgeShadows>True</castEdgeShadows>
 		<canOverlapZones>false</canOverlapZones>
 		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
@@ -51,6 +54,9 @@
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<uiIconPath>Things/Building/Misc/SleeveGrower/SleeveGrowerUI_Icon</uiIconPath>
 		<uiIconScale>1</uiIconScale>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<interactionCellOffset>(0,0,2)</interactionCellOffset>
+		<hasInteractionCell>true</hasInteractionCell>
 		<building>
 			<spawnedConceptLearnOpportunity>UT_SleeveGrowing</spawnedConceptLearnOpportunity>
 			<boughtConceptLearnOpportunity>UT_SleeveGrowing</boughtConceptLearnOpportunity>
