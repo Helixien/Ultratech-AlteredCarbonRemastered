@@ -250,7 +250,7 @@ namespace AlteredCarbon
 		{
 			if (this.InnerPawn != null)
 			{
-				return base.GetInspectString() + "\n" + "GrowthProgress".Translate() +
+				return base.GetInspectString() + "\n" + "AlteredCarbon.GrowthProgress".Translate() +
 					Math.Round(((float)this.curTicksToGrow / this.totalTicksToGrow) * 100f, 2).ToString() + "%";
 			}
 			else
@@ -325,14 +325,13 @@ namespace AlteredCarbon
 
         public int OpenTicks => 300;
 
-        public override void DrawAt(Vector3 drawLoc, bool flip = false)
+		public override void DrawAt(Vector3 drawLoc, bool flip = false)
 		{
 			base.DrawAt(drawLoc, flip);
-
 			if (this.InnerPawn != null)
 			{
 				Vector3 newPos = drawLoc;
-				newPos.z += 0.5f;
+				newPos.z += 0.2f;
 				var growthValue = (float)this.curTicksToGrow / this.totalTicksToGrow;
 				if (!this.innerPawnIsDead)
 				{
@@ -366,6 +365,7 @@ namespace AlteredCarbon
 					}
 				}
 			}
+
 			base.Comps_PostDraw();
 		}
 

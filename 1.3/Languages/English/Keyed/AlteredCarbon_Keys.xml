@@ -79,7 +79,7 @@
 	<AC.FactionDemandsStacks>{FACTION_name} demands stacks of their members back.\n\n{0}</AC.FactionDemandsStacks>
 	<AC.AppeptFactionDemand>Accept: (+{0} goodwill)</AC.AppeptFactionDemand>
 	<AC.RejectFactionDemand>Reject: ({0} goodwill)</AC.RejectFactionDemand>
-	<AC.FilledStacks>Cortical Stacks in Matrix:</AC.FilledStacks>
+	<AC.CorticalStacksInMatrix>Cortical Stacks in Matrix: ({0}/{1})</AC.CorticalStacksInMatrix>
 	<AC.StackStorage>Contents</AC.StackStorage>
 	
 	<AC.AllowColonistStacks>*Allow colonist cortical stacks</AC.AllowColonistStacks>

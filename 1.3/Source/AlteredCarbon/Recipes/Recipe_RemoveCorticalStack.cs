@@ -38,25 +38,17 @@ namespace AlteredCarbon
 				var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
 				if (hediff != null)
 				{
-					if (hediff.def.spawnThingOnRemoved != null)
-					{
-						var corticalStack = ThingMaker.MakeThing(hediff.def.spawnThingOnRemoved) as CorticalStack;
-						hediff.PersonaData.CopyPawn(pawn);
-						corticalStack.PersonaData.CopyDataFrom(hediff.PersonaData);
-						corticalStack.PersonaData.gender = hediff.PersonaData.gender;
-						corticalStack.PersonaData.race = hediff.PersonaData.race;
-						//if (hediff.stackGroupID == 0)
-                        //{
-						//	corticalStack.stackGroupID = AlteredCarbonManager.Instance.GetStackGroupID(corticalStack);
-						//}
-						GenPlace.TryPlaceThing(corticalStack, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
-						if (AlteredCarbonManager.Instance.stacksIndex == null) AlteredCarbonManager.Instance.stacksIndex = new Dictionary<int, CorticalStack>();
-						AlteredCarbonManager.Instance.stacksIndex[pawn.thingIDNumber] = corticalStack;
-						AlteredCarbonManager.Instance.ReplacePawnWithStack(pawn, corticalStack);
-						AlteredCarbonManager.Instance.RegisterSleeve(pawn, hediff.PersonaData.stackGroupID);
-						//Log.Message("corticalStack.stackGroupID: " + corticalStack.stackGroupID, true);
-						//Log.Message("hediff.stackGroupID: " + hediff.stackGroupID, true);
-					}
+					var corticalStack = ThingMaker.MakeThing(hediff.def.spawnThingOnRemoved) as CorticalStack;
+					hediff.PersonaData.CopyPawn(pawn);
+					corticalStack.PersonaData.CopyDataFrom(hediff.PersonaData);
+					corticalStack.PersonaData.gender = hediff.PersonaData.gender;
+					corticalStack.PersonaData.race = hediff.PersonaData.race;
+					GenPlace.TryPlaceThing(corticalStack, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
+					if (AlteredCarbonManager.Instance.stacksIndex == null) AlteredCarbonManager.Instance.stacksIndex = new Dictionary<int, CorticalStack>();
+					AlteredCarbonManager.Instance.stacksIndex[pawn.thingIDNumber] = corticalStack;
+					AlteredCarbonManager.Instance.ReplacePawnWithStack(pawn, corticalStack);
+					AlteredCarbonManager.Instance.RegisterSleeve(pawn, hediff.PersonaData.stackGroupID);
+
 					AlteredCarbonManager.Instance.deadPawns.Add(pawn);
 					var head = pawn.health.hediffSet.GetNotMissingParts().FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Head);
 					if (head != null)
@@ -64,6 +56,15 @@ namespace AlteredCarbon
 						pawn.TakeDamage(new DamageInfo(DamageDefOf.SurgicalCut, 99999f, 999f, -1f, null, head));
 					}
 					pawn.health.RemoveHediff(hediff);
+
+					if (LookTargets_Patch.targets.TryGetValue(pawn, out var targets))
+					{
+						foreach (var target in targets)
+						{
+							target.targets.Remove(pawn);
+							target.targets.Add(corticalStack);
+						}
+					}
 				}
 
 			}

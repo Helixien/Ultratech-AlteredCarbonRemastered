@@ -37,10 +37,11 @@ namespace AlteredCarbon
             DoAllowOption(ref num, viewRect, labelWidth, "AC.AllowStrangerStacks", ref Building_StackStorage.allowStrangerCorticalStacks);
             DoAllowOption(ref num, viewRect, labelWidth, "AC.AllowHostileStacks", ref Building_StackStorage.allowHostileCorticalStacks);
 
-            Widgets.ListSeparator(ref num, viewRect.width, "AC.FilledStacks".Translate());
-            foreach (var corticalStack in Building_StackStorage.StoredStacks.ToList())
+            var storedStacks = Building_StackStorage.StoredStacks.ToList();
+            Widgets.ListSeparator(ref num, viewRect.width, "AC.CorticalStacksInMatrix".Translate(storedStacks.Count(), Building_StackStorage.MaxFilledStackCapacity));
+            foreach (var corticalStack in storedStacks)
             {
-                bool showDuplicateStatus = Building_StackStorage.StoredStacks.Where(x => x.PersonaData.stackGroupID == corticalStack.PersonaData.stackGroupID).Count() >= 2;
+                bool showDuplicateStatus = storedStacks.Where(x => x.PersonaData.stackGroupID == corticalStack.PersonaData.stackGroupID).Count() >= 2;
                 DrawThingRow(ref num, viewRect.width, corticalStack, showDuplicateStatus);
             }
             Widgets.EndScrollView();

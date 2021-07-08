@@ -1411,7 +1411,7 @@ namespace AlteredCarbon
             pawn.workSettings = new Pawn_WorkSettings(pawn);
             pawn.needs.mood.thoughts = new ThoughtHandler(pawn);
             pawn.timetable = new Pawn_TimetableTracker(pawn);
-            if (BackstoryDatabase.TryGetWithIdentifier("AC_VatGrown45", out Backstory bs))
+            if (BackstoryDatabase.TryGetWithIdentifier("UT_VatGrown45", out Backstory bs))
             {
                 pawn.story.childhood = bs;
             }

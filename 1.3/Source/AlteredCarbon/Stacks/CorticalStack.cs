@@ -128,6 +128,16 @@ namespace AlteredCarbon
                     PersonaData.race = pawn.kindDef.race;
                     PersonaData.stackGroupID = AlteredCarbonManager.Instance.GetStackGroupID(this);
                     AlteredCarbonManager.Instance.RegisterStack(this);
+                    AlteredCarbonManager.Instance.stacksIndex[pawn.thingIDNumber] = this;
+
+                    if (LookTargets_Patch.targets.TryGetValue(pawn, out var targets))
+                    {
+                        foreach (var target in targets)
+                        {
+                            target.targets.Remove(pawn);
+                            target.targets.Add(this);
+                        }
+                    }
                 }
             }
             catch (Exception ex)

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
 	<EffecterDef>
@@ -6,7 +6,7 @@
 		<children>
 			<li>
 				<subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
-				<moteDef>Mote_Hacking</moteDef>
+				<moteDef>UT_Mote_Hacking</moteDef>
 				<spawnLocType>BetweenTouchingCells</spawnLocType>
 				<positionLerpFactor>0.6</positionLerpFactor>
 				<scale>0.3~0.5</scale>
@@ -17,4 +17,17 @@
 		</children>
 	</EffecterDef>
 
+	<ThingDef ParentName="MoteBase">
+		<defName>UT_Mote_Hacking</defName>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<mote>
+			<fadeInTime>0.2</fadeInTime>
+			<solidTime>0.2</solidTime>
+			<fadeOutTime>0.2</fadeOutTime>
+		</mote>
+		<graphicData>
+			<texPath>Things/Mote/Hacking</texPath>
+			<shaderType>MoteGlow</shaderType>
+		</graphicData>
+	</ThingDef>
 </Defs>

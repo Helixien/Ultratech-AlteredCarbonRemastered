@@ -198,15 +198,45 @@ namespace AlteredCarbon
 					AppendThoughts_Relations_Patch.disableKilledEffect = true;
 					DeadPawnMessageReplacement.disableKilledEffect = true;
 				}
-				var stackHediff = __instance.health.hediffSet.hediffs.FirstOrDefault((Hediff x) =>
-					x.def == AC_DefOf.UT_CorticalStack);
+				var stackHediff = __instance.health.hediffSet.hediffs.FirstOrDefault((Hediff x) => x.def == AC_DefOf.UT_CorticalStack);
 				if (stackHediff != null)
 				{
 					LessonAutoActivator.TeachOpportunity(AC_DefOf.UT_DeadPawnWithStack, __instance, OpportunityType.Important);
 					AlteredCarbonManager.Instance.deadPawns.Add(__instance);
 				}
+				if (AlteredCarbonManager.Instance.stacksIndex.TryGetValue(__instance.thingIDNumber, out var corticalStack))
+				{
+					if (LookTargets_Patch.targets.TryGetValue(__instance, out var targets))
+					{
+						foreach (var target in targets)
+						{
+							target.targets.Remove(__instance);
+							target.targets.Add(corticalStack);
+						}
+					}
+				}
 			}
 			catch { };
+		}
+	}
+
+	[HarmonyPatch(typeof(LookTargets), MethodType.Constructor, new Type[] { typeof(Thing) })]
+	public static class LookTargets_Patch
+	{
+		public static Dictionary<Pawn, List<LookTargets>> targets = new Dictionary<Pawn, List<LookTargets>>();
+		public static void Postfix(LookTargets __instance, Thing t)
+		{
+			if (t is Pawn pawn)
+			{
+				if (targets.ContainsKey(pawn))
+				{
+					targets[pawn].Add(__instance);
+				}
+				else
+				{
+					targets[pawn] = new List<LookTargets> { __instance };
+				}
+			}
 		}
 	}
 
@@ -221,15 +251,15 @@ namespace AlteredCarbon
 				if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && Event.current.clickCount == 2 && Mouse.IsOver(rect))
 				{
 					Event.current.Use();
-					if (AlteredCarbonManager.Instance.stacksIndex.ContainsKey(colonist.thingIDNumber))
+					if (AlteredCarbonManager.Instance.stacksIndex.TryGetValue(colonist.thingIDNumber, out var corticalStack))
 					{
-						if (AlteredCarbonManager.Instance.stacksIndex[colonist.thingIDNumber] == null)
+						if (corticalStack is null)
 						{
 							CameraJumper.TryJumpAndSelect(colonist);
 						}
 						else
 						{
-							CameraJumper.TryJumpAndSelect(AlteredCarbonManager.Instance.stacksIndex[colonist.thingIDNumber]);
+							CameraJumper.TryJumpAndSelect(corticalStack);
 						}
 					}
 					else
