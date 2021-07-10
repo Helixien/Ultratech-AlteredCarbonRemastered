@@ -9,141 +9,14 @@ using Verse.Sound;
 
 namespace AlteredCarbon
 {
-	public class Building_SleeveGrower : Building, IThingHolder, IOpenable
+	public class Building_SleeveGrower : Building_Incubator
 	{
-		protected ThingOwner innerContainer;
-
-		protected bool contentsKnown;
-
-		public int runningOutPowerInTicks;
-
-		public bool isRunningOutPower;
-
-		public bool isRunningOutFuel;
-
 		public bool innerPawnIsDead;
-		public bool HasAnyContents => this.InnerPawn != null;
 
 		public ThingDef activeBrainTemplateToBeProcessed;
 
 		public bool removeActiveBrainTemplate;
-
-		public bool CanOpen => HasAnyContents && !this.active && !this.innerPawnIsDead;
-
-		public Building_SleeveGrower()
-		{
-			innerContainer = new ThingOwner<Thing>(this, oneStackOnly: false);
-		}
-
-		public ThingOwner GetDirectlyHeldThings()
-		{
-			return innerContainer;
-		}
-
-		public void GetChildHolders(List<IThingHolder> outChildren)
-		{
-			ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
-		}
-
-		public override void TickRare()
-		{
-			base.TickRare();
-			innerContainer.ThingOwnerTickRare();
-		}
-		public virtual void Open()
-		{
-			if (HasAnyContents)
-			{
-				EjectContents();
-			}
-		}
-		public override bool ClaimableBy(Faction fac)
-		{
-			if (innerContainer.Any)
-			{
-				for (int i = 0; i < innerContainer.Count; i++)
-				{
-					if (innerContainer[i].Faction == fac)
-					{
-						return true;
-					}
-				}
-				return false;
-			}
-			return base.ClaimableBy(fac);
-		}
-		public virtual bool TryAcceptThing(Thing thing, bool allowSpecialEffects = true)
-		{
-			if (!Accepts(thing))
-			{
-				return false;
-			}
-			bool flag = false;
-			if (thing.holdingOwner != null)
-			{
-				thing.holdingOwner.TryTransferToContainer(thing, innerContainer, thing.stackCount);
-				flag = true;
-			}
-			else
-			{
-				flag = innerContainer.TryAdd(thing);
-			}
-			if (flag)
-			{
-				if (thing.Faction != null && thing.Faction.IsPlayer)
-				{
-					contentsKnown = true;
-				}
-				return true;
-			}
-			return false;
-		}
-
-		public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
-		{
-			if (innerContainer.Count > 0 && (mode == DestroyMode.Deconstruct || mode == DestroyMode.KillFinalize) && !this.active
-				&& this.curTicksToGrow == this.totalTicksToGrow && !this.innerPawnIsDead)
-			{
-				if (mode != DestroyMode.Deconstruct)
-				{
-					List<Pawn> list = new List<Pawn>();
-					foreach (Thing item in (IEnumerable<Thing>)innerContainer)
-					{
-						Pawn pawn = item as Pawn;
-						if (pawn != null)
-						{
-							list.Add(pawn);
-						}
-					}
-					foreach (Pawn item2 in list)
-					{
-						HealthUtility.DamageUntilDowned(item2);
-					}
-				}
-				EjectContents();
-			}
-			innerContainer.ClearAndDestroyContents();
-			base.Destroy(mode);
-		}
-
-		public bool IsOperating
-		{
-			get
-			{
-				CompPowerTrader compPowerTrader = this.powerTrader;
-				if (compPowerTrader == null || compPowerTrader.PowerOn)
-				{
-					CompBreakdownable compBreakdownable = this.breakdownable;
-					return compBreakdownable == null || !compBreakdownable.BrokenDown;
-				}
-				return false;
-			}
-		}
-
-		public bool Accepts(Thing thing)
-		{
-			return this.InnerPawn == null;
-		}
+		public override int OpenTicks => 300;
 		public Pawn InnerPawn
 		{
 			get
@@ -151,26 +24,14 @@ namespace AlteredCarbon
 				return this.innerContainer.Where(x => x is Pawn).FirstOrDefault() as Pawn;
 			}
 		}
-
-		public Thing ActiveBrainTemplate
+        protected override bool InnerThingIsDead => innerPawnIsDead;
+        public Thing ActiveBrainTemplate
 		{
 			get
 			{
 				return this.innerContainer.Where(x => x.TryGetComp<CompBrainTemplate>() != null).FirstOrDefault();
 			}
 		}
-
-		public override void SpawnSetup(Map map, bool respawningAfterLoad)
-		{
-			base.SpawnSetup(map, respawningAfterLoad);
-			if (base.Faction != null && base.Faction.IsPlayer)
-			{
-				contentsKnown = true;
-			}
-			this.powerTrader = base.GetComp<CompPowerTrader>();
-			this.breakdownable = base.GetComp<CompBreakdownable>();
-		}
-
 		public override IEnumerable<Gizmo> GetGizmos()
 		{
 			foreach (Gizmo gizmo in base.GetGizmos())
@@ -179,7 +40,7 @@ namespace AlteredCarbon
 			}
 			if (base.Faction == Faction.OfPlayer)
 			{
-				if (innerContainer.Count > 0 && this.active)
+				if (innerContainer.Count > 0 && this.incubatorState == IncubatorState.Growing)
 				{
 					Command_Action command_Action = new Command_Action();
 					command_Action.action = this.CancelGrowing;
@@ -208,7 +69,7 @@ namespace AlteredCarbon
 
 
 				}
-				if (Prefs.DevMode && active)
+				if (Prefs.DevMode && incubatorState == IncubatorState.Growing)
 				{
 					Command_Action command_Action = new Command_Action();
 					command_Action.defaultLabel = "Debug: Instant grow";
@@ -246,19 +107,6 @@ namespace AlteredCarbon
 			}
 			yield break;
 		}
-		public override string GetInspectString()
-		{
-			if (this.InnerPawn != null)
-			{
-				return base.GetInspectString() + "\n" + "AlteredCarbon.GrowthProgress".Translate() +
-					Math.Round(((float)this.curTicksToGrow / this.totalTicksToGrow) * 100f, 2).ToString() + "%";
-			}
-			else
-			{
-				return base.GetInspectString();
-			}
-		}
-
 		public Graphic fetus;
 		public Graphic Fetus
 		{
@@ -322,13 +170,10 @@ namespace AlteredCarbon
 				return adult_dead;
 			}
 		}
-
-        public int OpenTicks => 300;
-
 		public override void DrawAt(Vector3 drawLoc, bool flip = false)
 		{
 			base.DrawAt(drawLoc, flip);
-			if (this.InnerPawn != null)
+			if (this.incubatorState != IncubatorState.ToBeActivated && this.InnerPawn != null)
 			{
 				Vector3 newPos = drawLoc;
 				newPos.z += 0.2f;
@@ -365,11 +210,8 @@ namespace AlteredCarbon
 					}
 				}
 			}
-
 			base.Comps_PostDraw();
 		}
-
-
 		public void ResetGraphics()
 		{
 			this.fetus = null;
@@ -380,7 +222,7 @@ namespace AlteredCarbon
 		}
 		public void CancelGrowing()
 		{
-			this.active = false;
+			this.incubatorState = IncubatorState.Inactive;
 			this.totalGrowthCost = 0;
 			this.totalTicksToGrow = 0;
 			this.curTicksToGrow = 0;
@@ -391,6 +233,12 @@ namespace AlteredCarbon
 		public void CreateSleeve()
 		{
 			Find.WindowStack.Add(new CustomizeSleeveWindow(this));
+		}
+
+        public override void EjectContents()
+        {
+            base.EjectContents();
+			ResetGraphics();
 		}
 		public static TargetingParameters ForPawn()
 		{
@@ -425,7 +273,7 @@ namespace AlteredCarbon
 			this.totalTicksToGrow = totalTicksToGrow;
 			this.curTicksToGrow = 0;
 			this.totalGrowthCost = totalGrowthCost;
-			this.active = true;
+			this.incubatorState = IncubatorState.ToBeActivated;
 			this.innerPawnIsDead = false;
 			this.runningOutPowerInTicks = 0;
 		}
@@ -437,15 +285,10 @@ namespace AlteredCarbon
 		}
 		public void FinishGrowth()
 		{
-			this.active = false;
+			this.incubatorState = IncubatorState.Inactive;
 			if (AlteredCarbonManager.Instance.emptySleeves == null) AlteredCarbonManager.Instance.emptySleeves = new HashSet<Pawn>();
 			AlteredCarbonManager.Instance.emptySleeves.Add(this.InnerPawn);
 		}
-		public void KillInnerPawn()
-		{
-			this.innerPawnIsDead = true;
-		}
-
 		public void DropActiveBrainTemplate()
 		{
 			this.innerContainer.TryDrop(this.ActiveBrainTemplate, ThingPlaceMode.Near, out Thing result);
@@ -462,6 +305,10 @@ namespace AlteredCarbon
 			this.removeActiveBrainTemplate = false;
 		}
 
+        public override void KillInnerThing()
+        {
+			this.innerPawnIsDead = true;
+		}
 		public override void Tick()
 		{
 			base.Tick();
@@ -471,30 +318,34 @@ namespace AlteredCarbon
 			}
 			if (this.InnerPawn != null)
 			{
-				if (this.active && base.GetComp<CompRefuelable>().HasFuel && powerTrader.PowerOn)
-				{
-					if (runningOutPowerInTicks > 0) runningOutPowerInTicks = 0;
-					var fuelCost = this.totalGrowthCost / (float)this.totalTicksToGrow;
-					base.GetComp<CompRefuelable>().ConsumeFuel(fuelCost);
-					if (this.curTicksToGrow < totalTicksToGrow)
+				if (this.incubatorState == IncubatorState.Growing)
+                {
+					if (base.GetComp<CompRefuelable>().HasFuel && powerTrader.PowerOn)
 					{
-						curTicksToGrow++;
+						if (runningOutPowerInTicks > 0) runningOutPowerInTicks = 0;
+						var fuelCost = this.totalGrowthCost / (float)this.totalTicksToGrow;
+						base.GetComp<CompRefuelable>().ConsumeFuel(fuelCost);
+						if (this.curTicksToGrow < totalTicksToGrow)
+						{
+							curTicksToGrow++;
+						}
+						else
+						{
+							this.FinishGrowth();
+						}
 					}
-					else
+					else if (!powerTrader.PowerOn && runningOutPowerInTicks < 60000)
 					{
-						this.FinishGrowth();
+						runningOutPowerInTicks++;
+					}
+					else if (runningOutPowerInTicks >= 60000)
+					{
+						this.incubatorState = IncubatorState.Inactive;
+						this.KillInnerThing();
+						Messages.Message("AlteredCarbon.SleeveInIncubatorIsDead".Translate(), this, MessageTypeDefOf.NegativeEvent);
 					}
 				}
-				else if (this.active && !powerTrader.PowerOn && runningOutPowerInTicks < 60000)
-				{
-					runningOutPowerInTicks++;
-				}
-				else if (runningOutPowerInTicks >= 60000 && this.active)
-				{
-					this.active = false;
-					this.KillInnerPawn();
-					Messages.Message("AlteredCarbon.SleeveInIncubatorIsDead".Translate(), this, MessageTypeDefOf.NegativeEvent);
-				}
+
 				if (!powerTrader.PowerOn && !isRunningOutPower)
 				{
 					Messages.Message("AlteredCarbon.isRunningOutPower".Translate(), this, MessageTypeDefOf.NegativeEvent);
@@ -507,57 +358,12 @@ namespace AlteredCarbon
 				}
 			}
 		}
-
-		public void EjectContents()
-		{
-			ThingDef filth_Slime = ThingDefOf.Filth_Slime;
-			foreach (Thing thing in this.innerContainer)
-			{
-				Pawn pawn = thing as Pawn;
-				if (pawn != null)
-				{
-					PawnComponentsUtility.AddComponentsForSpawn(pawn);
-					pawn.filth.GainFilth(filth_Slime);
-					this.InnerPawn.health.AddHediff(AC_DefOf.UT_EmptySleeve);
-				}
-			}
-			if (!base.Destroyed)
-			{
-				SoundStarter.PlayOneShot(SoundDefOf.CryptosleepCasket_Eject,
-					SoundInfo.InMap(new TargetInfo(base.Position, base.Map, false), 0));
-			}
-			this.innerContainer.TryDrop(this.InnerPawn, ThingPlaceMode.Near, 1, out Thing resultingThing);
-			this.contentsKnown = true;
-			ResetGraphics();
-		}
-
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_Deep.Look(ref innerContainer, "innerContainer", this);
 			Scribe_Defs.Look(ref activeBrainTemplateToBeProcessed, "activeBrainTemplateToBeProcessed");
 			Scribe_Values.Look(ref removeActiveBrainTemplate, "removeActiveBrainTemplate", false);
-			Scribe_Values.Look<int>(ref this.totalTicksToGrow, "totalTicksToGrow", 0, true);
-			Scribe_Values.Look<int>(ref this.curTicksToGrow, "curTicksToGrow", 0, true);
-			Scribe_Values.Look<float>(ref this.totalGrowthCost, "totalGrowthCost", 0f, true);
-			Scribe_Values.Look<bool>(ref this.contentsKnown, "contentsKnown", false, true);
-			Scribe_Values.Look<bool>(ref this.active, "active", false, true);
-			Scribe_Values.Look<bool>(ref this.isRunningOutPower, "isRunningOutPower", false, true);
-			Scribe_Values.Look<bool>(ref this.isRunningOutFuel, "isRunningOutFuel", false, true);
-
-			Scribe_Values.Look<int>(ref this.runningOutPowerInTicks, "runningOutPowerInTicks", 0, true);
-			Scribe_Values.Look<bool>(ref this.innerPawnIsDead, "innerPawnIsDead", false, true);
+			Scribe_Values.Look(ref this.innerPawnIsDead, "innerPawnIsDead", false, true);
 		}
-
-		public int totalTicksToGrow = 0;
-		public int curTicksToGrow = 0;
-
-		public float totalGrowthCost = 0;
-		public bool active;
-
-		private CompPowerTrader powerTrader;
-
-		private CompBreakdownable breakdownable;
-
 	}
 }

@@ -2,9 +2,6 @@
 <Defs>
 
 	<RecipeDef Name="UT_OrganRecipeBase" Abstract="True">
-		<recipeUsers>
-			<li>UT_OrganIncubator</li>
-		</recipeUsers>
 		<researchPrerequisite>UT_OrganProduction</researchPrerequisite>
 	</RecipeDef>
 

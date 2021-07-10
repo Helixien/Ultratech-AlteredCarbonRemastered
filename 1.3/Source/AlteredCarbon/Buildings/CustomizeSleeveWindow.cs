@@ -39,7 +39,7 @@ namespace AlteredCarbon
 
         //Static Values
 
-        [TweakValue("0AC", 0, 200)] public static float AlienRacesYOffset = 100;
+        [TweakValue("0AC", 0, 200)] public static float AlienRacesYOffset = 140;
         [TweakValue("0AC", 0, 200)] public static float IdeologyYOffset = 90;
         [TweakValue("0AC", 0, 1000)] public static float InitialWindowXSize = 728f;
         [TweakValue("0AC", 0, 1000)] public static float InitialWindowYSize = 550f;
@@ -317,19 +317,7 @@ namespace AlteredCarbon
                 lastOffset = returnYfromPrevious(btnSkinColourOutlinePremade);
             }
             UpdateSkinColorButtons();
-
-            if (!ModCompatibility.AlienRacesIsActive)
-            {
-                //head shape
-                lblHeadShape = new Rect(leftOffset, lastOffset, labelWidth, buttonHeight);
-                btnHeadShapeOutline = lblHeadShape;
-                btnHeadShapeOutline.x += returnButtonOffset(lblHeadShape);
-                btnHeadShapeOutline.width = buttonWidth * 2 + buttonOffsetFromButton;
-                btnHeadShapeArrowLeft = new Rect(btnHeadShapeOutline.x + 2, btnHeadShapeOutline.y, btnHeadShapeOutline.height, btnHeadShapeOutline.height);
-                btnHeadShapeArrowRight = new Rect(btnHeadShapeOutline.x + btnHeadShapeOutline.width - btnHeadShapeOutline.height - 2, btnHeadShapeOutline.y, btnHeadShapeOutline.height, btnHeadShapeOutline.height);
-                btnHeadShapeSelection = new Rect(btnHeadShapeOutline.x + 5 + btnHeadShapeArrowLeft.width, btnHeadShapeOutline.y, btnHeadShapeOutline.width - 2 * (btnHeadShapeArrowLeft.width) - 10, btnHeadShapeOutline.height);
-            }
-            else
+            if (ModCompatibility.AlienRacesIsActive)
             {
                 //alien race
                 lblRaceChange = new Rect(leftOffset, lastOffset, labelWidth, buttonHeight);
@@ -349,7 +337,17 @@ namespace AlteredCarbon
                 btnHeadShapeArrowRight = new Rect(btnHeadShapeOutline.x + btnHeadShapeOutline.width - btnHeadShapeOutline.height - 2, btnHeadShapeOutline.y, btnHeadShapeOutline.height, btnHeadShapeOutline.height);
                 btnHeadShapeSelection = new Rect(btnHeadShapeOutline.x + 5 + btnHeadShapeArrowLeft.width, btnHeadShapeOutline.y, btnHeadShapeOutline.width - 2 * (btnHeadShapeArrowLeft.width) - 10, btnHeadShapeOutline.height);
             }
-
+            else
+            {
+                //head shape
+                lblHeadShape = new Rect(leftOffset, lastOffset, labelWidth, buttonHeight);
+                btnHeadShapeOutline = lblHeadShape;
+                btnHeadShapeOutline.x += returnButtonOffset(lblHeadShape);
+                btnHeadShapeOutline.width = buttonWidth * 2 + buttonOffsetFromButton;
+                btnHeadShapeArrowLeft = new Rect(btnHeadShapeOutline.x + 2, btnHeadShapeOutline.y, btnHeadShapeOutline.height, btnHeadShapeOutline.height);
+                btnHeadShapeArrowRight = new Rect(btnHeadShapeOutline.x + btnHeadShapeOutline.width - btnHeadShapeOutline.height - 2, btnHeadShapeOutline.y, btnHeadShapeOutline.height, btnHeadShapeOutline.height);
+                btnHeadShapeSelection = new Rect(btnHeadShapeOutline.x + 5 + btnHeadShapeArrowLeft.width, btnHeadShapeOutline.y, btnHeadShapeOutline.width - 2 * (btnHeadShapeArrowLeft.width) - 10, btnHeadShapeOutline.height);
+            }
 
             //body shape
             lblBodyShape = new Rect(leftOffset, returnYfromPrevious(lblHeadShape), labelWidth, buttonHeight);
@@ -687,7 +685,7 @@ namespace AlteredCarbon
                 Text.Anchor = TextAnchor.MiddleCenter;
 
                 //Saakra's Code
-
+                
                 //Gender
                 Text.Anchor = TextAnchor.MiddleLeft;
                 Widgets.Label(lblGender, "Gender".Translate() + ":");
@@ -760,18 +758,22 @@ namespace AlteredCarbon
                         ApplyBeauty();
                     }
                 }
-
+                
                 //Skin Colour
                 Text.Anchor = TextAnchor.MiddleLeft;
                 Widgets.Label(lblSkinColour, "AlteredCarbon.SkinColour".Translate().CapitalizeFirst() + ":");
+
+                var oldSaturation = skinSaturation;
+                var oldSkinValue = skinValue;
 
                 if (ModCompatibility.AlienRacesIsActive)
                 {
                     Widgets.DrawMenuSection(skinColorPicker);
                     Widgets.DrawTextureFitted(skinColorPicker, texColor, 1);
+
                     skinSaturation = Widgets.HorizontalSlider(skinSaturationSlider, skinSaturation, 0.0f, 1f, true, "AlteredCarbon.saturation".Translate());
                     skinValue = Widgets.HorizontalSlider(skinValueSlider, skinValue, 0.0f, 1f, true, "AlteredCarbon.value".Translate());
-
+                
                     //if click in texColour box
                     if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && Mouse.IsOver(skinColorPicker))
                     {
@@ -781,9 +783,11 @@ namespace AlteredCarbon
                         Color pick = texColor.GetPixel(Convert.ToInt32(x), Convert.ToInt32(skinColorPicker.height - y));
                         Color.RGBToHSV(pick, out skinHue, out _, out _);
                         Event.current.Use();
+                        UpdateSkin();
+                        UpdateSleeveGraphic();
                     }
                 }
-
+                
                 for (int ii = 0; ii < skinColorButtons.Count(); ++ii)
                 {
                     GUI.DrawTexture(GenUI.ExpandedBy(skinColorButtons[ii].Item1, 2f), BaseContent.GreyTex);
@@ -802,9 +806,16 @@ namespace AlteredCarbon
                     }
                     Widgets.DrawBoxSolid(skinColorButtons[ii].Item1, skinColorButtons[ii].Item2);
                 }
+
+                if (oldSaturation != skinSaturation || oldSkinValue != skinValue)
+                {
+                    UpdateSkin();
+                    UpdateSleeveGraphic();
+                }
+
                 //Head Shape
                 Widgets.Label(lblHeadShape, "AlteredCarbon.HeadShape".Translate().CapitalizeFirst() + ":");
-
+                
                 if (ModCompatibility.AlienRacesIsActive)
                 {
                     headLabel = ModCompatibility.GetAlienHead(newSleeve);
@@ -854,7 +865,7 @@ namespace AlteredCarbon
                             {
                                 femaleHeadTypeIndex--;
                             }
-
+                
                             typeof(Pawn_StoryTracker).GetField("headGraphicPath", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(newSleeve.story,
                                 GraphicDatabaseHeadRecords.femaleHeads.ElementAt(femaleHeadTypeIndex).graphicPath);
                         }
@@ -901,7 +912,7 @@ namespace AlteredCarbon
                     if (ModCompatibility.AlienRacesIsActive)
                     {
                         var list = ModCompatibility.GetAlienHeadPaths(newSleeve);
-
+                
                         if (alienHeadtypeIndex == list.Count - 1)
                         {
                             alienHeadtypeIndex = 0;
@@ -943,8 +954,8 @@ namespace AlteredCarbon
                     }
                     UpdateSleeveGraphic();
                 }
-
-
+                
+                
                 /*Body Shape
                  *Please note that HAR seems to output some percentage of pawns with body 
                  *types (male with female body or vice versa) that they can't select afterwards
@@ -977,7 +988,7 @@ namespace AlteredCarbon
                         }
                         newSleeve.story.bodyType = DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Male).ElementAt(femaleBodyTypeIndex);
                     }
-
+                
                     UpdateSleeveGraphic();
                 }
                 if (ButtonTextSubtleCentered(btnBodyShapeSelection, newSleeve.story.bodyType.defName))
@@ -1032,6 +1043,8 @@ namespace AlteredCarbon
                     UpdateSleeveGraphic();
                 }
 
+                var oldHairSaturation = hairSaturation;
+                var oldHairValue = hairValue;
                 if (!permittedHairs.NullOrEmpty())
                 {
                     //Hair Colour
@@ -1041,7 +1054,7 @@ namespace AlteredCarbon
                     Widgets.DrawTextureFitted(hairColorPicker, texColor, 1);
                     hairSaturation = Widgets.HorizontalSlider(hairSaturationSlider, hairSaturation, 0.0f, 1f, true, "AlteredCarbon.saturation".Translate());
                     hairValue = Widgets.HorizontalSlider(hairValueSlider, hairValue, 0.0f, 1f, true, "AlteredCarbon.value".Translate());
-
+                
                     //if click in texColour box
                     if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && Mouse.IsOver(hairColorPicker))
                     {
@@ -1051,6 +1064,8 @@ namespace AlteredCarbon
                         Color pick = texColor.GetPixel(Convert.ToInt32(x), Convert.ToInt32(hairColorPicker.height - y));
                         Color.RGBToHSV(pick, out hairHue, out _, out _);
                         Event.current.Use();
+                        UpdateHair();
+                        UpdateSleeveGraphic();
                     }
                     for (int ii = 0; ii < hairColorButtons.Count(); ++ii)
                     {
@@ -1062,8 +1077,8 @@ namespace AlteredCarbon
                         }
                         Widgets.DrawBoxSolid(hairColorButtons[ii].Item1, hairColorButtons[ii].Item2);
                     }
-
-
+                
+                
                     //Hair Type
                     Text.Anchor = TextAnchor.MiddleLeft;
                     Widgets.Label(lblHairType, "AlteredCarbon.HairType".Translate().CapitalizeFirst() + ":");
@@ -1116,9 +1131,8 @@ namespace AlteredCarbon
                     Widgets.Label(noHairBox.BottomPart(0.5f), "AlteredCarbon.noHairAllowed".Translate().CapitalizeFirst());
                     UpdateSleeveGraphic();
                     Text.Anchor = savedAnchor;
-
                 }
-
+                
                 //Hair Colour
                 Text.Anchor = TextAnchor.MiddleLeft;
                 Widgets.Label(lblHairColour, "AlteredCarbon.HairColour".Translate().CapitalizeFirst() + ":");
@@ -1126,7 +1140,7 @@ namespace AlteredCarbon
                 Widgets.DrawTextureFitted(hairColorPicker, texColor, 1);
                 hairSaturation = Widgets.HorizontalSlider(hairSaturationSlider, hairSaturation, 0.0f, 1f, true, "AlteredCarbon.saturation".Translate());
                 hairValue = Widgets.HorizontalSlider(hairValueSlider, hairValue, 0.0f, 1f, true, "AlteredCarbon.value".Translate());
-
+                
                 //if click in texColour box
                 if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && Mouse.IsOver(hairColorPicker))
                 {
@@ -1136,6 +1150,8 @@ namespace AlteredCarbon
                     Color pick = texColor.GetPixel(Convert.ToInt32(x), Convert.ToInt32(hairColorPicker.height - y));
                     Color.RGBToHSV(pick, out hairHue, out _, out _);
                     Event.current.Use();
+                    UpdateHair();
+                    UpdateSleeveGraphic();
                 }
                 for (int ii = 0; ii < hairColorButtons.Count(); ++ii)
                 {
@@ -1147,8 +1163,12 @@ namespace AlteredCarbon
                     }
                     Widgets.DrawBoxSolid(hairColorButtons[ii].Item1, hairColorButtons[ii].Item2);
                 }
-
-
+                if (oldHairSaturation != hairSaturation || oldHairValue != hairValue)
+                {
+                    UpdateHair();
+                    UpdateSleeveGraphic();
+                }
+                
                 //Beard Type
                 Text.Anchor = TextAnchor.MiddleLeft;
                 Widgets.Label(lblBeardType, "AlteredCarbon.BeardType".Translate().CapitalizeFirst() + ":");
@@ -1166,7 +1186,7 @@ namespace AlteredCarbon
                     newSleeve.style.beardDef = permittedBeards.ElementAt(beardTypeIndex);
                     UpdateSleeveGraphic();
                 }
-
+                
                 if (ButtonTextSubtleCentered(btnBeardTypeSelection, newSleeve.style.beardDef.LabelCap))
                 {
                     FloatMenuUtility.MakeMenu<BeardDef>(permittedBeards, beardDef => beardDef.LabelCap, (BeardDef beardDef) => delegate
@@ -1176,7 +1196,7 @@ namespace AlteredCarbon
                         UpdateSleeveGraphic();
                     });
                 }
-
+                
                 if (ButtonTextSubtleCentered(btnBeardTypeArrowRight, ">"))
                 {
                     if (beardTypeIndex == permittedBeards.Count() - 1)
@@ -1190,8 +1210,8 @@ namespace AlteredCarbon
                     newSleeve.style.beardDef = permittedBeards.ElementAt(beardTypeIndex);
                     UpdateSleeveGraphic();
                 }
-
-
+                
+                
                 if (ModsConfig.IdeologyActive)
                 {
                     //Face tattos Type
@@ -1211,7 +1231,7 @@ namespace AlteredCarbon
                         newSleeve.style.FaceTattoo = permittedFaceTattoos.ElementAt(faceTattoosTypeIndex);
                         UpdateSleeveGraphic();
                     }
-
+                
                     if (ButtonTextSubtleCentered(btnFaceTattoosTypeSelection, newSleeve.style.FaceTattoo.LabelCap))
                     {
                         FloatMenuUtility.MakeMenu<TattooDef>(permittedFaceTattoos, faceTattooDef => faceTattooDef.LabelCap, (TattooDef faceTattooDef) => delegate
@@ -1221,7 +1241,7 @@ namespace AlteredCarbon
                             UpdateSleeveGraphic();
                         });
                     }
-
+                
                     if (ButtonTextSubtleCentered(btnFaceTattoosTypeArrowRight, ">"))
                     {
                         if (faceTattoosTypeIndex == permittedFaceTattoos.Count() - 1)
@@ -1235,7 +1255,7 @@ namespace AlteredCarbon
                         newSleeve.style.FaceTattoo = permittedFaceTattoos.ElementAt(faceTattoosTypeIndex);
                         UpdateSleeveGraphic();
                     }
-
+                
                     //Body tattos Type
                     Text.Anchor = TextAnchor.MiddleLeft;
                     Widgets.Label(lblBodyTattoosType, "AlteredCarbon.BodyTattoosType".Translate().CapitalizeFirst() + ":");
@@ -1253,7 +1273,7 @@ namespace AlteredCarbon
                         newSleeve.style.BodyTattoo = permittedBodyTattoos.ElementAt(bodyTattoosTypeIndex);
                         UpdateSleeveGraphic();
                     }
-
+                
                     if (ButtonTextSubtleCentered(btnBodyTattoosTypeSelection, newSleeve.style.BodyTattoo.LabelCap))
                     {
                         FloatMenuUtility.MakeMenu<TattooDef>(permittedBodyTattoos, BodyTattooDef => BodyTattooDef.LabelCap, (TattooDef BodyTattooDef) => delegate
@@ -1263,7 +1283,7 @@ namespace AlteredCarbon
                             UpdateSleeveGraphic();
                         });
                     }
-
+                
                     if (ButtonTextSubtleCentered(btnBodyTattoosTypeArrowRight, ">"))
                     {
                         if (bodyTattoosTypeIndex == permittedBodyTattoos.Count() - 1)
@@ -1278,22 +1298,22 @@ namespace AlteredCarbon
                         UpdateSleeveGraphic();
                     }
                 }
-
+                
                 //Time to Grow
                 Widgets.Label(lblTimeToGrow, "AlteredCarbon.TimeToGrow".Translate().CapitalizeFirst() + ": " + GenDate.ToStringTicksToDays(ticksToGrow));//PUT TIME TO GROW INFO HERE
-
+                
                 //Require Biomass
                 Widgets.Label(lblRequireBiomass, "AlteredCarbon.RequireBiomass".Translate().CapitalizeFirst() + ": " + (meatCost));//PUT REQUIRED BIOMASS HERE
-
+                
                 //Vertical Divider
                 //Widgets.DrawLineVertical((pawnBox.x + (btnGenderFemale.x + btnGenderFemale.width)) / 2, pawnBox.y, InitialSize.y - pawnBox.y - (buttonHeight + 53));
-
+                
                 //Pawn Box
                 Widgets.DrawMenuSection(pawnBox);
                 Widgets.DrawShadowAround(pawnBox);
                 GUI.DrawTexture(pawnBoxPawn, PortraitsCache.Get(newSleeve, pawnBoxPawn.size, Rot4.South, default(Vector3), 1f));
                 Widgets.InfoCardButton(pawnBox.x + pawnBox.width - Widgets.InfoCardButtonSize - 10f, pawnBox.y + pawnBox.height - Widgets.InfoCardButtonSize - 10f, newSleeve);
-
+                
                 //Levels of Beauty
                 Text.Anchor = TextAnchor.MiddleCenter;
                 int newBeautyLevel = (int)Widgets.HorizontalSlider(beautySlider, beautyLevel, -2f, 2f, true, StatDefOf.Beauty.LabelCap + " : " + GetBeautyLabel(), null, null, 1f);
@@ -1303,7 +1323,7 @@ namespace AlteredCarbon
                     ApplyBeauty();
                     UpdateGrowingCost();
                 }
-
+                
                 //Levels of Quality
                 int newQualityLevel = (int)Widgets.HorizontalSlider(qualitySlider, qualityLevel, -1f, 1f, true, "Quality".Translate() + " : " + GetQualityLabel(), null, null, 1f);
                 if (newQualityLevel != qualityLevel)
@@ -1312,7 +1332,7 @@ namespace AlteredCarbon
                     UpdateHediffs();
                     UpdateGrowingCost();
                 }
-
+                
                 //Hediff printout
                 IEnumerable<IGrouping<BodyPartRecord, Hediff>> heDiffListing;
                 MethodInfo heDiffLister = typeof(HealthCardUtility).GetMethod("VisibleHediffGroupsInOrder", BindingFlags.NonPublic | BindingFlags.Static);
@@ -1336,7 +1356,7 @@ namespace AlteredCarbon
                     Widgets.DrawHighlight(healthBox);
                     TooltipHandler.TipRegion(healthBox, new TipSignal((Func<string>)(() => GetHediffToolTip(diffs, newSleeve)), 1147682));
                 }
-
+                
                 if (Widgets.ButtonText(btnAccept, "Accept".Translate().CapitalizeFirst()))
                 {
                     sleeveGrower.StartGrowth(newSleeve, ticksToGrow, meatCost);

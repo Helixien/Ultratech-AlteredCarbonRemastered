@@ -19,6 +19,8 @@ namespace AlteredCarbon
 
 		public static JobDef UT_ExtractActiveBrainTemplate;
 
+		public static JobDef UT_StartIncubatingProcess;
+
 		public static HediffDef UT_CorticalStack;
 
 		public static HediffDef UT_Sleeve_Quality_Low;

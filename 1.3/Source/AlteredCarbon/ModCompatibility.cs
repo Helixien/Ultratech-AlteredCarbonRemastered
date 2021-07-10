@@ -8,6 +8,7 @@ using Verse;
 
 namespace AlteredCarbon
 {
+	[StaticConstructorOnStartup]
 	public static class ModCompatibility
 	{
 		public static Color GetSkinColor(Pawn pawn)
@@ -209,10 +210,28 @@ namespace AlteredCarbon
 		{
 			return DefDatabase<AlienRace.ThingDef_AlienRace>.AllDefs.Where(x => !excluded.Contains(x)).Cast<ThingDef>().ToList();
 		}
+		static ModCompatibility()
+        {
+			AlienRacesIsActive = HasActiveModWithPackageID("erdelf.HumanoidAlienRaces");
+			IndividualityIsActive = ModLister.HasActiveModWithName("[SYR] Individuality");
+			PsychologyIsActive = HasActiveModWithPackageID("Community.Psychology.UnofficialUpdate");
+		}
+		private static bool HasActiveModWithPackageID(string packageID)
+		{
+			var mods = ModLister.AllInstalledMods.ToList();
+			for (int i = 0; i < mods.Count; i++)
+			{
+				if (mods[i].Active && mods[i].PackageIdPlayerFacing == packageID)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 
-		public static bool AlienRacesIsActive => ModLister.HasActiveModWithName("Humanoid Alien Races 2.0");
-		public static bool IndividualityIsActive => ModLister.HasActiveModWithName("[SYR] Individuality");
-		public static bool PsychologyIsActive => ModLister.AllInstalledMods.Where(x => x.Active && (x.PackageId.ToLower() == "community.psychology.unofficialupdate")).Any();
+		public static bool AlienRacesIsActive;
+		public static bool IndividualityIsActive;
+		public static bool PsychologyIsActive;
 	}
 
 }

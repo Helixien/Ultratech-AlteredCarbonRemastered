@@ -26,7 +26,7 @@ namespace AlteredCarbon
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
             var sleeveIncubator = t as Building_SleeveGrower;
-            if (sleeveIncubator == null || sleeveIncubator.active) return false;
+            if (sleeveIncubator == null || sleeveIncubator.incubatorState == IncubatorState.Growing) return false;
                 
             if (sleeveIncubator.activeBrainTemplateToBeProcessed != null && !t.IsForbidden(pawn) && !t.IsBurning())
             {

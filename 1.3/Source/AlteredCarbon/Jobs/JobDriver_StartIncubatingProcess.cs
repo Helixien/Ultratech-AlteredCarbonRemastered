@@ -1,0 +1,40 @@
+﻿using RimWorld;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Verse;
+using Verse.AI;
+
+namespace AlteredCarbon
+{
+    public class JobDriver_StartIncubatingProcess : JobDriver
+    {
+        public Building_Incubator Building_Incubator => this.TargetA.Thing as Building_Incubator;
+        public override bool TryMakePreToilReservations(bool errorOnFailed)
+        {
+            return pawn.Reserve(TargetA, job);
+        }
+        protected override IEnumerable<Toil> MakeNewToils()
+        {
+            this.FailOn(() => Building_Incubator.incubatorState != IncubatorState.ToBeActivated);
+            this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
+            yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.InteractionCell);
+            Toil doWork = Toils_General.Wait(60, 0);
+            doWork.AddPreTickAction(() =>
+            {
+                pawn.rotationTracker.FaceCell(TargetThingA.Position);
+            });
+            ToilEffects.WithProgressBarToilDelay(doWork, TargetIndex.A, false, -0.5f);
+            ToilFailConditions.FailOnDespawnedNullOrForbidden<Toil>(doWork, TargetIndex.A);
+            yield return doWork;
+            yield return new Toil
+            {
+                initAction = delegate ()
+                {
+                    Building_Incubator.incubatorState = IncubatorState.Growing;
+                }
+            };
+        }
+    }
+}
+
