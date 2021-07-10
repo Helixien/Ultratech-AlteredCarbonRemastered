@@ -88,5 +88,11 @@
 	<AC.Copy>Copy</AC.Copy>
 	<AC.Original>Original</AC.Original>
 	<AC.SuccessfullyDuplicatedStack>{PAWN_nameDef} successfully duplicated cortical stack.</AC.SuccessfullyDuplicatedStack>
-
+	<AlteredCarbon.OrganIncubatorIsRunningOutFuel>Organ incubator is running out fuel</AlteredCarbon.OrganIncubatorIsRunningOutFuel>
+	<AlteredCarbon.OrganIncubatorIsRunningOutPower>Organ incubator is running out power</AlteredCarbon.OrganIncubatorIsRunningOutPower>
+	<AlteredCarbon.OrganSpoiled>Organ in the incubator is spoiled</AlteredCarbon.OrganSpoiled>
+	<AlteredCarbon.CancelOrganGrowing>Cancel organ growing</AlteredCarbon.CancelOrganGrowing>
+	<AlteredCarbon.CancelOrganGrowingDesc>Cancel sleeve growing</AlteredCarbon.CancelOrganGrowingDesc>
+	<AlteredCarbon.CreateOrgan>Create organ</AlteredCarbon.CreateOrgan>
+	<AlteredCarbon.CreateOrganDesc>Create organ</AlteredCarbon.CreateOrganDesc>
 </LanguageData>

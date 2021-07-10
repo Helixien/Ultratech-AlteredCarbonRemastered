@@ -266,7 +266,7 @@ namespace AlteredCarbon
 			{
 				if (fetus == null)
 				{
-					fetus = GraphicDatabase.Get<Graphic_Single>("Things/Pawn/Humanlike/Vat/Fetus", ShaderDatabase.CutoutFlying, Vector3.one, this.InnerPawn.story.SkinColor);
+					fetus = GraphicDatabase.Get<Graphic_Single>("Things/Pawn/Humanlike/Vat/Fetus", ShaderDatabase.CutoutSkin, Vector3.one, this.InnerPawn.story.SkinColor);
 				}
 				return fetus;
 			}
@@ -279,7 +279,7 @@ namespace AlteredCarbon
 			{
 				if (child == null)
 				{
-					child = GraphicDatabase.Get<Graphic_Multi>("Things/Pawn/Humanlike/Vat/Child", ShaderDatabase.CutoutFlying, Vector3.one, this.InnerPawn.story.SkinColor);
+					child = GraphicDatabase.Get<Graphic_Multi>("Things/Pawn/Humanlike/Vat/Child", ShaderDatabase.CutoutSkin, Vector3.one, this.InnerPawn.story.SkinColor);
 				}
 				return child;
 			}
@@ -292,7 +292,7 @@ namespace AlteredCarbon
 			{
 				if (fetus_dead == null)
 				{
-					fetus_dead = GraphicDatabase.Get<Graphic_Single>("Things/Pawn/Humanlike/Vat/Fetus_Dead", ShaderDatabase.CutoutFlying, Vector3.one, this.InnerPawn.story.SkinColor);
+					fetus_dead = GraphicDatabase.Get<Graphic_Single>("Things/Pawn/Humanlike/Vat/Fetus_Dead", ShaderDatabase.CutoutSkin, Vector3.one, this.InnerPawn.story.SkinColor);
 				}
 				return fetus_dead;
 			}
@@ -304,7 +304,7 @@ namespace AlteredCarbon
 			{
 				if (child_dead == null)
 				{
-					child_dead = GraphicDatabase.Get<Graphic_Multi>("Things/Pawn/Humanlike/Vat/Child_Dead", ShaderDatabase.CutoutFlying, Vector3.one, this.InnerPawn.story.SkinColor);
+					child_dead = GraphicDatabase.Get<Graphic_Multi>("Things/Pawn/Humanlike/Vat/Child_Dead", ShaderDatabase.CutoutSkin, Vector3.one, this.InnerPawn.story.SkinColor);
 				}
 				return child_dead;
 			}
@@ -317,7 +317,7 @@ namespace AlteredCarbon
 			{
 				if (adult_dead == null)
 				{
-					adult_dead = GraphicDatabase.Get<Graphic_Multi>("Things/Pawn/Humanlike/Vat/Adult_Dead", ShaderDatabase.CutoutFlying, Vector3.one, this.InnerPawn.story.SkinColor);
+					adult_dead = GraphicDatabase.Get<Graphic_Multi>("Things/Pawn/Humanlike/Vat/Adult_Dead", ShaderDatabase.CutoutSkin, Vector3.one, this.InnerPawn.story.SkinColor);
 				}
 				return adult_dead;
 			}

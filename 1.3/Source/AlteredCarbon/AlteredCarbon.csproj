@@ -306,6 +306,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buildings\Building_DecryptionBench.cs" />
+    <Compile Include="Buildings\Building_OrganIncubator.cs" />
     <Compile Include="Designators\Designator_ExtractStack.cs" />
     <Compile Include="HarmonyPatches\Job_Patches.cs" />
     <Compile Include="HarmonyPatches\Gizmo_Patches.cs" />

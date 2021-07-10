@@ -38,10 +38,8 @@
 		<altitudeLayer>Building</altitudeLayer>
 		<neverMultiSelect>true</neverMultiSelect>
 		<rotatable>true</rotatable>
-		
 		<passability>PassThroughOnly</passability>
 		<pathCost>100</pathCost>
-		
 		<castEdgeShadows>True</castEdgeShadows>
 		<canOverlapZones>false</canOverlapZones>
 		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
@@ -97,12 +95,13 @@
 			<li Class="CompProperties_Breakdownable"/>
 		</comps>
 	</ThingDef>
-	
+
 	<ThingDef ParentName="BuildingBase">
 		<defName>UT_OrganIncubator</defName>
 		<label>organ incubator</label>
 		<description>A small ultra-tech vat tank used to grow organs of any kind in a short period of time. Requires neutroamine to work.</description>
 		<tickerType>Normal</tickerType>
+		<thingClass>AlteredCarbon.Building_OrganIncubator</thingClass>
 		<drawerType>RealtimeOnly</drawerType>
 		<graphicData>
 			<texPath>Things/Building/Misc/OrganIncubator/OrganIncubator</texPath>
@@ -110,6 +109,10 @@
 			<drawSize>(4,4)</drawSize>
 		</graphicData>
 		<size>(2,2)</size>
+		<passability>PassThroughOnly</passability>
+		<pathCost>100</pathCost>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<hasInteractionCell>true</hasInteractionCell>
 		<statBases>
 			<MaxHitPoints>500</MaxHitPoints>
 			<WorkToBuild>5000</WorkToBuild>
@@ -127,7 +130,6 @@
 		<altitudeLayer>Building</altitudeLayer>
 		<neverMultiSelect>true</neverMultiSelect>
 		<rotatable>true</rotatable>
-		<passability>Impassable</passability>
 		<castEdgeShadows>true</castEdgeShadows>
 		<canOverlapZones>false</canOverlapZones>
 		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
@@ -139,12 +141,21 @@
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<uiIconPath>Things/Building/Misc/OrganIncubator/OrganIncubatorUI_Icon</uiIconPath>
 		<uiIconScale>1</uiIconScale>
+		<recipes>
+			<li>UT_GrowOrganicHeart</li>
+			<li>UT_GrowOrganicLung</li>
+			<li>UT_GrowOrganicKidney</li>
+			<li>UT_GrowOrganicLiver</li>
+			<li>UT_GrowOrganicStomach</li>
+			<li>UT_GrowOrganicArm</li>
+			<li>UT_GrowOrganicLeg</li>
+			<li>UT_GrowOrganicEye</li>
+			<li>UT_GrowOrganicEar</li>
+			<li>UT_GrowOrganicNose</li>
+		</recipes>
 		<placeWorkers>
 			<li>PlaceWorker_FuelingPort</li>
 		</placeWorkers>
-		<inspectorTabs>
-				<li>ITab_Bills</li>
-		</inspectorTabs>
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>
@@ -243,7 +254,7 @@
 					<li MayRequire="VanillaExpanded.VFEMedical">Facility_VitalsCentre</li>
 					<li MayRequire="VanillaExpanded.VFEMedical">Facility_IVDrip</li>
 				</linkableFacilities>
-			</li>
+</li>
 			<li Class="CompProperties_Breakdownable"/>
 		</comps>
 	</ThingDef>
@@ -364,9 +375,9 @@
 			<ComponentSpacer>2</ComponentSpacer>
 		</costList>
 		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
-		<techLevel>Ultra</techLevel>	
+		<techLevel>Ultra</techLevel>
 		<designationCategory>UT_Ultra</designationCategory>
-		<altitudeLayer>Building</altitudeLayer>		
+		<altitudeLayer>Building</altitudeLayer>
 		<passability>PassThroughOnly</passability>
 		<fillPercent>0.5</fillPercent>
 		<pathCost>50</pathCost>
