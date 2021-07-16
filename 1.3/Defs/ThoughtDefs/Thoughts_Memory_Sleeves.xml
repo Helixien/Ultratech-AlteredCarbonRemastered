@@ -62,7 +62,7 @@
 		</nullifyingTraits>
 		<stages>
 			<li>
-				<label>New Body</label>
+				<label>New sleeve</label>
 				<description>I have a new body, this will take some getting used to.</description>
 				<baseMoodEffect>-2</baseMoodEffect>
 			</li>
@@ -80,7 +80,7 @@
 		</nullifyingTraits>
 		<stages>
 			<li>
-				<label>New Body</label>
+				<label>New sleeve</label>
 				<description>I have a new body, this will take some getting used to.</description>
 				<baseMoodEffect>-5</baseMoodEffect>
 			</li>
