@@ -315,6 +315,9 @@
 		<inspectorTabs>
 			<li>AlteredCarbon.ITab_StackStorageContents</li>
 		</inspectorTabs>
+		<placeWorkers>
+			<li>PlaceWorker_FuelingPort</li>
+		</placeWorkers>
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>

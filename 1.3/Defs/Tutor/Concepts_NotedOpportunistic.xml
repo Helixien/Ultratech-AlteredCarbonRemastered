@@ -52,5 +52,14 @@
 		\n\nYou can EXTRACT the stack from the corpse via either the new EXTRACT STACK ORDER or simply right clicking a pawn with a colonist selected. Similarly to how stripping clothes work.
 		\n\nStacks are rare and powerful, so make sure to harvest them!</helpText>
 	</ConceptDef>
+	
+	<ConceptDef ParentName="NotedOpportunisticBase">
+		<defName>UT_AncientStacks</defName>
+		<label>Ancient Stacks</label>
+		<helpText>FILLED CORTICAL STACKS are stacks with a pawns consciousness stored on them.
+		\n\nAs long as the stack with a pawn stored on it exists, the pawn on it is considerd alive by the game. You can IMPLANT filled stacks into a new body (or sleeve if you want) via SURGERY. This can be ANYONE, even a PRISONER! Due to game limitations, you cant select which stack you want to install, so its recommended you FORBID all filled stacks you have BUT the one you want to install.
+		\n\nFILLED CORTICAL STACKS can also be WIPED and turned into EMPTY CORTICAL STACKS. This progress kills the pawn stored on it. To WIPE a stack, select a colonist and then click on the stack you want to wipe. This requires a pawn with at least an INTELLECTUAL skill of 10. Be aware, this can fail and destroy the stack!
+		\n\nCORTICAL STACKS can NOT be crafted. You will have to find or "acquire" them from other people.</helpText>
+	</ConceptDef>
 
 </Defs>
