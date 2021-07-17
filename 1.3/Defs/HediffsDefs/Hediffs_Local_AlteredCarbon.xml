@@ -127,5 +127,11 @@
 			</li>
 		</stages>
 	</HediffDef>
+	
+	<HediffDef ParentName="DiseaseBase">
+		<defName>UT_SleeveShock</defName>
+		<label>sleeve shock</label>
+		<isBad>true</isBad>
+	</HediffDef>
 
 </Defs>
