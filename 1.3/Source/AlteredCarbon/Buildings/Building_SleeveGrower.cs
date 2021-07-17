@@ -234,12 +234,6 @@ namespace AlteredCarbon
 		{
 			Find.WindowStack.Add(new CustomizeSleeveWindow(this));
 		}
-
-        public override void EjectContents()
-        {
-            base.EjectContents();
-			ResetGraphics();
-		}
 		public static TargetingParameters ForPawn()
 		{
 			TargetingParameters targetingParameters = new TargetingParameters();
@@ -288,6 +282,66 @@ namespace AlteredCarbon
 			this.incubatorState = IncubatorState.Inactive;
 			if (AlteredCarbonManager.Instance.emptySleeves == null) AlteredCarbonManager.Instance.emptySleeves = new HashSet<Pawn>();
 			AlteredCarbonManager.Instance.emptySleeves.Add(this.InnerPawn);
+		}
+
+        public override void Open()
+        {
+			var sleeve = InnerPawn;
+            base.Open();
+			var pawn = OpeningPawn();
+			if (pawn != null)
+            {
+				Building_Bed bed = RestUtility.FindBedFor(sleeve, pawn, checkSocialProperness: false);
+				if (bed == null)
+				{
+					bed = RestUtility.FindBedFor(sleeve, pawn, checkSocialProperness: false, ignoreOtherReservations: true);
+				}
+				if (bed != null)
+				{
+					Job job = JobMaker.MakeJob(JobDefOf.Rescue, sleeve, bed);
+					job.count = 1;
+					pawn.jobs.jobQueue.EnqueueFirst(job, JobTag.Misc);
+				}
+			}
+		}
+		private Pawn OpeningPawn()
+		{
+			foreach (var reserv in Map.reservationManager.ReservationsReadOnly)
+			{
+				if (reserv.Target == this)
+				{
+					if (reserv.Claimant.CurJob != null && reserv.Claimant.CurJob.def == JobDefOf.Open && reserv.Claimant.CurJob.targetA.Thing == this)
+					{
+						return reserv.Claimant;
+					}
+				}
+			}
+			return null;
+		}
+		public override void EjectContents()
+		{
+			base.EjectContents();
+			ThingDef filth_Slime = ThingDefOf.Filth_Slime;
+			foreach (Thing thing in this.innerContainer)
+			{
+				Pawn pawn = thing as Pawn;
+				if (pawn != null)
+				{
+					PawnComponentsUtility.AddComponentsForSpawn(pawn);
+					pawn.filth.GainFilth(filth_Slime);
+					pawn.health.AddHediff(AC_DefOf.UT_EmptySleeve);
+				}
+			}
+			var openingPawn = OpeningPawn();
+			if (openingPawn != null)
+            {
+				this.innerContainer.TryDrop(this.InnerThing, openingPawn.Position, this.Map, ThingPlaceMode.Direct, 1, out Thing resultingThing);
+			}
+			else
+            {
+				this.innerContainer.TryDrop(this.InnerThing, ThingPlaceMode.Near, 1, out Thing resultingThing);
+            }
+			ResetGraphics();
 		}
 		public void DropActiveBrainTemplate()
 		{

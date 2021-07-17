@@ -184,24 +184,10 @@ namespace AlteredCarbon
 		}
 		public virtual void EjectContents()
 		{
-			ThingDef filth_Slime = ThingDefOf.Filth_Slime;
-			foreach (Thing thing in this.innerContainer)
-			{
-				Pawn pawn = thing as Pawn;
-				if (pawn != null)
-				{
-					PawnComponentsUtility.AddComponentsForSpawn(pawn);
-					pawn.filth.GainFilth(filth_Slime);
-					pawn.health.AddHediff(AC_DefOf.UT_EmptySleeve);
-				}
-			}
-
 			if (!base.Destroyed)
 			{
-				SoundStarter.PlayOneShot(SoundDefOf.CryptosleepCasket_Eject,
-					SoundInfo.InMap(new TargetInfo(base.Position, base.Map, false), 0));
+				SoundStarter.PlayOneShot(SoundDefOf.CryptosleepCasket_Eject, SoundInfo.InMap(new TargetInfo(base.Position, base.Map, false), 0));
 			}
-			this.innerContainer.TryDrop(this.InnerThing, ThingPlaceMode.Near, 1, out Thing resultingThing);
 			this.contentsKnown = true;
 		}
 		public virtual void KillInnerThing()
