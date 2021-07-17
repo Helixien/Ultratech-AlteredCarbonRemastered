@@ -260,6 +260,8 @@ namespace AlteredCarbon
 
         private void Init(Building_SleeveGrower sleeveGrower)
         {
+            this.forcePause = true;
+            this.absorbInputAroundWindow = true;
             if (ModCompatibility.AlienRacesIsActive)
             {
                 List<ThingDef> excludedRaces = new List<ThingDef>();
@@ -459,8 +461,6 @@ namespace AlteredCarbon
 
         public CustomizeSleeveWindow(Building_SleeveGrower sleeveGrower, Pawn pawn)
         {
-            this.forcePause = true;
-            this.absorbInputAroundWindow = true;
             Init(sleeveGrower);
             CopyBodyFrom(pawn);
         }
@@ -494,7 +494,8 @@ namespace AlteredCarbon
         }
         void UpdateGrowingCost()
         {
-            ticksToGrow = (int)((900000 + beautyLevel * 105000 + qualityLevel * 210000) * AlteredCarbonMod.settings.growingTimeModifier);
+            ticksToGrow = (int)((AlteredCarbonMod.settings.baseGrowingTimeDuration + 
+                (beautyLevel * AlteredCarbonMod.settings.baseBeautyLevel + qualityLevel * AlteredCarbonMod.settings.baseQualityLevel)));
             meatCost = 250 + beautyLevel * 25 + qualityLevel * 50;
         }
         void UpdateHediffs()

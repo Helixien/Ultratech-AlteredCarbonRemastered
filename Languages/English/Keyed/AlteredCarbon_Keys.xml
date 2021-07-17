@@ -67,7 +67,7 @@
 	<AlteredCarbon.RemoveCurrentBrainTemplate>Remove current brain template</AlteredCarbon.RemoveCurrentBrainTemplate>
 	<AlteredCarbon.CommandCallsNeuroformers>Call psylink neuroformers</AlteredCarbon.CommandCallsNeuroformers>
 
-	<AlteredCarbon.growingTimeModifier>Sleeve growing time multiplier</AlteredCarbon.growingTimeModifier>
+	<AlteredCarbon.growingTimeDuration>Sleeve growing time duration</AlteredCarbon.growingTimeDuration>
 	<AlteredCarbon.sleeveHealthPreview>Health preview</AlteredCarbon.sleeveHealthPreview>
 	<AlteredCarbon.saturation>saturation</AlteredCarbon.saturation>
 	<AlteredCarbon.value>brightness</AlteredCarbon.value>
@@ -95,4 +95,7 @@
 	<AlteredCarbon.CancelOrganGrowingDesc>Cancel sleeve growing</AlteredCarbon.CancelOrganGrowingDesc>
 	<AlteredCarbon.CreateOrgan>Create organ</AlteredCarbon.CreateOrgan>
 	<AlteredCarbon.CreateOrganDesc>Create organ</AlteredCarbon.CreateOrganDesc>
+	<AlteredCarbon.FinishedGrowingSleeve>Sleeve Incubator: Finished growing sleeve!</AlteredCarbon.FinishedGrowingSleeve>
+	<AlteredCarbon.InstallStack>Install stack</AlteredCarbon.InstallStack>
+	<AlteredCarbon.InstallStackDesc>Install stack</AlteredCarbon.InstallStackDesc>
 </LanguageData>

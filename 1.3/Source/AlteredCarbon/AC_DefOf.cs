@@ -21,6 +21,8 @@ namespace AlteredCarbon
 
 		public static JobDef UT_StartIncubatingProcess;
 
+		public static JobDef UT_CancelIncubatingProcess;
+
 		public static HediffDef UT_CorticalStack;
 
 		public static HediffDef UT_Sleeve_Quality_Low;
@@ -30,6 +32,8 @@ namespace AlteredCarbon
 		public static HediffDef UT_Sleeve_Quality_High;
 
 		public static HediffDef UT_EmptySleeve;
+
+		public static HediffDef UT_SleeveShock;
 
 		public static HediffDef UT_SleeveBodyData;
 

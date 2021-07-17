@@ -37,6 +37,12 @@
 		<reportString>starting growth process on incubator</reportString>
 	</JobDef>
 	
+	<JobDef>
+		<defName>UT_CancelIncubatingProcess</defName>
+		<driverClass>AlteredCarbon.JobDriver_CancelIncubatingProcess</driverClass>
+		<reportString>canceling growth process on incubator</reportString>
+	</JobDef>
+	
 	<WorkGiverDef>
 		<defName>UT_ExtractActiveBrainTemplate</defName>
 		<label>extracting brain template from incubator</label>
@@ -127,6 +133,20 @@
 		<priorityInType>50</priorityInType>
 		<verb>starting growing process</verb>
 		<gerund>starting growing process at</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<prioritizeSustains>true</prioritizeSustains>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>UT_CancelIncubatingProcess</defName>
+		<label>cancel growing process</label>
+		<giverClass>AlteredCarbon.WorkGiver_CancelIncubatingProcess</giverClass>
+		<workType>BasicWorker</workType>
+		<priorityInType>50</priorityInType>
+		<verb>canceling growing process</verb>
+		<gerund>canceling growing process at</gerund>
 		<requiredCapacities>
 			<li>Manipulation</li>
 		</requiredCapacities>

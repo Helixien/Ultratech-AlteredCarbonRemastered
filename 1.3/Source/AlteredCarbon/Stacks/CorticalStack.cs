@@ -35,7 +35,6 @@ namespace AlteredCarbon
         private Graphic hostileGraphic;
         private Graphic friendlyGraphic;
         private Graphic strangerGraphic;
-
         public override Graphic Graphic
         {
             get
@@ -149,6 +148,111 @@ namespace AlteredCarbon
                 this.stackCount = 1;
             }
             base.SpawnSetup(map, respawningAfterLoad);
+        }
+        public static TargetingParameters ForPawn()
+        {
+            TargetingParameters targetingParameters = new TargetingParameters();
+            targetingParameters.canTargetPawns = true;
+            targetingParameters.validator = (TargetInfo x) => x.Thing is Pawn pawn && pawn.RaceProps.Humanlike;
+            return targetingParameters;
+        }
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            foreach (var g in base.GetGizmos())
+            {
+                yield return g;
+            }
+            if (this.def == AC_DefOf.UT_FilledCorticalStack)
+            {
+                yield return new Command_Action
+                {
+                    defaultLabel = "AlteredCarbon.InstallStack".Translate(),
+                    defaultDesc = "AlteredCarbon.InstallStack".Translate(),
+                    icon = ContentFinder<Texture2D>.Get("UI/Icons/InstallStack"),
+                    action = delegate ()
+                    {
+                        Find.Targeter.BeginTargeting(ForPawn(), delegate (LocalTargetInfo x)
+                        {
+                            InstallStackRecipe(x.Pawn);
+                        });
+                    }
+                };
+            }
+        }
+
+        private void InstallStackRecipe(Pawn medPawn)
+        {
+            var recipe = AC_DefOf.UT_InstallCorticalStack;
+            Bill_InstallStack bill_Medical = new Bill_InstallStack(recipe, this);
+            medPawn.BillStack.AddBill(bill_Medical);
+            bill_Medical.Part = recipe.Worker.GetPartsToApplyOn(medPawn, recipe).First();
+
+            if (recipe.conceptLearned != null)
+            {
+                PlayerKnowledgeDatabase.KnowledgeDemonstrated(recipe.conceptLearned, KnowledgeAmount.Total);
+            }
+            Map map = medPawn.Map;
+            if (!map.mapPawns.FreeColonists.Any((Pawn col) => recipe.PawnSatisfiesSkillRequirements(col)))
+            {
+                Bill.CreateNoPawnsWithSkillDialog(recipe);
+            }
+            if (!medPawn.InBed() && medPawn.RaceProps.IsFlesh)
+            {
+                if (medPawn.RaceProps.Humanlike)
+                {
+                    if (!map.listerBuildings.allBuildingsColonist.Any((Building x) => x is Building_Bed && RestUtility.CanUseBedEver(medPawn, x.def) && ((Building_Bed)x).Medical))
+                    {
+                        Messages.Message("MessageNoMedicalBeds".Translate(), medPawn, MessageTypeDefOf.CautionInput, historical: false);
+                    }
+                }
+                else if (!map.listerBuildings.allBuildingsColonist.Any((Building x) => x is Building_Bed && RestUtility.CanUseBedEver(medPawn, x.def)))
+                {
+                    Messages.Message("MessageNoAnimalBeds".Translate(), medPawn, MessageTypeDefOf.CautionInput, historical: false);
+                }
+            }
+            if (medPawn.Faction != null && !medPawn.Faction.Hidden && !medPawn.Faction.HostileTo(Faction.OfPlayer) && recipe.Worker.IsViolationOnPawn(medPawn, bill_Medical.Part, Faction.OfPlayer))
+            {
+                Messages.Message("MessageMedicalOperationWillAngerFaction".Translate(medPawn.HomeFaction), medPawn, MessageTypeDefOf.CautionInput, historical: false);
+            }
+            ThingDef minRequiredMedicine = GetMinRequiredMedicine(recipe);
+            if (minRequiredMedicine != null && medPawn.playerSettings != null && !medPawn.playerSettings.medCare.AllowsMedicine(minRequiredMedicine))
+            {
+                Messages.Message("MessageTooLowMedCare".Translate(minRequiredMedicine.label, medPawn.LabelShort, medPawn.playerSettings.medCare.GetLabel(), medPawn.Named("PAWN")), medPawn, MessageTypeDefOf.CautionInput, historical: false);
+            }
+            recipe.Worker.CheckForWarnings(medPawn);
+        }
+
+        private static List<ThingDef> tmpMedicineBestToWorst = new List<ThingDef>();
+        private static ThingDef GetMinRequiredMedicine(RecipeDef recipe)
+        {
+            tmpMedicineBestToWorst.Clear();
+            List<ThingDef> allDefsListForReading = DefDatabase<ThingDef>.AllDefsListForReading;
+            for (int i = 0; i < allDefsListForReading.Count; i++)
+            {
+                if (allDefsListForReading[i].IsMedicine)
+                {
+                    tmpMedicineBestToWorst.Add(allDefsListForReading[i]);
+                }
+            }
+            tmpMedicineBestToWorst.SortByDescending((ThingDef x) => x.GetStatValueAbstract(StatDefOf.MedicalPotency));
+            ThingDef thingDef = null;
+            for (int j = 0; j < recipe.ingredients.Count; j++)
+            {
+                ThingDef thingDef2 = null;
+                for (int k = 0; k < tmpMedicineBestToWorst.Count; k++)
+                {
+                    if (recipe.ingredients[j].filter.Allows(tmpMedicineBestToWorst[k]))
+                    {
+                        thingDef2 = tmpMedicineBestToWorst[k];
+                    }
+                }
+                if (thingDef2 != null && (thingDef == null || thingDef2.GetStatValueAbstract(StatDefOf.MedicalPotency) > thingDef.GetStatValueAbstract(StatDefOf.MedicalPotency)))
+                {
+                    thingDef = thingDef2;
+                }
+            }
+            tmpMedicineBestToWorst.Clear();
+            return thingDef;
         }
         public override string GetInspectString()
         {

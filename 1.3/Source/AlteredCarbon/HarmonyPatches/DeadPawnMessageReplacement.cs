@@ -60,21 +60,25 @@ namespace AlteredCarbon
 			if (disableKilledEffect)
 			{
 				try
-                {
+				{
+
 					if (!___pawn.IsEmptySleeve() && ___pawn.HasStack())
 					{
 						TaggedString taggedString = "";
 						taggedString = (dinfo.HasValue ? "AlteredCarbon.SleveOf".Translate() + dinfo.Value.Def.deathMessage
-							.Formatted(___pawn.LabelShortCap, ___pawn.Named("PAWN")) : ((hediff == null)
-							? "AlteredCarbon.PawnDied".Translate(___pawn.LabelShortCap, ___pawn.Named("PAWN"))
-							: "AlteredCarbon.PawnDiedBecauseOf".Translate(___pawn.LabelShortCap, hediff.def.LabelCap,
-							___pawn.Named("PAWN"))));
+								.Formatted(___pawn.LabelShortCap, ___pawn.Named("PAWN")) : ((hediff == null)
+								? "AlteredCarbon.PawnDied".Translate(___pawn.LabelShortCap, ___pawn.Named("PAWN"))
+								: "AlteredCarbon.PawnDiedBecauseOf".Translate(___pawn.LabelShortCap, hediff.def.LabelCap,
+								___pawn.Named("PAWN"))));
 						taggedString = taggedString.AdjustedFor(___pawn);
 						TaggedString label = "AlteredCarbon.SleeveDeath".Translate() + ": " + ___pawn.LabelShortCap;
 						Find.LetterStack.ReceiveLetter(label, taggedString, LetterDefOf.NegativeEvent, ___pawn);
 					}
 				}
-				catch { }
+				catch (Exception ex)
+                {
+					throw ex;
+                }
 				disableKilledEffect = false;
 				return false;
 			}
@@ -198,9 +202,13 @@ namespace AlteredCarbon
 					AppendThoughts_Relations_Patch.disableKilledEffect = true;
 					DeadPawnMessageReplacement.disableKilledEffect = true;
 				}
-				var stackHediff = __instance.health.hediffSet.hediffs.FirstOrDefault((Hediff x) => x.def == AC_DefOf.UT_CorticalStack);
+				var stackHediff = __instance.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
 				if (stackHediff != null)
 				{
+					if (dinfo.HasValue && dinfo.Value.Def.ExternalViolenceFor(__instance))
+                    {
+						stackHediff.PersonaData.diedFromCombat = true;
+                    }
 					LessonAutoActivator.TeachOpportunity(AC_DefOf.UT_DeadPawnWithStack, __instance, OpportunityType.Important);
 					AlteredCarbonManager.Instance.deadPawns.Add(__instance);
 				}
@@ -248,6 +256,18 @@ namespace AlteredCarbon
 			reordering = false;
 			if (colonist.Dead)
 			{
+				if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && Event.current.clickCount == 1 && Mouse.IsOver(rect))
+                {
+					Event.current.Use();
+					if (AlteredCarbonManager.Instance.stacksIndex.TryGetValue(colonist.thingIDNumber, out var corticalStack))
+					{
+						if (corticalStack != null)
+						{
+							CameraJumper.TryJumpAndSelect(colonist);
+						}
+					}
+				}
+
 				if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && Event.current.clickCount == 2 && Mouse.IsOver(rect))
 				{
 					Event.current.Use();

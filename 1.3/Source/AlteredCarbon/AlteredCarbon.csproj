@@ -316,12 +316,14 @@
     <Compile Include="Ideology\ThoughtWorker_Precept_HasNoCorticalStack.cs" />
     <Compile Include="Ideology\ThoughtWorker_Precept_HasCorticalStack.cs" />
     <Compile Include="Incidents\IncidentWorker_StackRequest.cs" />
+    <Compile Include="Jobs\JobDriver_CancelIncubatingProcess.cs" />
     <Compile Include="Jobs\JobDriver_StartIncubatingProcess.cs" />
     <Compile Include="Jobs\JobGiver_TakeStackWhenClose.cs" />
     <Compile Include="Jobs\JobGiver_TakeStackWideMap.cs" />
     <Compile Include="Jobs\WorkGiver_ExtractStack.cs" />
     <Compile Include="Jobs\WorkGiver_DuplicateStacks.cs" />
     <Compile Include="Jobs\WorkGiver_HaulStacks.cs" />
+    <Compile Include="Jobs\WorkGiver_CancelIncubatingProcess.cs" />
     <Compile Include="Jobs\WorkGiver_StartIncubatingProcess.cs" />
     <Compile Include="Lords\LordJob_TakeStacks.cs" />
     <Compile Include="Misc\RoomRoleWorker_UltraTech.cs" />
@@ -348,6 +350,7 @@
     <Compile Include="Recipes\SpecialThingFilterWorker_Stacks.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksHostile.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksColonist.cs" />
+    <Compile Include="Recipes\Bill_InstallStack.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksStranger.cs" />
     <Compile Include="Buildings\Building_SleeveCasket.cs" />
     <Compile Include="Buildings\Building_StackStorage.cs" />

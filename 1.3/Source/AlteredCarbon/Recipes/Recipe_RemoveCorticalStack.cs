@@ -46,16 +46,20 @@ namespace AlteredCarbon
 					GenPlace.TryPlaceThing(corticalStack, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
 					if (AlteredCarbonManager.Instance.stacksIndex == null) AlteredCarbonManager.Instance.stacksIndex = new Dictionary<int, CorticalStack>();
 					AlteredCarbonManager.Instance.stacksIndex[pawn.thingIDNumber] = corticalStack;
-					AlteredCarbonManager.Instance.ReplacePawnWithStack(pawn, corticalStack);
-					AlteredCarbonManager.Instance.RegisterSleeve(pawn, hediff.PersonaData.stackGroupID);
 
-					AlteredCarbonManager.Instance.deadPawns.Add(pawn);
+					DeadPawnMessageReplacement.disableKilledEffect = true;
 					var head = pawn.health.hediffSet.GetNotMissingParts().FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Head);
 					if (head != null)
 					{
 						pawn.TakeDamage(new DamageInfo(DamageDefOf.SurgicalCut, 99999f, 999f, -1f, null, head));
 					}
 					pawn.health.RemoveHediff(hediff);
+					DeadPawnMessageReplacement.disableKilledEffect = false;
+
+					AlteredCarbonManager.Instance.ReplacePawnWithStack(pawn, corticalStack);
+					AlteredCarbonManager.Instance.RegisterSleeve(pawn, hediff.PersonaData.stackGroupID);
+					AlteredCarbonManager.Instance.deadPawns.Add(pawn);
+
 
 					if (LookTargets_Patch.targets.TryGetValue(pawn, out var targets))
 					{

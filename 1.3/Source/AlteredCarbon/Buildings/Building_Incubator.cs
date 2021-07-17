@@ -12,6 +12,7 @@ namespace AlteredCarbon
 	public enum IncubatorState
     {
 		Inactive,
+		ToBeCanceled,
 		ToBeActivated,
 		Growing,
     };
@@ -29,6 +30,7 @@ namespace AlteredCarbon
 		public IncubatorState incubatorState;
 		protected CompPowerTrader powerTrader;
 		protected CompBreakdownable breakdownable;
+		protected CompRefuelable refuelable;
 		protected ThingOwner innerContainer;
 		protected bool contentsKnown;
 
@@ -57,6 +59,7 @@ namespace AlteredCarbon
 			}
 			this.powerTrader = base.GetComp<CompPowerTrader>();
 			this.breakdownable = base.GetComp<CompBreakdownable>();
+			this.refuelable = base.GetComp<CompRefuelable>();
 		}
 
 		public override void TickRare()

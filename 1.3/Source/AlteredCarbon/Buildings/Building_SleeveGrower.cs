@@ -43,13 +43,14 @@ namespace AlteredCarbon
 				if (innerContainer.Count > 0 && this.incubatorState == IncubatorState.Growing)
 				{
 					Command_Action command_Action = new Command_Action();
-					command_Action.action = this.CancelGrowing;
+					command_Action.action = this.OrderToCancel;
 					command_Action.defaultLabel = "AlteredCarbon.CancelSleeveBodyGrowing".Translate();
 					command_Action.defaultDesc = "AlteredCarbon.CancelSleeveBodyGrowingDesc".Translate();
 					command_Action.hotKey = KeyBindingDefOf.Misc8;
 					command_Action.icon = ContentFinder<Texture2D>.Get("UI/Icons/CancelSleeve");
 					yield return command_Action;
 				}
+
 				if (this.InnerPawn == null || this.innerPawnIsDead)
 				{
 					Command_Action createSleeveBody = new Command_Action();
@@ -220,6 +221,11 @@ namespace AlteredCarbon
 			this.child_dead = null;
 			this.adult_dead = null;
 		}
+
+		public void OrderToCancel()
+        {
+			this.incubatorState = IncubatorState.ToBeCanceled;
+		}
 		public void CancelGrowing()
 		{
 			this.incubatorState = IncubatorState.Inactive;
@@ -232,20 +238,33 @@ namespace AlteredCarbon
 		}
 		public void CreateSleeve()
 		{
+			if (Find.Targeter.IsTargeting)
+            {
+				Find.Targeter.StopTargeting();
+            }
 			Find.WindowStack.Add(new CustomizeSleeveWindow(this));
 		}
 		public static TargetingParameters ForPawn()
 		{
 			TargetingParameters targetingParameters = new TargetingParameters();
 			targetingParameters.canTargetPawns = true;
-			targetingParameters.validator = (TargetInfo x) => x.Thing is Pawn pawn && pawn.RaceProps.Humanlike;
+			targetingParameters.canTargetItems = true;
+			targetingParameters.mapObjectTargetsMustBeAutoAttackable = false;
+			targetingParameters.validator = (TargetInfo x) => x.Thing is Pawn pawn && pawn.RaceProps.Humanlike || x.Thing is Corpse corpse && corpse.InnerPawn.RaceProps.Humanlike;
 			return targetingParameters;
 		}
 		public void CopyPawnBody()
         {
 			Find.Targeter.BeginTargeting(ForPawn(), delegate (LocalTargetInfo x)
 			{
-				Find.WindowStack.Add(new CustomizeSleeveWindow(this, x.Pawn));
+				if (x.Thing is Pawn pawn)
+                {
+					Find.WindowStack.Add(new CustomizeSleeveWindow(this, pawn));
+                }
+				else if (x.Thing is Corpse corpse)
+                {
+					Find.WindowStack.Add(new CustomizeSleeveWindow(this, corpse.InnerPawn));
+				}
 			});
 		}
 		public void StartGrowth(Pawn newSleeve, int totalTicksToGrow, int totalGrowthCost)
@@ -282,6 +301,7 @@ namespace AlteredCarbon
 			this.incubatorState = IncubatorState.Inactive;
 			if (AlteredCarbonManager.Instance.emptySleeves == null) AlteredCarbonManager.Instance.emptySleeves = new HashSet<Pawn>();
 			AlteredCarbonManager.Instance.emptySleeves.Add(this.InnerPawn);
+			Messages.Message("AlteredCarbon.FinishedGrowingSleeve".Translate(), this, MessageTypeDefOf.CautionInput);
 		}
 
         public override void Open()
@@ -372,13 +392,14 @@ namespace AlteredCarbon
 			}
 			if (this.InnerPawn != null)
 			{
-				if (this.incubatorState == IncubatorState.Growing)
+				if (this.incubatorState == IncubatorState.Growing || this.incubatorState == IncubatorState.ToBeCanceled)
                 {
-					if (base.GetComp<CompRefuelable>().HasFuel && powerTrader.PowerOn)
+					Log.Message("runningOutPowerInTicks: " + runningOutPowerInTicks);
+					if (refuelable.HasFuel && powerTrader.PowerOn)
 					{
 						if (runningOutPowerInTicks > 0) runningOutPowerInTicks = 0;
 						var fuelCost = this.totalGrowthCost / (float)this.totalTicksToGrow;
-						base.GetComp<CompRefuelable>().ConsumeFuel(fuelCost);
+						refuelable.ConsumeFuel(fuelCost);
 						if (this.curTicksToGrow < totalTicksToGrow)
 						{
 							curTicksToGrow++;
@@ -405,7 +426,7 @@ namespace AlteredCarbon
 					Messages.Message("AlteredCarbon.isRunningOutPower".Translate(), this, MessageTypeDefOf.NegativeEvent);
 					this.isRunningOutPower = true;
 				}
-				if (!base.GetComp<CompRefuelable>().HasFuel && !isRunningOutFuel)
+				if (!refuelable.HasFuel && !isRunningOutFuel)
 				{
 					Messages.Message("AlteredCarbon.isRunningOutFuel".Translate(), this, MessageTypeDefOf.NegativeEvent);
 					this.isRunningOutFuel = true;

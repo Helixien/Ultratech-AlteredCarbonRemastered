@@ -77,9 +77,7 @@ namespace AlteredCarbon
             base.PostRemoved();
             if (!this.pawn.Dead)
             {
-                Notify_ColonistKilled_Patch.disableKilledEffect = true;
                 this.pawn.Kill(null);
-                Notify_ColonistKilled_Patch.disableKilledEffect = false;
             }
         }
         public override void ExposeData()

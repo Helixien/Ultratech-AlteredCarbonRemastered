@@ -9,6 +9,11 @@ namespace AlteredCarbon
 {
     public class Recipe_InstallCorticalStack : Recipe_Surgery
     {
+        public override bool AvailableOnNow(Thing thing, BodyPartRecord part = null)
+        {
+            Log.Message("Preventing from installing" + thing);
+            return false;
+        }
         public override IEnumerable<BodyPartRecord> GetPartsToApplyOn(Pawn pawn, RecipeDef recipe)
         {
             return MedicalRecipesUtility.GetFixedPartsToApplyOn(recipe, pawn, delegate (BodyPartRecord record)
@@ -89,6 +94,12 @@ namespace AlteredCarbon
                     else
                     {
                         pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_NewSleeve);
+                    }
+
+                    if (corticalStack.PersonaData.diedFromCombat.HasValue && corticalStack.PersonaData.diedFromCombat.Value)
+                    {
+                        pawn.health.AddHediff(HediffMaker.MakeHediff(AC_DefOf.UT_SleeveShock, pawn));
+                        corticalStack.PersonaData.diedFromCombat = null;
                     }
                 }
                 else

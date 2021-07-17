@@ -86,6 +86,7 @@ namespace AlteredCarbon
         private PsychologyData psychologyData;
 
         // misc
+        public bool? diedFromCombat;
         public bool isCopied = false;
         public int stackGroupID;
 
@@ -446,6 +447,7 @@ namespace AlteredCarbon
             }
 
             this.isCopied = isDuplicateOperation ? true : other.isCopied;
+            this.diedFromCombat = other.diedFromCombat;
             this.stackGroupID = other.stackGroupID;
 
             this.sexuality = other.sexuality;
@@ -840,6 +842,7 @@ namespace AlteredCarbon
         {
             Scribe_Values.Look<int>(ref this.stackGroupID, "stackGroupID", 0);
             Scribe_Values.Look<bool>(ref this.isCopied, "isCopied", false, false);
+            Scribe_Values.Look(ref this.diedFromCombat, "diedFromCombat");
             Scribe_Deep.Look<Name>(ref this.name, "name", new object[0]);
             Scribe_References.Look<Pawn>(ref this.origPawn, "origPawn", true);
             Scribe_Values.Look<int>(ref this.hostilityMode, "hostilityMode");

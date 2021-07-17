@@ -134,11 +134,11 @@ namespace AlteredCarbon
 			{
 				if (this.incubatorState == IncubatorState.Growing)
                 {
-					if (base.GetComp<CompRefuelable>().HasFuel && powerTrader.PowerOn)
+					if (refuelable.HasFuel && powerTrader.PowerOn)
 					{
 						if (runningOutPowerInTicks > 0) runningOutPowerInTicks = 0;
 						var fuelCost = this.totalGrowthCost / (float)this.totalTicksToGrow;
-						base.GetComp<CompRefuelable>().ConsumeFuel(fuelCost);
+						refuelable.ConsumeFuel(fuelCost);
 						if (this.curTicksToGrow < totalTicksToGrow)
 						{
 							curTicksToGrow++;
@@ -165,7 +165,7 @@ namespace AlteredCarbon
 					Messages.Message("AlteredCarbon.OrganIncubatorIsRunningOutPower".Translate(), this, MessageTypeDefOf.NegativeEvent);
 					this.isRunningOutPower = true;
 				}
-				if (!base.GetComp<CompRefuelable>().HasFuel && !isRunningOutFuel)
+				if (!refuelable.HasFuel && !isRunningOutFuel)
 				{
 					Messages.Message("AlteredCarbon.OrganIncubatorIsRunningOutFuel".Translate(), this, MessageTypeDefOf.NegativeEvent);
 					this.isRunningOutFuel = true;
