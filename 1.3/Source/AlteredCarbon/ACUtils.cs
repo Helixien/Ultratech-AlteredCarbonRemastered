@@ -64,6 +64,22 @@ namespace AlteredCarbon
                 li.filter.SetAllow(AC_DefOf.UT_AllowStacksColonist, false);
             }
             AC_DefOf.UT_WipeFilledCorticalStack.defaultIngredientFilter.SetAllow(AC_DefOf.UT_AllowStacksColonist, false);
+
+
+            foreach (var li in AC_DefOf.UT_InstallCorticalStack.ingredients)
+            {
+                li.filter.SetAllow(AC_DefOf.UT_AllowStacksColonist, true);
+                li.filter.SetAllow(AC_DefOf.UT_AllowStacksStranger, true);
+                li.filter.SetAllow(AC_DefOf.UT_AllowStacksHostile, true);
+            }
+
+            AC_DefOf.UT_InstallCorticalStack.fixedIngredientFilter.SetAllow(AC_DefOf.UT_AllowStacksColonist, true);
+            AC_DefOf.UT_InstallCorticalStack.fixedIngredientFilter.SetAllow(AC_DefOf.UT_AllowStacksStranger, true);
+            AC_DefOf.UT_InstallCorticalStack.fixedIngredientFilter.SetAllow(AC_DefOf.UT_AllowStacksHostile, true);
+
+            AC_DefOf.UT_InstallCorticalStack.defaultIngredientFilter.SetAllow(AC_DefOf.UT_AllowStacksColonist, true);
+            AC_DefOf.UT_InstallCorticalStack.defaultIngredientFilter.SetAllow(AC_DefOf.UT_AllowStacksStranger, true);
+            AC_DefOf.UT_InstallCorticalStack.defaultIngredientFilter.SetAllow(AC_DefOf.UT_AllowStacksHostile, true);
         }
 
         public static bool IsUltraTech(this Thing thing)

@@ -112,6 +112,12 @@ namespace AlteredCarbon
 		{
 			this.incubatorState = IncubatorState.Inactive;
 		}
+
+        public override void EjectContents()
+        {
+            base.EjectContents();
+			this.innerContainer.TryDrop(this.InnerThing, ThingPlaceMode.Near, 1, out Thing resultingThing);
+		}
 		public override void KillInnerThing()
         {
             base.KillInnerThing();
