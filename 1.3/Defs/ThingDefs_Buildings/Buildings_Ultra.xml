@@ -127,7 +127,7 @@
 		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
 		<techLevel>Ultra</techLevel>
 		<designationCategory>UT_Ultra</designationCategory>
-		<altitudeLayer>Building</altitudeLayer>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
 		<neverMultiSelect>true</neverMultiSelect>
 		<rotatable>true</rotatable>
 		<castEdgeShadows>true</castEdgeShadows>
@@ -179,7 +179,7 @@
 				<showFuelGizmo>true</showFuelGizmo>
 			</li>
 			<li Class="CompProperties_Glower">
-				<glowRadius>2</glowRadius>
+				<glowRadius>3</glowRadius>
 				<glowColor>(96,161,153,0)</glowColor>
 			</li>
 			<li Class="CompProperties_Flickable"/>
@@ -293,7 +293,7 @@
 		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
 		<techLevel>Ultra</techLevel>
 		<designationCategory>UT_Ultra</designationCategory>
-		<altitudeLayer>Building</altitudeLayer>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
 		<neverMultiSelect>true</neverMultiSelect>
 		<rotatable>true</rotatable>
 		<passability>Impassable</passability>
