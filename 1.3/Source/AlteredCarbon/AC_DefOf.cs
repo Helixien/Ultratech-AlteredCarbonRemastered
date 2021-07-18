@@ -57,6 +57,8 @@ namespace AlteredCarbon
 
 		public static RecipeDef UT_InstallEmptyCorticalStack;
 
+		public static RecipeDef UT_HackFilledCorticalStack;
+
 		public static SpecialThingFilterDef UT_AllowStacksColonist;
 		public static SpecialThingFilterDef UT_AllowStacksStranger;
 		public static SpecialThingFilterDef UT_AllowStacksHostile;
@@ -82,6 +84,8 @@ namespace AlteredCarbon
 		public static ThoughtDef UT_LostMyFiance;
 
 		public static ThoughtDef UT_LostMyLover;
+
+		public static ThoughtDef UT_SomethingIsWrong;
 
 		public static PawnRelationDef UT_Original;
 

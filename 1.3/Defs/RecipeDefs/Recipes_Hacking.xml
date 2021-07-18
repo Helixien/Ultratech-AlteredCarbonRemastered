@@ -106,4 +106,52 @@
 		</skillRequirements>
 	</RecipeDef>
 
+	<RecipeDef>
+		<defName>UT_HackFilledCorticalStack</defName>
+		<label>hack cortical stack</label>
+		<description>PLACEHOLDER</description>
+		<jobString>hacking cortical stack.</jobString>
+		<workerClass>AlteredCarbon.Recipe_HackFilledCorticalStack</workerClass>
+		<workAmount>180</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>UT_FilledCorticalStack</li>
+						<li>UT_EmptyCorticalStack</li>
+					</thingDefs>
+					<specialFiltersToAllow>
+						<li>UT_AllowStacksColonist</li>
+						<li>UT_AllowStacksStranger</li>
+						<li>UT_AllowStacksHostile</li>
+					</specialFiltersToAllow>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>UT_FilledCorticalStack</li>
+			</thingDefs>
+			<specialFiltersToAllow>
+				<li>UT_AllowStacksColonist</li>
+				<li>UT_AllowStacksStranger</li>
+				<li>UT_AllowStacksHostile</li>
+			</specialFiltersToAllow>
+		</fixedIngredientFilter>
+		<defaultIngredientFilter>
+			<thingDefs>
+				<li>UT_FilledCorticalStack</li>
+			</thingDefs>
+			<specialFiltersToAllow>
+				<li>UT_AllowStacksColonist</li>
+				<li>UT_AllowStacksStranger</li>
+				<li>UT_AllowStacksHostile</li>
+			</specialFiltersToAllow>
+		</defaultIngredientFilter>
+		<skillRequirements>
+			<Intellectual>8</Intellectual>
+		</skillRequirements>
+	</RecipeDef>
+	
 </Defs>

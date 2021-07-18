@@ -13,8 +13,13 @@ namespace AlteredCarbon
 	[StaticConstructorOnStartup]
 	internal static class ACUtils
 	{
+        public static RecipeDef UT_ConvertFilledCorticalStackToIdeo;
         static ACUtils()
         {
+            if (ModsConfig.IdeologyActive)
+            {
+                UT_ConvertFilledCorticalStackToIdeo = DefDatabase<RecipeDef>.GetNamed("UT_ConvertFilledCorticalStackToIdeo");
+            }
             foreach (var li in AC_DefOf.UT_HackBiocodedThings.ingredients)
             {
                 li.filter = new ThingFilterBiocodable();

@@ -77,7 +77,7 @@ namespace AlteredCarbon
 				}
 				catch (Exception ex)
                 {
-					throw ex;
+					Log.Error(ex.ToString());
                 }
 				disableKilledEffect = false;
 				return false;
@@ -185,8 +185,9 @@ namespace AlteredCarbon
 	[HarmonyPatch(typeof(Pawn), "Kill")]
 	public class Pawn_Kill_Patch
 	{
-		public static void Prefix(Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
+		public static void Prefix(out Caravan __state, Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
 		{
+			__state = null;
 			try
 			{
 				if (dinfo.HasValue && dinfo.Value.Def == DamageDefOf.Crush && dinfo.Value.Category == DamageInfo.SourceCategory.Collapse)
@@ -211,6 +212,7 @@ namespace AlteredCarbon
                     }
 					LessonAutoActivator.TeachOpportunity(AC_DefOf.UT_DeadPawnWithStack, __instance, OpportunityType.Important);
 					AlteredCarbonManager.Instance.deadPawns.Add(__instance);
+					__state = __instance.GetCaravan();
 				}
 				if (AlteredCarbonManager.Instance.stacksIndex.TryGetValue(__instance.thingIDNumber, out var corticalStack))
 				{
@@ -226,6 +228,39 @@ namespace AlteredCarbon
 			}
 			catch { };
 		}
+		public static void Postfix(Caravan __state, Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
+        {
+			Log.Message("__state: " + __state);
+			if (__state != null && __state.PawnsListForReading.Any())
+            {
+				var stackHediff = __instance.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
+				if (stackHediff.def.spawnThingOnRemoved != null)
+				{
+					var corticalStackThing = ThingMaker.MakeThing(stackHediff.def.spawnThingOnRemoved) as CorticalStack;
+					if (stackHediff.PersonaData.hasPawn)
+					{
+						stackHediff.PersonaData.CopyDataFrom(stackHediff.PersonaData);
+					}
+					else
+					{
+						stackHediff.PersonaData.CopyPawn(__instance);
+					}
+					AlteredCarbonManager.Instance.RegisterStack(corticalStackThing);
+					AlteredCarbonManager.Instance.RegisterSleeve(__instance, corticalStackThing.PersonaData.stackGroupID);
+					CaravanInventoryUtility.GiveThing(__state, corticalStackThing);
+				}
+				var head = __instance.health.hediffSet.GetNotMissingParts().FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Head);
+				if (head != null)
+				{
+					Hediff_MissingPart hediff_MissingPart = (Hediff_MissingPart)HediffMaker.MakeHediff(HediffDefOf.MissingBodyPart, __instance, head);
+					hediff_MissingPart.lastInjury = HediffDefOf.SurgicalCut;
+					hediff_MissingPart.IsFresh = true;
+					__instance.health.AddHediff(hediff_MissingPart);
+				}
+				__instance.health.RemoveHediff(stackHediff);
+			}
+        }
+
 	}
 
 	[HarmonyPatch(typeof(LookTargets), MethodType.Constructor, new Type[] { typeof(Thing) })]

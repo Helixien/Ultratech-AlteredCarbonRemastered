@@ -99,4 +99,11 @@
 	<AlteredCarbon.InstallStack>Install stack</AlteredCarbon.InstallStack>
 	<AlteredCarbon.InstallStackDesc>Install stack</AlteredCarbon.InstallStackDesc>
 	<AlteredCarbon.MustPlaceDistantToOtherCorticalMatrixes>Cannot be placed too close to existing Quantum Storage Matrix!</AlteredCarbon.MustPlaceDistantToOtherCorticalMatrixes>
+	<AlteredCarbon.HackStack>Hack stack</AlteredCarbon.HackStack>
+	<AlteredCarbon.ConvertStack>Convert stack ideo</AlteredCarbon.ConvertStack>
+	<AlteredCarbon.PawnAlreadyHasStack>{PAWN_nameDef} already has a cortical stack installed!</AlteredCarbon.PawnAlreadyHasStack>
+	<AlteredCarbon.CannotInstallStackNeckIsMissingOrAnotherImplantInstalled>Cannot install cortical stack - neck is missing or another implant installed in the neck</AlteredCarbon.CannotInstallStackNeckIsMissingOrAnotherImplantInstalled>
+	<AlteredCarbon.AlreadyOrderedToHackStack>This stack is set for hacking already on the decryption workbench</AlteredCarbon.AlreadyOrderedToHackStack>
+	<AlteredCarbon.AlreadyOrderedToConvertStack>This stack is set for ideo converting already on the decryption workbench</AlteredCarbon.AlreadyOrderedToConvertStack>
+	
 </LanguageData>

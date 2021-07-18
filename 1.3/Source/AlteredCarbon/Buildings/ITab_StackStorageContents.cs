@@ -83,7 +83,7 @@ namespace AlteredCarbon
             if (Widgets.ButtonImage(installStackRect, ContentFinder<Texture2D>.Get("UI/Icons/InstallStack", true)))
             {
                 SoundDefOf.Tick_High.PlayOneShotOnCamera();
-                Find.Targeter.BeginTargeting(CorticalStack.ForPawn(), delegate (LocalTargetInfo x)
+                Find.Targeter.BeginTargeting(corticalStack.ForPawn(), delegate (LocalTargetInfo x)
                 {
                     this.Building_StackStorage.innerContainer.TryDrop(corticalStack, ThingPlaceMode.Near, out var droppedThing);
                     corticalStack.InstallStackRecipe(x.Pawn);

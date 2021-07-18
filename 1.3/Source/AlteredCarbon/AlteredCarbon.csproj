@@ -345,6 +345,9 @@
     <Compile Include="Jobs\JobDriver_InsertBrainTemplate.cs" />
     <Compile Include="Jobs\WorkGiver_ExtractBrainTemplate.cs" />
     <Compile Include="Jobs\WorkGiver_InsertBrainTemplate.cs" />
+    <Compile Include="Recipes\Bill_HackStack.cs" />
+    <Compile Include="Recipes\Recipe_ConvertFilledCorticalStack.cs" />
+    <Compile Include="Recipes\Recipe_HackFilledCorticalStack.cs" />
     <Compile Include="Recipes\Recipe_WipeFilledCorticalStack.cs" />
     <Compile Include="Recipes\Recipe_HackBiocodedThings.cs" />
     <Compile Include="Recipes\Recipe_DecryptAncientCorticalStack.cs" />

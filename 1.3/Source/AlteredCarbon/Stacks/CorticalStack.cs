@@ -82,7 +82,7 @@ namespace AlteredCarbon
                 else
                 {
                     return base.Graphic;
-                } 
+                }
             }
         }
 
@@ -149,7 +149,7 @@ namespace AlteredCarbon
             }
             base.SpawnSetup(map, respawningAfterLoad);
         }
-        public static TargetingParameters ForPawn()
+        public TargetingParameters ForPawn()
         {
             TargetingParameters targetingParameters = new TargetingParameters();
             targetingParameters.canTargetPawns = true;
@@ -182,45 +182,57 @@ namespace AlteredCarbon
 
         public void InstallStackRecipe(Pawn medPawn)
         {
-            medPawn.BillStack.Bills.RemoveAll(x => x is Bill_InstallStack);
             var recipe = AC_DefOf.UT_InstallCorticalStack;
-            Bill_InstallStack bill_Medical = new Bill_InstallStack(recipe, this);
-            medPawn.BillStack.AddBill(bill_Medical);
-            bill_Medical.Part = recipe.Worker.GetPartsToApplyOn(medPawn, recipe).First();
+            if (medPawn.HasStack())
+            {
+                Messages.Message("AlteredCarbon.PawnAlreadyHasStack".Translate(medPawn.Named("PAWN")), MessageTypeDefOf.CautionInput);
+            }
+            else if (recipe.Worker.GetPartsToApplyOn(medPawn, recipe).FirstOrDefault() is null)
+            {
+                Messages.Message("AlteredCarbon.CannotInstallStackNeckIsMissingOrAnotherImplantInstalled".Translate(), MessageTypeDefOf.CautionInput);
+            }
+            else
+            {
+                medPawn.BillStack.Bills.RemoveAll(x => x is Bill_InstallStack);
+                Bill_InstallStack bill_Medical = new Bill_InstallStack(recipe, this);
+                medPawn.BillStack.AddBill(bill_Medical);
+                bill_Medical.Part = recipe.Worker.GetPartsToApplyOn(medPawn, recipe).First();
 
-            if (recipe.conceptLearned != null)
-            {
-                PlayerKnowledgeDatabase.KnowledgeDemonstrated(recipe.conceptLearned, KnowledgeAmount.Total);
-            }
-            Map map = medPawn.Map;
-            if (!map.mapPawns.FreeColonists.Any((Pawn col) => recipe.PawnSatisfiesSkillRequirements(col)))
-            {
-                Bill.CreateNoPawnsWithSkillDialog(recipe);
-            }
-            if (!medPawn.InBed() && medPawn.RaceProps.IsFlesh)
-            {
-                if (medPawn.RaceProps.Humanlike)
+                if (recipe.conceptLearned != null)
                 {
-                    if (!map.listerBuildings.allBuildingsColonist.Any((Building x) => x is Building_Bed && RestUtility.CanUseBedEver(medPawn, x.def) && ((Building_Bed)x).Medical))
+                    PlayerKnowledgeDatabase.KnowledgeDemonstrated(recipe.conceptLearned, KnowledgeAmount.Total);
+                }
+                Map map = medPawn.Map;
+                if (!map.mapPawns.FreeColonists.Any((Pawn col) => recipe.PawnSatisfiesSkillRequirements(col)))
+                {
+                    Bill.CreateNoPawnsWithSkillDialog(recipe);
+                }
+                if (!medPawn.InBed() && medPawn.RaceProps.IsFlesh)
+                {
+                    if (medPawn.RaceProps.Humanlike)
                     {
-                        Messages.Message("MessageNoMedicalBeds".Translate(), medPawn, MessageTypeDefOf.CautionInput, historical: false);
+                        if (!map.listerBuildings.allBuildingsColonist.Any((Building x) => x is Building_Bed && RestUtility.CanUseBedEver(medPawn, x.def) && ((Building_Bed)x).Medical))
+                        {
+                            Messages.Message("MessageNoMedicalBeds".Translate(), medPawn, MessageTypeDefOf.CautionInput, historical: false);
+                        }
+                    }
+                    else if (!map.listerBuildings.allBuildingsColonist.Any((Building x) => x is Building_Bed && RestUtility.CanUseBedEver(medPawn, x.def)))
+                    {
+                        Messages.Message("MessageNoAnimalBeds".Translate(), medPawn, MessageTypeDefOf.CautionInput, historical: false);
                     }
                 }
-                else if (!map.listerBuildings.allBuildingsColonist.Any((Building x) => x is Building_Bed && RestUtility.CanUseBedEver(medPawn, x.def)))
+                if (medPawn.Faction != null && !medPawn.Faction.Hidden && !medPawn.Faction.HostileTo(Faction.OfPlayer) && recipe.Worker.IsViolationOnPawn(medPawn, bill_Medical.Part, Faction.OfPlayer))
                 {
-                    Messages.Message("MessageNoAnimalBeds".Translate(), medPawn, MessageTypeDefOf.CautionInput, historical: false);
+                    Messages.Message("MessageMedicalOperationWillAngerFaction".Translate(medPawn.HomeFaction), medPawn, MessageTypeDefOf.CautionInput, historical: false);
                 }
+                ThingDef minRequiredMedicine = GetMinRequiredMedicine(recipe);
+                if (minRequiredMedicine != null && medPawn.playerSettings != null && !medPawn.playerSettings.medCare.AllowsMedicine(minRequiredMedicine))
+                {
+                    Messages.Message("MessageTooLowMedCare".Translate(minRequiredMedicine.label, medPawn.LabelShort, medPawn.playerSettings.medCare.GetLabel(), medPawn.Named("PAWN")), medPawn, MessageTypeDefOf.CautionInput, historical: false);
+                }
+                recipe.Worker.CheckForWarnings(medPawn);
             }
-            if (medPawn.Faction != null && !medPawn.Faction.Hidden && !medPawn.Faction.HostileTo(Faction.OfPlayer) && recipe.Worker.IsViolationOnPawn(medPawn, bill_Medical.Part, Faction.OfPlayer))
-            {
-                Messages.Message("MessageMedicalOperationWillAngerFaction".Translate(medPawn.HomeFaction), medPawn, MessageTypeDefOf.CautionInput, historical: false);
-            }
-            ThingDef minRequiredMedicine = GetMinRequiredMedicine(recipe);
-            if (minRequiredMedicine != null && medPawn.playerSettings != null && !medPawn.playerSettings.medCare.AllowsMedicine(minRequiredMedicine))
-            {
-                Messages.Message("MessageTooLowMedCare".Translate(minRequiredMedicine.label, medPawn.LabelShort, medPawn.playerSettings.medCare.GetLabel(), medPawn.Named("PAWN")), medPawn, MessageTypeDefOf.CautionInput, historical: false);
-            }
-            recipe.Worker.CheckForWarnings(medPawn);
+
         }
 
         private static List<ThingDef> tmpMedicineBestToWorst = new List<ThingDef>();

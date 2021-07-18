@@ -33,7 +33,6 @@ namespace AlteredCarbon
         public string title;
 
         private Dictionary<WorkTypeDef, int> priorities;
-
         private GuestStatus guestStatusInt;
         private PrisonerInteractionModeDef interactionMode;
         private SlaveInteractionModeDef slaveInteractionMode;
@@ -70,11 +69,11 @@ namespace AlteredCarbon
         private Dictionary<Faction, int> permitPoints = new Dictionary<Faction, int>();
 
         // Ideology
-        private Ideo ideo;
-        private Color? favoriteColor;
-        private int joinTick;
-        private List<Ideo> previousIdeos;
-        private float certainty;
+        public Ideo ideo;
+        public Color? favoriteColor;
+        public int joinTick;
+        public List<Ideo> previousIdeos;
+        public float certainty;
         private Precept_RoleMulti precept_RoleMulti;
         private Precept_RoleSingle precept_RoleSingle;
 
@@ -87,6 +86,7 @@ namespace AlteredCarbon
 
         // misc
         public bool? diedFromCombat;
+        public bool hackedWhileOnStack;
         public bool isCopied = false;
         public int stackGroupID;
 
@@ -144,6 +144,7 @@ namespace AlteredCarbon
                     return faction.Color;
             }
         }
+
         public void CopyPawn(Pawn pawn)
         {
             this.name = pawn.Name;
@@ -448,6 +449,7 @@ namespace AlteredCarbon
 
             this.isCopied = isDuplicateOperation ? true : other.isCopied;
             this.diedFromCombat = other.diedFromCombat;
+            this.hackedWhileOnStack = other.hackedWhileOnStack;
             this.stackGroupID = other.stackGroupID;
 
             this.sexuality = other.sexuality;
@@ -843,6 +845,7 @@ namespace AlteredCarbon
             Scribe_Values.Look<int>(ref this.stackGroupID, "stackGroupID", 0);
             Scribe_Values.Look<bool>(ref this.isCopied, "isCopied", false, false);
             Scribe_Values.Look(ref this.diedFromCombat, "diedFromCombat");
+            Scribe_Values.Look(ref this.hackedWhileOnStack, "hackedWhileOnStack");
             Scribe_Deep.Look<Name>(ref this.name, "name", new object[0]);
             Scribe_References.Look<Pawn>(ref this.origPawn, "origPawn", true);
             Scribe_Values.Look<int>(ref this.hostilityMode, "hostilityMode");

@@ -14,13 +14,14 @@ namespace AlteredCarbon
 		public CorticalStack stackToInstall;
 		public Bill_InstallStack()
 		{
+
 		}
 
 		public Bill_InstallStack(RecipeDef recipe, CorticalStack corticalStack) : base(recipe)
 		{
 			this.stackToInstall = corticalStack;
 		}
-
+		public override string Label => base.Label + " (" + stackToInstall.PersonaData.PawnNameColored + ")";
 		public override void ExposeData()
 		{
 			base.ExposeData();

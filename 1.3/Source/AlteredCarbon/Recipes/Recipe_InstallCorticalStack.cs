@@ -11,7 +11,6 @@ namespace AlteredCarbon
     {
         public override bool AvailableOnNow(Thing thing, BodyPartRecord part = null)
         {
-            Log.Message("Preventing from installing" + thing);
             return false;
         }
         public override IEnumerable<BodyPartRecord> GetPartsToApplyOn(Pawn pawn, RecipeDef recipe)
@@ -29,7 +28,6 @@ namespace AlteredCarbon
                 return (!pawn.health.hediffSet.hediffs.Any((Hediff x) => x.Part == record && (x.def == recipe.addsHediff || !recipe.CompatibleWithHediff(x.def)))) ? true : false;
             });
         }
-
         public override void ConsumeIngredient(Thing ingredient, RecipeDef recipe, Map map)
         {
             if (ingredient is CorticalStack c)
@@ -38,7 +36,6 @@ namespace AlteredCarbon
             }
             base.ConsumeIngredient(ingredient, recipe, map);
         }
-
         public override void ApplyOnPawn(Pawn pawn, BodyPartRecord part, Pawn billDoer, List<Thing> ingredients, Bill bill)
         {
             if (billDoer != null)
@@ -100,6 +97,11 @@ namespace AlteredCarbon
                     {
                         pawn.health.AddHediff(HediffMaker.MakeHediff(AC_DefOf.UT_SleeveShock, pawn));
                         corticalStack.PersonaData.diedFromCombat = null;
+                    }
+                    if (corticalStack.PersonaData.hackedWhileOnStack)
+                    {
+                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_SomethingIsWrong);
+                        corticalStack.PersonaData.hackedWhileOnStack = false;
                     }
                 }
                 else
