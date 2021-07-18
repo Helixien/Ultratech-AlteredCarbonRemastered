@@ -180,8 +180,9 @@ namespace AlteredCarbon
             }
         }
 
-        private void InstallStackRecipe(Pawn medPawn)
+        public void InstallStackRecipe(Pawn medPawn)
         {
+            medPawn.BillStack.Bills.RemoveAll(x => x is Bill_InstallStack);
             var recipe = AC_DefOf.UT_InstallCorticalStack;
             Bill_InstallStack bill_Medical = new Bill_InstallStack(recipe, this);
             medPawn.BillStack.AddBill(bill_Medical);

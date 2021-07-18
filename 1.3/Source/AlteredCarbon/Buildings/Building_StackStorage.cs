@@ -9,7 +9,7 @@ using Verse.Sound;
 
 namespace AlteredCarbon
 {
-    public class Building_StackStorage : Building, IThingHolder, IOpenable
+    public class Building_StackStorage : Building, IThingHolder
     {
         public const int MaxFilledStackCapacity = 10;
         public const int MaxEmergencyBackupDistanceInTiles = 25;
@@ -93,6 +93,7 @@ namespace AlteredCarbon
                 {
                     defaultLabel = "AlteredCarbon.DuplicateStack".Translate(),
                     defaultDesc = "AC.DuplicateStackDesc".Translate(),
+                    icon = ContentFinder<Texture2D>.Get("UI/Icons/DuplicateStack"),
                     action = delegate ()
                     {
                         var floatList = new List<FloatMenuOption>();
@@ -154,23 +155,7 @@ namespace AlteredCarbon
             {
                 yield return opt;
             }
-
         }
-        public override string GetInspectString()
-        {
-            return base.GetInspectString();
-        }
-
-        public bool CanOpen
-        {
-            get
-            {
-                return this.HasAnyContents;
-            }
-        }
-
-        public int OpenTicks => 60;
-
         public ThingOwner GetDirectlyHeldThings()
         {
             return this.innerContainer;
@@ -185,14 +170,7 @@ namespace AlteredCarbon
             base.Tick();
             this.innerContainer.ThingOwnerTick(true);
         }
-
-        public void Open()
-        {
-
-        }
-
         public bool HasFreeSpace => this.innerContainer.Count < MaxFilledStackCapacity;
-
         public override void ExposeData()
         {
             base.ExposeData();

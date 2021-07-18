@@ -68,7 +68,6 @@ namespace AlteredCarbon
             Rect rect1 = new Rect(0.0f, y, width, 28f);
             Widgets.InfoCardButton(rect1.width - 24f, y, corticalStack);
             rect1.width -= 24f;
-
             Rect rect2 = new Rect(rect1.width - 28f, y, 24f, 24f);
             TooltipHandler.TipRegion(rect2, "DropThing".Translate());
             if (Widgets.ButtonImage(rect2, ContentFinder<Texture2D>.Get("UI/Buttons/Drop", true)))
@@ -76,7 +75,21 @@ namespace AlteredCarbon
                 SoundDefOf.Tick_High.PlayOneShotOnCamera();
                 this.Building_StackStorage.innerContainer.TryDrop(corticalStack, ThingPlaceMode.Near, out var droppedThing);
             }
-            rect1.width -= 24f;
+
+            Rect installStackRect = rect2;
+            installStackRect.x -= 28;
+
+            TooltipHandler.TipRegion(installStackRect, "AlteredCarbon.InstallStack".Translate());
+            if (Widgets.ButtonImage(installStackRect, ContentFinder<Texture2D>.Get("UI/Icons/InstallStack", true)))
+            {
+                SoundDefOf.Tick_High.PlayOneShotOnCamera();
+                Find.Targeter.BeginTargeting(CorticalStack.ForPawn(), delegate (LocalTargetInfo x)
+                {
+                    this.Building_StackStorage.innerContainer.TryDrop(corticalStack, ThingPlaceMode.Near, out var droppedThing);
+                    corticalStack.InstallStackRecipe(x.Pawn);
+                });
+            }
+            rect1.width -= 54f;
             Rect rect3 = rect1;
             rect3.xMin = rect3.xMax - 40f;
             rect1.width -= 15f;

@@ -326,6 +326,7 @@
     <Compile Include="Jobs\WorkGiver_CancelIncubatingProcess.cs" />
     <Compile Include="Jobs\WorkGiver_StartIncubatingProcess.cs" />
     <Compile Include="Lords\LordJob_TakeStacks.cs" />
+    <Compile Include="Misc\PlaceWorker_CorticalStackStorage.cs" />
     <Compile Include="Misc\RoomRoleWorker_UltraTech.cs" />
     <Compile Include="ModCompatibility.cs" />
     <Compile Include="AC_DefOf.cs" />

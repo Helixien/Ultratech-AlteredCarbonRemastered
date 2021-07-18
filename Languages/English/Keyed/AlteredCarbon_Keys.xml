@@ -98,4 +98,5 @@
 	<AlteredCarbon.FinishedGrowingSleeve>Sleeve Incubator: Finished growing sleeve!</AlteredCarbon.FinishedGrowingSleeve>
 	<AlteredCarbon.InstallStack>Install stack</AlteredCarbon.InstallStack>
 	<AlteredCarbon.InstallStackDesc>Install stack</AlteredCarbon.InstallStackDesc>
+	<AlteredCarbon.MustPlaceDistantToOtherCorticalMatrixes>Cannot be placed too close to existing Quantum Storage Matrix!</AlteredCarbon.MustPlaceDistantToOtherCorticalMatrixes>
 </LanguageData>

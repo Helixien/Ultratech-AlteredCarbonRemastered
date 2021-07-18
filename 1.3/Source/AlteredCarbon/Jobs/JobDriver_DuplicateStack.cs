@@ -9,6 +9,7 @@ namespace AlteredCarbon
 {
     public class JobDriver_DuplicateStack : JobDriver
     {
+        public const int DuplicateDuration = 1000;
         public Building_StackStorage Building_StackStorage => this.TargetA.Thing as Building_StackStorage;
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -18,7 +19,7 @@ namespace AlteredCarbon
         {
             this.FailOn(() => !Building_StackStorage.CanDuplicateStack);
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
-            Toil copyStack = Toils_General.Wait(60, 0);
+            Toil copyStack = Toils_General.Wait(DuplicateDuration, 0);
             copyStack.AddPreTickAction(() =>
             {
                 pawn.rotationTracker.FaceCell(TargetThingA.Position);

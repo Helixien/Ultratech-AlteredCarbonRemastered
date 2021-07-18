@@ -5,6 +5,7 @@ using System.Reflection;
 using HarmonyLib;
 using RimWorld;
 using Verse;
+using Verse.AI;
 
 namespace AlteredCarbon
 {
@@ -64,14 +65,7 @@ namespace AlteredCarbon
 		{
 			if (__instance is Bill_InstallStack installStack && thing is CorticalStack stack)
             {
-				if (stack != installStack.stackToInstall)
-				{
-					__result = false;
-				}
-				else
-				{
-					__result = true;
-				}
+				__result = stack == installStack.stackToInstall;
 				return false;
 			}
 			return true;

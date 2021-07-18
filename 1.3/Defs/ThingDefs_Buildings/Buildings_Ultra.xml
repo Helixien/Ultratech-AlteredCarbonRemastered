@@ -254,7 +254,7 @@
 					<li MayRequire="VanillaExpanded.VFEMedical">Facility_VitalsCentre</li>
 					<li MayRequire="VanillaExpanded.VFEMedical">Facility_IVDrip</li>
 				</linkableFacilities>
-</li>
+			</li>
 			<li Class="CompProperties_Breakdownable"/>
 		</comps>
 	</ThingDef>
@@ -297,7 +297,8 @@
 		<neverMultiSelect>true</neverMultiSelect>
 		<hasInteractionCell>True</hasInteractionCell>
 		<rotatable>true</rotatable>
-		<passability>Impassable</passability>
+		<passability>PassThroughOnly</passability>
+		<pathCost>100</pathCost>
 		<castEdgeShadows>true</castEdgeShadows>
 		<canOverlapZones>false</canOverlapZones>
 		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
@@ -312,10 +313,30 @@
 		<building>
 			<ai_chillDestination>false</ai_chillDestination>
 			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
+			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+			<fixedStorageSettings>
+				<filter>
+					<thingDefs>
+						<li>UT_FilledCorticalStack</li>
+					</thingDefs>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<priority>Important</priority>
+				<filter>
+					<thingDefs>
+						<li>UT_FilledCorticalStack</li>
+					</thingDefs>
+				</filter>
+			</defaultStorageSettings>
 		</building>
 		<inspectorTabs>
 			<li>AlteredCarbon.ITab_StackStorageContents</li>
 		</inspectorTabs>
+		<placeWorkers>
+			<li>AlteredCarbon.PlaceWorker_CorticalStackStorage</li>
+		</placeWorkers>
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>
