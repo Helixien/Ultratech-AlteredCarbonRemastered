@@ -102,8 +102,16 @@
 	<AlteredCarbon.HackStack>Hack stack</AlteredCarbon.HackStack>
 	<AlteredCarbon.ConvertStack>Convert stack ideo</AlteredCarbon.ConvertStack>
 	<AlteredCarbon.PawnAlreadyHasStack>{PAWN_nameDef} already has a cortical stack installed!</AlteredCarbon.PawnAlreadyHasStack>
-	<AlteredCarbon.CannotInstallStackNeckIsMissingOrAnotherImplantInstalled>Cannot install cortical stack - neck is missing or another implant installed in the neck</AlteredCarbon.CannotInstallStackNeckIsMissingOrAnotherImplantInstalled>
-	<AlteredCarbon.AlreadyOrderedToHackStack>This stack is set for hacking already on the decryption workbench</AlteredCarbon.AlreadyOrderedToHackStack>
-	<AlteredCarbon.AlreadyOrderedToConvertStack>This stack is set for ideo converting already on the decryption workbench</AlteredCarbon.AlreadyOrderedToConvertStack>
-	
+	<AlteredCarbon.CannotInstallStackNeckIsMissingOrAnotherImplantInstalled>Cannot install cortical stack - neck is missing or another implant installed in the neck.</AlteredCarbon.CannotInstallStackNeckIsMissingOrAnotherImplantInstalled>
+	<AlteredCarbon.AlreadyOrderedToHackStack>This stack is set for hacking already on the decryption workbench.</AlteredCarbon.AlreadyOrderedToHackStack>
+	<AlteredCarbon.AlreadyOrderedToConvertStack>This stack is set for ideo converting already on the decryption workbench.</AlteredCarbon.AlreadyOrderedToConvertStack>
+	<AlteredCarbon.AlreadyOrderedToWipeStack>This stack is set for wiping already on the decryption workbench.</AlteredCarbon.AlreadyOrderedToWipeStack>
+	<AlteredCarbon.FixedAncientStack>Decrypt Ancient Stacks: Fixed the ancient cortical stack!</AlteredCarbon.FixedAncientStack>
+	<AlteredCarbon.UnlockedNewTechnology>Decrypt Ancient Stacks: Unlocked new technology - {0}!</AlteredCarbon.UnlockedNewTechnology>
+	<AlteredCarbon.GainedProgressToTechnology>Decrypt Ancient Stacks: Gained progress to technology - {0}!</AlteredCarbon.GainedProgressToTechnology>
+	<AlteredCarbon.GainedEmptyCorticalStack>Decrypt Ancient Stacks: Gained empty cortical stack!</AlteredCarbon.GainedEmptyCorticalStack>
+	<AlteredCarbon.FailedCorticalStackDestroyed>Decrypt Ancient Stacks: Failed, cortical stack destroyed!</AlteredCarbon.FailedCorticalStackDestroyed>
+	<AlteredCarbon.HackingBiocodedFailed>Hacking biocoded equipment: Failed, {0} destroyed!</AlteredCarbon.HackingBiocodedFailed>
+	<AlteredCarbon.HackingBiocodedSuccess>Hacking biocoded equipment: Successful! {0} is unlocked.</AlteredCarbon.HackingBiocodedSuccess>
+
 </LanguageData>

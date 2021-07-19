@@ -38,14 +38,17 @@ namespace AlteredCarbon
             {
                 baseFailChance -= 0.03f;
             }
+            var name = biocodedThing.LabelShort;
             if (!Rand.Chance(baseFailChance))
             {
                 var comp = biocodedThing.TryGetComp<CompBiocodable>();
                 comp.UnCode();
+                Messages.Message("AlteredCarbon.HackingBiocodedSuccess".Translate(name), biocodedThing, MessageTypeDefOf.PositiveEvent);
             }
             else
             {
                 biocodedThing.Destroy();
+                Messages.Message("AlteredCarbon.HackingBiocodedFailed".Translate(name), billDoer, MessageTypeDefOf.NegativeEvent);
             }
         }
     }

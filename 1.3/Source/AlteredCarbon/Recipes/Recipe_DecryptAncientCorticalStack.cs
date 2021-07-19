@@ -32,12 +32,14 @@ namespace AlteredCarbon
                 corticalStack.PersonaData.stackGroupID = AlteredCarbonManager.Instance.GetStackGroupID(corticalStack);
                 AlteredCarbonManager.Instance.RegisterStack(corticalStack);
                 GenPlace.TryPlaceThing(corticalStack, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
+                Messages.Message("AlteredCarbon.FixedAncientStack".Translate(), corticalStack, MessageTypeDefOf.PositiveEvent);
             }, () => 0.1f));
             actions.Add(new Pair<Action, Func<float>>(delegate
             {
                 if (TryGetUnfinishedSpacerResearch(out var researchProjectDef))
                 {
                     AddResearchProgress(researchProjectDef, 1f);
+                    Messages.Message("AlteredCarbon.UnlockedNewTechnology".Translate(researchProjectDef.label), billDoer, MessageTypeDefOf.PositiveEvent);
                 }
             }, () => TryGetUnfinishedSpacerResearch(out var projectDef) ? 0.1f : 0));
             actions.Add(new Pair<Action, Func<float>>(delegate
@@ -45,12 +47,14 @@ namespace AlteredCarbon
                 if (TryGetUnfinishedSpacerResearch(out var researchProjectDef))
                 {
                     AddResearchProgress(researchProjectDef, Rand.Range(0.1f, 0.2f));
+                    Messages.Message("AlteredCarbon.GainedProgressToTechnology".Translate(researchProjectDef.label), billDoer, MessageTypeDefOf.PositiveEvent);
                 }
             }, () => TryGetUnfinishedSpacerResearch(out var projectDef) ? 0.4f : 0));
             actions.Add(new Pair<Action, Func<float>>(delegate
             {
                 var emptyStack = ThingMaker.MakeThing(AC_DefOf.UT_EmptyCorticalStack);
                 GenPlace.TryPlaceThing(emptyStack, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
+                Messages.Message("AlteredCarbon.GainedEmptyCorticalStack".Translate(), emptyStack, MessageTypeDefOf.PositiveEvent);
             }, () => 0.5f));
             actions.Add(new Pair<Action, Func<float>>(delegate
             {
@@ -61,6 +65,7 @@ namespace AlteredCarbon
                 var plasteel = ThingMaker.MakeThing(ThingDefOf.Plasteel);
                 plasteel.stackCount = 5;
                 GenPlace.TryPlaceThing(plasteel, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
+                Messages.Message("AlteredCarbon.FailedCorticalStackDestroyed".Translate(), MessageTypeDefOf.NeutralEvent);
             }, () => 
             {
                 // Chance: 50% with skill level 8, each skill level lowers the chance by 5% until its 0%.

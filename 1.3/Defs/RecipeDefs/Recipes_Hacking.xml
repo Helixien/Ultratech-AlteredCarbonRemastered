@@ -13,7 +13,7 @@
 		<description>PLACEHOLDER</description>
 		<jobString>decrypting ancient stack.</jobString>
 		<workerClass>AlteredCarbon.Recipe_DecryptAncientCorticalStack</workerClass>
-		<workAmount>180</workAmount>
+		<workAmount>30000</workAmount>
 		<ingredients>
 			<li>
 				<filter>
@@ -35,7 +35,7 @@
 		<description>PLACEHOLDER</description>
 		<jobString>hacking biocoded things.</jobString>
 		<workerClass>AlteredCarbon.Recipe_HackBiocodedThings</workerClass>
-		<workAmount>180</workAmount>
+		<workAmount>25000</workAmount>
 		<ingredients>
 			<li>
 				<filter>
@@ -60,9 +60,9 @@
 
 	<RecipeDef>
 		<defName>UT_WipeFilledCorticalStack</defName>
-		<label>wipe filled cortical stack</label>
+		<label>wipe cortical stack</label>
 		<description>PLACEHOLDER</description>
-		<jobString>wiping filled cortical stack.</jobString>
+		<jobString>wiping cortical stack.</jobString>
 		<workerClass>AlteredCarbon.Recipe_WipeFilledCorticalStack</workerClass>
 		<workAmount>180</workAmount>
 		<ingredients>
