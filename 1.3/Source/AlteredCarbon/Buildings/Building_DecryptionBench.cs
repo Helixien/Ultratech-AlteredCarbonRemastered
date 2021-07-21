@@ -114,6 +114,7 @@ namespace AlteredCarbon
             yield return new Command_HackStacks
             {
                 defaultLabel = "AlteredCarbon.HackStack".Translate(),
+                defaultDesc = "AlteredCarbon.HackStackDesc".Translate(),
                 icon = ContentFinder<Texture2D>.Get("UI/Icons/ConvertStack"),
                 action = delegate ()
                 {
@@ -127,6 +128,7 @@ namespace AlteredCarbon
             yield return new Command_HackStacks
             {
                 defaultLabel = "AlteredCarbon.WipeStack".Translate(),
+                defaultDesc = "AlteredCarbon.WipeStackDesc".Translate(),
                 icon = ContentFinder<Texture2D>.Get("UI/Icons/WipeStack"),
                 action = delegate ()
                 {
@@ -142,6 +144,7 @@ namespace AlteredCarbon
                 yield return new Command_ConvertStacksIdeo
                 {
                     defaultLabel = "AlteredCarbon.ConvertStack".Translate(),
+                    defaultDesc = "AlteredCarbon.ConvertStackDesc".Translate(),
                     icon = ContentFinder<Texture2D>.Get("UI/Icons/ConvertIdeo"),
                     action = delegate ()
                     {

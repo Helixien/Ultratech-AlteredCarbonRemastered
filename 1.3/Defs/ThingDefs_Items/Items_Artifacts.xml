@@ -30,7 +30,9 @@
 		</costList>
 		<thingCategories>
 			<li>UT_BodyPartsUltra</li>
+			<li>Artifacts</li>
 		</thingCategories>
+		<thingSetMakerTags><li>RewardStandardHighFreq</li></thingSetMakerTags>
 		<drawGUIOverlay>true</drawGUIOverlay>
 		<tradeability>Sellable</tradeability>
 		<techLevel>Ultra</techLevel>

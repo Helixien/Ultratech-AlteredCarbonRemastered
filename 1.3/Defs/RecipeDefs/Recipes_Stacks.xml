@@ -39,7 +39,7 @@
 		<descriptionHyperlinks>
 			<ThingDef>UT_FilledCorticalStack</ThingDef>
 		</descriptionHyperlinks>
-		<workerClass>AlteredCarbon.Recipe_InstallCorticalStack</workerClass>
+		<workerClass>AlteredCarbon.Recipe_InstallFilledCorticalStack</workerClass>
 		<jobString>Installing cortical stack.</jobString>
 		<uiIconThing>UT_FilledCorticalStack</uiIconThing>
 		<ingredients>

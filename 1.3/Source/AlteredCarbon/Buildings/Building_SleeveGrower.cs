@@ -64,6 +64,7 @@ namespace AlteredCarbon
 					Command_Action copySleeveBody = new Command_Action();
 					copySleeveBody.action = new Action(this.CopyPawnBody);
 					copySleeveBody.defaultLabel = "AlteredCarbon.CloneSleeve".Translate();
+					copySleeveBody.defaultDesc = "AlteredCarbon.CloneSleeveDesc".Translate();
 					copySleeveBody.hotKey = KeyBindingDefOf.Misc8;
 					copySleeveBody.icon = ContentFinder<Texture2D>.Get("UI/Icons/CloneSleeve", true);
 					yield return copySleeveBody;

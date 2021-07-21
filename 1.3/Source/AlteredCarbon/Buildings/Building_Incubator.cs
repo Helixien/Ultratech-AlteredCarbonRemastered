@@ -177,8 +177,7 @@ namespace AlteredCarbon
 			var str = base.GetInspectString();
 			if (this.InnerThing != null)
 			{
-				return str + "\n" + "AlteredCarbon.GrowthProgress".Translate() +
-					Math.Round(((float)this.curTicksToGrow / this.totalTicksToGrow) * 100f, 2).ToString() + "%";
+				return str + "\n" + "AlteredCarbon.GrowthProgress".Translate() + ((int)((this.curTicksToGrow / this.totalTicksToGrow) * 100f)).ToString() + "%";
 			}
 			else
 			{

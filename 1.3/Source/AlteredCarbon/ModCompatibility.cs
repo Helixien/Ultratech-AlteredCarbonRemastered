@@ -190,18 +190,14 @@ namespace AlteredCarbon
 
 		public static List<HairDef> GetPermittedHair(ThingDef raceDef)
         {
-			if (!((AlienRace.ThingDef_AlienRace)raceDef).alienRace.hairSettings.hasHair)
-            {
-				return new List<HairDef>();
-            }
-			else if (((AlienRace.ThingDef_AlienRace)raceDef).alienRace.hairSettings.hairTags == null)
+			if (((AlienRace.ThingDef_AlienRace)raceDef).alienRace.styleSettings[typeof(HairDef)].styleTags == null)
 			{
 				//no good way to distinguish between alien specific hair and hair suitable for generic humanlikes
 				return DefDatabase<HairDef>.AllDefs.ToList();
 			}
             else
 			{
-				List<string> allowedTags = ((AlienRace.ThingDef_AlienRace)raceDef).alienRace.hairSettings.hairTags.ToList();
+				List<string> allowedTags = ((AlienRace.ThingDef_AlienRace)raceDef).alienRace.styleSettings[typeof(HairDef)].styleTags.ToList();
 				return DefDatabase<HairDef>.AllDefs.Where(x => x.styleTags.Intersect(allowedTags).Any()).ToList();
 			}
 		}

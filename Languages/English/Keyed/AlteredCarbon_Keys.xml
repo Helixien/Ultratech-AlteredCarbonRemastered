@@ -68,6 +68,9 @@
 	<AlteredCarbon.CommandCallsNeuroformers>Call psylink neuroformers</AlteredCarbon.CommandCallsNeuroformers>
 
 	<AlteredCarbon.growingTimeDuration>Sleeve growing time duration</AlteredCarbon.growingTimeDuration>
+	<AlteredCarbon.baseBeautyLevel>Sleeve growing time duration</AlteredCarbon.baseBeautyLevel>
+	<AlteredCarbon.baseQualityLevel>Sleeve growing time duration</AlteredCarbon.baseQualityLevel>
+	
 	<AlteredCarbon.sleeveHealthPreview>Health preview</AlteredCarbon.sleeveHealthPreview>
 	<AlteredCarbon.saturation>saturation</AlteredCarbon.saturation>
 	<AlteredCarbon.value>brightness</AlteredCarbon.value>

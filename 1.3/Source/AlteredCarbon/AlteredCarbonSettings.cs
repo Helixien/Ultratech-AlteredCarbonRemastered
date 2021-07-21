@@ -45,6 +45,12 @@ namespace AlteredCarbon
             baseQualityLevel = (int)Widgets.HorizontalSlider(rect2, baseQualityLevel, 1000, 9000000, true, baseQualityLevel.ToStringTicksToPeriod());
             listingStandard.Gap(listingStandard.verticalSpacing);
 
+            if (listingStandard.ButtonText("Reset".Translate()))
+            {
+                baseGrowingTimeDuration = 900000;
+                baseBeautyLevel = 105000;
+                baseQualityLevel = 210000;
+            }
             listingStandard.End();
         }
 

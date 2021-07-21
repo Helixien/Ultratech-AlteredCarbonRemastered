@@ -7,12 +7,15 @@ using Verse;
 
 namespace AlteredCarbon
 {
-    public class Recipe_InstallCorticalStack : Recipe_Surgery
+    public class Recipe_InstallFilledCorticalStack : Recipe_InstallCorticalStack
     {
         public override bool AvailableOnNow(Thing thing, BodyPartRecord part = null)
         {
             return false;
         }
+    }
+    public class Recipe_InstallCorticalStack : Recipe_Surgery
+    {
         public override IEnumerable<BodyPartRecord> GetPartsToApplyOn(Pawn pawn, RecipeDef recipe)
         {
             return MedicalRecipesUtility.GetFixedPartsToApplyOn(recipe, pawn, delegate (BodyPartRecord record)
