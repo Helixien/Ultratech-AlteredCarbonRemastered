@@ -145,5 +145,48 @@
 		</forcedTraits>
 		<saveKeyIdentifier>UT_DigitalUpbringing04</saveKeyIdentifier>
 	</AlteredCarbon.BackstoryDef>
+	
+	<AlteredCarbon.BackstoryDef>
+		<defName>UT_EarlyResleeving</defName>
+		<title>Early Resleeving</title>
+		<titleShort>Resleeved</titleShort>
+		<baseDescription>[PAWN_nameDef] experienced accidental Sleeve Death during [PAWN_possessive] early years and was given a new sleeve as per Victim Restitution. The Sleeve was completely different in all aspects but lasted for the rest of their childhood, the imbalance between the Sleeve and the Stack meant [PAWN_pronoun] experienced life in a chaotic manner.</baseDescription>
+		<slot>Childhood</slot>
+		<skillGains>
+			<li>
+				<defName>Intellectual</defName>
+				<amount>3</amount>
+			</li>
+			<li>
+				<defName>Medicine</defName>
+				<amount>2</amount>
+			</li>
+			<li>
+				<defName>Melee</defName>
+				<amount>2</amount>
+			</li>
+			<li>
+				<defName>Shooting</defName>
+				<amount>2</amount>
+			</li>
+			<li>
+				<defName>Cooking</defName>
+				<amount>-1</amount>
+			</li>
+		</skillGains>
+		<spawnCategories>
+			<li>Civil</li>
+			<li>Outlander</li>
+			<li>ImperialCommon</li>
+			<li>ImperialFighter</li>
+		</spawnCategories>
+		<forcedTraits>
+			<li>
+				<defName>UT_FreeMind</defName>
+				<chance>75</chance>
+			</li>
+		</forcedTraits>
+		<saveKeyIdentifier>UT_EarlyResleeving05</saveKeyIdentifier>
+	</AlteredCarbon.BackstoryDef>
 
 </Defs>
