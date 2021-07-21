@@ -44,7 +44,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Psychology">
-      <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2016263135\v1.2\Assemblies\Psychology.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2016263135\1.3\Assemblies\Psychology.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SyrTraits">
@@ -370,7 +370,7 @@
     <Compile Include="Buildings\CustomizeSleeveWindow.cs" />
     <Compile Include="ExcludeRacesModExtension.cs" />
     <Compile Include="RoyalTitlePermitWorker_CallNeuroformers.cs" />
-    <Compile Include="Stacks\BackstoryDef.cs" />
+    <Compile Include="Misc\BackstoryDef.cs" />
     <Compile Include="Stacks\PsychologyData.cs" />
     <Compile Include="Stacks\Hediff_SleeveBodyStats.cs" />
     <Compile Include="Stacks\PersonaData.cs" />
