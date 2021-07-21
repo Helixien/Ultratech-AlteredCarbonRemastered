@@ -8,7 +8,6 @@
 	<AlteredCarbon.ageChronologicalTicks>Chronological age</AlteredCarbon.ageChronologicalTicks>
 	<AlteredCarbon.ExtractStack>Extract stack</AlteredCarbon.ExtractStack>
 	<AlteredCarbon.DuplicateStack>Duplicate Stack</AlteredCarbon.DuplicateStack>
-	<AlteredCarbon.WipeStack>Wipe stack</AlteredCarbon.WipeStack>
 	<AlteredCarbon.DestroyStack>Destroy stack</AlteredCarbon.DestroyStack>
 	<AlteredCarbon.DestroyedStack>Destroyed stack</AlteredCarbon.DestroyedStack>
 	<AlteredCarbon.DestroyedStackDesc>An empty stack was destroyed by inept actions of {PAWN_labelShort}</AlteredCarbon.DestroyedStackDesc>
@@ -32,11 +31,11 @@
 	<AlteredCarbon.GoodwillChangedReason_ErasedPawn>erased {PAWN_labelShort}</AlteredCarbon.GoodwillChangedReason_ErasedPawn>
 	<AlteredCarbon.CantWipeStackTooDumb>Wipe Stack (requires intellectual skill of 5 or higher)</AlteredCarbon.CantWipeStackTooDumb>
 	<AlteredCarbon.CancelSleeveBodyGrowing>Cancel sleeve growing</AlteredCarbon.CancelSleeveBodyGrowing>
-	<AlteredCarbon.CancelSleeveBodyGrowingDesc>Cancel sleeve growing</AlteredCarbon.CancelSleeveBodyGrowingDesc>
+	<AlteredCarbon.CancelSleeveBodyGrowingDesc>Cancel sleeve growing.</AlteredCarbon.CancelSleeveBodyGrowingDesc>
 	<AlteredCarbon.CreateSleeveBody>Create sleeve</AlteredCarbon.CreateSleeveBody>
-	<AlteredCarbon.CreateSleeveBodyDesc>Create sleeve</AlteredCarbon.CreateSleeveBodyDesc>
+	<AlteredCarbon.CreateSleeveBodyDesc>Create a new sleeve.</AlteredCarbon.CreateSleeveBodyDesc>
 	<AlteredCarbon.ReleaseSleeve>Release sleeve</AlteredCarbon.ReleaseSleeve>
-	<AlteredCarbon.noHairAllowed>This race does not support hair</AlteredCarbon.noHairAllowed>
+	<AlteredCarbon.noHairAllowed>This race does not support hair!</AlteredCarbon.noHairAllowed>
 
 	<AlteredCarbon.BodyShape>Body shape</AlteredCarbon.BodyShape>
 	<AlteredCarbon.BodyTypeReplace>Body type</AlteredCarbon.BodyTypeReplace>
@@ -51,19 +50,20 @@
 	<AlteredCarbon.BodyTattoosType>Body tattoos type</AlteredCarbon.BodyTattoosType>
 	<AlteredCarbon.LevelOfBeauty>Level of beauty</AlteredCarbon.LevelOfBeauty>
 	<AlteredCarbon.LevelofQuality>Level of quality</AlteredCarbon.LevelofQuality>
-	<AlteredCarbon.RequireBiomass>Require biomass</AlteredCarbon.RequireBiomass>
+	<AlteredCarbon.RequireBiomass>Require neutroamine</AlteredCarbon.RequireBiomass>
 	<AlteredCarbon.SkinColour>Skin colour</AlteredCarbon.SkinColour>
 	<AlteredCarbon.TimeToGrow>Time to grow</AlteredCarbon.TimeToGrow>
 	<AlteredCarbon.SelectRace>Select race</AlteredCarbon.SelectRace>
 	<AlteredCarbon.RaceTypeReplace>Race type</AlteredCarbon.RaceTypeReplace>
 	<AlteredCarbon.CloneSleeve>Clone sleeve</AlteredCarbon.CloneSleeve>
-	<AlteredCarbon.isRunningOutFuel>Sleeve incubator is running out fuel</AlteredCarbon.isRunningOutFuel>
+	<AlteredCarbon.CloneSleeveDesc>Create a sleeve based on an existing pawn.</AlteredCarbon.CloneSleeveDesc>
+	<AlteredCarbon.isRunningOutFuel>Sleeve incubator is running out neutroamine</AlteredCarbon.isRunningOutFuel>
 	<AlteredCarbon.isRunningOutPower>Sleeve incubator is running out power</AlteredCarbon.isRunningOutPower>
 	<AlteredCarbon.SleeveInIncubatorIsDead>Sleeve body in the incubator is dead</AlteredCarbon.SleeveInIncubatorIsDead>
 
 	<AlteredCarbon.NoBrainTemplatesFound>No brain templates found</AlteredCarbon.NoBrainTemplatesFound>
 	<AlteredCarbon.InsertBrainTemplate>Insert brain template</AlteredCarbon.InsertBrainTemplate>
-	<AlteredCarbon.InsertBrainTemplateDesc>Insert brain template desc</AlteredCarbon.InsertBrainTemplateDesc>
+	<AlteredCarbon.InsertBrainTemplateDesc>Insert a brain template into the incubator.</AlteredCarbon.InsertBrainTemplateDesc>
 	<AlteredCarbon.RemoveCurrentBrainTemplate>Remove current brain template</AlteredCarbon.RemoveCurrentBrainTemplate>
 	<AlteredCarbon.CommandCallsNeuroformers>Call psylink neuroformers</AlteredCarbon.CommandCallsNeuroformers>
 
@@ -88,19 +88,23 @@
 	<AC.Copy>Copy</AC.Copy>
 	<AC.Original>Original</AC.Original>
 	<AC.SuccessfullyDuplicatedStack>{PAWN_nameDef} successfully duplicated cortical stack.</AC.SuccessfullyDuplicatedStack>
-	<AlteredCarbon.OrganIncubatorIsRunningOutFuel>Organ incubator is running out fuel</AlteredCarbon.OrganIncubatorIsRunningOutFuel>
+	<AlteredCarbon.OrganIncubatorIsRunningOutFuel>Organ incubator is running out neutroamine</AlteredCarbon.OrganIncubatorIsRunningOutFuel>
 	<AlteredCarbon.OrganIncubatorIsRunningOutPower>Organ incubator is running out power</AlteredCarbon.OrganIncubatorIsRunningOutPower>
 	<AlteredCarbon.OrganSpoiled>Organ in the incubator is spoiled</AlteredCarbon.OrganSpoiled>
 	<AlteredCarbon.CancelOrganGrowing>Cancel organ growing</AlteredCarbon.CancelOrganGrowing>
 	<AlteredCarbon.CancelOrganGrowingDesc>Cancel sleeve growing</AlteredCarbon.CancelOrganGrowingDesc>
-	<AlteredCarbon.CreateOrgan>Create organ</AlteredCarbon.CreateOrgan>
-	<AlteredCarbon.CreateOrganDesc>Create organ</AlteredCarbon.CreateOrganDesc>
+	<AlteredCarbon.CreateOrgan>Grow organ</AlteredCarbon.CreateOrgan>
+	<AlteredCarbon.CreateOrganDesc>Grow an organ.</AlteredCarbon.CreateOrganDesc>
 	<AlteredCarbon.FinishedGrowingSleeve>Sleeve Incubator: Finished growing sleeve!</AlteredCarbon.FinishedGrowingSleeve>
 	<AlteredCarbon.InstallStack>Install stack</AlteredCarbon.InstallStack>
-	<AlteredCarbon.InstallStackDesc>Install stack</AlteredCarbon.InstallStackDesc>
+	<AlteredCarbon.InstallStackDesc>Install a stack.</AlteredCarbon.InstallStackDesc>
 	<AlteredCarbon.MustPlaceDistantToOtherCorticalMatrixes>Cannot be placed too close to existing Quantum Storage Matrix!</AlteredCarbon.MustPlaceDistantToOtherCorticalMatrixes>
 	<AlteredCarbon.HackStack>Hack stack</AlteredCarbon.HackStack>
+	<AlteredCarbon.HackStackDesc>Convert a stack to the players faction.</AlteredCarbon.HackStackDesc>
 	<AlteredCarbon.ConvertStack>Convert stack ideo</AlteredCarbon.ConvertStack>
+	<AlteredCarbon.ConvertStackDesc>Convert a stack to the players ideology.</AlteredCarbon.ConvertStackDesc>
+	<AlteredCarbon.WipeStack>Wipe stack</AlteredCarbon.WipeStack>
+	<AlteredCarbon.WipeStackDesc>Wipe a stack of the pawn stored on it.</AlteredCarbon.WipeStackDesc>
 	<AlteredCarbon.PawnAlreadyHasStack>{PAWN_nameDef} already has a cortical stack installed!</AlteredCarbon.PawnAlreadyHasStack>
 	<AlteredCarbon.CannotInstallStackNeckIsMissingOrAnotherImplantInstalled>Cannot install cortical stack - neck is missing or another implant installed in the neck.</AlteredCarbon.CannotInstallStackNeckIsMissingOrAnotherImplantInstalled>
 	<AlteredCarbon.AlreadyOrderedToHackStack>This stack is set for hacking already on the decryption workbench.</AlteredCarbon.AlreadyOrderedToHackStack>

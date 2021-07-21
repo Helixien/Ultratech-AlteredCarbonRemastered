@@ -296,6 +296,7 @@
 		<altitudeLayer>BuildingOnTop</altitudeLayer>
 		<neverMultiSelect>true</neverMultiSelect>
 		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-2)</interactionCellOffset>
 		<rotatable>true</rotatable>
 		<passability>PassThroughOnly</passability>
 		<pathCost>100</pathCost>
