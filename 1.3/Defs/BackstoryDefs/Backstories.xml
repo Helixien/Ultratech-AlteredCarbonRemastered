@@ -110,5 +110,40 @@
 		</spawnCategories>
 		<saveKeyIdentifier>UT_SlumDweller03</saveKeyIdentifier>
 	</AlteredCarbon.BackstoryDef>
+	
+	<AlteredCarbon.BackstoryDef>
+		<defName>UT_DigitalUpbringing</defName>
+		<title>Digital Upbringing</title>
+		<titleShort>Virtual</titleShort>
+		<baseDescription>[PAWN_nameDef] experienced Sleeve Death not long after their Stack was integrated, and [PAWN_possessive] parents were unable to afford an appropriate Sleeve. As such, [PAWN_pronoun] was given what little virtual lessons and experience as could be afforded and has developed insecurities and a lack of identity.</baseDescription>
+		<slot>Childhood</slot>
+		<workDisables>
+			<li>Social</li>
+			<li>ManualSkilled</li>
+			<li>Animals</li>
+		</workDisables>
+		<skillGains>
+			<li>
+				<defName>Intellectual</defName>
+				<amount>3</amount>
+			</li>
+			<li>
+				<defName>Medicine</defName>
+				<amount>2</amount>
+			</li>
+		</skillGains>
+		<spawnCategories>
+			<li>Civil</li>
+			<li>ImperialCommon</li>
+			<li>ImperialFighter</li>
+		</spawnCategories>
+		<forcedTraits>
+			<li>
+				<defName>UT_FreeMind</defName>
+				<chance>100</chance>
+			</li>
+		</forcedTraits>
+		<saveKeyIdentifier>UT_DigitalUpbringing04</saveKeyIdentifier>
+	</AlteredCarbon.BackstoryDef>
 
 </Defs>
