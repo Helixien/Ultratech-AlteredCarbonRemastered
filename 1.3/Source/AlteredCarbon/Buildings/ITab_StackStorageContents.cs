@@ -73,7 +73,7 @@ namespace AlteredCarbon
             if (Widgets.ButtonImage(rect2, ContentFinder<Texture2D>.Get("UI/Buttons/Drop", true)))
             {
                 SoundDefOf.Tick_High.PlayOneShotOnCamera();
-                this.Building_StackStorage.innerContainer.TryDrop(corticalStack, ThingPlaceMode.Near, out var droppedThing);
+                this.Building_StackStorage.innerContainer.TryDrop(corticalStack, this.Building_StackStorage.InteractionCell, this.Building_StackStorage.Map, ThingPlaceMode.Near, 1, out var droppedThing);
             }
 
             Rect installStackRect = rect2;
@@ -85,7 +85,7 @@ namespace AlteredCarbon
                 SoundDefOf.Tick_High.PlayOneShotOnCamera();
                 Find.Targeter.BeginTargeting(corticalStack.ForPawn(), delegate (LocalTargetInfo x)
                 {
-                    this.Building_StackStorage.innerContainer.TryDrop(corticalStack, ThingPlaceMode.Near, out var droppedThing);
+                    this.Building_StackStorage.innerContainer.TryDrop(corticalStack, this.Building_StackStorage.InteractionCell, this.Building_StackStorage.Map, ThingPlaceMode.Near, 1, out var droppedThing);
                     corticalStack.InstallStackRecipe(x.Pawn);
                 });
             }
