@@ -13,7 +13,7 @@
 		<description>Decrypt ancient stacks in an attempt to repair them or acquire information from them.</description>
 		<jobString>decrypting ancient stack.</jobString>
 		<workerClass>AlteredCarbon.Recipe_DecryptAncientCorticalStack</workerClass>
-		<workAmount>30000</workAmount>
+		<workAmount>15000</workAmount>
 		<ingredients>
 			<li>
 				<filter>

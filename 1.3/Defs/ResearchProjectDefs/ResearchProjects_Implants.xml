@@ -13,7 +13,7 @@
 	<ResearchProjectDef ParentName="UT_ResearchBase">
 		<defName>UT_Hacking</defName>
 		<label>hacking</label>
-		<description>Hack into closed systems, remove restrictions or delete cortical stacks.</description>
+		<description>Hack into closed systems, remove restrictions or wipe cortical stacks.</description>
 		<baseCost>1200</baseCost>
 		<researchViewX>0.00</researchViewX>
 		<researchViewY>1.40</researchViewY>
@@ -22,7 +22,7 @@
 	<ResearchProjectDef ParentName="UT_ResearchBase">
 		<defName>UT_CorticalStackMatrix</defName>
 		<label>quantum matrix</label>
-		<description>Craft ultra-tech neck implants which store a human's consciousness, effectively removing someone from their body.</description>
+		<description>Store cortical stacks in an advanced storage system.</description>
 		<baseCost>4000</baseCost>
 		<prerequisites>
 			<li>Fabrication</li>
@@ -34,8 +34,8 @@
 
 	<ResearchProjectDef ParentName="UT_ResearchBase">
 		<defName>UT_OrganProduction</defName>
-		<label>human sleeves</label>
-		<description>Craft ultra-tech neck implants which store a human's consciousness, effectively removing someone from their body.</description>
+		<label>organ growing</label>
+		<description>Growing human organs in organ incubators.</description>
 		<baseCost>1500</baseCost>
 		<prerequisites>
 			<li>Fabrication</li>
@@ -47,7 +47,7 @@
 	<ResearchProjectDef ParentName="UT_ResearchBase">
 		<defName>UT_SleeveProduction</defName>
 		<label>human sleeves</label>
-		<description>Craft ultra-tech neck implants which store a human's consciousness, effectively removing someone from their body.</description>
+		<description>Grow perfect human bodies (sleeves) in sleeve incubators.</description>
 		<baseCost>3000</baseCost>
 		<prerequisites>
 			<li>UT_OrganProduction</li>
