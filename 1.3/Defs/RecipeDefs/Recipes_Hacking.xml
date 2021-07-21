@@ -10,7 +10,7 @@
 	<RecipeDef>
 		<defName>UT_DecryptAncientStack</defName>
 		<label>decrypt ancient stack</label>
-		<description>PLACEHOLDER</description>
+		<description>Decrypt ancient stacks in an attempt to repair them or acquire information from them.</description>
 		<jobString>decrypting ancient stack.</jobString>
 		<workerClass>AlteredCarbon.Recipe_DecryptAncientCorticalStack</workerClass>
 		<workAmount>30000</workAmount>
@@ -32,7 +32,7 @@
 	<RecipeDef>
 		<defName>UT_HackBiocodedThings</defName>
 		<label>hack biocoded things</label>
-		<description>PLACEHOLDER</description>
+		<description>Attempt to remove biocoding from weapons and equipment to make it usable.</description>
 		<jobString>hacking biocoded things.</jobString>
 		<workerClass>AlteredCarbon.Recipe_HackBiocodedThings</workerClass>
 		<workAmount>25000</workAmount>
@@ -61,7 +61,7 @@
 	<RecipeDef>
 		<defName>UT_WipeFilledCorticalStack</defName>
 		<label>wipe cortical stack</label>
-		<description>PLACEHOLDER</description>
+		<description>Wipe a cortical stack and remove the pawn stored on it.</description>
 		<jobString>wiping cortical stack.</jobString>
 		<workerClass>AlteredCarbon.Recipe_WipeFilledCorticalStack</workerClass>
 		<workAmount>180</workAmount>
@@ -109,7 +109,7 @@
 	<RecipeDef>
 		<defName>UT_HackFilledCorticalStack</defName>
 		<label>hack cortical stack</label>
-		<description>PLACEHOLDER</description>
+		<description>Convert a cortical stack to the players faction.</description>
 		<jobString>hacking cortical stack.</jobString>
 		<workerClass>AlteredCarbon.Recipe_HackFilledCorticalStack</workerClass>
 		<workAmount>180</workAmount>

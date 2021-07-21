@@ -14,7 +14,7 @@
 		<products>
 			<Heart>1</Heart>
 		</products>
-		<workAmount>1800</workAmount>
+		<workAmount>60000</workAmount>
 	</RecipeDef>
 	
 	<RecipeDef ParentName="UT_OrganRecipeBase">
@@ -26,7 +26,7 @@
 		<products>
 			<Lung>1</Lung>
 		</products>
-		<workAmount>1200</workAmount>
+		<workAmount>50000</workAmount>
 	</RecipeDef>
 	
 	<RecipeDef ParentName="UT_OrganRecipeBase">
@@ -38,7 +38,7 @@
 		<products>
 			<Kidney>1</Kidney>
 		</products>
-		<workAmount>1400</workAmount>
+		<workAmount>35000</workAmount>
 	</RecipeDef>
 
 	<RecipeDef ParentName="UT_OrganRecipeBase">
@@ -50,7 +50,7 @@
 		<products>
 			<Liver>1</Liver>
 		</products>
-		<workAmount>1400</workAmount>
+		<workAmount>35000</workAmount>
 	</RecipeDef>
 	
 	<RecipeDef ParentName="UT_OrganRecipeBase">
@@ -62,7 +62,7 @@
 		<products>
 			<UT_OrganicStomach>1</UT_OrganicStomach>
 		</products>
-		<workAmount>1600</workAmount>
+		<workAmount>38000</workAmount>
 	</RecipeDef>
 	
 	<RecipeDef ParentName="UT_OrganRecipeBase">
@@ -74,7 +74,7 @@
 		<products>
 			<UT_OrganicArm>1</UT_OrganicArm>
 		</products>
-		<workAmount>2000</workAmount>
+		<workAmount>20000</workAmount>
 	</RecipeDef>
 	
 	<RecipeDef ParentName="UT_OrganRecipeBase">
@@ -86,7 +86,7 @@
 		<products>
 			<UT_OrganicLeg>1</UT_OrganicLeg>
 		</products>
-		<workAmount>2200</workAmount>
+		<workAmount>22000</workAmount>
 	</RecipeDef>
 	
 	<RecipeDef ParentName="UT_OrganRecipeBase">
@@ -98,7 +98,7 @@
 		<products>
 			<UT_OrganicEye>1</UT_OrganicEye>
 		</products>
-		<workAmount>850</workAmount>
+		<workAmount>39500</workAmount>
 	</RecipeDef>
 	
 	<RecipeDef ParentName="UT_OrganRecipeBase">
@@ -110,7 +110,7 @@
 		<products>
 			<UT_OrganicEar>1</UT_OrganicEar>
 		</products>
-		<workAmount>450</workAmount>
+		<workAmount>15000</workAmount>
 	</RecipeDef>
 	
 	<RecipeDef ParentName="UT_OrganRecipeBase">
@@ -122,7 +122,7 @@
 		<products>
 			<UT_OrganicNose>1</UT_OrganicNose>
 		</products>
-		<workAmount>450</workAmount>
+		<workAmount>15000</workAmount>
 	</RecipeDef>
 
 </Defs>

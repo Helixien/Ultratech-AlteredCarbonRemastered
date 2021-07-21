@@ -10,13 +10,13 @@
 	<AlteredCarbon.DuplicateStack>Duplicate Stack</AlteredCarbon.DuplicateStack>
 	<AlteredCarbon.DestroyStack>Destroy stack</AlteredCarbon.DestroyStack>
 	<AlteredCarbon.DestroyedStack>Destroyed stack</AlteredCarbon.DestroyedStack>
-	<AlteredCarbon.DestroyedStackDesc>An empty stack was destroyed by inept actions of {PAWN_labelShort}</AlteredCarbon.DestroyedStackDesc>
-	<AlteredCarbon.DestroyedWipingStackDesc>A stack was destroyed by inept actions of {PAWN_labelShort}</AlteredCarbon.DestroyedWipingStackDesc>
+	<AlteredCarbon.DestroyedStackDesc>An empty stack was destroyed by inept actions of {PAWN_labelShort}.</AlteredCarbon.DestroyedStackDesc>
+	<AlteredCarbon.DestroyedWipingStackDesc>A stack was destroyed by inept actions of {PAWN_labelShort}.</AlteredCarbon.DestroyedWipingStackDesc>
 	<AlteredCarbon.EmptySleeve>Empty sleeve</AlteredCarbon.EmptySleeve>
 	<AlteredCarbon.EmptyStack>Empty stack</AlteredCarbon.EmptyStack>
-	<AlteredCarbon.EmptyStackDesc>Empty stack</AlteredCarbon.EmptyStackDesc>
+	<AlteredCarbon.EmptyStackDesc>An empty stack.</AlteredCarbon.EmptyStackDesc>
 	<AlteredCarbon.SleeveDeath>Sleeve Death</AlteredCarbon.SleeveDeath>
-	<AlteredCarbon.SleeveDeathDesc>Sleeve Death</AlteredCarbon.SleeveDeathDesc>
+	<AlteredCarbon.SleeveDeathDesc>Sleeve Death.</AlteredCarbon.SleeveDeathDesc>
 	<AlteredCarbon.PawnDiedBecauseOf>Sleeve of {PAWN_labelShort} has died. Cause: {1}.</AlteredCarbon.PawnDiedBecauseOf>
 	<AlteredCarbon.PawnDied>Sleeve of {1_labelShort} has died.</AlteredCarbon.PawnDied>
 	<AlteredCarbon.SleveOf>Sleeve of </AlteredCarbon.SleveOf>
@@ -30,7 +30,7 @@
 	<AlteredCarbon.CannotCopyNoOtherEmptyStacks>Duplicate Stack (no empty stacks on the map)</AlteredCarbon.CannotCopyNoOtherEmptyStacks>
 	<AlteredCarbon.GoodwillChangedReason_ErasedPawn>erased {PAWN_labelShort}</AlteredCarbon.GoodwillChangedReason_ErasedPawn>
 	<AlteredCarbon.CantWipeStackTooDumb>Wipe Stack (requires intellectual skill of 5 or higher)</AlteredCarbon.CantWipeStackTooDumb>
-	<AlteredCarbon.CancelSleeveBodyGrowing>Cancel sleeve growing</AlteredCarbon.CancelSleeveBodyGrowing>
+	<AlteredCarbon.CancelSleeveBodyGrowing>Cancel the sleeve growing process.</AlteredCarbon.CancelSleeveBodyGrowing>
 	<AlteredCarbon.CancelSleeveBodyGrowingDesc>Cancel sleeve growing.</AlteredCarbon.CancelSleeveBodyGrowingDesc>
 	<AlteredCarbon.CreateSleeveBody>Create sleeve</AlteredCarbon.CreateSleeveBody>
 	<AlteredCarbon.CreateSleeveBodyDesc>Create a new sleeve.</AlteredCarbon.CreateSleeveBodyDesc>

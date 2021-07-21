@@ -168,7 +168,7 @@
 				<outOfFuelMessage>Cannot grow: Needs neutroamine</outOfFuelMessage>
 				<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
 				<targetFuelLevelConfigurable>false</targetFuelLevelConfigurable>
-				<fuelCapacity>25.0</fuelCapacity>
+				<fuelCapacity>100.0</fuelCapacity>
 				<fuelFilter>
 					<thingDefs>
 						<li>Neutroamine</li>
