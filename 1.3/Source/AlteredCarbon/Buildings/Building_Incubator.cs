@@ -165,7 +165,10 @@ namespace AlteredCarbon
 			}
 		}
 
-        public virtual int OpenTicks => -1;
+		public float GrowthProgress => (float)this.curTicksToGrow / (float)this.totalTicksToGrow;
+
+
+		public virtual int OpenTicks => -1;
 
         public bool Accepts(Thing thing)
 		{
@@ -177,7 +180,9 @@ namespace AlteredCarbon
 			var str = base.GetInspectString();
 			if (this.InnerThing != null)
 			{
-				return str + "\n" + "AlteredCarbon.GrowthProgress".Translate() + ((int)((this.curTicksToGrow / this.totalTicksToGrow) * 100f)).ToString() + "%";
+				var growthProgress = GrowthProgress * 100f;
+				return str + "\n" + "AlteredCarbon.GrowthProgress".Translate() + ((int)growthProgress).ToString() + "%";
+
 			}
 			else
 			{

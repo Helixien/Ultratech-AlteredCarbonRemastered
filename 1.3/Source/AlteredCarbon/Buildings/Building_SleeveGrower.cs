@@ -179,7 +179,7 @@ namespace AlteredCarbon
 			{
 				Vector3 newPos = drawLoc;
 				newPos.z += 0.2f;
-				var growthValue = (float)this.curTicksToGrow / this.totalTicksToGrow;
+				var growthValue = GrowthProgress;
 				if (!this.innerPawnIsDead)
 				{
 					if (growthValue < 0.33f)
@@ -395,7 +395,6 @@ namespace AlteredCarbon
 			{
 				if (this.incubatorState == IncubatorState.Growing || this.incubatorState == IncubatorState.ToBeCanceled)
                 {
-					Log.Message("runningOutPowerInTicks: " + runningOutPowerInTicks);
 					if (refuelable.HasFuel && powerTrader.PowerOn)
 					{
 						if (runningOutPowerInTicks > 0) runningOutPowerInTicks = 0;
