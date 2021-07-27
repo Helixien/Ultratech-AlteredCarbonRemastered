@@ -52,7 +52,6 @@
 			<spawnedConceptLearnOpportunity>AC_SleeveGrowing</spawnedConceptLearnOpportunity>
 			<boughtConceptLearnOpportunity>AC_SleeveGrowing</boughtConceptLearnOpportunity>
 			<ai_chillDestination>false</ai_chillDestination>
-			<soundAmbient>AC_SleeveGrowingVat_Ambience</soundAmbient>
 			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
 		</building>
 		<uiIconPath>Things/Building/Misc/SleeveGrowerUI_Icon</uiIconPath>
