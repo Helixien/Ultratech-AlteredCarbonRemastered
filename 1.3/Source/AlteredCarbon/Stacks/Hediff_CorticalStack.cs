@@ -51,6 +51,22 @@ namespace AlteredCarbon
             {
                 pawn.health.RemoveHediff(emptySleeveHediff);
             }
+
+            if (!AlteredCarbonManager.Instance.pawnsWithStacks.Contains(this.pawn))
+            {
+                this.PersonaData.gender = pawn.gender;
+                this.PersonaData.race = pawn.kindDef.race;
+                if (AlteredCarbonManager.Instance.stacksRelationships != null)
+                {
+                    this.PersonaData.stackGroupID = AlteredCarbonManager.Instance.stacksRelationships.Count + 1;
+                }
+                else
+                {
+                    this.PersonaData.stackGroupID = 0;
+                }
+                AlteredCarbonManager.Instance.RegisterPawn(pawn);
+                AlteredCarbonManager.Instance.TryAddRelationships(pawn);
+            }
         }
         public override bool ShouldRemove => false;
 

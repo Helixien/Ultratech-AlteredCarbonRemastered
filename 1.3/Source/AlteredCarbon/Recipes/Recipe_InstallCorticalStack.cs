@@ -107,21 +107,6 @@ namespace AlteredCarbon
                         corticalStack.PersonaData.hackedWhileOnStack = false;
                     }
                 }
-                else
-                {
-                    hediff.PersonaData.gender = pawn.gender;
-                    hediff.PersonaData.race = pawn.kindDef.race;
-                    if (AlteredCarbonManager.Instance.stacksRelationships != null)
-                    {
-                        hediff.PersonaData.stackGroupID = AlteredCarbonManager.Instance.stacksRelationships.Count + 1;
-                    }
-                    else
-                    {
-                        hediff.PersonaData.stackGroupID = 0;
-                    }
-                    AlteredCarbonManager.Instance.RegisterPawn(pawn);
-                    AlteredCarbonManager.Instance.TryAddRelationships(pawn);
-                }
 
                 var additionalSleeveBodyData = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_SleeveBodyData) as Hediff_SleeveBodyStats;
                 if (additionalSleeveBodyData != null)
