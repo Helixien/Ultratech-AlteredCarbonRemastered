@@ -742,18 +742,6 @@ namespace AlteredCarbon
 
             if (ModsConfig.IdeologyActive)
             {
-                if (this.ideo != null)
-                {
-                    pawn.ideo.SetIdeo(this.ideo);
-                    Traverse.Create(pawn.ideo).Field("certainty").SetValue(this.certainty);
-                    Traverse.Create(pawn.ideo).Field("previousIdeos").SetValue(this.previousIdeos);
-                    pawn.ideo.joinTick = this.joinTick;
-                }
-                if (this.favoriteColor.HasValue)
-                {
-                    pawn.story.favoriteColor = this.favoriteColor.Value;
-                }
-
                 if (this.precept_RoleMulti != null)
                 {
                     if (this.precept_RoleMulti.chosenPawns is null)
@@ -773,6 +761,20 @@ namespace AlteredCarbon
                         pawn = pawn
                     };
                 }
+
+                if (this.ideo != null)
+                {
+                    pawn.ideo.SetIdeo(this.ideo);
+                    Traverse.Create(pawn.ideo).Field("certainty").SetValue(this.certainty);
+                    Traverse.Create(pawn.ideo).Field("previousIdeos").SetValue(this.previousIdeos);
+                    pawn.ideo.joinTick = this.joinTick;
+                }
+                if (this.favoriteColor.HasValue)
+                {
+                    pawn.story.favoriteColor = this.favoriteColor.Value;
+                }
+
+
             }
 
             if (ModCompatibility.IndividualityIsActive)
@@ -828,11 +830,11 @@ namespace AlteredCarbon
 
         private Pawn GetTruePawn(Pawn pawn)
         {
-            if (pawn.Dead && AlteredCarbonManager.Instance.pawnsWithStacks != null)
+            if (pawn.Dead && pawn.Name != null && AlteredCarbonManager.Instance.pawnsWithStacks != null)
             {
                 foreach (var otherPawn in AlteredCarbonManager.Instance.pawnsWithStacks)
                 {
-                    if (otherPawn != null && otherPawn.Name.ToStringFull == pawn.Name.ToStringFull)
+                    if (otherPawn != null && otherPawn.Name != null && otherPawn.Name.ToStringFull == pawn.Name.ToStringFull)
                     {
                         return otherPawn;
                     }

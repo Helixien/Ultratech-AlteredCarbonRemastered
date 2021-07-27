@@ -70,7 +70,6 @@
 				<filter>
 					<thingDefs>
 						<li>UT_FilledCorticalStack</li>
-						<li>UT_EmptyCorticalStack</li>
 					</thingDefs>
 					<specialFiltersToAllow>
 						<li>UT_AllowStacksColonist</li>
