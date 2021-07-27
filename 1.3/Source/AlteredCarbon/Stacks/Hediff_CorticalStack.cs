@@ -52,7 +52,7 @@ namespace AlteredCarbon
                 pawn.health.RemoveHediff(emptySleeveHediff);
             }
 
-            if (!AlteredCarbonManager.Instance.pawnsWithStacks.Contains(this.pawn))
+            if (!this.pawn.HasStack())
             {
                 this.PersonaData.gender = pawn.gender;
                 this.PersonaData.race = pawn.kindDef.race;
