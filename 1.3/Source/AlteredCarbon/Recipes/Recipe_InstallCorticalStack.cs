@@ -63,7 +63,6 @@ namespace AlteredCarbon
             if (thing is CorticalStack corticalStack)
             {
                 var hediff = HediffMaker.MakeHediff(recipe.addsHediff, pawn) as Hediff_CorticalStack;
-                pawn.health.AddHediff(hediff, part);
                 if (corticalStack.PersonaData.hasPawn)
                 {
                     hediff.PersonaData.gender = corticalStack.PersonaData.gender;
@@ -108,6 +107,7 @@ namespace AlteredCarbon
                     }
                 }
 
+                pawn.health.AddHediff(hediff, part);
                 var additionalSleeveBodyData = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_SleeveBodyData) as Hediff_SleeveBodyStats;
                 if (additionalSleeveBodyData != null)
                 {
