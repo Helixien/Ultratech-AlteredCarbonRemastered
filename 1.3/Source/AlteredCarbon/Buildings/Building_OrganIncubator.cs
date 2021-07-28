@@ -54,29 +54,28 @@ namespace AlteredCarbon
 		public void CreateOrgan()
 		{
 			var floatList = new List<FloatMenuOption>();
-			foreach (var recipe in this.def.recipes)
-            {
-				if (recipe.researchPrerequisite != null && !recipe.researchPrerequisite.IsFinished)
-				{
-					continue;
-				}
-				if (recipe.researchPrerequisites != null)
-                {
-					foreach (var research in recipe.researchPrerequisites)
-                    {
-						if (!research.IsFinished)
-                        {
-							continue;
-						}
-					}
-                }
-				floatList.Add(new FloatMenuOption(recipe.LabelCap, delegate 
+			var validRecipes = DebugSettings.godMode ?
+				this.def.recipes :
+				this.def.recipes.Where(recipe =>
+					(recipe.researchPrerequisite?.IsFinished ?? true) &&
+					(recipe.researchPrerequisites?.All(research => research.IsFinished) ?? true)
+				);
+			foreach (var recipe in validRecipes)
+			{
+				floatList.Add(new FloatMenuOption(recipe.LabelCap, delegate
 				{
 					var newOrgan = ThingMaker.MakeThing(recipe.ProducedThingDef);
 					StartGrowth(newOrgan, (int)recipe.workAmount, (int)(recipe.workAmount * 0.0012f));
 				}));
-            }
-			Find.WindowStack.Add(new FloatMenu(floatList));
+			}
+			if (floatList.Count() == 0)
+			{
+				Messages.Message("AlteredCarbon.NoOrgansUnlocked".TranslateSimple(), this, MessageTypeDefOf.RejectInput);
+			}
+			else
+			{
+				Find.WindowStack.Add(new FloatMenu(floatList));
+			}
 		}
 
 		[TweakValue("0AC", -5f, 5f)] public static float yOffset;
@@ -127,17 +126,17 @@ namespace AlteredCarbon
 			this.incubatorState = IncubatorState.Inactive;
 		}
 
-        public override void EjectContents()
-        {
-            base.EjectContents();
+		public override void EjectContents()
+		{
+			base.EjectContents();
 			this.innerContainer.TryDrop(this.InnerThing, ThingPlaceMode.Near, 1, out Thing resultingThing);
 		}
 		public override void KillInnerThing()
-        {
-            base.KillInnerThing();
+		{
+			base.KillInnerThing();
 			this.InnerThing.Destroy();
-        }
-        public override void Tick()
+		}
+		public override void Tick()
 		{
 			base.Tick();
 			if (this.InnerThing == null && this.curTicksToGrow > 0)
@@ -147,7 +146,7 @@ namespace AlteredCarbon
 			if (this.InnerThing != null)
 			{
 				if (this.incubatorState == IncubatorState.Growing)
-                {
+				{
 					if (refuelable.HasFuel && powerTrader.PowerOn)
 					{
 						if (runningOutPowerInTicks > 0) runningOutPowerInTicks = 0;
