@@ -343,3 +343,4 @@ healthchecksdb
 */obj/*
 Source/RimEffect/.vs/RimEffect/v16/.suo
 **/*.suo
+*.db
