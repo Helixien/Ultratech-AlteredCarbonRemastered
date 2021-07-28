@@ -25,8 +25,6 @@ namespace AlteredCarbon
 			hediff.skillsOffsets = Props.skillsOffsets;
 			hediff.skillPassionsOffsets = Props.skillPassionsOffsets;
 			pawn.health.AddHediff(hediff);
-			//Log.Message("SAVING");
-
 		}
 	}
 }

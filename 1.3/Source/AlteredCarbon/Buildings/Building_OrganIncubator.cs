@@ -56,6 +56,20 @@ namespace AlteredCarbon
 			var floatList = new List<FloatMenuOption>();
 			foreach (var recipe in this.def.recipes)
             {
+				if (recipe.researchPrerequisite != null && !recipe.researchPrerequisite.IsFinished)
+				{
+					continue;
+				}
+				if (recipe.researchPrerequisites != null)
+                {
+					foreach (var research in recipe.researchPrerequisites)
+                    {
+						if (!research.IsFinished)
+                        {
+							continue;
+						}
+					}
+                }
 				floatList.Add(new FloatMenuOption(recipe.LabelCap, delegate 
 				{
 					var newOrgan = ThingMaker.MakeThing(recipe.ProducedThingDef);

@@ -230,7 +230,6 @@ namespace AlteredCarbon
 		}
 		public static void Postfix(Caravan __state, Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
         {
-			Log.Message("__state: " + __state);
 			if (__state != null && __state.PawnsListForReading.Any())
             {
 				var stackHediff = __instance.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;

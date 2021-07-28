@@ -26,7 +26,6 @@ namespace AlteredCarbon
                 {
                     if (stackGroup.Value.deadPawns != null && stackGroup.Value.deadPawns.Contains(___pawn))
                     {
-                        //Log.Message("Found stackGroup");
                         stackGroup.Value.deadPawns.Remove(___pawn);
                         stackGroup.Value.copiedPawns.Add(___pawn);
                         if (AlteredCarbonManager.Instance.emptySleeves != null && AlteredCarbonManager.Instance.emptySleeves.Contains(___pawn))

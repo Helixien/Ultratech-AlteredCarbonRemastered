@@ -157,7 +157,7 @@ namespace AlteredCarbon
 				return false;
 			}
 		}
-		public Thing InnerThing
+		public virtual Thing InnerThing
 		{
 			get
 			{

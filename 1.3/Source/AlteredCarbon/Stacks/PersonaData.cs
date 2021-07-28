@@ -74,8 +74,8 @@ namespace AlteredCarbon
         public int joinTick;
         public List<Ideo> previousIdeos;
         public float certainty;
-        private Precept_RoleMulti precept_RoleMulti;
-        private Precept_RoleSingle precept_RoleSingle;
+        public Precept_RoleMulti precept_RoleMulti;
+        public Precept_RoleSingle precept_RoleSingle;
 
         // [SYR] Individuality
         private int sexuality;
@@ -179,7 +179,6 @@ namespace AlteredCarbon
                 {
                     if (this.relations.Where(r => r.def == rel2 && r.otherPawn == otherPawn).Count() == 0)
                     {
-                        //Log.Message("00000 Rel: " + otherPawn?.Name + " - " + rel2 + " - " + pawn.Name, true);
                         if (!rel2.implied)
                         {
                             this.relations.Add(new DirectPawnRelation(rel2, otherPawn, 0));
@@ -350,33 +349,27 @@ namespace AlteredCarbon
                     if (skill != null)
                     {
                         var finalValue = (int)skill.passion + negativeOffset.offset + 1;
-                        //Log.Message("finalValue: " + finalValue, true);
                         if (finalValue <= 2)
                         {
                             switch (finalValue)
                             {
                                 case 0:
                                     skill.passion = Passion.None;
-                                    //Log.Message(skill.def + " - finalValue: " + finalValue + " - skill.passion = Passion.None");
                                     break;
                                 case 1:
                                     skill.passion = Passion.Minor;
-                                    //Log.Message(skill.def + " - finalValue: " + finalValue + " - skill.passion = Passion.Minor");
                                     break;
                                 case 2:
                                     skill.passion = Passion.Major;
-                                    //Log.Message(skill.def + " - finalValue: " + finalValue + " - skill.passion = Passion.Major");
                                     break;
                                 default:
                                     skill.passion = Passion.None;
-                                    //Log.Message("default: " + skill.def + " - finalValue: " + finalValue + " - skill.passion = Passion.None");
                                     break;
                             }
                         }
                         else
                         {
                             skill.passion = Passion.None;
-                            //Log.Message("2 default: " + skill.def + " - finalValue: " + finalValue + " - skill.passion = Passion.None");
                         }
                     }
                 }
@@ -439,6 +432,7 @@ namespace AlteredCarbon
                 this.certainty = other.certainty;
 
                 this.precept_RoleSingle = other.precept_RoleSingle;
+
                 this.precept_RoleMulti = other.precept_RoleMulti;
 
                 if (other.favoriteColor.HasValue)
@@ -753,6 +747,7 @@ namespace AlteredCarbon
                     {
                         pawn = pawn
                     });
+                    this.precept_RoleMulti.FillOrUpdateAbilities();
                 }
                 if (this.precept_RoleSingle != null)
                 {
@@ -760,6 +755,7 @@ namespace AlteredCarbon
                     {
                         pawn = pawn
                     };
+                    this.precept_RoleSingle.FillOrUpdateAbilities();
                 }
 
                 if (this.ideo != null)

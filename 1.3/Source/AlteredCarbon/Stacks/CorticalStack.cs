@@ -272,6 +272,8 @@ namespace AlteredCarbon
             StringBuilder stringBuilder = new StringBuilder();
             if (PersonaData.hasPawn)
             {
+
+                stringBuilder.AppendLineTagged("Role".Translate() + ": " + personaData.precept_RoleSingle + " - " + personaData.precept_RoleSingle?.chosenPawn?.pawn + " - " + personaData.precept_RoleSingle?.chosenPawn?.abilities);
                 stringBuilder.AppendLineTagged("AlteredCarbon.Name".Translate() + ": " + personaData.PawnNameColored);
                 stringBuilder.AppendLineTagged("AlteredCarbon.faction".Translate() + ": " + PersonaData.faction.NameColored);
                 Backstory newChildhood = null;

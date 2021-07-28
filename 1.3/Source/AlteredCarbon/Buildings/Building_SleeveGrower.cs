@@ -21,7 +21,7 @@ namespace AlteredCarbon
 		{
 			get
 			{
-				return this.innerContainer.Where(x => x is Pawn).FirstOrDefault() as Pawn;
+				return this.innerContainer.OfType<Pawn>().FirstOrDefault();
 			}
 		}
         protected override bool InnerThingIsDead => innerPawnIsDead;
@@ -32,7 +32,8 @@ namespace AlteredCarbon
 				return this.innerContainer.Where(x => x.TryGetComp<CompBrainTemplate>() != null).FirstOrDefault();
 			}
 		}
-		public override IEnumerable<Gizmo> GetGizmos()
+		public override Thing InnerThing => this.innerContainer.Where(x => x.TryGetComp<CompBrainTemplate>() is null).FirstOrDefault();
+        public override IEnumerable<Gizmo> GetGizmos()
 		{
 			foreach (Gizmo gizmo in base.GetGizmos())
 			{
@@ -268,7 +269,8 @@ namespace AlteredCarbon
 				}
 			});
 		}
-		public void StartGrowth(Pawn newSleeve, int totalTicksToGrow, int totalGrowthCost)
+
+        public void StartGrowth(Pawn newSleeve, int totalTicksToGrow, int totalGrowthCost)
 		{
 			this.ResetGraphics();
 			if (this.ActiveBrainTemplate != null)
@@ -283,7 +285,7 @@ namespace AlteredCarbon
 				pawn.Destroy(DestroyMode.Vanish);
 			}
 
-			this.TryAcceptThing(newSleeve);
+			var result = this.TryAcceptThing(newSleeve);
 			this.totalTicksToGrow = totalTicksToGrow;
 			this.curTicksToGrow = 0;
 			this.totalGrowthCost = totalGrowthCost;
