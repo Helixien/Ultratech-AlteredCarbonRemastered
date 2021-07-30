@@ -351,7 +351,6 @@
     <Compile Include="Recipes\Recipe_WipeFilledCorticalStack.cs" />
     <Compile Include="Recipes\Recipe_HackBiocodedThings.cs" />
     <Compile Include="Recipes\Recipe_DecryptAncientCorticalStack.cs" />
-    <Compile Include="Recipes\SpecialThingFilterWorker_Stacks.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksHostile.cs" />
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksColonist.cs" />
     <Compile Include="Recipes\Bill_InstallStack.cs" />

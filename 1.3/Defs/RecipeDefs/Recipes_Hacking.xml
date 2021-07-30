@@ -7,7 +7,7 @@
 		<soundWorking>Recipe_Machining</soundWorking>
 	</RecipeDef>
 
-	<RecipeDef>
+	<RecipeDef ParentName="UT_RecipeHacking">
 		<defName>UT_DecryptAncientStack</defName>
 		<label>decrypt ancient stack</label>
 		<description>Decrypt ancient stacks in an attempt to repair them or acquire information from them.</description>
@@ -29,7 +29,7 @@
 		</skillRequirements>
 	</RecipeDef>
 
-	<RecipeDef>
+	<RecipeDef ParentName="UT_RecipeHacking">
 		<defName>UT_HackBiocodedThings</defName>
 		<label>hack biocoded things</label>
 		<description>Attempt to remove biocoding from weapons and equipment to make it usable.</description>
@@ -58,7 +58,7 @@
 		</skillRequirements>
 	</RecipeDef>
 
-	<RecipeDef>
+	<RecipeDef ParentName="UT_RecipeHacking">
 		<defName>UT_WipeFilledCorticalStack</defName>
 		<label>wipe cortical stack</label>
 		<description>Wipe a cortical stack and remove the pawn stored on it.</description>
@@ -105,7 +105,7 @@
 		</skillRequirements>
 	</RecipeDef>
 
-	<RecipeDef>
+	<RecipeDef ParentName="UT_RecipeHacking">
 		<defName>UT_HackFilledCorticalStack</defName>
 		<label>hack cortical stack</label>
 		<description>Convert a cortical stack to the players faction.</description>

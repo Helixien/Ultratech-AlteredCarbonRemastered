@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
 	<SpecialThingFilterDef>
 		<defName>UT_AllowStacksColonist</defName>
 		<label>allow colonist stacks</label>
@@ -30,7 +29,7 @@
 		<saveKey>allowStacksHostile</saveKey>
 		<workerClass>AlteredCarbon.SpecialThingFilterWorker_StacksHostile</workerClass>
 	</SpecialThingFilterDef>
-	
+
 </Defs>
 
 

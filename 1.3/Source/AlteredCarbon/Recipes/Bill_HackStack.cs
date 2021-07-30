@@ -21,7 +21,7 @@ namespace AlteredCarbon
         {
             this.corticalStack = corticalStack;
         }
-        public override string Label => base.Label + " (" + corticalStack.PersonaData.PawnNameColored + ")";
+        public override string Label => base.Label + " (" + (corticalStack?.PersonaData?.PawnNameColored ?? "Destroyed".Translate()) + ")";
         public override void ExposeData()
         {
             base.ExposeData();
