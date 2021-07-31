@@ -357,13 +357,15 @@ namespace AlteredCarbon
 			}
 			var openingPawn = OpeningPawn();
 			if (openingPawn != null)
-            {
-				this.innerContainer.TryDrop(this.InnerThing, openingPawn.Position, this.Map, ThingPlaceMode.Direct, 1, out Thing resultingThing);
+			{
+				this.innerContainer.TryDrop(this.InnerThing, openingPawn.Position, this.Map, ThingPlaceMode.Direct, out Thing _);
+				this.innerContainer.TryDrop(this.ActiveBrainTemplate, openingPawn.Position, this.Map, ThingPlaceMode.Direct, out Thing _);
 			}
 			else
-            {
-				this.innerContainer.TryDrop(this.InnerThing, ThingPlaceMode.Near, 1, out Thing resultingThing);
-            }
+			{
+				this.innerContainer.TryDrop(this.InnerThing, ThingPlaceMode.Near, out Thing _);
+				this.innerContainer.TryDrop(this.ActiveBrainTemplate, ThingPlaceMode.Near, out Thing _);
+			}
 			ResetGraphics();
 		}
 		public void DropActiveBrainTemplate()
