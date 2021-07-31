@@ -17,6 +17,9 @@ namespace AlteredCarbon
 
 		public bool removeActiveBrainTemplate;
 		public override int OpenTicks => 300;
+
+		public override bool CanOpen => InnerThing != null && base.CanOpen;
+
 		public Pawn InnerPawn
 		{
 			get
@@ -356,25 +359,11 @@ namespace AlteredCarbon
 			var openingPawn = OpeningPawn();
 			if (openingPawn != null)
 			{
-				if (this.InnerThing != null)
-				{
-					this.innerContainer.TryDrop(this.InnerThing, openingPawn.Position, this.Map, ThingPlaceMode.Direct, out Thing _);
-				}
-				if (this.ActiveBrainTemplate != null)
-				{
-					this.innerContainer.TryDrop(this.ActiveBrainTemplate, openingPawn.Position, this.Map, ThingPlaceMode.Direct, out Thing _);
-				}
+				this.innerContainer.TryDrop(this.InnerThing, openingPawn.Position, this.Map, ThingPlaceMode.Direct, out Thing _);
 			}
 			else
 			{
-				if (this.InnerThing != null)
-				{
-					this.innerContainer.TryDrop(this.InnerThing, ThingPlaceMode.Near, out Thing _);
-				}
-				if (this.ActiveBrainTemplate != null)
-				{
-					this.innerContainer.TryDrop(this.ActiveBrainTemplate, ThingPlaceMode.Near, out Thing _);
-				}
+				this.innerContainer.TryDrop(this.InnerThing, ThingPlaceMode.Near, out Thing _);
 			}
 			ResetGraphics();
 		}
