@@ -91,6 +91,7 @@
 	<AC.Copy>Copy</AC.Copy>
 	<AC.Original>Original</AC.Original>
 	<AC.SuccessfullyDuplicatedStack>{PAWN_nameDef} successfully duplicated cortical stack.</AC.SuccessfullyDuplicatedStack>
+	<AlteredCarbon.NoOrgansUnlocked>No organs unlocked</AlteredCarbon.NoOrgansUnlocked>
 	<AlteredCarbon.OrganIncubatorIsRunningOutFuel>Organ incubator is running out neutroamine</AlteredCarbon.OrganIncubatorIsRunningOutFuel>
 	<AlteredCarbon.OrganIncubatorIsRunningOutPower>Organ incubator is running out power</AlteredCarbon.OrganIncubatorIsRunningOutPower>
 	<AlteredCarbon.OrganSpoiled>Organ in the incubator is spoiled</AlteredCarbon.OrganSpoiled>
