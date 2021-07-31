@@ -344,27 +344,37 @@ namespace AlteredCarbon
 		public override void EjectContents()
 		{
 			base.EjectContents();
-			ThingDef filth_Slime = ThingDefOf.Filth_Slime;
 			foreach (Thing thing in this.innerContainer)
 			{
-				Pawn pawn = thing as Pawn;
-				if (pawn != null)
+				if (thing is Pawn pawn)
 				{
 					PawnComponentsUtility.AddComponentsForSpawn(pawn);
-					pawn.filth.GainFilth(filth_Slime);
+					pawn.filth.GainFilth(ThingDefOf.Filth_Slime);
 					pawn.health.AddHediff(AC_DefOf.UT_EmptySleeve);
 				}
 			}
 			var openingPawn = OpeningPawn();
 			if (openingPawn != null)
 			{
-				this.innerContainer.TryDrop(this.InnerThing, openingPawn.Position, this.Map, ThingPlaceMode.Direct, out Thing _);
-				this.innerContainer.TryDrop(this.ActiveBrainTemplate, openingPawn.Position, this.Map, ThingPlaceMode.Direct, out Thing _);
+				if (this.InnerThing != null)
+				{
+					this.innerContainer.TryDrop(this.InnerThing, openingPawn.Position, this.Map, ThingPlaceMode.Direct, out Thing _);
+				}
+				if (this.ActiveBrainTemplate != null)
+				{
+					this.innerContainer.TryDrop(this.ActiveBrainTemplate, openingPawn.Position, this.Map, ThingPlaceMode.Direct, out Thing _);
+				}
 			}
 			else
 			{
-				this.innerContainer.TryDrop(this.InnerThing, ThingPlaceMode.Near, out Thing _);
-				this.innerContainer.TryDrop(this.ActiveBrainTemplate, ThingPlaceMode.Near, out Thing _);
+				if (this.InnerThing != null)
+				{
+					this.innerContainer.TryDrop(this.InnerThing, ThingPlaceMode.Near, out Thing _);
+				}
+				if (this.ActiveBrainTemplate != null)
+				{
+					this.innerContainer.TryDrop(this.ActiveBrainTemplate, ThingPlaceMode.Near, out Thing _);
+				}
 			}
 			ResetGraphics();
 		}
