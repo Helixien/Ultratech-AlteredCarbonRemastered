@@ -64,13 +64,6 @@ namespace AlteredCarbon
                 AC_DefOf.UT_HackBiocodedThings.defaultIngredientFilter.SetAllow(thingDef, true);
             }
 
-            foreach (var li in AC_DefOf.UT_WipeFilledCorticalStack.ingredients)
-            {
-                li.filter.SetAllow(AC_DefOf.UT_AllowStacksColonist, false);
-            }
-            AC_DefOf.UT_WipeFilledCorticalStack.defaultIngredientFilter.SetAllow(AC_DefOf.UT_AllowStacksColonist, false);
-
-
             foreach (var li in AC_DefOf.UT_InstallCorticalStack.ingredients)
             {
                 li.filter.SetAllow(AC_DefOf.UT_AllowStacksColonist, true);

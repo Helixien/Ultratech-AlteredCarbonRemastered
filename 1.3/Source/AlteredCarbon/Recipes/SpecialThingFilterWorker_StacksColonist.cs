@@ -17,6 +17,7 @@ namespace AlteredCarbon
 			var stack = t as CorticalStack;
 			if (stack != null && stack.PersonaData.hasPawn && stack.PersonaData.faction == Faction.OfPlayer)
 			{
+				Log.Message("Matches: " + stack + " - " + stack.PersonaData.faction + " - " + stack.PersonaData.PawnNameColored);
 				return true;
 			}
 			return false;

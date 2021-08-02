@@ -70,7 +70,7 @@ namespace AlteredCarbon
 			}
 			else if (__instance is Bill_HackStack hackStack && thing is CorticalStack stack)
             {
-				__result = thing == hackStack.corticalStack;
+				__result = stack == hackStack.corticalStack;
 				return false;
 			}
 			return true;
