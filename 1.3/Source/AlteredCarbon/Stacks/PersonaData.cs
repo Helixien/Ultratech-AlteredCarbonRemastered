@@ -83,7 +83,8 @@ namespace AlteredCarbon
 
         // Psychology
         private PsychologyData psychologyData;
-
+        // RJW
+        private RJWData rjwData;
         // misc
         public bool? diedFromCombat;
         public bool hackedWhileOnStack;
@@ -308,7 +309,12 @@ namespace AlteredCarbon
             {
                 this.psychologyData = ModCompatibility.GetPsychologyData(pawn);
             }
+            if (ModCompatibility.RimJobWorldIsActive)
+            {
+                this.rjwData = ModCompatibility.GetRjwData(pawn);
+            }
         }
+
         public void CopyDataFrom(PersonaData other, bool isDuplicateOperation = false)
         {
             this.name = other.name;
@@ -449,6 +455,7 @@ namespace AlteredCarbon
             this.sexuality = other.sexuality;
             this.romanceFactor = other.romanceFactor;
             this.psychologyData = other.psychologyData;
+            this.rjwData = other.rjwData;
         }
 
         public void OverwritePawn(Pawn pawn, StackSavingOptionsModExtension extension)
@@ -779,9 +786,13 @@ namespace AlteredCarbon
                 ModCompatibility.SetSyrTraitsRomanceFactor(pawn, this.romanceFactor);
             }
 
-            if (ModCompatibility.PsychologyIsActive)
+            if (ModCompatibility.PsychologyIsActive && this.psychologyData != null)
             {
                 ModCompatibility.SetPsychologyData(pawn, this.psychologyData);
+            }
+            if (ModCompatibility.RimJobWorldIsActive && this.rjwData != null)
+            {
+                ModCompatibility.SetRjwData(pawn, this.rjwData);
             }
         }
 
@@ -918,7 +929,8 @@ namespace AlteredCarbon
             }
             Scribe_Values.Look<int>(ref this.sexuality, "sexuality", -1);
             Scribe_Values.Look<float>(ref this.romanceFactor, "romanceFactor", -1f);
-            Scribe_Deep.Look<PsychologyData>(ref this.psychologyData, "psychologyData");
+            Scribe_Deep.Look(ref this.psychologyData, "psychologyData");
+            Scribe_Deep.Look(ref rjwData, "rjwData");
         }
 
         private List<Faction> favorKeys = new List<Faction>();

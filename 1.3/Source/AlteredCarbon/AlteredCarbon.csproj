@@ -47,6 +47,10 @@
       <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2016263135\1.3\Assemblies\Psychology.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="RJW">
+      <HintPath>..\..\..\..\rjw-master\1.3\Assemblies\RJW.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="SyrTraits">
       <HintPath>..\..\..\..\..\..\..\workshop\content\294100\1497105115\1.2\Assemblies\SyrTraits.dll</HintPath>
       <Private>False</Private>
@@ -308,6 +312,7 @@
     <Compile Include="Buildings\Building_DecryptionBench.cs" />
     <Compile Include="Buildings\Building_OrganIncubator.cs" />
     <Compile Include="Buildings\Building_Incubator.cs" />
+    <Compile Include="UI\Dialog_BodyPartPicker.cs" />
     <Compile Include="Designators\Designator_ExtractStack.cs" />
     <Compile Include="HarmonyPatches\Job_Patches.cs" />
     <Compile Include="HarmonyPatches\Gizmo_Patches.cs" />
@@ -366,7 +371,7 @@
     <Compile Include="Buildings\GraphicDatabaseHeadRecords.cs" />
     <Compile Include="HarmonyPatches\CheckForStateChange_Patch.cs" />
     <Compile Include="Buildings\Building_SleeveGrower.cs" />
-    <Compile Include="Buildings\CustomizeSleeveWindow.cs" />
+    <Compile Include="UI\CustomizeSleeveWindow.cs" />
     <Compile Include="ExcludeRacesModExtension.cs" />
     <Compile Include="RoyalTitlePermitWorker_CallNeuroformers.cs" />
     <Compile Include="Misc\BackstoryDef.cs" />

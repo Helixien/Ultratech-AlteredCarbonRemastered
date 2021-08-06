@@ -120,5 +120,5 @@
 	<AlteredCarbon.FailedCorticalStackDestroyed>Decrypt Ancient Stacks: Failed, cortical stack destroyed!</AlteredCarbon.FailedCorticalStackDestroyed>
 	<AlteredCarbon.HackingBiocodedFailed>Hacking biocoded equipment: Failed, {0} destroyed!</AlteredCarbon.HackingBiocodedFailed>
 	<AlteredCarbon.HackingBiocodedSuccess>Hacking biocoded equipment: Successful! {0} is unlocked.</AlteredCarbon.HackingBiocodedSuccess>
-
+	<AlteredCarbon.SetBodyParts>Install body parts</AlteredCarbon.SetBodyParts>
 </LanguageData>

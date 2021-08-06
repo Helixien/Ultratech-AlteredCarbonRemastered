@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using HarmonyLib;
@@ -211,7 +212,185 @@ namespace AlteredCarbon
 			AlienRacesIsActive = HasActiveModWithPackageID("erdelf.HumanoidAlienRaces");
 			IndividualityIsActive = ModLister.HasActiveModWithName("[SYR] Individuality");
 			PsychologyIsActive = HasActiveModWithPackageID("Community.Psychology.UnofficialUpdate");
+			RimJobWorldIsActive = HasActiveModWithPackageID("rim.job.world");
+			if (RimJobWorldIsActive)
+            {
+				raceGroupDef_HelperType = AccessTools.TypeByName("RaceGroupDef_Helper");
+				tryGetRaceGroupDef = raceGroupDef_HelperType.GetMethods().FirstOrDefault(x => x.Name == "TryGetRaceGroupDef");
+			}
 		}
+
+		private static MethodInfo tryGetRaceGroupDef;
+		private static Type raceGroupDef_HelperType;
+		public static bool RJWAllowsThisFor(this HediffDef hediffDef, Pawn pawn)
+		{
+			try
+			{
+				var part = DefDatabase<rjw.RacePartDef>.GetNamedSilentFail(hediffDef.defName);
+				if (part != null)
+                {
+					var parms = new object[2];
+					parms[0] = pawn.kindDef;
+
+					if ((bool)tryGetRaceGroupDef.Invoke(null, parms))
+					{
+						var def = parms[1] as rjw.RaceGroupDef;
+						if (hediffDef.IsBreasts())
+						{
+							if (def.femaleBreasts != null || def.maleBreasts != null)
+                            {
+								if (def.femaleBreasts != null && def.femaleBreasts.Contains(hediffDef.defName))
+								{
+									return true;
+								}
+								else if (def.maleBreasts != null && def.maleBreasts.Contains(hediffDef.defName))
+								{
+									return true;
+								}
+								return false;
+							}
+						}
+
+						if (hediffDef.IsGenitals())
+						{
+							if (def.femaleGenitals != null || def.maleGenitals != null)
+							{
+								if (def.femaleGenitals != null && def.femaleGenitals.Contains(hediffDef.defName))
+								{
+									return true;
+								}
+								else if (def.maleGenitals != null && def.maleGenitals.Contains(hediffDef.defName))
+								{
+									return true;
+								}
+								return false;
+							}
+						}
+						if (hediffDef.IsAnus())
+						{
+							if (def.anuses != null)
+                            {
+								if (!def.anuses.Contains(hediffDef.defName))
+                                {
+									return false;
+                                }
+                            }
+						}
+
+						if (hediffDef.IsOvipositor())
+                        {
+							if (!def.oviPregnancy)
+                            {
+								return false;
+                            }
+                        }
+					}
+				}
+
+				if (hediffDef.IsGenitals())
+                {
+					return hediffDef == rjw.Genital_Helper.average_penis || hediffDef == rjw.Genital_Helper.average_vagina;
+				}
+				else if (hediffDef.IsBreasts())
+                {
+					return hediffDef == rjw.Genital_Helper.average_breasts;
+                }
+				else if (hediffDef.IsAnus())
+                {
+					return hediffDef == rjw.Genital_Helper.average_anus;
+                }
+				else if (hediffDef.IsOvipositor())
+                {
+					return false;
+                }
+			}
+			catch (Exception ex)
+			{
+				Log.Error("ERROR: " + ex);
+			}
+			return true;
+		}
+
+		private static bool IsOvipositor(this HediffDef hediffDef)
+        {
+			return hediffDef.defName.ToLower().Contains("ovipositor");
+		}
+		private static bool IsBreasts(this HediffDef hediffDef)
+        {
+			return hediffDef.defName.ToLower().Contains("breasts");
+		}
+		private static bool IsGenitals(this HediffDef hediffDef)
+		{
+			return hediffDef.defName.ToLower().Contains("penis") || hediffDef.defName.ToLower().Contains("vagina");
+		}
+		private static bool IsAnus(this HediffDef hediffDef)
+		{
+			return hediffDef.defName.ToLower().Contains("anus");
+		}
+
+		public static RJWData GetRjwData(Pawn pawn)
+		{
+			RJWData rjwData = null;
+			var dataStore = Find.World.GetComponent<rjw.DataStore>();
+			if (dataStore != null)
+			{
+				rjwData = new RJWData();
+				var pawnData = dataStore.GetPawnData(pawn);
+				foreach (var fieldInfo in typeof(rjw.PawnData).GetFields())
+				{
+					try
+					{
+						var newField = rjwData.GetType().GetField(fieldInfo.Name);
+						newField.SetValue(rjwData, fieldInfo.GetValue(pawnData));
+					}
+					catch { }
+				}
+			}
+			var comp = ThingCompUtility.TryGetComp<rjw.CompRJW>(pawn);
+			if (comp != null)
+			{
+				if (rjwData is null)
+                {
+					rjwData = new RJWData();
+                }
+				rjwData.quirksave = comp.quirksave;
+				rjwData.orientation = (OrientationAC)(int)comp.orientation;
+				rjwData.NextHookupTick = comp.NextHookupTick;
+			}
+			return rjwData;
+		}
+
+		public static void SetRjwData(Pawn pawn, RJWData rjwData)
+		{
+			var dataStore = Find.World.GetComponent<rjw.DataStore>();
+			if (dataStore != null)
+			{
+				var pawnData = dataStore.GetPawnData(pawn);
+				if (pawnData != null)
+                {
+					foreach (var fieldInfo in typeof(RJWData).GetFields())
+					{
+						try
+						{
+							var newField = pawnData.GetType().GetField(fieldInfo.Name);
+							newField.SetValue(pawnData, fieldInfo.GetValue(rjwData));
+						}
+						catch { }
+					}
+				}
+			}
+
+			var comp = ThingCompUtility.TryGetComp<rjw.CompRJW>(pawn);
+			if (comp != null)
+			{
+				comp.quirksave = rjwData.quirksave;
+				comp.quirks = new System.Text.StringBuilder(comp.quirksave);
+
+				comp.orientation = (rjw.Orientation)(int)rjwData.orientation;
+				comp.NextHookupTick = rjwData.NextHookupTick;
+			}
+		}
+
 		private static bool HasActiveModWithPackageID(string packageID)
 		{
 			var mods = ModLister.AllInstalledMods.ToList();
@@ -228,6 +407,7 @@ namespace AlteredCarbon
 		public static bool AlienRacesIsActive;
 		public static bool IndividualityIsActive;
 		public static bool PsychologyIsActive;
+		public static bool RimJobWorldIsActive;
 	}
 
 }

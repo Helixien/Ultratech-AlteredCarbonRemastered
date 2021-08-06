@@ -81,6 +81,7 @@ namespace AlteredCarbon
         public Rect lblTimeToGrow;
         public Rect lblRequireBiomass;
 
+        public Rect areaInstallBodyParts;
         public Rect qualitySlider;
         public Rect beautySlider;
 
@@ -163,13 +164,13 @@ namespace AlteredCarbon
 
         public float leftOffset = 20;
         public float topOffset = 50;
-        public float optionOffset = 15;
+        public static float optionOffset = 15;
 
-        public float labelWidth = 120;
-        public float buttonWidth = 120;
-        public float buttonHeight = 30;
+        public static float labelWidth = 120;
+        public static float buttonWidth = 120;
+        public static float buttonHeight = 30;
         public float buttonOffsetFromText = 10;
-        public float buttonOffsetFromButton = 15;
+        public static float buttonOffsetFromButton = 15;
 
         public float smallButtonOptionWidth = 44;  //for 5 elements   5 on each side + (buttonoptionwidth + offset) * number of buttons
         public float smallButtonOptionWidthHair = 25;  //for 8 elements  (255[OUTLINEWIDTH]-10)/NUM - 5     
@@ -225,7 +226,7 @@ namespace AlteredCarbon
             return Widgets.ButtonInvisible(rect2, false);
         }
 
-        public float returnYfromPrevious(Rect rect)
+        public static float returnYfromPrevious(Rect rect)
         {
             float y;
             y = rect.y;
@@ -429,23 +430,9 @@ namespace AlteredCarbon
             //Pawn
             pawnBox = new Rect(labelWidth + buttonOffsetFromText + buttonWidth * 2 + buttonOffsetFromButton + 60 + leftOffset, topOffset, pawnBoxSide, pawnBoxSide);
             pawnBoxPawn = new Rect(pawnBox.x + pawnSpacingFromEdge, pawnBox.y + pawnSpacingFromEdge, pawnBox.width - pawnSpacingFromEdge * 2, pawnBox.height - pawnSpacingFromEdge * 2);
-
-            //Quality preview
-            healthBox = new Rect(pawnBox.x - 15, pawnBox.y + pawnBox.height + 40f, pawnBox.width + 30, 50f);
-            healthBoxLabel = new Rect(healthBox.x, healthBox.y - buttonHeight, healthBox.width, buttonHeight);
-            heDiffPrintout = healthBox.BottomPart(0.95f).LeftPart(0.95f).RightPart(0.95f);
-
-            //Levels of Beauty
-            beautySlider = new Rect(pawnBox.x, healthBox.y + healthBox.height + optionOffset, pawnBox.width, buttonHeight);
-
-            //Levels of Quality
-            qualitySlider = new Rect(beautySlider.x, beautySlider.y + buttonHeight, pawnBox.width, buttonHeight);
             
-            //timetogrow
-            lblTimeToGrow = new Rect(beautySlider.x + 30, returnYfromPrevious(qualitySlider) - 10, labelWidth * 3, buttonHeight);
-
-            //biomass
-            lblRequireBiomass = new Rect(beautySlider.x + 30, lblTimeToGrow.y + lblTimeToGrow.height, labelWidth * 3, buttonHeight);
+            healthBox = new Rect(pawnBox.x - 15, pawnBox.y + pawnBox.height + 40f, pawnBox.width + 30, 50f);
+            InitHealthArea();
 
             //Accept/Cancel buttons
             btnAccept = new Rect(InitialSize.x * .5f - buttonWidth / 2 - buttonOffsetFromButton / 2 - buttonWidth / 2, InitialSize.y - buttonHeight - 38, buttonWidth, buttonHeight);
@@ -454,6 +441,29 @@ namespace AlteredCarbon
             //Create textures
             InitColorPicker();
         }
+
+        private void InitHealthArea()
+        {
+            //Quality preview
+            healthBoxLabel = new Rect(healthBox.x, healthBox.y - buttonHeight, healthBox.width, buttonHeight);
+            heDiffPrintout = healthBox.BottomPart(0.95f).LeftPart(0.95f).RightPart(0.95f);
+
+            //Levels of Beauty
+            beautySlider = new Rect(pawnBox.x, healthBox.y + healthBox.height + optionOffset, pawnBox.width, buttonHeight);
+
+            //Levels of Quality
+            qualitySlider = new Rect(beautySlider.x, beautySlider.y + buttonHeight, pawnBox.width, buttonHeight);
+
+            //timetogrow
+            lblTimeToGrow = new Rect(beautySlider.x + 30, returnYfromPrevious(qualitySlider) - 10, labelWidth * 3, buttonHeight);
+
+            //biomass
+            lblRequireBiomass = new Rect(beautySlider.x + 30, lblTimeToGrow.y + lblTimeToGrow.height, labelWidth * 3, buttonHeight);
+
+            areaInstallBodyParts = new Rect(healthBox.x, lblRequireBiomass.yMax + 10, healthBox.width, test2);
+        }
+        [TweakValue("0AC", 0, 1000)] public static float test1 = 200;
+        [TweakValue("0AC", 0, 1000)] public static float test2 = 200;
         public CustomizeSleeveWindow(Building_SleeveGrower sleeveGrower)
         {
             Init(sleeveGrower);
@@ -1351,13 +1361,22 @@ namespace AlteredCarbon
                     diffListing.Label(diffs[ii].LabelCap);
                 }
                 diffListing.End();
+
+                healthBox.height = Mathf.Max(50f, diffs.Count * 25f);
+                InitHealthArea();
+
                 GUI.color = Color.white;
                 if (Mouse.IsOver(healthBox))
                 {
                     Widgets.DrawHighlight(healthBox);
                     TooltipHandler.TipRegion(healthBox, new TipSignal((Func<string>)(() => GetHediffToolTip(diffs, newSleeve)), 1147682));
                 }
-                
+
+                var setBodyParts = new Rect(healthBox.x, lblRequireBiomass.yMax + 25f, healthBox.width, buttonHeight);
+                if (ButtonTextSubtleCentered(setBodyParts, "AlteredCarbon.SetBodyParts".Translate().CapitalizeFirst()))
+                {
+                    Find.WindowStack.Add(new Dialog_BodyPartPicker(newSleeve, this));
+                }
                 if (Widgets.ButtonText(btnAccept, "Accept".Translate().CapitalizeFirst()))
                 {
                     sleeveGrower.StartGrowth(newSleeve, ticksToGrow, meatCost);
@@ -1370,7 +1389,6 @@ namespace AlteredCarbon
             }
             Text.Anchor = TextAnchor.UpperLeft;
         }
-
         private void CopyBodyFrom(Pawn source)
         {
             this.newSleeve.gender = source.gender;
