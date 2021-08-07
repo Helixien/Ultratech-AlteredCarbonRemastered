@@ -177,8 +177,8 @@ namespace AlteredCarbon
                     var curInd = partIndex[data.Key];
                     var hediffStage = data.Value[curInd];
                     var hediffDef = hediffStage.hediffDef;
-
-                    var hediff = ModCompatibility.RimJobWorldIsActive ? rjw.SexPartAdder.MakePart(hediffDef, pawn, data.Key) : HediffMaker.MakeHediff(hediffDef, pawn, data.Key);
+                    pawn.health.RestorePart(data.Key);
+                    var hediff = ACUtils.MakeHediff(hediffDef, pawn, data.Key);
                     var stages = hediffDef.stages;
                     if (stages != null)
                     {

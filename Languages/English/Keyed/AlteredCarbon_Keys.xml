@@ -121,4 +121,21 @@
 	<AlteredCarbon.HackingBiocodedFailed>Hacking biocoded equipment: Failed, {0} destroyed!</AlteredCarbon.HackingBiocodedFailed>
 	<AlteredCarbon.HackingBiocodedSuccess>Hacking biocoded equipment: Successful! {0} is unlocked.</AlteredCarbon.HackingBiocodedSuccess>
 	<AlteredCarbon.SetBodyParts>Install body parts</AlteredCarbon.SetBodyParts>
+	<AlteredCarbon.None>None</AlteredCarbon.None>
+	<AlteredCarbon.Backup>Backup</AlteredCarbon.Backup>
+	<AlteredCarbon.BackedUpStacksInMatrix>Backed up stacks in Matrix: {0}</AlteredCarbon.BackedUpStacksInMatrix>
+	<AlteredCarbon.Erase>Erase</AlteredCarbon.Erase>
+	<AlteredCarbon.Backup>Backup now</AlteredCarbon.Backup>
+	<AlteredCarbon.BackupNow>Backup now</AlteredCarbon.BackupNow>
+	<AlteredCarbon.CannotBackupNoSuchPawn>Cannot backup {0}: there's no such pawn!</AlteredCarbon.CannotBackupNoSuchPawn>
+	<AlteredCarbon.CannotBackupPawnOnAnotherLocation>Cannot backup, {0} is on different location.</AlteredCarbon.CannotBackupPawnOnAnotherLocation>
+	<AlteredCarbon.CannotBackupNoPower>Cannot backup {0}, the building is not powered.</AlteredCarbon.CannotBackupNoPower>
+	<AlteredCarbon.EnableBackup>Enable backup</AlteredCarbon.EnableBackup>
+	<AlteredCarbon.EnableBackupDesc>Placeholder</AlteredCarbon.EnableBackupDesc>
+	<AlteredCarbon.BackupAllStacks>Backup all stacks</AlteredCarbon.BackupAllStacks>
+	<AlteredCarbon.BackupAllStacksDesc>Placeholder</AlteredCarbon.BackupAllStacksDesc>
+	<AlteredCarbon.TimeSinceLastBackup>({0} since last backup)</AlteredCarbon.TimeSinceLastBackup>
+	<AlteredCarbon.CannotRestoreBackupNoOtherEmptyStacks>Restore stack from backup (no available empty stacks on the map)</AlteredCarbon.CannotRestoreBackupNoOtherEmptyStacks>
+	<AlteredCarbon.SuccessfullyRestoredStackFromBackup>{PAWN_nameDef} successfully restored cortical stack from backup.</AlteredCarbon.SuccessfullyRestoredStackFromBackup>
+
 </LanguageData>

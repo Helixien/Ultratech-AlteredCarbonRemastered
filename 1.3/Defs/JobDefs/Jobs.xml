@@ -12,7 +12,13 @@
 		<driverClass>AlteredCarbon.JobDriver_DuplicateStack</driverClass>
 		<reportString>duplicating cortical stack</reportString>
 	</JobDef>
-
+	
+	<JobDef>
+		<defName>UT_CreateStackFromBackup</defName>
+		<driverClass>AlteredCarbon.JobDriver_CreateStackFromBackup</driverClass>
+		<reportString>restoring cortical stack from backup</reportString>
+	</JobDef>
+	
 	<JobDef>
 		<defName>UT_ReleaseSleeve</defName>
 		<driverClass>AlteredCarbon.JobDriver_ReleaseSleeve</driverClass>
@@ -151,5 +157,18 @@
 			<li>Manipulation</li>
 		</requiredCapacities>
 		<prioritizeSustains>true</prioritizeSustains>
+	</WorkGiverDef>
+	
+	<WorkGiverDef>
+		<defName>UT_CreateStackFromBackup</defName>
+		<label>restore stack from backup</label>
+		<giverClass>AlteredCarbon.WorkGiver_CreateStackFromBackup</giverClass>
+		<workType>Research</workType>
+		<verb>restore stack from backup</verb>
+		<gerund>restoring stack from backup</gerund>
+		<priorityInType>999</priorityInType>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
 	</WorkGiverDef>
 </Defs>

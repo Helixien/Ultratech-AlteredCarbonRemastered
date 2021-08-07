@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace AlteredCarbon
 {
-    public class WorkGiver_DuplicateStacks : WorkGiver_Scanner
+    public class WorkGiver_CreateStackFromBackup : WorkGiver_Scanner
     {
         public override Danger MaxPathDanger(Pawn pawn)
         {
@@ -15,7 +15,8 @@ namespace AlteredCarbon
         }
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
         {
-            return Building_StackStorage.building_StackStorages.Where(x => x.stackToDuplicate != null && x.CanDuplicateStack && pawn.CanReserveAndReach(x, PathEndMode.Touch, Danger.Deadly));
+            return Building_StackStorage.building_StackStorages.Where(x => x.Powered && x.FirstPersonaStackToRestore != null 
+                && pawn.CanReserveAndReach(x, PathEndMode.Touch, Danger.Deadly));
         }
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
@@ -25,10 +26,10 @@ namespace AlteredCarbon
                 return false;
             }
             var emptyCorticalStack = GenClosest.ClosestThingReachable(pawn.Position, pawn.Map,
-                ThingRequest.ForDef(AC_DefOf.UT_EmptyCorticalStack), PathEndMode.Touch, TraverseParms.For(pawn));
+                    ThingRequest.ForDef(AC_DefOf.UT_EmptyCorticalStack), PathEndMode.Touch, TraverseParms.For(pawn));
             if (emptyCorticalStack is null)
             {
-                JobFailReason.Is("AlteredCarbon.CannotCopyNoOtherEmptyStacks".Translate());
+                JobFailReason.Is("AlteredCarbon.CannotRestoreBackupNoOtherEmptyStacks".Translate());
                 return false;
             }
             return true;
@@ -37,7 +38,7 @@ namespace AlteredCarbon
         {
             var emptyCorticalStack = GenClosest.ClosestThingReachable(pawn.Position, pawn.Map,
                 ThingRequest.ForDef(AC_DefOf.UT_EmptyCorticalStack), PathEndMode.Touch, TraverseParms.For(pawn));
-            Job job = JobMaker.MakeJob(AC_DefOf.UT_DuplicateStack, t, emptyCorticalStack);
+            Job job = JobMaker.MakeJob(AC_DefOf.UT_CreateStackFromBackup, t, emptyCorticalStack);
             job.count = 1;
             return job;
         }

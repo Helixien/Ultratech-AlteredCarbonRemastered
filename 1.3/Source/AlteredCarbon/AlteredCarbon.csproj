@@ -312,6 +312,9 @@
     <Compile Include="Buildings\Building_DecryptionBench.cs" />
     <Compile Include="Buildings\Building_OrganIncubator.cs" />
     <Compile Include="Buildings\Building_Incubator.cs" />
+    <Compile Include="UI\ITab_StackBackupContents.cs" />
+    <Compile Include="Jobs\JobDriver_CreateStackFromBackup.cs" />
+    <Compile Include="Jobs\WorkGiver_CreateStackFromBackup.cs" />
     <Compile Include="UI\Dialog_BodyPartPicker.cs" />
     <Compile Include="Designators\Designator_ExtractStack.cs" />
     <Compile Include="HarmonyPatches\Job_Patches.cs" />
@@ -331,7 +334,6 @@
     <Compile Include="Jobs\WorkGiver_CancelIncubatingProcess.cs" />
     <Compile Include="Jobs\WorkGiver_StartIncubatingProcess.cs" />
     <Compile Include="Lords\LordJob_TakeStacks.cs" />
-    <Compile Include="Misc\PlaceWorker_CorticalStackStorage.cs" />
     <Compile Include="Misc\RoomRoleWorker_UltraTech.cs" />
     <Compile Include="ModCompatibility.cs" />
     <Compile Include="AC_DefOf.cs" />
@@ -362,7 +364,7 @@
     <Compile Include="Recipes\SpecialThingFilterWorker_StacksStranger.cs" />
     <Compile Include="Buildings\Building_SleeveCasket.cs" />
     <Compile Include="Buildings\Building_StackStorage.cs" />
-    <Compile Include="Buildings\ITab_StackStorageContents.cs" />
+    <Compile Include="UI\ITab_StackStorageContents.cs" />
     <Compile Include="Buildings\CompProperties_SleeveCasketPostDraw.cs" />
     <Compile Include="Buildings\CompProperties_SleeveGrowerPostDraw.cs" />
     <Compile Include="Buildings\CompSleeveCasketPostDraw.cs" />

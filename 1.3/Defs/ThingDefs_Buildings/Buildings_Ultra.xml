@@ -334,31 +334,13 @@
 		</building>
 		<inspectorTabs>
 			<li>AlteredCarbon.ITab_StackStorageContents</li>
+			<li>AlteredCarbon.ITab_StackBackupContents</li>
 		</inspectorTabs>
-		<placeWorkers>
-			<li>AlteredCarbon.PlaceWorker_CorticalStackStorage</li>
-		</placeWorkers>
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>
 				<shortCircuitInRain>true</shortCircuitInRain>
 				<basePowerConsumption>5000</basePowerConsumption>
-			</li>
-			<li Class="CompProperties_Refuelable">
-				<fuelLabel>Empty Cortical Stack</fuelLabel>
-				<fuelGizmoLabel>Empty Cortical Stack</fuelGizmoLabel>
-				<outOfFuelMessage>No cortical stacks: Can not do emergency backups.</outOfFuelMessage>
-				<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
-				<targetFuelLevelConfigurable>false</targetFuelLevelConfigurable>
-				<fuelCapacity>10</fuelCapacity>
-				<fuelFilter>
-					<thingDefs>
-						<li>UT_EmptyCorticalStack</li>
-					</thingDefs>
-				</fuelFilter>
-				<initialFuelPercent>0</initialFuelPercent>
-				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
-				<showFuelGizmo>true</showFuelGizmo>
 			</li>
 			<li Class="CompProperties_Glower">
 				<glowRadius>5</glowRadius>

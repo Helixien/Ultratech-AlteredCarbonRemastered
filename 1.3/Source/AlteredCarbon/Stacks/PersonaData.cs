@@ -91,6 +91,8 @@ namespace AlteredCarbon
         public bool isCopied = false;
         public int stackGroupID;
 
+        public int lastTimeUpdated;
+
         public List<SkillOffsets> negativeSkillsOffsets;
         public List<SkillOffsets> negativeSkillPassionsOffsets;
         public TaggedString PawnNameColored
@@ -837,9 +839,9 @@ namespace AlteredCarbon
 
         private Pawn GetTruePawn(Pawn pawn)
         {
-            if (pawn.Dead && pawn.Name != null && AlteredCarbonManager.Instance.pawnsWithStacks != null)
+            if (pawn.Dead && pawn.Name != null && AlteredCarbonManager.Instance.PawnsWithStacks != null)
             {
-                foreach (var otherPawn in AlteredCarbonManager.Instance.pawnsWithStacks)
+                foreach (var otherPawn in AlteredCarbonManager.Instance.PawnsWithStacks)
                 {
                     if (otherPawn != null && otherPawn.Name != null && otherPawn.Name.ToStringFull == pawn.Name.ToStringFull)
                     {
@@ -908,6 +910,7 @@ namespace AlteredCarbon
 
             Scribe_Values.Look<bool>(ref this.hasPawn, "hasPawn", false, false);
             Scribe_Values.Look<Gender>(ref this.gender, "gender", 0, false);
+            Scribe_Values.Look(ref lastTimeUpdated, "lastTimeUpdated");
             if (ModsConfig.RoyaltyActive)
             {
                 Scribe_Collections.Look<Faction, int>(ref this.favor, "favor", LookMode.Reference, LookMode.Value, ref this.favorKeys, ref this.favorValues);

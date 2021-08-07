@@ -136,7 +136,16 @@ namespace AlteredCarbon
 
         public static bool HasStack(this Pawn pawn)
         {
-            return AlteredCarbonManager.Instance.stacksIndex.ContainsKey(pawn.thingIDNumber) || AlteredCarbonManager.Instance.pawnsWithStacks.Contains(pawn);
+            return AlteredCarbonManager.Instance.stacksIndex.ContainsKey(pawn.thingIDNumber) || AlteredCarbonManager.Instance.PawnsWithStacks.Contains(pawn);
+        }
+
+        public static Hediff MakeHediff(HediffDef hediffDef, Pawn pawn, BodyPartRecord part)
+        {
+            if (ModCompatibility.RimJobWorldIsActive)
+            {
+                return rjw.SexPartAdder.MakePart(hediffDef, pawn, part);
+            }
+            return HediffMaker.MakeHediff(hediffDef, pawn, part);
         }
 	}
 }

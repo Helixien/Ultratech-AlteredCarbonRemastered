@@ -279,11 +279,13 @@ namespace AlteredCarbon
         public override void ExposeData()
         {
             base.ExposeData();
+            this.pawnsWithStacks.RemoveWhere(x => x is null || x.Destroyed);
             Scribe_Collections.Look<int, CorticalStack>(ref this.stacksIndex, "stacksIndex", LookMode.Value, LookMode.Reference, ref this.pawnKeys, ref this.stacksValues);
             Scribe_Collections.Look<Pawn>(ref this.pawnsWithStacks, "pawnsWithStacks", LookMode.Reference);
             Scribe_Collections.Look<Pawn>(ref this.emptySleeves, "emptySleeves", LookMode.Reference);
             Scribe_Collections.Look<Pawn>(ref this.deadPawns, saveDestroyedThings: true, "deadPawns", LookMode.Reference);
             Scribe_Collections.Look<int, StacksData>(ref this.stacksRelationships, "stacksRelationships", LookMode.Value, LookMode.Deep, ref stacksRelationshipsKeys, ref stacksRelationshipsValues);
+            this.pawnsWithStacks.RemoveWhere(x => x is null || x.Destroyed);
             Instance = this;
         }
 
@@ -291,7 +293,15 @@ namespace AlteredCarbon
         private List<int> stacksRelationshipsKeys = new List<int>();
         private List<StacksData> stacksRelationshipsValues = new List<StacksData>();
 
-        public HashSet<Pawn> pawnsWithStacks = new HashSet<Pawn>();
+        private HashSet<Pawn> pawnsWithStacks = new HashSet<Pawn>();
+        public HashSet<Pawn> PawnsWithStacks
+        {
+            get
+            {
+                return pawnsWithStacks.Where(x => x != null).ToHashSet();
+            }
+        }
+
         public HashSet<Pawn> emptySleeves = new HashSet<Pawn>();
         public HashSet<Pawn> deadPawns = new HashSet<Pawn>();
 

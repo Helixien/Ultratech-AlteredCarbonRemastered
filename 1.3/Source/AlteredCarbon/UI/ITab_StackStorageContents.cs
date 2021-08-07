@@ -17,32 +17,31 @@ namespace AlteredCarbon
             this.size = WinSize;
             this.labelKey = "AC.StackStorage";
         }
-
         protected override void FillTab()
         {
             Text.Font = GameFont.Small;
-            Rect rect = new Rect(0.0f, 20f, this.size.x, this.size.y - 20f).ContractedBy(10f);
-            Rect position = new Rect(rect.x, rect.y, rect.width, rect.height);
-            GUI.BeginGroup(position);
+            Rect viewRect = new Rect(5f, 20f, this.size.x, this.size.y - 20f).ContractedBy(10f);
+            GUI.BeginGroup(viewRect);
             Text.Font = GameFont.Small;
             GUI.color = Color.white;
-            Rect outRect = new Rect(0.0f, 0.0f, position.width, position.height);
-            Rect viewRect = outRect;
-            Widgets.BeginScrollView(outRect, ref this.scrollPosition, viewRect, true);
-
             float labelWidth = viewRect.width - 26f;
-            float num = 0.0f;
-
+            float num = 0;
             DoAllowOption(ref num, viewRect, labelWidth, "AC.AllowColonistStacks", ref Building_StackStorage.allowColonistCorticalStacks);
             DoAllowOption(ref num, viewRect, labelWidth, "AC.AllowStrangerStacks", ref Building_StackStorage.allowStrangerCorticalStacks);
             DoAllowOption(ref num, viewRect, labelWidth, "AC.AllowHostileStacks", ref Building_StackStorage.allowHostileCorticalStacks);
 
             var storedStacks = Building_StackStorage.StoredStacks.ToList();
             Widgets.ListSeparator(ref num, viewRect.width, "AC.CorticalStacksInMatrix".Translate(storedStacks.Count(), Building_StackStorage.MaxFilledStackCapacity));
+            var scrollRect = new Rect(0, num, viewRect.width - 16, viewRect.height);
+            var outerRect = scrollRect;
+            outerRect.width += 16;
+            outerRect.height -= 100;
+            scrollRect.height = storedStacks.Count() * 28f;
+            Widgets.BeginScrollView(outerRect, ref scrollPosition, scrollRect);
             foreach (var corticalStack in storedStacks)
             {
-                bool showDuplicateStatus = storedStacks.Where(x => x.PersonaData.stackGroupID == corticalStack.PersonaData.stackGroupID).Count() >= 2;
-                DrawThingRow(ref num, viewRect.width, corticalStack, showDuplicateStatus);
+                bool showDuplicateStatus = storedStacks.Count(x => x.PersonaData.stackGroupID == corticalStack.PersonaData.stackGroupID) > 1;
+                DrawThingRow(ref num, scrollRect.width, corticalStack, showDuplicateStatus);
             }
             Widgets.EndScrollView();
             GUI.EndGroup();
@@ -99,17 +98,17 @@ namespace AlteredCarbon
                 GUI.color = ITab_Pawn_Gear.HighlightColor;
                 GUI.DrawTexture(rect1, TexUI.HighlightTex);
             }
-
-            Widgets.ThingIcon(new Rect(4f, y, 28f, 28f), corticalStack, 1f);
+            var thingIconRect = new Rect(0f, y, 28f, 28f);
+            Widgets.ThingIcon(thingIconRect, corticalStack, 1f);
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = ITab_Pawn_Gear.ThingLabelColor;
-            Rect rect4 = new Rect(36f, y, rect1.width - 36f, rect1.height);
-            var pawnLabel = corticalStack.PersonaData.PawnNameColored.Truncate(rect4.width);
+            Rect pawnLabelRect = new Rect(thingIconRect.xMax + 5, y, rect1.width - 36f, rect1.height);
+            var pawnLabel = corticalStack.PersonaData.PawnNameColored.Truncate(pawnLabelRect.width);
             if (showDuplicateStatus)
             {
                 pawnLabel += " (" + (corticalStack.PersonaData.isCopied ? "AC.Copy".Translate() : "AC.Original".Translate()) + ")";
             }
-            Widgets.Label(rect4, pawnLabel);
+            Widgets.Label(pawnLabelRect, pawnLabel);
             string str2 = corticalStack.DescriptionDetailed;
             TooltipHandler.TipRegion(rect1, str2);
             y += 28f;

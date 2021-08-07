@@ -25,20 +25,12 @@ namespace AlteredCarbon
         public void TryRecoverOrSpawnOnGround()
         {
             PersonaData.CopyPawn(this.pawn);
-            if (Rand.Chance(0.25f) && false)
+            if (Rand.Chance(0.25f))
             {
                 Notify_ColonistKilled_Patch.disableKilledEffect = true;
                 var corticalStack = ThingMaker.MakeThing(this.def.spawnThingOnRemoved) as CorticalStack;
                 corticalStack.PersonaData.CopyPawn(pawn);
                 GenPlace.TryPlaceThing(corticalStack, pawn.Position, pawn.Map, ThingPlaceMode.Near);
-            }
-            else if (Building_StackStorage.building_StackStorages.Where(x => x.PoweredAndFueled &&
-                Find.WorldGrid.ApproxDistanceInTiles(pawn.Tile, x.Tile) <= Building_StackStorage.MaxEmergencyBackupDistanceInTiles).TryRandomElement(out var building))
-            {
-                if (Rand.Chance(0.9f) || true)
-                {
-                    building.PerformStackBackup(this);
-                }
             }
             pawn.health.RemoveHediff(this);
         }

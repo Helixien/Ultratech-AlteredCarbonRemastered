@@ -11,20 +11,20 @@ namespace AlteredCarbon
 {
     public class Building_StackStorage : Building, IThingHolder
     {
-        public const int MaxFilledStackCapacity = 10;
-        public const int MaxEmergencyBackupDistanceInTiles = 25;
+        public const int MaxFilledStackCapacity = 25;
         public static HashSet<Building_StackStorage> building_StackStorages = new HashSet<Building_StackStorage>();
         public Building_StackStorage()
         {
             this.innerContainer = new ThingOwner<Thing>(this, false, LookMode.Deep);
+            this.backedUpStacks = new Dictionary<int, PersonaData>();
         }
 
         public bool allowColonistCorticalStacks = true;
         public bool allowStrangerCorticalStacks;
         public bool allowHostileCorticalStacks;
-        public CompRefuelable compRefuelable;
         public CompPowerTrader compPower;
-
+        private bool backupIsEnabled;
+        public Dictionary<int, PersonaData> backedUpStacks;
         public CorticalStack stackToDuplicate;
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -34,7 +34,6 @@ namespace AlteredCarbon
             {
                 this.contentsKnown = true;
             }
-            compRefuelable = this.TryGetComp<CompRefuelable>();
             compPower = this.TryGetComp<CompPowerTrader>();
         }
 
@@ -62,7 +61,7 @@ namespace AlteredCarbon
                 {
                     return false;
                 }
-                if (!PoweredAndFueled)
+                if (!Powered)
                 {
                     return false;
                 }
@@ -70,7 +69,30 @@ namespace AlteredCarbon
             }
         }
 
-        public bool PoweredAndFueled => this.compPower.PowerOn && this.compRefuelable.HasFuel;
+        public PersonaData FirstPersonaStackToRestore
+        {
+            get
+            {
+                foreach (var pawn in AlteredCarbonManager.Instance.PawnsWithStacks)
+                {
+                    foreach (var personaData in StoredBackedUpStacks)
+                    {
+                        if (pawn.thingIDNumber == personaData.pawnID)
+                        {
+                            if (pawn.Destroyed || pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is null)
+                            {
+                                if (!CorticalStack.corticalStacks.Any(x => x.PersonaData.pawnID == personaData.pawnID && x.Spawned && !x.Destroyed))
+                                {
+                                    return personaData;
+                                }
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+        }
+        public bool Powered => this.compPower.PowerOn;
         public bool HasAnyContents
         {
             get
@@ -78,7 +100,7 @@ namespace AlteredCarbon
                 return this.innerContainer.Any();
             }
         }
-
+        public IEnumerable<PersonaData> StoredBackedUpStacks => this.backedUpStacks.Values;
         public IEnumerable<CorticalStack> StoredStacks => this.innerContainer.OfType<CorticalStack>();
         public override IEnumerable<Gizmo> GetGizmos()
         {
@@ -86,41 +108,72 @@ namespace AlteredCarbon
             {
                 yield return g;
             }
-            var stacks = StoredStacks.ToList();
-            if (base.Faction == Faction.OfPlayer && stacks.Any())
+            if (base.Faction == Faction.OfPlayer)
             {
-                var command = new Command_Action
+                var stacks = StoredStacks.ToList();
+                if (stacks.Any())
                 {
-                    defaultLabel = "AlteredCarbon.DuplicateStack".Translate(),
-                    defaultDesc = "AC.DuplicateStackDesc".Translate(),
-                    icon = ContentFinder<Texture2D>.Get("UI/Icons/DuplicateStack"),
-                    action = delegate ()
+                    var command = new Command_Action
                     {
-                        var floatList = new List<FloatMenuOption>();
-                        foreach (var stack in StoredStacks)
+                        defaultLabel = "AlteredCarbon.DuplicateStack".Translate(),
+                        defaultDesc = "AC.DuplicateStackDesc".Translate(),
+                        icon = ContentFinder<Texture2D>.Get("UI/Icons/DuplicateStack"),
+                        action = delegate ()
                         {
-                            floatList.Add(new FloatMenuOption(stack.PersonaData.PawnNameColored, delegate ()
+                            var floatList = new List<FloatMenuOption>();
+                            foreach (var stack in StoredStacks)
                             {
-                                this.stackToDuplicate = stack;
-                            }));
+                                floatList.Add(new FloatMenuOption(stack.PersonaData.PawnNameColored, delegate ()
+                                {
+                                    this.stackToDuplicate = stack;
+                                }));
+                            }
+                            Find.WindowStack.Add(new FloatMenu(floatList));
                         }
-                        Find.WindowStack.Add(new FloatMenu(floatList));
-                    }
-                };
+                    };
 
-                if (this.stackToDuplicate != null)
-                {
-                    command.Disable("AC.AlreadySetToDuplicate".Translate());
+                    if (this.stackToDuplicate != null)
+                    {
+                        command.Disable("AC.AlreadySetToDuplicate".Translate());
+                    }
+                    else if (stacks.Count() >= MaxFilledStackCapacity)
+                    {
+                        command.Disable("AC.NoEnoughSpaceForNewStack".Translate());
+                    }
+                    yield return command;
                 }
-                else if (!this.compRefuelable.HasFuel)
+
+                var enableBackup = new Command_Toggle()
                 {
-                    command.Disable("AC.NoEnoughEmptyStacks".Translate());
-                }
-                else if (stacks.Count() >= MaxFilledStackCapacity)
+                    defaultLabel = "AlteredCarbon.EnableBackup".Translate(),
+                    defaultDesc = "AlteredCarbon.EnableBackupDesc".Translate(),
+                    icon = ContentFinder<Texture2D>.Get("UI/Icons/EnableBackup"),
+                    toggleAction = delegate ()
+                    {
+                        backupIsEnabled = !backupIsEnabled;
+                    },
+                    isActive = () => backupIsEnabled
+                };
+                yield return enableBackup;
+                if (backupIsEnabled)
                 {
-                    command.Disable("AC.NoEnoughSpaceForNewStack".Translate());
+                    var backupAll = new Command_Action()
+                    {
+                        defaultLabel = "AlteredCarbon.BackupAllStacks".Translate(),
+                        defaultDesc = "AlteredCarbon.BackupAllStacksDesc".Translate(),
+                        icon = ContentFinder<Texture2D>.Get("UI/Icons/BackupAllStacks"),
+                        action = delegate
+                        {
+                            BackupAllColonistsWithStacks();
+                        },
+                    };
+                    if (!this.compPower.PowerOn)
+                    {
+                        backupAll.Disable("NoPower".Translate());
+                    }
+                    yield return backupAll;
                 }
-                yield return command;
+
             }
         }
 
@@ -134,12 +187,10 @@ namespace AlteredCarbon
                 this.innerContainer.TryAdd(stackCopyTo);
                 stackCopyTo.PersonaData.CopyDataFrom(stackToDuplicate.PersonaData, true);
                 AlteredCarbonManager.Instance.RegisterStack(stackCopyTo);
-                compRefuelable.ConsumeFuel(1);
                 stackToDuplicate = null;
                 Messages.Message("AC.SuccessfullyDuplicatedStack".Translate(doer.Named("PAWN")), this, MessageTypeDefOf.TaskCompletion);
             }
         }
-
         public void PerformStackBackup(Hediff_CorticalStack hediff_CorticalStack)
         {
             var stackCopyTo = (CorticalStack)ThingMaker.MakeThing(AC_DefOf.UT_FilledCorticalStack);
@@ -147,7 +198,17 @@ namespace AlteredCarbon
             this.innerContainer.TryAdd(stackCopyTo);
             stackCopyTo.PersonaData.CopyDataFrom(hediff_CorticalStack.PersonaData);
             AlteredCarbonManager.Instance.RegisterStack(stackCopyTo);
-            compRefuelable.ConsumeFuel(1);
+        }
+        public void PerformStackRestoration(Pawn doer)
+        {
+            var stackRestoreTo = (CorticalStack)ThingMaker.MakeThing(AC_DefOf.UT_FilledCorticalStack);
+            stackRestoreTo.PersonaData.hasPawn = true;
+            var personaDataToRestore = FirstPersonaStackToRestore;
+            stackRestoreTo.PersonaData.CopyDataFrom(personaDataToRestore, true);
+            AlteredCarbonManager.Instance.RegisterStack(stackRestoreTo);
+            backedUpStacks.Remove(personaDataToRestore.pawnID);
+            Messages.Message("AlteredCarbon.SuccessfullyRestoredStackFromBackup".Translate(doer.Named("PAWN")), stackRestoreTo, MessageTypeDefOf.TaskCompletion);
+            GenPlace.TryPlaceThing(stackRestoreTo, doer.Position, doer.Map, ThingPlaceMode.Near);
         }
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn myPawn)
         {
@@ -169,6 +230,36 @@ namespace AlteredCarbon
         {
             base.Tick();
             this.innerContainer.ThingOwnerTick(true);
+            if (this.backupIsEnabled && compPower.PowerOn)
+            {
+                if (Find.TickManager.TicksGame % GenDate.TicksPerDay == 0)
+                {
+                    BackupAllColonistsWithStacks();
+                }
+            }
+        }
+
+        public void BackupAllColonistsWithStacks()
+        {
+            foreach (var pawn in AlteredCarbonManager.Instance.PawnsWithStacks)
+            {
+                if (CanBackup(pawn))
+                {
+                    Backup(pawn);
+                }
+            }
+        }
+        public bool CanBackup(Pawn pawn)
+        {
+            return pawn.Faction == this.Faction && pawn.MapHeld == this.Map && pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is Hediff_CorticalStack;
+        }
+        public void Backup(Pawn pawn)
+        {
+            var copy = new PersonaData();
+            copy.CopyPawn(pawn);
+            copy.isCopied = true;
+            copy.lastTimeUpdated = Find.TickManager.TicksGame;
+            this.backedUpStacks[copy.pawnID] = copy;
         }
         public bool HasFreeSpace => this.innerContainer.Count < MaxFilledStackCapacity;
         public override void ExposeData()
@@ -182,9 +273,13 @@ namespace AlteredCarbon
             Scribe_Values.Look(ref this.allowColonistCorticalStacks, "allowColonistCorticalStacks", true);
             Scribe_Values.Look(ref this.allowHostileCorticalStacks, "allowHostileCorticalStacks", false);
             Scribe_Values.Look(ref this.allowStrangerCorticalStacks, "allowStrangerCorticalStacks", false);
+            Scribe_Values.Look(ref this.backupIsEnabled, "backupIsEnabled");
             Scribe_References.Look(ref this.stackToDuplicate, "stackToDuplicate");
+            Scribe_Collections.Look(ref this.backedUpStacks, "backedUpStacks", LookMode.Value, LookMode.Deep, ref intKeys, ref personaDataValues);
         }
 
+        private List<int> intKeys;
+        private List<PersonaData> personaDataValues;
         public bool Accepts(Thing thing)
         {
             Predicate<Thing> validator = delegate (Thing x)

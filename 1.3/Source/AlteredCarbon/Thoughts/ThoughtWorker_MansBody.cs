@@ -8,7 +8,7 @@ namespace AlteredCarbon
 	{
 		protected override ThoughtState CurrentStateInternal(Pawn p)
 		{
-			if (p.story.traits.HasTrait(TraitDefOf.DislikesMen) && AlteredCarbonManager.Instance.pawnsWithStacks.Contains(p) && p.gender == Gender.Male)
+			if (p.story.traits.HasTrait(TraitDefOf.DislikesMen) && AlteredCarbonManager.Instance.PawnsWithStacks.Contains(p) && p.gender == Gender.Male)
 			{
 				return ThoughtState.ActiveDefault;
 			}
