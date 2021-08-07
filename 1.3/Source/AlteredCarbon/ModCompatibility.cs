@@ -203,10 +203,21 @@ namespace AlteredCarbon
 			}
 		}
 
+		public static List<BodyTypeDef> GetAllowedBodyTypes(ThingDef raceDef)
+        {
+			var alienRace = raceDef as AlienRace.ThingDef_AlienRace;
+			if (alienRace.alienRace?.generalSettings?.alienPartGenerator?.alienbodytypes?.Any() ?? false)
+            {
+				return alienRace.alienRace.generalSettings.alienPartGenerator.alienbodytypes;
+            }
+			return DefDatabase<BodyTypeDef>.AllDefsListForReading;
+		}
 		public static List<ThingDef> GetGrowableRaces(List<ThingDef> excluded)
 		{
 			return DefDatabase<AlienRace.ThingDef_AlienRace>.AllDefs.Where(x => !excluded.Contains(x)).Cast<ThingDef>().ToList();
 		}
+
+
 		static ModCompatibility()
         {
 			AlienRacesIsActive = HasActiveModWithPackageID("erdelf.HumanoidAlienRaces");

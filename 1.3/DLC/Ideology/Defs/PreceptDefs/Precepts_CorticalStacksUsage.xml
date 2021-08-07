@@ -262,7 +262,7 @@
 		<stages>
 			<li>
 				<label>no cortical stack</label>
-				<baseOpinionOffset>-10</baseOpinionOffset>
+				<baseOpinionOffset>-3</baseOpinionOffset>
 			</li>
 		</stages>
 		<nullifyingTraits>

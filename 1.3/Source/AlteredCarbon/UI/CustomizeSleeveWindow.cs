@@ -674,6 +674,11 @@ namespace AlteredCarbon
             string str = Regex.Replace(path, ".*/[A-Z]+?_", "", RegexOptions.IgnoreCase).Replace("_", " ");
             return str;
         }
+
+        public List<BodyTypeDef> GetAllowedBodyTypesFor(Pawn pawn)
+        {
+            return ModCompatibility.AlienRacesIsActive ? ModCompatibility.GetAllowedBodyTypes(pawn.def) : DefDatabase<BodyTypeDef>.AllDefsListForReading;
+        }
         public override void DoWindowContents(Rect inRect)
         {
             //Detect changes
@@ -979,25 +984,25 @@ namespace AlteredCarbon
                     {
                         if (maleBodyTypeIndex == 0)
                         {
-                            maleBodyTypeIndex = DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Female).Count() - 1;
+                            maleBodyTypeIndex = GetAllowedBodyTypesFor(newSleeve).Where(x => x != BodyTypeDefOf.Female).Count() - 1;
                         }
                         else
                         {
                             maleBodyTypeIndex--;
                         }
-                        newSleeve.story.bodyType = DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Female).ElementAt(maleBodyTypeIndex);
+                        newSleeve.story.bodyType = GetAllowedBodyTypesFor(newSleeve).Where(x => x != BodyTypeDefOf.Female).ElementAt(maleBodyTypeIndex);
                     }
                     else if (newSleeve.gender == Gender.Female)
                     {
                         if (femaleBodyTypeIndex == 0)
                         {
-                            femaleBodyTypeIndex = DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Male).Count() - 1;
+                            femaleBodyTypeIndex = GetAllowedBodyTypesFor(newSleeve).Where(x => x != BodyTypeDefOf.Male).Count() - 1;
                         }
                         else
                         {
                             femaleBodyTypeIndex--;
                         }
-                        newSleeve.story.bodyType = DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Male).ElementAt(femaleBodyTypeIndex);
+                        newSleeve.story.bodyType = GetAllowedBodyTypesFor(newSleeve).Where(x => x != BodyTypeDefOf.Male).ElementAt(femaleBodyTypeIndex);
                     }
                 
                     UpdateSleeveGraphic();
@@ -1006,7 +1011,7 @@ namespace AlteredCarbon
                 {
                     if (newSleeve.gender == Gender.Male)
                     {
-                        List<BodyTypeDef> maleBodyTypes = DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Female).ToList();
+                        List<BodyTypeDef> maleBodyTypes = GetAllowedBodyTypesFor(newSleeve).Where(x => x != BodyTypeDefOf.Female).ToList();
                         FloatMenuUtility.MakeMenu<BodyTypeDef>(maleBodyTypes, bodyType => bodyType.defName, (BodyTypeDef bodyType) => delegate
                         {
                             maleBodyTypeIndex = maleBodyTypes.IndexOf(bodyType);
@@ -1016,7 +1021,7 @@ namespace AlteredCarbon
                     }
                     else if (newSleeve.gender == Gender.Female)
                     {
-                        List<BodyTypeDef> femaleBodyTypes = DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Male).ToList();
+                        List<BodyTypeDef> femaleBodyTypes = GetAllowedBodyTypesFor(newSleeve).Where(x => x != BodyTypeDefOf.Male).ToList();
                         FloatMenuUtility.MakeMenu<BodyTypeDef>(femaleBodyTypes, bodyType => bodyType.defName, (BodyTypeDef bodyType) => delegate
                         {
                             femaleBodyTypeIndex = femaleBodyTypes.IndexOf(bodyType);
@@ -1029,7 +1034,7 @@ namespace AlteredCarbon
                 {
                     if (newSleeve.gender == Gender.Male)
                     {
-                        if (maleBodyTypeIndex == DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Female).Count() - 1)
+                        if (maleBodyTypeIndex == GetAllowedBodyTypesFor(newSleeve).Where(x => x != BodyTypeDefOf.Female).Count() - 1)
                         {
                             maleBodyTypeIndex = 0;
                         }
@@ -1037,11 +1042,11 @@ namespace AlteredCarbon
                         {
                             maleBodyTypeIndex++;
                         }
-                        newSleeve.story.bodyType = DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Female).ElementAt(maleBodyTypeIndex);
+                        newSleeve.story.bodyType = GetAllowedBodyTypesFor(newSleeve).Where(x => x != BodyTypeDefOf.Female).ElementAt(maleBodyTypeIndex);
                     }
                     else if (newSleeve.gender == Gender.Female)
                     {
-                        if (femaleBodyTypeIndex == DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Male).Count() - 1)
+                        if (femaleBodyTypeIndex == GetAllowedBodyTypesFor(newSleeve).Where(x => x != BodyTypeDefOf.Male).Count() - 1)
                         {
                             femaleBodyTypeIndex = 0;
                         }
@@ -1049,7 +1054,7 @@ namespace AlteredCarbon
                         {
                             femaleBodyTypeIndex++;
                         }
-                        newSleeve.story.bodyType = DefDatabase<BodyTypeDef>.AllDefs.Where(x => x != BodyTypeDefOf.Male).ElementAt(femaleBodyTypeIndex);
+                        newSleeve.story.bodyType = GetAllowedBodyTypesFor(newSleeve).Where(x => x != BodyTypeDefOf.Male).ElementAt(femaleBodyTypeIndex);
                     }
                     UpdateSleeveGraphic();
                 }
