@@ -16,17 +16,23 @@ Check the workshop page for information.</description>
 		<li>
 			<packageId>brrainz.harmony</packageId>
 			<displayName>Harmony</displayName>
-			<downloadUrl>https://github.com/Helixien/Ultratech-AlteredCarbonRemastered</downloadUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld</downloadUrl>
 			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2196278117</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>Ultratech.TOTT.Core</packageId>
+			<displayName>Ultratech: Core and Framework</displayName>
+			<downloadUrl></downloadUrl>
+			<steamWorkshopUrl></steamWorkshopUrl>
 		</li>
 	</modDependencies>
 	<loadAfter>
-		<li>brrainz.harmony</li> 
+		<li>brrainz.harmony</li>
 		<li>Ludeon.RimWorld</li>
 		<li>Ludeon.RimWorld.Royalty</li>
 		<li>Ludeon.RimWorld.Ideology</li>       
 		<li>OskarPotocki.VanillaExpandedFramework</li>
-		<li>vanillaexpanded.achievements</li>
+		<li>Ultratech.TOTT.Core</li>
 	</loadAfter>
 
 </ModMetaData>
