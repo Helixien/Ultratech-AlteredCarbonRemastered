@@ -276,6 +276,13 @@ namespace AlteredCarbon
             Scribe_Values.Look(ref this.backupIsEnabled, "backupIsEnabled");
             Scribe_References.Look(ref this.stackToDuplicate, "stackToDuplicate");
             Scribe_Collections.Look(ref this.backedUpStacks, "backedUpStacks", LookMode.Value, LookMode.Deep, ref intKeys, ref personaDataValues);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                if (this.backedUpStacks is null)
+                {
+                    this.backedUpStacks = new Dictionary<int, PersonaData>();
+                }
+            }
         }
 
         private List<int> intKeys;
