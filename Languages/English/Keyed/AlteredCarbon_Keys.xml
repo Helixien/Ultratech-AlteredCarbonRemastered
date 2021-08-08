@@ -137,5 +137,5 @@
 	<AlteredCarbon.TimeSinceLastBackup>({0} since last backup)</AlteredCarbon.TimeSinceLastBackup>
 	<AlteredCarbon.CannotRestoreBackupNoOtherEmptyStacks>Restore stack from backup (no available empty stacks on the map)</AlteredCarbon.CannotRestoreBackupNoOtherEmptyStacks>
 	<AlteredCarbon.SuccessfullyRestoredStackFromBackup>{PAWN_nameDef} successfully restored cortical stack from backup.</AlteredCarbon.SuccessfullyRestoredStackFromBackup>
-
+	<AlteredCarbon.OneMatrixStorageCanBeBuild>Only one Quantum Storage Matrix can be build per colony!</AlteredCarbon.OneMatrixStorageCanBeBuild>
 </LanguageData>

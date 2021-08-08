@@ -316,6 +316,7 @@
     <Compile Include="Buildings\Building_DecryptionBench.cs" />
     <Compile Include="Buildings\Building_OrganIncubator.cs" />
     <Compile Include="Buildings\Building_Incubator.cs" />
+    <Compile Include="Misc\PlaceWorker_MatrixStorage.cs" />
     <Compile Include="UI\ITab_StackBackupContents.cs" />
     <Compile Include="Jobs\JobDriver_CreateStackFromBackup.cs" />
     <Compile Include="Jobs\WorkGiver_CreateStackFromBackup.cs" />

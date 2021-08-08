@@ -59,7 +59,7 @@ namespace AlteredCarbon
             installStackRect.x -= 28;
 
             TooltipHandler.TipRegion(installStackRect, "AlteredCarbon.BackupNow".Translate());
-            if (Widgets.ButtonImage(installStackRect, ContentFinder<Texture2D>.Get("UI/Icons/BackupNow", true)))
+            if (Widgets.ButtonImage(installStackRect, ContentFinder<Texture2D>.Get("UI/Icons/Backup", true)))
             {
                 SoundDefOf.Tick_High.PlayOneShotOnCamera();
                 var pawn = AlteredCarbonManager.Instance.PawnsWithStacks.FirstOrDefault(x => x.thingIDNumber == personaData.pawnID);
