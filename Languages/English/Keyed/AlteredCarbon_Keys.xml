@@ -130,10 +130,10 @@
 	<AlteredCarbon.CannotBackupNoSuchPawn>Cannot backup {0}: there's no such pawn!</AlteredCarbon.CannotBackupNoSuchPawn>
 	<AlteredCarbon.CannotBackupPawnOnAnotherLocation>Cannot backup, {0} is on different location.</AlteredCarbon.CannotBackupPawnOnAnotherLocation>
 	<AlteredCarbon.CannotBackupNoPower>Cannot backup {0}, the building is not powered.</AlteredCarbon.CannotBackupNoPower>
-	<AlteredCarbon.EnableBackup>Enable backup</AlteredCarbon.EnableBackup>
-	<AlteredCarbon.EnableBackupDesc>Placeholder</AlteredCarbon.EnableBackupDesc>
-	<AlteredCarbon.BackupAllStacks>Backup all stacks</AlteredCarbon.BackupAllStacks>
-	<AlteredCarbon.BackupAllStacksDesc>Placeholder</AlteredCarbon.BackupAllStacksDesc>
+	<AlteredCarbon.EnableBackup>Enable automatic backup</AlteredCarbon.EnableBackup>
+	<AlteredCarbon.EnableBackupDesc>Allow the matrix to make backups of all installed cortical stacks belonging to the player who are on the local map.</AlteredCarbon.EnableBackupDesc>
+	<AlteredCarbon.BackupAllStacks>Emergency Backup</AlteredCarbon.BackupAllStacks>
+	<AlteredCarbon.BackupAllStacksDesc>Force backup all installed cortical stacks belonging to the player now.</AlteredCarbon.BackupAllStacksDesc>
 	<AlteredCarbon.TimeSinceLastBackup>({0} since last backup)</AlteredCarbon.TimeSinceLastBackup>
 	<AlteredCarbon.CannotRestoreBackupNoOtherEmptyStacks>Restore stack from backup (no available empty stacks on the map)</AlteredCarbon.CannotRestoreBackupNoOtherEmptyStacks>
 	<AlteredCarbon.SuccessfullyRestoredStackFromBackup>{PAWN_nameDef} successfully restored cortical stack from backup.</AlteredCarbon.SuccessfullyRestoredStackFromBackup>
