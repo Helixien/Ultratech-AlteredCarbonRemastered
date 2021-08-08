@@ -20,7 +20,7 @@ Check the workshop page for information.</description>
 			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2196278117</steamWorkshopUrl>
 		</li>
 		<li>
-			<packageId>Ultratech.TOTT.Core</packageId>
+			<packageId>Ultratech.TOT.Core</packageId>
 			<displayName>Ultratech: Core and Framework</displayName>
 			<downloadUrl></downloadUrl>
 			<steamWorkshopUrl></steamWorkshopUrl>
@@ -30,9 +30,10 @@ Check the workshop page for information.</description>
 		<li>brrainz.harmony</li>
 		<li>Ludeon.RimWorld</li>
 		<li>Ludeon.RimWorld.Royalty</li>
-		<li>Ludeon.RimWorld.Ideology</li>       
+		<li>Ludeon.RimWorld.Ideology</li>
+		<li>UnlimitedHugs.HugsLib</li>		
 		<li>OskarPotocki.VanillaExpandedFramework</li>
-		<li>Ultratech.TOTT.Core</li>
+		<li>Ultratech.TOT.Core</li>
 	</loadAfter>
 
 </ModMetaData>
