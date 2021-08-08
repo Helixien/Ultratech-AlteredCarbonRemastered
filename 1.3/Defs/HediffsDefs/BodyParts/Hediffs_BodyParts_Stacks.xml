@@ -88,6 +88,9 @@
 		<descriptionHyperlinks>
 			<RecipeDef>UT_InstallCorticalStack</RecipeDef>
 		</descriptionHyperlinks>
+		<inspectorTabs>
+			<li>ITab_Pawn_Character</li>
+		</inspectorTabs>
 		<uiIconForStackCount>1</uiIconForStackCount>
 		<healthAffectsPrice>false</healthAffectsPrice>
 		<stackLimit>1</stackLimit>

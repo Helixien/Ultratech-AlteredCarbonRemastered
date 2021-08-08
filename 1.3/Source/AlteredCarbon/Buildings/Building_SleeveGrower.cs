@@ -193,7 +193,7 @@ namespace AlteredCarbon
 					}
 					else
 					{
-						this.InnerPawn.Rotation = Rot4.South;
+						this.InnerPawn.Rotation = this.Rotation;
 						this.InnerPawn.DrawAt(newPos, flip);
 					}
 				}

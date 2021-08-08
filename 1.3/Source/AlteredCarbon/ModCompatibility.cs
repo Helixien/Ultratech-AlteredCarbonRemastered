@@ -216,8 +216,6 @@ namespace AlteredCarbon
 		{
 			return DefDatabase<AlienRace.ThingDef_AlienRace>.AllDefs.Where(x => !excluded.Contains(x)).Cast<ThingDef>().ToList();
 		}
-
-
 		static ModCompatibility()
         {
 			AlienRacesIsActive = HasActiveModWithPackageID("erdelf.HumanoidAlienRaces");
@@ -229,8 +227,26 @@ namespace AlteredCarbon
 				raceGroupDef_HelperType = AccessTools.TypeByName("RaceGroupDef_Helper");
 				tryGetRaceGroupDef = raceGroupDef_HelperType.GetMethods().FirstOrDefault(x => x.Name == "TryGetRaceGroupDef");
 			}
+			DubsBadHygieneActive = HasActiveModWithPackageID("Dubwise.DubsBadHygiene");
 		}
 
+		public static void FillThirstNeed(Pawn pawn, float value) 
+		{
+			var need = pawn.needs.TryGetNeed<DubsBadHygiene.Need_Thirst>();
+			if (need != null)
+            {
+				need.CurLevel += value;
+            }
+		}
+
+		public static void FillHygieneNeed(Pawn pawn, float value)
+		{
+			var need = pawn.needs.TryGetNeed<DubsBadHygiene.Need_Hygiene>();
+			if (need != null)
+			{
+				need.CurLevel += value;
+			}
+		}
 		private static MethodInfo tryGetRaceGroupDef;
 		private static Type raceGroupDef_HelperType;
 		public static bool RJWAllowsThisFor(this HediffDef hediffDef, Pawn pawn)
@@ -388,6 +404,17 @@ namespace AlteredCarbon
 						}
 						catch { }
 					}
+					if (pawnData.Hero)
+                    {
+						foreach (var otherPawn in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction)
+                        {
+							if (otherPawn != pawn)
+                            {
+								var otherPawnData = dataStore.GetPawnData(otherPawn);
+								otherPawnData.Hero = false;
+							}
+						}
+                    }
 				}
 			}
 
@@ -419,6 +446,7 @@ namespace AlteredCarbon
 		public static bool IndividualityIsActive;
 		public static bool PsychologyIsActive;
 		public static bool RimJobWorldIsActive;
+		public static bool DubsBadHygieneActive;
 	}
 
 }

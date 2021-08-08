@@ -43,6 +43,10 @@
       <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="BadHygiene">
+      <HintPath>..\..\..\..\..\..\..\workshop\content\294100\836308268\1.3\Assemblies\BadHygiene.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Psychology">
       <HintPath>..\..\..\..\..\..\..\workshop\content\294100\2016263135\1.3\Assemblies\Psychology.dll</HintPath>
       <Private>False</Private>

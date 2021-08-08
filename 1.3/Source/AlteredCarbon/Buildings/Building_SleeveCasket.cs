@@ -25,11 +25,21 @@ namespace AlteredCarbon
 				if (occupant.IsEmptySleeve() && occupant.needs.food.CurLevel < 1f)
                 {
 					occupant.needs.food.CurLevel += 0.001f;
+					if (ModCompatibility.DubsBadHygieneActive)
+                    {
+						ModCompatibility.FillThirstNeed(occupant, 0.001f);
+						ModCompatibility.FillHygieneNeed(occupant, 0.001f);
+					}
 					var malnutrition = occupant.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.Malnutrition);
 					if (malnutrition != null)
                     {
 						occupant.health.RemoveHediff(malnutrition);
                     }
+					var dehydration = occupant.health.hediffSet.hediffs.FirstOrDefault(x => x.def.defName == "DBHDehydration");
+					if (dehydration != null)
+                    {
+						occupant.health.RemoveHediff(dehydration);
+					}
 				}
             }
 

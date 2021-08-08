@@ -79,7 +79,7 @@ namespace AlteredCarbon
             installStackRect.x -= 28;
 
             TooltipHandler.TipRegion(installStackRect, "AlteredCarbon.InstallStack".Translate());
-            if (Widgets.ButtonImage(installStackRect, ContentFinder<Texture2D>.Get("UI/Icons/InstallStack", true)))
+            if (Widgets.ButtonImage(installStackRect, ContentFinder<Texture2D>.Get("UI/Icons/Install", true)))
             {
                 SoundDefOf.Tick_High.PlayOneShotOnCamera();
                 Find.Targeter.BeginTargeting(corticalStack.ForPawn(), delegate (LocalTargetInfo x)
