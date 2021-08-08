@@ -22,6 +22,7 @@ namespace AlteredCarbon
 				Traverse.Create(this.def).Field("allRecipesCached").SetValue(null);
             }
         }
+
         private static List<RecipeDef> allRecipes;
 		public override int OpenTicks => 200;
 		public override IEnumerable<Gizmo> GetGizmos()
