@@ -27,7 +27,7 @@ namespace AlteredCarbon
 		{
 			base.PostDraw();
 			var vector = this.parent.DrawPos + Altitudes.AltIncVect;
-			vector.y += 3;
+			vector.y += 6;
 			Glass.Draw(vector, Rot4.North, this.parent);
 		}
 	}

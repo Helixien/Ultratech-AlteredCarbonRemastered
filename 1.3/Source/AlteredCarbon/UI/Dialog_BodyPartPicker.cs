@@ -82,7 +82,15 @@ namespace AlteredCarbon
                 if (hediffsWithStages.Any())
                 {
                     hediffsForParts[part] = hediffsWithStages;
-                    partIndex[part] = Rand.RangeInclusive(0, hediffsWithStages.Count - 1);
+                    var existingHediff = hediffsWithStages.FirstOrDefault(x => pawn.health.hediffSet.hediffs.Any(y => y.def == x.hediffDef && y.CurStageIndex == x.stageInd));
+                    if (existingHediff != null)
+                    {
+                        partIndex[part] = hediffsWithStages.IndexOf(existingHediff);
+                    }
+                    else
+                    {
+                        partIndex[part] = Rand.RangeInclusive(0, hediffsWithStages.Count - 1);
+                    }
                 }
             }
         }

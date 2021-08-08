@@ -61,7 +61,6 @@ namespace AlteredCarbon
             base.LoadedGame();
             PreInit();
         }
-
         public void TryAddRelationships(Pawn pawn)
         {
             var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;

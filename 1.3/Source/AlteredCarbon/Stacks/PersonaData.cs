@@ -191,27 +191,32 @@ namespace AlteredCarbon
             this.times = pawn.timetable?.times;
             this.thoughts = pawn.needs?.mood?.thoughts?.memories?.Memories;
             this.faction = pawn.Faction;
-            if (pawn.Faction.leader == pawn)
+            if (pawn.Faction?.leader == pawn)
             {
                 this.isFactionLeader = true;
             }
             this.traits = pawn.story?.traits?.allTraits;
-            this.relations = pawn.relations?.DirectRelations;
-            this.relatedPawns = pawn.relations?.RelatedPawns?.ToHashSet();
-            foreach (var otherPawn in pawn.relations.RelatedPawns)
+
+            if (pawn.relations != null)
             {
-                foreach (var rel2 in pawn.GetRelations(otherPawn))
+                this.relations = pawn.relations.DirectRelations ?? new List<DirectPawnRelation>();
+                this.relatedPawns = pawn.relations.RelatedPawns?.ToHashSet() ?? new HashSet<Pawn>();
+                foreach (var otherPawn in pawn.relations.RelatedPawns)
                 {
-                    if (this.relations.Where(r => r.def == rel2 && r.otherPawn == otherPawn).Count() == 0)
+                    foreach (var rel2 in pawn.GetRelations(otherPawn))
                     {
-                        if (!rel2.implied)
+                        if (!this.relations.Any(r => r.def == rel2 && r.otherPawn == otherPawn))
                         {
-                            this.relations.Add(new DirectPawnRelation(rel2, otherPawn, 0));
+                            if (!rel2.implied)
+                            {
+                                this.relations.Add(new DirectPawnRelation(rel2, otherPawn, 0));
+                            }
                         }
                     }
+                    relatedPawns.Add(otherPawn);
                 }
-                relatedPawns.Add(otherPawn);
             }
+
             this.skills = pawn.skills?.skills;
             this.childhood = pawn.story?.childhood?.identifier;
             if (pawn.story?.adulthood != null)
@@ -228,27 +233,29 @@ namespace AlteredCarbon
                     this.priorities[w] = pawn.workSettings.GetPriority(w);
                 }
             }
-
-            this.guestStatusInt = pawn.guest.GuestStatus;
-            this.interactionMode = pawn.guest.interactionMode;
-            this.slaveInteractionMode = pawn.guest.slaveInteractionMode;
-            this.hostFactionInt = pawn.guest.HostFaction;
-            this.joinStatus = pawn.guest.joinStatus;
-            this.slaveFactionInt = pawn.guest.SlaveFaction;
-            this.lastRecruiterName = pawn.guest.lastRecruiterName;
-            this.lastRecruiterOpinion = pawn.guest.lastRecruiterOpinion;
-            this.hasOpinionOfLastRecruiter = pawn.guest.hasOpinionOfLastRecruiter;
-            this.lastRecruiterResistanceReduce = pawn.guest.lastRecruiterResistanceReduce;
-            this.releasedInt = pawn.guest.Released;
-            this.ticksWhenAllowedToEscapeAgain = Traverse.Create(pawn.guest).Field("ticksWhenAllowedToEscapeAgain").GetValue<int>();
-            this.spotToWaitInsteadOfEscaping = pawn.guest.spotToWaitInsteadOfEscaping;
-            this.lastPrisonBreakTicks = pawn.guest.lastPrisonBreakTicks;
-            this.everParticipatedInPrisonBreak = pawn.guest.everParticipatedInPrisonBreak;
-            this.resistance = pawn.guest.resistance;
-            this.will = pawn.guest.will;
-            this.ideoForConversion = pawn.guest.ideoForConversion;
-            this.everEnslaved = pawn.guest.EverEnslaved;
-            this.getRescuedThoughtOnUndownedBecauseOfPlayer = pawn.guest.getRescuedThoughtOnUndownedBecauseOfPlayer;
+            if (pawn.guest != null)
+            {
+                this.guestStatusInt = pawn.guest.GuestStatus;
+                this.interactionMode = pawn.guest.interactionMode;
+                this.slaveInteractionMode = pawn.guest.slaveInteractionMode;
+                this.hostFactionInt = pawn.guest.HostFaction;
+                this.joinStatus = pawn.guest.joinStatus;
+                this.slaveFactionInt = pawn.guest.SlaveFaction;
+                this.lastRecruiterName = pawn.guest.lastRecruiterName;
+                this.lastRecruiterOpinion = pawn.guest.lastRecruiterOpinion;
+                this.hasOpinionOfLastRecruiter = pawn.guest.hasOpinionOfLastRecruiter;
+                this.lastRecruiterResistanceReduce = pawn.guest.lastRecruiterResistanceReduce;
+                this.releasedInt = pawn.guest.Released;
+                this.ticksWhenAllowedToEscapeAgain = Traverse.Create(pawn.guest).Field("ticksWhenAllowedToEscapeAgain").GetValue<int>();
+                this.spotToWaitInsteadOfEscaping = pawn.guest.spotToWaitInsteadOfEscaping;
+                this.lastPrisonBreakTicks = pawn.guest.lastPrisonBreakTicks;
+                this.everParticipatedInPrisonBreak = pawn.guest.everParticipatedInPrisonBreak;
+                this.resistance = pawn.guest.resistance;
+                this.will = pawn.guest.will;
+                this.ideoForConversion = pawn.guest.ideoForConversion;
+                this.everEnslaved = pawn.guest.EverEnslaved;
+                this.getRescuedThoughtOnUndownedBecauseOfPlayer = pawn.guest.getRescuedThoughtOnUndownedBecauseOfPlayer;
+            }
 
             this.hasPawn = true;
             this.pawnID = pawn.thingIDNumber;
@@ -257,6 +264,7 @@ namespace AlteredCarbon
                 this.royalTitles = pawn.royalty?.AllTitlesForReading;
                 this.favor = Traverse.Create(pawn.royalty).Field("favor").GetValue<Dictionary<Faction, int>>();
                 this.heirs = Traverse.Create(pawn.royalty).Field("heirs").GetValue<Dictionary<Faction, Pawn>>();
+                this.bondedThings = new List<Thing>();
                 foreach (var map in Find.Maps)
                 {
                     foreach (var thing in map.listerThings.AllThings)
@@ -298,9 +306,10 @@ namespace AlteredCarbon
 
             if (ModsConfig.IdeologyActive)
             {
-                if (pawn.Ideo != null)
+                if (pawn.ideo != null && pawn.Ideo != null)
                 {
                     this.ideo = pawn.Ideo;
+
                     this.certainty = pawn.ideo.Certainty;
                     this.previousIdeos = pawn.ideo.PreviousIdeos;
                     this.joinTick = pawn.ideo.joinTick;
@@ -318,7 +327,7 @@ namespace AlteredCarbon
                     }
                 }
 
-                if (pawn.story.favoriteColor.HasValue)
+                if (pawn.story?.favoriteColor.HasValue ?? false)
                 {
                     this.favoriteColor = pawn.story.favoriteColor.Value;
                 }

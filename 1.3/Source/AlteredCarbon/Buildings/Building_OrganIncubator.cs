@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -11,6 +12,17 @@ namespace AlteredCarbon
 {
 	public class Building_OrganIncubator : Building_Incubator
 	{
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+			if (allRecipes is null)
+            {
+				allRecipes = this.def.AllRecipes.ListFullCopy();
+				this.def.recipes.Clear();
+				Traverse.Create(this.def).Field("allRecipesCached").SetValue(null);
+            }
+        }
+        private static List<RecipeDef> allRecipes;
 		public override int OpenTicks => 200;
 		public override IEnumerable<Gizmo> GetGizmos()
 		{
@@ -39,6 +51,11 @@ namespace AlteredCarbon
 					createOrgan.defaultDesc = "AlteredCarbon.CreateOrganDesc".Translate();
 					createOrgan.hotKey = KeyBindingDefOf.Misc8;
 					createOrgan.icon = ContentFinder<Texture2D>.Get("UI/Icons/CreateSleeve", true);
+
+					if (!ResearchedOrganGrowingRecipes.Any())
+                    {
+						createOrgan.Disable("AlteredCarbon.OrganGrowingRecipesRequiresResearch".Translate());
+					}
 					yield return createOrgan;
 				}
 				if (Prefs.DevMode && incubatorState == IncubatorState.Growing)
@@ -51,25 +68,36 @@ namespace AlteredCarbon
 			}
 			yield break;
 		}
+
+		private IEnumerable<RecipeDef> ResearchedOrganGrowingRecipes
+        {
+            get
+            {
+				foreach (var recipe in allRecipes) 
+				{
+					if (recipe.researchPrerequisite != null && !recipe.researchPrerequisite.IsFinished)
+					{
+						continue;
+					}
+					if (recipe.researchPrerequisites != null)
+					{
+						foreach (var research in recipe.researchPrerequisites)
+						{
+							if (!research.IsFinished)
+							{
+								continue;
+							}
+						}
+					}
+					yield return recipe;
+				}
+            }
+        }
 		public void CreateOrgan()
 		{
 			var floatList = new List<FloatMenuOption>();
-			foreach (var recipe in this.def.recipes)
+			foreach (var recipe in ResearchedOrganGrowingRecipes)
             {
-				if (recipe.researchPrerequisite != null && !recipe.researchPrerequisite.IsFinished)
-				{
-					continue;
-				}
-				if (recipe.researchPrerequisites != null)
-                {
-					foreach (var research in recipe.researchPrerequisites)
-                    {
-						if (!research.IsFinished)
-                        {
-							continue;
-						}
-					}
-                }
 				floatList.Add(new FloatMenuOption(recipe.LabelCap, delegate 
 				{
 					var newOrgan = ThingMaker.MakeThing(recipe.ProducedThingDef);
@@ -77,22 +105,6 @@ namespace AlteredCarbon
 				}));
             }
 			Find.WindowStack.Add(new FloatMenu(floatList));
-		}
-
-		[TweakValue("0AC", -5f, 5f)] public static float yOffset;
-		[TweakValue("0AC", -5f, 5f)] public static float zOffset;
-		public override void DrawAt(Vector3 drawLoc, bool flip = false)
-		{
-			base.DrawAt(drawLoc, flip);
-			//if (this.InnerThing != null)
-			//{
-			//	Vector3 newPos = drawLoc;
-			//	newPos.y += yOffset;
-			//	newPos.z += zOffset;
-			//	this.InnerThing.Rotation = Rot4.South;
-			//	this.InnerThing.DrawAt(newPos, flip);
-			//}
-			base.Comps_PostDraw();
 		}
 		public void CancelGrowing()
 		{

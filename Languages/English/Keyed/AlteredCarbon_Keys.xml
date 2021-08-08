@@ -138,4 +138,6 @@
 	<AlteredCarbon.CannotRestoreBackupNoOtherEmptyStacks>Restore stack from backup (no available empty stacks on the map)</AlteredCarbon.CannotRestoreBackupNoOtherEmptyStacks>
 	<AlteredCarbon.SuccessfullyRestoredStackFromBackup>{PAWN_nameDef} successfully restored cortical stack from backup.</AlteredCarbon.SuccessfullyRestoredStackFromBackup>
 	<AlteredCarbon.OneMatrixStorageCanBeBuild>Only one Quantum Storage Matrix can be build per colony!</AlteredCarbon.OneMatrixStorageCanBeBuild>
+	<AlteredCarbon.OrganGrowingRecipesRequiresResearch>You need to research at least one organ growing recipe.</AlteredCarbon.OrganGrowingRecipesRequiresResearch>
+	<AlteredCarbon.BackupsCompleted>Quantum Storage Matrix: Backups Completed! {0} colonists were backed up!</AlteredCarbon.BackupsCompleted>
 </LanguageData>

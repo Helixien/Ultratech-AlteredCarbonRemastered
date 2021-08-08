@@ -241,13 +241,17 @@ namespace AlteredCarbon
 
         public void BackupAllColonistsWithStacks()
         {
+            int num = 0;
             foreach (var pawn in AlteredCarbonManager.Instance.PawnsWithStacks)
             {
                 if (CanBackup(pawn))
                 {
+                    num++;
                     Backup(pawn);
                 }
             }
+
+            Messages.Message("AlteredCarbon.BackupsCompleted".Translate(num), this, MessageTypeDefOf.NeutralEvent);
         }
         public bool CanBackup(Pawn pawn)
         {

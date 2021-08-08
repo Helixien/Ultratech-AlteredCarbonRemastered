@@ -508,9 +508,19 @@ namespace AlteredCarbon
                 (beautyLevel * AlteredCarbonMod.settings.baseBeautyLevel + qualityLevel * AlteredCarbonMod.settings.baseQualityLevel)));
             meatCost = 250 + beautyLevel * 25 + qualityLevel * 50;
         }
+
+        HediffDef qualityDiff;
         void UpdateHediffs()
         {
-            HediffDef qualityDiff;
+            if (qualityDiff != null)
+            {
+                var hediff = newSleeve.health.hediffSet.GetFirstHediffOfDef(qualityDiff);
+                if (hediff != null)
+                {
+                    newSleeve.health.RemoveHediff(hediff);
+                }
+            }
+
             if (qualityLevel == -1)
             {
                 qualityDiff = AC_DefOf.UT_Sleeve_Quality_Low;
@@ -524,7 +534,6 @@ namespace AlteredCarbon
                 qualityDiff = AC_DefOf.UT_Sleeve_Quality_Standart;
             }
 
-            RemoveAllHediffs(newSleeve);
             newSleeve.health.AddHediff(qualityDiff, null);
             var comp = sleeveGrower.ActiveBrainTemplate.TryGetComp<CompBrainTemplate>();
             if (comp != null)
