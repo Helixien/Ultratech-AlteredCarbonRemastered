@@ -81,6 +81,7 @@ namespace AlteredCarbon
                 }
                 if (hediffsWithStages.Any())
                 {
+                    hediffsWithStages.Add(new HediffStage());// just a null option;
                     hediffsForParts[part] = hediffsWithStages;
                     var existingHediff = hediffsWithStages.FirstOrDefault(x => pawn.health.hediffSet.hediffs.Any(y => y.def == x.hediffDef && y.CurStageIndex == x.stageInd));
                     if (existingHediff != null)
@@ -100,6 +101,10 @@ namespace AlteredCarbon
 
         private string GetLabel(HediffDef hediffDef, int stageIndex)
         {
+            if (hediffDef is null)
+            {
+                return "None".Translate();
+            }
             var label = hediffDef.LabelCap;
             if (hediffDef.stages != null)
             {
@@ -185,19 +190,22 @@ namespace AlteredCarbon
                     var curInd = partIndex[data.Key];
                     var hediffStage = data.Value[curInd];
                     var hediffDef = hediffStage.hediffDef;
-                    pawn.health.RestorePart(data.Key);
-                    var hediff = ACUtils.MakeHediff(hediffDef, pawn, data.Key);
-                    var stages = hediffDef.stages;
-                    if (stages != null)
+                    if (hediffDef != null)
                     {
-                        var stage = stages[hediffStage.stageInd];
-                        hediff.Severity = stage.minSeverity;
+                        pawn.health.RestorePart(data.Key);
+                        var hediff = ACUtils.MakeHediff(hediffDef, pawn, data.Key);
+                        var stages = hediffDef.stages;
+                        if (stages != null)
+                        {
+                            var stage = stages[hediffStage.stageInd];
+                            hediff.Severity = stage.minSeverity;
+                        }
+                        else
+                        {
+                            hediff.Severity = 0;
+                        }
+                        pawn.health.AddHediff(hediff);
                     }
-                    else
-                    {
-                        hediff.Severity = 0;
-                    }
-                    pawn.health.AddHediff(hediff);
                 }
                 this.Close();
             }

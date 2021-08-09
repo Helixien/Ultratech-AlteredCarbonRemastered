@@ -8,6 +8,7 @@
 	<AlteredCarbon.ageChronologicalTicks>Chronological age</AlteredCarbon.ageChronologicalTicks>
 	<AlteredCarbon.ExtractStack>Extract stack</AlteredCarbon.ExtractStack>
 	<AlteredCarbon.DuplicateStack>Duplicate Stack</AlteredCarbon.DuplicateStack>
+	<AlteredCarbon.DuplicateStackDesc>Placeholder</AlteredCarbon.DuplicateStackDesc>
 	<AlteredCarbon.DestroyStack>Destroy stack</AlteredCarbon.DestroyStack>
 	<AlteredCarbon.DestroyedStack>Destroyed stack</AlteredCarbon.DestroyedStack>
 	<AlteredCarbon.DestroyedStackDesc>An empty stack was destroyed by inept actions of {PAWN_labelShort}.</AlteredCarbon.DestroyedStackDesc>
@@ -125,7 +126,7 @@
 	<AlteredCarbon.Backup>Backup</AlteredCarbon.Backup>
 	<AlteredCarbon.BackedUpStacksInMatrix>Backed up stacks in Matrix: {0}</AlteredCarbon.BackedUpStacksInMatrix>
 	<AlteredCarbon.Erase>Erase</AlteredCarbon.Erase>
-	<AlteredCarbon.Backup>Backup now</AlteredCarbon.Backup>
+	<AlteredCarbon.Backup>Backup</AlteredCarbon.Backup>
 	<AlteredCarbon.BackupNow>Backup now</AlteredCarbon.BackupNow>
 	<AlteredCarbon.CannotBackupNoSuchPawn>Cannot backup {0}: there's no such pawn!</AlteredCarbon.CannotBackupNoSuchPawn>
 	<AlteredCarbon.CannotBackupPawnOnAnotherLocation>Cannot backup, {0} is on different location.</AlteredCarbon.CannotBackupPawnOnAnotherLocation>

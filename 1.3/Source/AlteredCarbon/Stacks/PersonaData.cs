@@ -54,6 +54,9 @@ namespace AlteredCarbon
         private bool everEnslaved = false;
         public bool getRescuedThoughtOnUndownedBecauseOfPlayer;
 
+        private DefMap<RecordDef, float> records = new DefMap<RecordDef, float>();
+        private Battle battleActive;
+        private int battleExitTick;
 
         public bool hasPawn = false;
         public Gender gender;
@@ -256,7 +259,12 @@ namespace AlteredCarbon
                 this.everEnslaved = pawn.guest.EverEnslaved;
                 this.getRescuedThoughtOnUndownedBecauseOfPlayer = pawn.guest.getRescuedThoughtOnUndownedBecauseOfPlayer;
             }
-
+            if (pawn.records != null)
+            {
+                this.records = Traverse.Create(pawn.records).Field("records").GetValue<DefMap<RecordDef, float>>();
+                this.battleActive = pawn.records.BattleActive;
+                this.battleExitTick = pawn.records.LastBattleTick;
+            }
             this.hasPawn = true;
             this.pawnID = pawn.thingIDNumber;
             if (ModsConfig.RoyaltyActive && pawn.royalty != null)
@@ -439,6 +447,10 @@ namespace AlteredCarbon
             this.ideoForConversion = other.ideoForConversion;
             this.everEnslaved = other.everEnslaved;
             this.getRescuedThoughtOnUndownedBecauseOfPlayer = other.getRescuedThoughtOnUndownedBecauseOfPlayer;
+
+            this.records = other.records;
+            this.battleActive = other.battleActive;
+            this.battleExitTick = other.battleExitTick;
 
             this.hasPawn = true;
 
@@ -653,7 +665,10 @@ namespace AlteredCarbon
                     pawnToOverwrite.workSettings.SetPriority(priority.Key, priority.Value);
                 }
             }
-
+            if (pawnToOverwrite.guest is null)
+            {
+                pawnToOverwrite.guest = new Pawn_GuestTracker();
+            }
             pawnToOverwrite.guest.guestStatusInt = this.guestStatusInt;
             pawnToOverwrite.guest.interactionMode = this.interactionMode;
             pawnToOverwrite.guest.slaveInteractionMode = this.slaveInteractionMode;
@@ -675,6 +690,19 @@ namespace AlteredCarbon
             Traverse.Create(pawnToOverwrite.guest).Field("everEnslaved").SetValue(this.everEnslaved);
             pawnToOverwrite.guest.getRescuedThoughtOnUndownedBecauseOfPlayer = this.getRescuedThoughtOnUndownedBecauseOfPlayer;
 
+            if (pawnToOverwrite.records is null)
+            {
+                pawnToOverwrite.records = new Pawn_RecordsTracker(pawnToOverwrite);
+            }
+
+            Traverse.Create(pawnToOverwrite.records).Field("records").SetValue(this.records);
+            Traverse.Create(pawnToOverwrite.records).Field("battleActive").SetValue(this.battleActive);
+            Traverse.Create(pawnToOverwrite.records).Field("battleExitTick").SetValue(this.battleExitTick);
+
+            if (pawnToOverwrite.playerSettings is null)
+            {
+                pawnToOverwrite.playerSettings = new Pawn_PlayerSettings(pawnToOverwrite);
+            }
             pawnToOverwrite.playerSettings.AreaRestriction = this.areaRestriction;
             pawnToOverwrite.playerSettings.medCare = this.medicalCareCategory;
             pawnToOverwrite.playerSettings.selfTend = this.selfTend;
@@ -936,6 +964,10 @@ namespace AlteredCarbon
             Scribe_References.Look(ref ideoForConversion, "ideoForConversion");
             Scribe_Values.Look(ref everEnslaved, "everEnslaved");
             Scribe_Values.Look(ref getRescuedThoughtOnUndownedBecauseOfPlayer, "getRescuedThoughtOnUndownedBecauseOfPlayer");
+
+            Scribe_Deep.Look(ref records, "records");
+            Scribe_References.Look(ref battleActive, "battleActive");
+            Scribe_Values.Look(ref battleExitTick, "battleExitTick", 0);
 
             Scribe_Values.Look<bool>(ref this.hasPawn, "hasPawn", false, false);
             Scribe_Values.Look<Gender>(ref this.gender, "gender", 0, false);

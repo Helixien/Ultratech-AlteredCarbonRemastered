@@ -259,10 +259,8 @@ namespace AlteredCarbon
             return excludedRaces;
         }
 
-        private void Init(Building_SleeveGrower sleeveGrower)
+        private void Init(PawnKindDef pawnKindDef, Gender? gender = null)
         {
-            this.forcePause = true;
-            this.absorbInputAroundWindow = true;
             if (ModCompatibility.AlienRacesIsActive)
             {
                 List<ThingDef> excludedRaces = new List<ThingDef>();
@@ -278,15 +276,22 @@ namespace AlteredCarbon
                 }
                 orderedValidAlienRaces = ModCompatibility.GetGrowableRaces(excludedRaces).OrderBy(entry => entry.LabelCap.RawText).ToList();
             }
-            this.sleeveGrower = sleeveGrower;
-            currentPawnKindDef = PawnKindDefOf.Colonist;
-            var gender = Gender.Male;
-            if (Rand.Chance(0.5f)) gender = Gender.Female;
-            newSleeve = GetNewPawn(gender);
+            currentPawnKindDef = pawnKindDef;;
+            
+            if (!gender.HasValue)
+            {
+                gender = Rand.Bool ? Gender.Male : Gender.Female;
+            }
+            newSleeve = GetNewPawn(gender.Value);
             UpdateGrowingCost();
             UpdateHediffs();
             ApplyBeauty();
+        }
 
+        private void InitUI()
+        {
+            this.forcePause = true;
+            this.absorbInputAroundWindow = true;
             //860x570
             //init Rects
             //gender
@@ -460,19 +465,21 @@ namespace AlteredCarbon
             //biomass
             lblRequireBiomass = new Rect(beautySlider.x + 30, lblTimeToGrow.y + lblTimeToGrow.height, labelWidth * 3, buttonHeight);
 
-            areaInstallBodyParts = new Rect(healthBox.x, lblRequireBiomass.yMax + 10, healthBox.width, test2);
+            areaInstallBodyParts = new Rect(healthBox.x, lblRequireBiomass.yMax + 10, healthBox.width, 200);
         }
-        [TweakValue("0AC", 0, 1000)] public static float test1 = 200;
-        [TweakValue("0AC", 0, 1000)] public static float test2 = 200;
         public CustomizeSleeveWindow(Building_SleeveGrower sleeveGrower)
         {
-            Init(sleeveGrower);
+            this.sleeveGrower = sleeveGrower;
+            Init(PawnKindDefOf.Colonist);
+            InitUI();
         }
 
         public CustomizeSleeveWindow(Building_SleeveGrower sleeveGrower, Pawn pawn)
         {
-            Init(sleeveGrower);
+            this.sleeveGrower = sleeveGrower;
+            Init(pawn.kindDef, pawn.gender);
             CopyBodyFrom(pawn);
+            InitUI();
         }
 
         string GetQualityLabel()
@@ -586,7 +593,10 @@ namespace AlteredCarbon
                 selectedSkinHue = skinHue;
                 selectedSkinSaturation = skinSaturation;
                 selectedSkinValue = skinValue;
-                ModCompatibility.SetSkinColor(newSleeve, color);
+                if (ModCompatibility.AlienRacesIsActive)
+                {
+                    ModCompatibility.SetSkinColorFirst(newSleeve, color);
+                }
                 refreshSleevePortrait = true;
             }
         }
@@ -598,7 +608,14 @@ namespace AlteredCarbon
                 selectedHairHue = hairHue;
                 selectedHairSaturation = hairSaturation;
                 selectedHairValue = hairValue;
-                newSleeve.story.hairColor = color;
+                if (ModCompatibility.AlienRacesIsActive)
+                {
+                    ModCompatibility.SetHairColorFirst(newSleeve, color);
+                }
+                else 
+                {
+                    newSleeve.story.hairColor = color;
+                }
                 refreshSleevePortrait = true;
             }
         }
@@ -608,6 +625,7 @@ namespace AlteredCarbon
             newSleeve.Drawer.renderer.graphics.ResolveAllGraphics();
             PortraitsCache.SetDirty(newSleeve);
             PortraitsCache.PortraitsCacheUpdate();
+            GlobalTextureAtlasManager.TryMarkPawnFrameSetDirty(newSleeve);
         }
 
         public void UpdateSkinColorButtons()
@@ -1415,9 +1433,14 @@ namespace AlteredCarbon
             this.newSleeve.style.FaceTattoo = source.style.FaceTattoo;
             if (ModCompatibility.AlienRacesIsActive)
             {
-                ModCompatibility.SetHairColor(newSleeve, ModCompatibility.GetHairColor(source));
-                ModCompatibility.SetSkinColor(newSleeve, ModCompatibility.GetSkinColor(source));
                 ModCompatibility.SetAlienHead(newSleeve, ModCompatibility.GetAlienHead(source));
+                ModCompatibility.SetSkinColorFirst(newSleeve, ModCompatibility.GetSkinColorFirst(source));
+                ModCompatibility.SetSkinColorSecond(newSleeve, ModCompatibility.GetSkinColorSecond(source));
+
+                ModCompatibility.SetHairColorFirst(newSleeve, ModCompatibility.GetHairColorFirst(source));
+                ModCompatibility.SetHairColorSecond(newSleeve, ModCompatibility.GetHairColorSecond(source));
+
+                ModCompatibility.CopyBodyAddons(source, newSleeve);
             }
             else
             {
@@ -1426,6 +1449,7 @@ namespace AlteredCarbon
                 this.newSleeve.story.melanin = source.story.melanin;
                 typeof(Pawn_StoryTracker).GetField("headGraphicPath", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(newSleeve.story, source.story.HeadGraphicPath);
             }
+
             UpdateSleeveGraphic();
         }
         private Pawn GetNewPawn(Gender gender)
@@ -1496,7 +1520,7 @@ namespace AlteredCarbon
             Color.RGBToHSV(pawn.story.hairColor, out hairHue, out hairSaturation, out hairValue);
             if (ModCompatibility.AlienRacesIsActive)
             {
-                Color.RGBToHSV(ModCompatibility.GetSkinColor(pawn), out skinHue, out skinSaturation, out skinValue);
+                Color.RGBToHSV(ModCompatibility.GetSkinColorFirst(pawn), out skinHue, out skinSaturation, out skinValue);
                 permittedHairs = ModCompatibility.GetPermittedHair(currentPawnKindDef.race);
             }
             else
