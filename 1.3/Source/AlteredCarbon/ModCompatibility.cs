@@ -438,6 +438,8 @@ namespace AlteredCarbon
 					rjwData = new RJWData();
                 }
 				rjwData.quirksave = comp.quirksave;
+				rjwData.quirksave.Replace("Fertile", "");
+				rjwData.quirksave.Replace("Infertile", "");
 				rjwData.orientation = (OrientationAC)(int)comp.orientation;
 				rjwData.NextHookupTick = comp.NextHookupTick;
 			}

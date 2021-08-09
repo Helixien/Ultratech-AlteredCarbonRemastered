@@ -116,7 +116,7 @@ namespace AlteredCarbon
                     var command = new Command_Action
                     {
                         defaultLabel = "AlteredCarbon.DuplicateStack".Translate(),
-                        defaultDesc = "AC.DuplicateStackDesc".Translate(),
+                        defaultDesc = "AlteredCarbon.DuplicateStackDesc".Translate(),
                         icon = ContentFinder<Texture2D>.Get("UI/Icons/DuplicateStack"),
                         action = delegate ()
                         {
