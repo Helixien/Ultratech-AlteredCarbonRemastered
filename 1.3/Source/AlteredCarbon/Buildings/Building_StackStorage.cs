@@ -73,11 +73,12 @@ namespace AlteredCarbon
         {
             get
             {
-                foreach (var pawn in AlteredCarbonManager.Instance.PawnsWithStacks)
+                var pawns = AlteredCarbonManager.Instance.PawnsWithStacks.Concat(AlteredCarbonManager.Instance.deadPawns ?? Enumerable.Empty<Pawn>()).ToList();
+                foreach (var personaData in StoredBackedUpStacks)
                 {
-                    foreach (var personaData in StoredBackedUpStacks)
+                    foreach (var pawn in pawns)
                     {
-                        if (pawn.thingIDNumber == personaData.pawnID)
+                        if (pawn != null && pawn.thingIDNumber == personaData.pawnID)
                         {
                             if (pawn.Destroyed || pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is null)
                             {

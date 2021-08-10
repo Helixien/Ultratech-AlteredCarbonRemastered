@@ -511,8 +511,8 @@ namespace AlteredCarbon
         }
         void UpdateGrowingCost()
         {
-            ticksToGrow = (int)((AlteredCarbonMod.settings.baseGrowingTimeDuration +
-                (beautyLevel * AlteredCarbonMod.settings.baseBeautyLevel + qualityLevel * AlteredCarbonMod.settings.baseQualityLevel)));
+            ticksToGrow = AlteredCarbonMod.settings.baseGrowingTimeDuration + (beautyLevel * AlteredCarbonMod.settings.baseBeautyLevel) + (qualityLevel * AlteredCarbonMod.settings.baseQualityLevel);
+            ticksToGrow = Mathf.Max(AlteredCarbonMod.settings.baseGrowingTimeDuration, ticksToGrow);
             meatCost = 250 + beautyLevel * 25 + qualityLevel * 50;
         }
 

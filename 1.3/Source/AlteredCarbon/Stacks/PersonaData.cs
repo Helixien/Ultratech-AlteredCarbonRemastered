@@ -126,9 +126,9 @@ namespace AlteredCarbon
             {
                 if (TitleShort?.CapitalizeFirst().NullOrEmpty() ?? false)
                 {
-                    return this.name.ToStringShort.Colorize(GetFactionRelationColor(this.faction));
+                    return this.name?.ToStringShort.Colorize(GetFactionRelationColor(this.faction));
                 }
-                return this.name.ToStringShort.Colorize(GetFactionRelationColor(this.faction)) + ", " + TitleShort.CapitalizeFirst();
+                return this.name?.ToStringShort.Colorize(GetFactionRelationColor(this.faction)) + ", " + TitleShort?.CapitalizeFirst();
             }
         }
         public string TitleShort

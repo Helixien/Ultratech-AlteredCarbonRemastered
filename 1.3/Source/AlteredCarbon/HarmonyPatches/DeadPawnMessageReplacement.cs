@@ -182,6 +182,39 @@ namespace AlteredCarbon
 		}
 	}
 
+	[HarmonyPatch(typeof(Ideo), "RecacheColonistBelieverCount")]
+	public static class RecacheColonistBelieverCount_Patch
+	{
+		public static bool includeStackPawns = false;
+		public static void Prefix()
+		{
+			includeStackPawns = true;
+		}
+		public static void Postfix()
+        {
+			includeStackPawns = false;
+		}
+	}
+
+	[HarmonyPatch(typeof(PawnsFinder), "AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep", MethodType.Getter)]
+	public static class AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep_Patch
+	{
+		public static void Postfix(ref List<Pawn> __result)
+		{
+			if (RecacheColonistBelieverCount_Patch.includeStackPawns)
+            {
+				var pawns = AlteredCarbonManager.Instance.PawnsWithStacks.Concat(AlteredCarbonManager.Instance.deadPawns ?? Enumerable.Empty<Pawn>()).ToList();
+				foreach (var pawn in pawns)
+                {
+					if (!__result.Contains(pawn))
+                    {
+						__result.Add(pawn);
+					}
+                }
+			}
+		}
+	}
+
 	[HarmonyPatch(typeof(Pawn), "Kill")]
 	public class Pawn_Kill_Patch
 	{

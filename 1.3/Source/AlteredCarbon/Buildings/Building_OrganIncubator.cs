@@ -14,13 +14,13 @@ namespace AlteredCarbon
 	{
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
-            base.SpawnSetup(map, respawningAfterLoad);
 			if (allRecipes is null)
             {
 				allRecipes = this.def.AllRecipes.ListFullCopy();
 				this.def.recipes.Clear();
 				Traverse.Create(this.def).Field("allRecipesCached").SetValue(null);
             }
+            base.SpawnSetup(map, respawningAfterLoad);
         }
 
         private static List<RecipeDef> allRecipes;

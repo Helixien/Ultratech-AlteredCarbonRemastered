@@ -44,7 +44,7 @@ namespace AlteredCarbon
             Widgets.Label(rect, "AlteredCarbon.baseQualityLevel".Translate());
             baseQualityLevel = (int)Widgets.HorizontalSlider(rect2, baseQualityLevel, 1000, 9000000, true, baseQualityLevel.ToStringTicksToPeriod());
             listingStandard.Gap(listingStandard.verticalSpacing);
-
+            listingStandard.Gap(70);
             if (listingStandard.ButtonText("Reset".Translate()))
             {
                 baseGrowingTimeDuration = 900000;

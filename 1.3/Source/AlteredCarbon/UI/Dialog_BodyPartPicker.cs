@@ -64,7 +64,8 @@ namespace AlteredCarbon
                 foreach (var recipe in DefDatabase<RecipeDef>.AllDefs)
                 {
                     if (recipe.addsHediff != null && recipe.appliedOnFixedBodyParts.Contains(part.def) && !hediffsWithStages.Any(x => x.hediffDef == recipe.addsHediff)
-                        && typeof(Hediff_Implant).IsAssignableFrom(recipe.addsHediff.hediffClass) == false && CanBeAppliedTo(recipe, pawn))
+                        && typeof(Hediff_Implant).IsAssignableFrom(recipe.addsHediff.hediffClass) == false 
+                        && typeof(Recipe_InstallImplant).IsAssignableFrom(recipe.workerClass) == false && CanBeAppliedTo(recipe, pawn))
                     {
                         if (recipe.addsHediff.stages != null)
                         {
@@ -119,6 +120,7 @@ namespace AlteredCarbon
         public override void DoWindowContents(Rect inRect)
         {
             var areaInstallBodyParts = inRect.ContractedBy(15f);
+            areaInstallBodyParts.height -= 30;
             var spaceBetweenButtons = 40;
             if (hediffsForParts.Any())
             {
