@@ -206,7 +206,7 @@ namespace AlteredCarbon
 				var pawns = AlteredCarbonManager.Instance.PawnsWithStacks.Concat(AlteredCarbonManager.Instance.deadPawns ?? Enumerable.Empty<Pawn>()).ToList();
 				foreach (var pawn in pawns)
                 {
-					if (!__result.Contains(pawn))
+					if (pawn != null && !__result.Contains(pawn))
                     {
 						__result.Add(pawn);
 					}
