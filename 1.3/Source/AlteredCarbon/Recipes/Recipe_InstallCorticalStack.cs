@@ -76,9 +76,10 @@ namespace AlteredCarbon
                         PawnDiedOrDownedThoughtsUtility.TryGiveThoughts(pawn, null, PawnDiedOrDownedThoughtsKind.Died);
                     }
                     pawn.health.NotifyPlayerOfKilled(null, null, null);
-                    AlteredCarbonManager.Instance.stacksIndex.Remove(corticalStack.PersonaData.pawnID);
                     corticalStack.PersonaData.OverwritePawn(pawn, corticalStack.def.GetModExtension<StackSavingOptionsModExtension>());
                     hediff.PersonaData.stackGroupID = corticalStack.PersonaData.stackGroupID;
+                    pawn.health.AddHediff(hediff, part);
+                    AlteredCarbonManager.Instance.stacksIndex.Remove(corticalStack.PersonaData.pawnID);
                     AlteredCarbonManager.Instance.ReplaceStackWithPawn(corticalStack, pawn);
 
                     var naturalMood = pawn.story.traits.GetTrait(TraitDefOf.NaturalMood);
@@ -106,8 +107,11 @@ namespace AlteredCarbon
                         corticalStack.PersonaData.hackedWhileOnStack = false;
                     }
                 }
+                else
+                {
+                    pawn.health.AddHediff(hediff, part);
+                }
 
-                pawn.health.AddHediff(hediff, part);
                 var additionalSleeveBodyData = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_SleeveBodyData) as Hediff_SleeveBodyStats;
                 if (additionalSleeveBodyData != null)
                 {

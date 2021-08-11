@@ -22,20 +22,10 @@ namespace AlteredCarbon
             if (!respawningAfterLoad && __instance.RaceProps.Humanlike && __instance.kindDef.HasModExtension<StackSpawnModExtension>())
             {
                 var extension = __instance.kindDef.GetModExtension<StackSpawnModExtension>();
-                if (extension.SpawnsWithStack && Rand.Chance((float)extension.ChanceToSpawnWithStack / 100f))
+                if (extension.SpawnsWithStack && __instance.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is null && Rand.Chance((float)extension.ChanceToSpawnWithStack / 100f))
                 {
                     BodyPartRecord neckRecord = __instance.def.race.body.AllParts.FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Neck);
                     var hediff = HediffMaker.MakeHediff(AC_DefOf.UT_CorticalStack, __instance, neckRecord) as Hediff_CorticalStack;
-                    hediff.PersonaData.gender = __instance.gender;
-                    hediff.PersonaData.race = __instance.kindDef.race;
-                    if (AlteredCarbonManager.Instance.stacksRelationships != null)
-                    {
-                        hediff.PersonaData.stackGroupID = AlteredCarbonManager.Instance.stacksRelationships.Count + 1;
-                    }
-                    else
-                    {
-                        hediff.PersonaData.stackGroupID = 0;
-                    }
                     __instance.health.AddHediff(hediff, neckRecord);
                     AlteredCarbonManager.Instance.RegisterPawn(__instance);
                     AlteredCarbonManager.Instance.TryAddRelationships(__instance);

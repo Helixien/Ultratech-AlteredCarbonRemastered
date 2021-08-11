@@ -141,4 +141,5 @@
 	<AlteredCarbon.OneMatrixStorageCanBeBuild>Only one Quantum Storage Matrix can be build per colony!</AlteredCarbon.OneMatrixStorageCanBeBuild>
 	<AlteredCarbon.OrganGrowingRecipesRequiresResearch>You need to research at least one organ growing recipe.</AlteredCarbon.OrganGrowingRecipesRequiresResearch>
 	<AlteredCarbon.BackupsCompleted>Quantum Storage Matrix: Backups Completed! {0} colonists were backed up!</AlteredCarbon.BackupsCompleted>
+	<AlteredCarbon.race>Race</AlteredCarbon.race>
 </LanguageData>

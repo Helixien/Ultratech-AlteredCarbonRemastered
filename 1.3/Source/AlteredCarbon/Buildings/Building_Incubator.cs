@@ -39,7 +39,7 @@ namespace AlteredCarbon
 		public bool isRunningOutPower;
 
 		public bool isRunningOutFuel;
-		public bool HasAnyContents => this.innerContainer.FirstOrDefault() != null;
+		public virtual bool HasAnyContents => this.innerContainer.FirstOrDefault() != null;
 		public virtual bool CanOpen => HasAnyContents && this.incubatorState == IncubatorState.Inactive && !this.InnerThingIsDead;
 		public ThingOwner GetDirectlyHeldThings()
 		{

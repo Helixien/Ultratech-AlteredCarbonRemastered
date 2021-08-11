@@ -274,6 +274,10 @@ namespace AlteredCarbon
             {
                 stringBuilder.AppendLineTagged("AlteredCarbon.Name".Translate() + ": " + personaData.PawnNameColored);
                 stringBuilder.AppendLineTagged("AlteredCarbon.faction".Translate() + ": " + PersonaData.faction.NameColored);
+                if (ModCompatibility.AlienRacesIsActive)
+                {
+                    stringBuilder.AppendLineTagged("AlteredCarbon.race".Translate() + ": " + PersonaData.race.LabelCap);
+                }
                 Backstory newChildhood = null;
                 BackstoryDatabase.TryGetWithIdentifier(PersonaData.childhood, out newChildhood, true);
                 stringBuilder.Append("AlteredCarbon.childhood".Translate() + ": " + newChildhood.title.CapitalizeFirst() + "\n");
@@ -342,7 +346,12 @@ namespace AlteredCarbon
                 {
                     pawn.Faction.leader = pawn;
                 }
-                pawn.Kill(null);
+                try
+                {
+                    pawn.Kill(null);
+                }
+                catch { }
+            
             }
             PersonaData.hasPawn = false;
         }

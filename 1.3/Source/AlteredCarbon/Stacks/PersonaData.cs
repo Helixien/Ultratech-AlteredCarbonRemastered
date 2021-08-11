@@ -92,7 +92,7 @@ namespace AlteredCarbon
         public bool? diedFromCombat;
         public bool hackedWhileOnStack;
         public bool isCopied = false;
-        public int stackGroupID;
+        public int stackGroupID = -1;
 
         public int lastTimeUpdated;
 
@@ -601,15 +601,20 @@ namespace AlteredCarbon
             foreach (var rel in this.relations)
             {
                 var otherPawn = GetTruePawn(rel.otherPawn);
-                if (otherPawn != null)
+                if (otherPawn != null && rel != null)
                 {
                     var oldRelation = otherPawn.relations.DirectRelations.Where(r => r.def == rel.def && r.otherPawn.Name.ToStringFull == pawnToOverwrite.Name.ToStringFull).FirstOrDefault();
                     if (oldRelation != null)
                     {
                         oldRelation.otherPawn = pawnToOverwrite;
                     }
+
+                    try
+                    {
+                        pawnToOverwrite.relations.AddDirectRelation(rel.def, otherPawn);
+                    }
+                    catch { }
                 }
-                pawnToOverwrite.relations.AddDirectRelation(rel.def, otherPawn);
             }
 
             if (origPawn != null)
@@ -970,7 +975,7 @@ namespace AlteredCarbon
             Scribe_Values.Look(ref battleExitTick, "battleExitTick", 0);
 
             Scribe_Values.Look<bool>(ref this.hasPawn, "hasPawn", false, false);
-            Scribe_Values.Look<Gender>(ref this.gender, "gender", 0, false);
+            Scribe_Values.Look<Gender>(ref this.gender, "gender");
             Scribe_Values.Look(ref lastTimeUpdated, "lastTimeUpdated");
             if (ModsConfig.RoyaltyActive)
             {

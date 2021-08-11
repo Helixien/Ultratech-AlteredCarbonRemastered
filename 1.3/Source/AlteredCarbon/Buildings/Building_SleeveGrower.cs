@@ -341,7 +341,9 @@ namespace AlteredCarbon
 			}
 			return null;
 		}
-		public override void EjectContents()
+
+        public override bool HasAnyContents => this.InnerPawn != null;
+        public override void EjectContents()
 		{
 			base.EjectContents();
 			ThingDef filth_Slime = ThingDefOf.Filth_Slime;
