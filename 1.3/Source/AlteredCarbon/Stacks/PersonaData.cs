@@ -505,6 +505,7 @@ namespace AlteredCarbon
 
         public void OverwritePawn(Pawn pawnToOverwrite, StackSavingOptionsModExtension extension)
         {
+            PawnComponentsUtility.CreateInitialComponents(pawnToOverwrite);
             if (pawnToOverwrite.Faction != this.faction)
             {
                 pawnToOverwrite.SetFaction(this.faction);
@@ -597,7 +598,6 @@ namespace AlteredCarbon
                 }
             }
 
-
             foreach (var rel in this.relations)
             {
                 var otherPawn = GetTruePawn(rel.otherPawn);
@@ -621,7 +621,6 @@ namespace AlteredCarbon
             {
                 origPawn.relations = new Pawn_RelationsTracker(origPawn);
             }
-
 
             pawnToOverwrite.skills.skills.Clear();
             if (this.skills != null)
@@ -764,6 +763,7 @@ namespace AlteredCarbon
                 }
             }
 
+
             if (pawnToOverwrite.kindDef.race != this.race)
             {
                 try
@@ -775,6 +775,7 @@ namespace AlteredCarbon
                     Log.Error(ex.ToString());
                 }
             }
+
             if (ModsConfig.RoyaltyActive)
             {
                 if (pawnToOverwrite.royalty == null) pawnToOverwrite.royalty = new Pawn_RoyaltyTracker(pawnToOverwrite);
@@ -858,7 +859,6 @@ namespace AlteredCarbon
                     pawnToOverwrite.story.favoriteColor = this.favoriteColor.Value;
                 }
 
-
             }
 
             if (ModCompatibility.IndividualityIsActive)
@@ -876,7 +876,6 @@ namespace AlteredCarbon
                 ModCompatibility.SetRjwData(pawnToOverwrite, this.rjwData);
             }
         }
-
         private Pawn GetOriginalPawn(Pawn pawn)
         {
             if (this.origPawn != null)
