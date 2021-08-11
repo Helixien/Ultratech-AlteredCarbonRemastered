@@ -10,310 +10,391 @@ using Verse.AI;
 
 namespace AlteredCarbon
 {
-
-	[HarmonyPatch(typeof(MapDeiniter))]
-	[HarmonyPatch("PassPawnsToWorld")]
-	internal static class PassPawnsToWorld_Patch
+    [HarmonyPatch(typeof(MapDeiniter))]
+    [HarmonyPatch("PassPawnsToWorld")]
+    internal static class PassPawnsToWorld_Patch
     {
-		private static void Prefix(Map map)
+        private static void Prefix(Map map)
         {
-			for (int num = map.mapPawns.AllPawns.Count - 1; num >= 0; num--)
+            for (int num = map.mapPawns.AllPawns.Count - 1; num >= 0; num--)
             {
-				Pawn pawn = map.mapPawns.AllPawns[num];
-				if ((pawn.Faction == Faction.OfPlayer || pawn.HostFaction == Faction.OfPlayer) && pawn.HasStack())
+                Log.Message("PassPawnsToWorld_Patch - Prefix - Pawn pawn = map.mapPawns.AllPawns[num]; - 1", true);
+                Pawn pawn = map.mapPawns.AllPawns[num];
+                Log.Message("PassPawnsToWorld_Patch - Prefix - if ((pawn.Faction == Faction.OfPlayer || pawn.HostFaction == Faction.OfPlayer) && pawn.HasStack()) - 2", true);
+                if ((pawn.Faction == Faction.OfPlayer || pawn.HostFaction == Faction.OfPlayer) && pawn.HasStack())
                 {
-					pawn.DeSpawn(DestroyMode.Vanish);
-					TaggedString label = "Death".Translate() + ": " + pawn.LabelShortCap;
-					TaggedString taggedString = "PawnDied".Translate(pawn.LabelShortCap, pawn.Named("PAWN"));
-					Find.LetterStack.ReceiveLetter(label, taggedString, LetterDefOf.Death, pawn, null, null);
-				}
-			}
+                    Log.Message("PassPawnsToWorld_Patch - Prefix - pawn.DeSpawn(DestroyMode.Vanish); - 3", true);
+                    pawn.DeSpawn(DestroyMode.Vanish);
+                    Log.Message("PassPawnsToWorld_Patch - Prefix - TaggedString label = \"Death\".Translate() + \": \" + pawn.LabelShortCap; - 4", true);
+                    TaggedString label = "Death".Translate() + ": " + pawn.LabelShortCap;
+                    Log.Message("PassPawnsToWorld_Patch - Prefix - TaggedString taggedString = \"PawnDied\".Translate(pawn.LabelShortCap, pawn.Named(\"PAWN\")); - 5", true);
+                    TaggedString taggedString = "PawnDied".Translate(pawn.LabelShortCap, pawn.Named("PAWN"));
+                    Log.Message("PassPawnsToWorld_Patch - Prefix - Find.LetterStack.ReceiveLetter(label, taggedString, LetterDefOf.Death, pawn, null, null); - 6", true);
+                    Find.LetterStack.ReceiveLetter(label, taggedString, LetterDefOf.Death, pawn, null, null);
+                }
+            }
         }
     }
 
-	[HarmonyPatch(typeof(Messages), "Message", new Type[]
-	{
-		typeof(string),
-		typeof(LookTargets),
-		typeof(MessageTypeDef),
-		typeof(bool)
-	})]
-	internal static class Message_Patch
-	{
-		private static bool Prefix(string text, LookTargets lookTargets, MessageTypeDef def)
-		{
-			if (def == MessageTypeDefOf.PawnDeath && lookTargets.TryGetPrimaryTarget().Thing is Pawn pawn && (pawn.IsEmptySleeve() || pawn.HasStack()))
+    [HarmonyPatch(typeof(Messages), "Message", new Type[]
+    {
+                typeof(string),
+                typeof(LookTargets),
+                typeof(MessageTypeDef),
+                typeof(bool)
+    })]
+    internal static class Message_Patch
+    {
+        private static bool Prefix(string text, LookTargets lookTargets, MessageTypeDef def)
+        {
+            Log.Message("Message_Patch - Prefix - if (def == MessageTypeDefOf.PawnDeath && lookTargets.TryGetPrimaryTarget().Thing is Pawn pawn && (pawn.IsEmptySleeve() || pawn.HasStack())) - 7", true);
+            if (def == MessageTypeDefOf.PawnDeath && lookTargets.TryGetPrimaryTarget().Thing is Pawn pawn && (pawn.IsEmptySleeve() || pawn.HasStack()))
             {
-				return false;
+                Log.Message("Message_Patch - Prefix - return false; - 8", true);
+                return false;
             }
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 
-	[HarmonyPatch(typeof(Pawn_HealthTracker))]
-	[HarmonyPatch("NotifyPlayerOfKilled")]
-	internal static class DeadPawnMessageReplacement
-	{
-		public static bool disableKilledEffect = false;
-		private static bool Prefix(Pawn_HealthTracker __instance, Pawn ___pawn, DamageInfo? dinfo, Hediff hediff, Caravan caravan)
-		{
-			if (disableKilledEffect)
-			{
-				try
-				{
-
-					if (!___pawn.IsEmptySleeve() && ___pawn.HasStack())
-					{
-						TaggedString taggedString = "";
-						taggedString = (dinfo.HasValue ? "AlteredCarbon.SleveOf".Translate() + dinfo.Value.Def.deathMessage
-								.Formatted(___pawn.LabelShortCap, ___pawn.Named("PAWN")) : ((hediff == null)
-								? "AlteredCarbon.PawnDied".Translate(___pawn.LabelShortCap, ___pawn.Named("PAWN"))
-								: "AlteredCarbon.PawnDiedBecauseOf".Translate(___pawn.LabelShortCap, hediff.def.LabelCap,
-								___pawn.Named("PAWN"))));
-						taggedString = taggedString.AdjustedFor(___pawn);
-						TaggedString label = "AlteredCarbon.SleeveDeath".Translate() + ": " + ___pawn.LabelShortCap;
-						Find.LetterStack.ReceiveLetter(label, taggedString, LetterDefOf.NegativeEvent, ___pawn);
-					}
-				}
-				catch (Exception ex)
-                {
-					Log.Error(ex.ToString());
-                }
-				disableKilledEffect = false;
-				return false;
-			}
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(PawnDiedOrDownedThoughtsUtility), "AppendThoughts_ForHumanlike")]
-	public class AppendThoughts_ForHumanlike_Patch
-	{
-		public static bool disableKilledEffect = false;
-		public static bool Prefix(Pawn victim)
-		{
-			if (disableKilledEffect)
-			{
-				disableKilledEffect = false;
-				return false;
-			}
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(PawnDiedOrDownedThoughtsUtility), "AppendThoughts_Relations")]
-	public class AppendThoughts_Relations_Patch
-	{
-		public static bool disableKilledEffect = false;
-		public static bool Prefix(Pawn victim)
-		{
-			if (disableKilledEffect)
-			{
-				disableKilledEffect = false;
-				return false;
-			}
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(SocialCardUtility), "GetPawnSituationLabel")]
-	public class Dead_Patch
-	{
-		public static bool Prefix(Pawn pawn, Pawn fromPOV, ref string __result)
-		{
-			if (AlteredCarbonManager.Instance.deadPawns.Contains(pawn) && AlteredCarbonManager.Instance.stacksIndex.ContainsKey(pawn.thingIDNumber))
-			{
-				__result = "AlteredCarbon.NoSleeve".Translate();
-				return false;
-			}
-			var stackHediff = pawn.health.hediffSet.hediffs.FirstOrDefault((Hediff x) =>
-				x.def == AC_DefOf.UT_CorticalStack);
-			if (stackHediff != null && pawn.Dead)
-			{
-				__result = "AlteredCarbon.Sleeve".Translate();
-				return false;
-			}
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(Faction), "Notify_LeaderDied")]
-	public static class Notify_LeaderDied_Patch
-	{
-		public static bool disableKilledEffect = false;
-		public static bool Prefix()
-		{
-			if (disableKilledEffect)
-			{
-				disableKilledEffect = false;
-				return false;
-			}
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(StatsRecord), "Notify_ColonistKilled")]
-	public static class Notify_ColonistKilled_Patch
-	{
-		public static bool disableKilledEffect = false;
-		public static bool Prefix()
-		{
-			if (disableKilledEffect)
-			{
-				disableKilledEffect = false;
-				return false;
-			}
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(Pawn_RoyaltyTracker), "Notify_PawnKilled")]
-	public static class Notify_PawnKilled_Patch
-	{
-		public static bool disableKilledEffect = false;
-		public static bool Prefix()
-		{
-			if (disableKilledEffect)
-			{
-				disableKilledEffect = false;
-				return false;
-			}
-			return true;
-		}
-	}
-
-	[HarmonyPatch(typeof(Ideo), "RecacheColonistBelieverCount")]
-	public static class RecacheColonistBelieverCount_Patch
-	{
-		public static bool includeStackPawns = false;
-		public static void Prefix()
-		{
-			includeStackPawns = true;
-		}
-		public static void Postfix()
+    [HarmonyPatch(typeof(Pawn_HealthTracker))]
+    [HarmonyPatch("NotifyPlayerOfKilled")]
+    internal static class DeadPawnMessageReplacement
+    {
+                public static bool disableKilledEffect = false;
+        private static bool Prefix(Pawn_HealthTracker __instance, Pawn ___pawn, DamageInfo? dinfo, Hediff hediff, Caravan caravan)
         {
-			includeStackPawns = false;
-		}
-	}
-
-	[HarmonyPatch(typeof(PawnsFinder), "AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep", MethodType.Getter)]
-	public static class AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep_Patch
-	{
-		public static void Postfix(ref List<Pawn> __result)
-		{
-			if (RecacheColonistBelieverCount_Patch.includeStackPawns)
+            Log.Message("DeadPawnMessageReplacement - Prefix - if (disableKilledEffect) - 11", true);
+            if (disableKilledEffect)
             {
-				var pawns = AlteredCarbonManager.Instance.PawnsWithStacks.Concat(AlteredCarbonManager.Instance.deadPawns ?? Enumerable.Empty<Pawn>()).ToList();
-				foreach (var pawn in pawns)
+                try
                 {
-					if (pawn?.ideo != null && pawn.Ideo != null && !__result.Contains(pawn))
-                    {
-						__result.Add(pawn);
-					}
-                }
-			}
-		}
-	}
 
-	[HarmonyPatch(typeof(Pawn), "Kill")]
-	public class Pawn_Kill_Patch
-	{
-		public static void Prefix(out Caravan __state, Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
-		{
-			__state = null;
-			try
-			{
-				if (dinfo.HasValue && dinfo.Value.Def == DamageDefOf.Crush && dinfo.Value.Category == DamageInfo.SourceCategory.Collapse)
-				{
-					return;
-				}
-				if (__instance != null && (__instance.HasStack() || __instance.IsEmptySleeve()))
-				{
-					Notify_ColonistKilled_Patch.disableKilledEffect = true;
-					Notify_PawnKilled_Patch.disableKilledEffect = true;
-					Notify_LeaderDied_Patch.disableKilledEffect = true;
-					AppendThoughts_ForHumanlike_Patch.disableKilledEffect = true;
-					AppendThoughts_Relations_Patch.disableKilledEffect = true;
-					DeadPawnMessageReplacement.disableKilledEffect = true;
-				}
-				var stackHediff = __instance.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
-				if (stackHediff != null)
-				{
-					if (dinfo.HasValue && dinfo.Value.Def.ExternalViolenceFor(__instance))
+                    Log.Message("DeadPawnMessageReplacement - Prefix - if (!___pawn.IsEmptySleeve() && ___pawn.HasStack()) - 12", true);
+                    if (!___pawn.IsEmptySleeve() && ___pawn.HasStack())
                     {
-						stackHediff.PersonaData.diedFromCombat = true;
+                        Log.Message("DeadPawnMessageReplacement - Prefix - TaggedString taggedString = \"\"; - 13", true);
+                        TaggedString taggedString = "";
+                        taggedString = (dinfo.HasValue ? "AlteredCarbon.SleveOf".Translate() + dinfo.Value.Def.deathMessage
+                                        .Formatted(___pawn.LabelShortCap, ___pawn.Named("PAWN")) : ((hediff == null)
+                                        ? "AlteredCarbon.PawnDied".Translate(___pawn.LabelShortCap, ___pawn.Named("PAWN"))
+                                        : "AlteredCarbon.PawnDiedBecauseOf".Translate(___pawn.LabelShortCap, hediff.def.LabelCap,
+                                        ___pawn.Named("PAWN"))));
+                        Log.Message("DeadPawnMessageReplacement - Prefix - taggedString = taggedString.AdjustedFor(___pawn); - 15", true);
+                        taggedString = taggedString.AdjustedFor(___pawn);
+                        Log.Message("DeadPawnMessageReplacement - Prefix - TaggedString label = \"AlteredCarbon.SleeveDeath\".Translate() + \": \" + ___pawn.LabelShortCap; - 16", true);
+                        TaggedString label = "AlteredCarbon.SleeveDeath".Translate() + ": " + ___pawn.LabelShortCap;
+                        Log.Message("DeadPawnMessageReplacement - Prefix - Find.LetterStack.ReceiveLetter(label, taggedString, LetterDefOf.NegativeEvent, ___pawn); - 17", true);
+                        Find.LetterStack.ReceiveLetter(label, taggedString, LetterDefOf.NegativeEvent, ___pawn);
                     }
-					LessonAutoActivator.TeachOpportunity(AC_DefOf.UT_DeadPawnWithStack, __instance, OpportunityType.Important);
-					AlteredCarbonManager.Instance.deadPawns.Add(__instance);
-					__state = __instance.GetCaravan();
-				}
-				if (AlteredCarbonManager.Instance.stacksIndex.TryGetValue(__instance.thingIDNumber, out var corticalStack))
-				{
-					if (LookTargets_Patch.targets.TryGetValue(__instance, out var targets))
-					{
-						foreach (var target in targets)
-						{
-							target.targets.Remove(__instance);
-							target.targets.Add(corticalStack);
-						}
-					}
-				}
-			}
-			catch { };
-		}
-		public static void Postfix(Caravan __state, Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
+                }
+                catch (Exception ex)
+                {
+                    Log.Message("DeadPawnMessageReplacement - Prefix - Log.Error(ex.ToString()); - 18", true);
+                    Log.Error(ex.ToString());
+                }
+                disableKilledEffect = false;
+                Log.Message("DeadPawnMessageReplacement - Prefix - return false; - 20", true);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(PawnDiedOrDownedThoughtsUtility), "AppendThoughts_ForHumanlike")]
+    public class AppendThoughts_ForHumanlike_Patch
+    {
+                public static bool disableKilledEffect = false;
+        public static bool Prefix(Pawn victim)
         {
-			if (__state != null && __state.PawnsListForReading.Any())
+            Log.Message("AppendThoughts_ForHumanlike_Patch - Prefix - if (disableKilledEffect) - 23", true);
+            if (disableKilledEffect)
             {
-				var stackHediff = __instance.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
-				if (stackHediff.def.spawnThingOnRemoved != null)
-				{
-					var corticalStackThing = ThingMaker.MakeThing(stackHediff.def.spawnThingOnRemoved) as CorticalStack;
-					if (stackHediff.PersonaData.hasPawn)
-					{
-						stackHediff.PersonaData.CopyDataFrom(stackHediff.PersonaData);
-					}
-					else
-					{
-						stackHediff.PersonaData.CopyPawn(__instance);
-					}
-					AlteredCarbonManager.Instance.RegisterStack(corticalStackThing);
-					AlteredCarbonManager.Instance.RegisterSleeve(__instance, corticalStackThing.PersonaData.stackGroupID);
-					CaravanInventoryUtility.GiveThing(__state, corticalStackThing);
-				}
-				var head = __instance.health.hediffSet.GetNotMissingParts().FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Head);
-				if (head != null)
-				{
-					Hediff_MissingPart hediff_MissingPart = (Hediff_MissingPart)HediffMaker.MakeHediff(HediffDefOf.MissingBodyPart, __instance, head);
-					hediff_MissingPart.lastInjury = HediffDefOf.SurgicalCut;
-					hediff_MissingPart.IsFresh = true;
-					__instance.health.AddHediff(hediff_MissingPart);
-				}
-				__instance.health.RemoveHediff(stackHediff);
-			}
+                Log.Message("AppendThoughts_ForHumanlike_Patch - Prefix - disableKilledEffect = false; - 24", true);
+                disableKilledEffect = false;
+                Log.Message("AppendThoughts_ForHumanlike_Patch - Prefix - return false; - 25", true);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(PawnDiedOrDownedThoughtsUtility), "AppendThoughts_Relations")]
+    public class AppendThoughts_Relations_Patch
+    {
+                public static bool disableKilledEffect = false;
+        public static bool Prefix(Pawn victim)
+        {
+            Log.Message("AppendThoughts_Relations_Patch - Prefix - if (disableKilledEffect) - 28", true);
+            if (disableKilledEffect)
+            {
+                Log.Message("AppendThoughts_Relations_Patch - Prefix - disableKilledEffect = false; - 29", true);
+                disableKilledEffect = false;
+                Log.Message("AppendThoughts_Relations_Patch - Prefix - return false; - 30", true);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(SocialCardUtility), "GetPawnSituationLabel")]
+    public class Dead_Patch
+    {
+        public static bool Prefix(Pawn pawn, Pawn fromPOV, ref string __result)
+        {
+            Log.Message("Dead_Patch - Prefix - if (AlteredCarbonManager.Instance.deadPawns.Contains(pawn) && AlteredCarbonManager.Instance.stacksIndex.ContainsKey(pawn.thingIDNumber)) - 32", true);
+            if (AlteredCarbonManager.Instance.deadPawns.Contains(pawn) && AlteredCarbonManager.Instance.stacksIndex.ContainsKey(pawn.thingIDNumber))
+            {
+                Log.Message("Dead_Patch - Prefix - __result = \"AlteredCarbon.NoSleeve\".Translate(); - 33", true);
+                __result = "AlteredCarbon.NoSleeve".Translate();
+                Log.Message("Dead_Patch - Prefix - return false; - 34", true);
+                return false;
+            }
+            var stackHediff = pawn.health.hediffSet.hediffs.FirstOrDefault((Hediff x) =>
+                    x.def == AC_DefOf.UT_CorticalStack);
+            Log.Message("Dead_Patch - Prefix - if (stackHediff != null && pawn.Dead) - 36", true);
+            if (stackHediff != null && pawn.Dead)
+            {
+                Log.Message("Dead_Patch - Prefix - __result = \"AlteredCarbon.Sleeve\".Translate(); - 37", true);
+                __result = "AlteredCarbon.Sleeve".Translate();
+                Log.Message("Dead_Patch - Prefix - return false; - 38", true);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(Faction), "Notify_LeaderDied")]
+    public static class Notify_LeaderDied_Patch
+    {
+                public static bool disableKilledEffect = false;
+        public static bool Prefix()
+        {
+            Log.Message("Notify_LeaderDied_Patch - Prefix - if (disableKilledEffect) - 41", true);
+            if (disableKilledEffect)
+            {
+                Log.Message("Notify_LeaderDied_Patch - Prefix - disableKilledEffect = false; - 42", true);
+                disableKilledEffect = false;
+                Log.Message("Notify_LeaderDied_Patch - Prefix - return false; - 43", true);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(StatsRecord), "Notify_ColonistKilled")]
+    public static class Notify_ColonistKilled_Patch
+    {
+                public static bool disableKilledEffect = false;
+        public static bool Prefix()
+        {
+            Log.Message("Notify_ColonistKilled_Patch - Prefix - if (disableKilledEffect) - 46", true);
+            if (disableKilledEffect)
+            {
+                Log.Message("Notify_ColonistKilled_Patch - Prefix - disableKilledEffect = false; - 47", true);
+                disableKilledEffect = false;
+                Log.Message("Notify_ColonistKilled_Patch - Prefix - return false; - 48", true);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(Pawn_RoyaltyTracker), "Notify_PawnKilled")]
+    public static class Notify_PawnKilled_Patch
+    {
+                public static bool disableKilledEffect = false;
+        public static bool Prefix()
+        {
+            Log.Message("Notify_PawnKilled_Patch - Prefix - if (disableKilledEffect) - 51", true);
+            if (disableKilledEffect)
+            {
+                Log.Message("Notify_PawnKilled_Patch - Prefix - disableKilledEffect = false; - 52", true);
+                disableKilledEffect = false;
+                Log.Message("Notify_PawnKilled_Patch - Prefix - return false; - 53", true);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(Ideo), "RecacheColonistBelieverCount")]
+    public static class RecacheColonistBelieverCount_Patch
+    {
+                public static bool includeStackPawns = false;
+        public static void Prefix()
+        {
+            Log.Message("RecacheColonistBelieverCount_Patch - Prefix - includeStackPawns = true; - 56", true);
+            includeStackPawns = true;
+        }
+        public static void Postfix()
+        {
+            Log.Message("RecacheColonistBelieverCount_Patch - Postfix - includeStackPawns = false; - 57", true);
+            includeStackPawns = false;
+        }
+    }
+
+    [HarmonyPatch(typeof(PawnsFinder), "AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep", MethodType.Getter)]
+    public static class AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep_Patch
+    {
+        public static void Postfix(ref List<Pawn> __result)
+        {
+            Log.Message("AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep_Patch - Postfix - if (RecacheColonistBelieverCount_Patch.includeStackPawns) - 58", true);
+            if (RecacheColonistBelieverCount_Patch.includeStackPawns)
+            {
+                Log.Message("AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep_Patch - Postfix - var pawns = AlteredCarbonManager.Instance.PawnsWithStacks.Concat(AlteredCarbonManager.Instance.deadPawns ?? Enumerable.Empty<Pawn>()).ToList(); - 59", true);
+                var pawns = AlteredCarbonManager.Instance.PawnsWithStacks.Concat(AlteredCarbonManager.Instance.deadPawns ?? Enumerable.Empty<Pawn>()).ToList();
+                Log.Message("AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep_Patch - Postfix - foreach (var pawn in pawns) - 60", true);
+                foreach (var pawn in pawns)
+                {
+                    Log.Message("AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep_Patch - Postfix - if (pawn?.ideo != null && pawn.Ideo != null && !__result.Contains(pawn)) - 61", true);
+                    if (pawn?.ideo != null && pawn.Ideo != null && !__result.Contains(pawn))
+                    {
+                        Log.Message("AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep_Patch - Postfix - __result.Add(pawn); - 62", true);
+                        __result.Add(pawn);
+                    }
+                }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Pawn), "Kill")]
+    public class Pawn_Kill_Patch
+    {
+        public static void Prefix(out Caravan __state, Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
+        {
+            Log.Message("Pawn_Kill_Patch - Prefix - __state = null; - 63", true);
+            __state = null;
+            try
+            {
+                Log.Message("Pawn_Kill_Patch - Prefix - if (dinfo.HasValue && dinfo.Value.Def == DamageDefOf.Crush && dinfo.Value.Category == DamageInfo.SourceCategory.Collapse) - 64", true);
+                if (dinfo.HasValue && dinfo.Value.Def == DamageDefOf.Crush && dinfo.Value.Category == DamageInfo.SourceCategory.Collapse)
+                {
+                    Log.Message("Pawn_Kill_Patch - Prefix - return; - 65", true);
+                    return;
+                }
+                Log.Message("Pawn_Kill_Patch - Prefix - if (__instance != null && (__instance.HasStack() || __instance.IsEmptySleeve())) - 66", true);
+                if (__instance != null && (__instance.HasStack() || __instance.IsEmptySleeve()))
+                {
+                    Log.Message("Pawn_Kill_Patch - Prefix - Notify_ColonistKilled_Patch.disableKilledEffect = true; - 67", true);
+                    Notify_ColonistKilled_Patch.disableKilledEffect = true;
+                    Log.Message("Pawn_Kill_Patch - Prefix - Notify_PawnKilled_Patch.disableKilledEffect = true; - 68", true);
+                    Notify_PawnKilled_Patch.disableKilledEffect = true;
+                    Log.Message("Pawn_Kill_Patch - Prefix - Notify_LeaderDied_Patch.disableKilledEffect = true; - 69", true);
+                    Notify_LeaderDied_Patch.disableKilledEffect = true;
+                    Log.Message("Pawn_Kill_Patch - Prefix - AppendThoughts_ForHumanlike_Patch.disableKilledEffect = true; - 70", true);
+                    AppendThoughts_ForHumanlike_Patch.disableKilledEffect = true;
+                    Log.Message("Pawn_Kill_Patch - Prefix - AppendThoughts_Relations_Patch.disableKilledEffect = true; - 71", true);
+                    AppendThoughts_Relations_Patch.disableKilledEffect = true;
+                    Log.Message("Pawn_Kill_Patch - Prefix - DeadPawnMessageReplacement.disableKilledEffect = true; - 72", true);
+                    DeadPawnMessageReplacement.disableKilledEffect = true;
+                }
+                var stackHediff = __instance.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
+                Log.Message("Pawn_Kill_Patch - Prefix - if (stackHediff != null) - 74", true);
+                if (stackHediff != null)
+                {
+                    Log.Message("Pawn_Kill_Patch - Prefix - if (dinfo.HasValue && dinfo.Value.Def.ExternalViolenceFor(__instance)) - 75", true);
+                    if (dinfo.HasValue && dinfo.Value.Def.ExternalViolenceFor(__instance))
+                    {
+                        Log.Message("Pawn_Kill_Patch - Prefix - stackHediff.PersonaData.diedFromCombat = true; - 76", true);
+                        stackHediff.PersonaData.diedFromCombat = true;
+                    }
+                    LessonAutoActivator.TeachOpportunity(AC_DefOf.UT_DeadPawnWithStack, __instance, OpportunityType.Important);
+                    Log.Message("Pawn_Kill_Patch - Prefix - AlteredCarbonManager.Instance.deadPawns.Add(__instance); - 78", true);
+                    AlteredCarbonManager.Instance.deadPawns.Add(__instance);
+                    Log.Message("Pawn_Kill_Patch - Prefix - __state = __instance.GetCaravan(); - 79", true);
+                    __state = __instance.GetCaravan();
+                }
+                Log.Message("Pawn_Kill_Patch - Prefix - if (AlteredCarbonManager.Instance.stacksIndex.TryGetValue(__instance.thingIDNumber, out var corticalStack)) - 80", true);
+                if (AlteredCarbonManager.Instance.stacksIndex.TryGetValue(__instance.thingIDNumber, out var corticalStack))
+                {
+                    Log.Message("Pawn_Kill_Patch - Prefix - if (LookTargets_Patch.targets.TryGetValue(__instance, out var targets)) - 81", true);
+                    if (LookTargets_Patch.targets.TryGetValue(__instance, out var targets))
+                    {
+                        Log.Message("Pawn_Kill_Patch - Prefix - foreach (var target in targets) - 82", true);
+                        foreach (var target in targets)
+                        {
+                            Log.Message("Pawn_Kill_Patch - Prefix - target.targets.Remove(__instance); - 83", true);
+                            target.targets.Remove(__instance);
+                            Log.Message("Pawn_Kill_Patch - Prefix - target.targets.Add(corticalStack); - 84", true);
+                            target.targets.Add(corticalStack);
+                        }
+                    }
+                }
+            }
+            catch { };
+        }
+        public static void Postfix(Caravan __state, Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
+        {
+            Log.Message("Pawn_Kill_Patch - Postfix - if (__state != null && __state.PawnsListForReading.Any()) - 86", true);
+            if (__state != null && __state.PawnsListForReading.Any())
+            {
+                Log.Message("Pawn_Kill_Patch - Postfix - var stackHediff = __instance.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack; - 87", true);
+                var stackHediff = __instance.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
+                Log.Message("Pawn_Kill_Patch - Postfix - if (stackHediff.def.spawnThingOnRemoved != null) - 88", true);
+                if (stackHediff.def.spawnThingOnRemoved != null)
+                {
+                    Log.Message("Pawn_Kill_Patch - Postfix - var corticalStackThing = ThingMaker.MakeThing(stackHediff.def.spawnThingOnRemoved) as CorticalStack; - 89", true);
+                    var corticalStackThing = ThingMaker.MakeThing(stackHediff.def.spawnThingOnRemoved) as CorticalStack;
+                    Log.Message("Pawn_Kill_Patch - Postfix - if (stackHediff.PersonaData.hasPawn) - 90", true);
+                    if (stackHediff.PersonaData.hasPawn)
+                    {
+                        Log.Message("Pawn_Kill_Patch - Postfix - stackHediff.PersonaData.CopyDataFrom(stackHediff.PersonaData); - 91", true);
+                        stackHediff.PersonaData.CopyDataFrom(stackHediff.PersonaData);
+                    }
+                    else
+                    {
+                        Log.Message("Pawn_Kill_Patch - Postfix - stackHediff.PersonaData.CopyPawn(__instance); - 92", true);
+                        stackHediff.PersonaData.CopyPawn(__instance);
+                    }
+                    AlteredCarbonManager.Instance.RegisterStack(corticalStackThing);
+                    Log.Message("Pawn_Kill_Patch - Postfix - AlteredCarbonManager.Instance.RegisterSleeve(__instance, corticalStackThing.PersonaData.stackGroupID); - 94", true);
+                    AlteredCarbonManager.Instance.RegisterSleeve(__instance, corticalStackThing.PersonaData.stackGroupID);
+                    Log.Message("Pawn_Kill_Patch - Postfix - CaravanInventoryUtility.GiveThing(__state, corticalStackThing); - 95", true);
+                    CaravanInventoryUtility.GiveThing(__state, corticalStackThing);
+                }
+                var head = __instance.health.hediffSet.GetNotMissingParts().FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Head);
+                Log.Message("Pawn_Kill_Patch - Postfix - if (head != null) - 97", true);
+                if (head != null)
+                {
+                    Log.Message("Pawn_Kill_Patch - Postfix - Hediff_MissingPart hediff_MissingPart = (Hediff_MissingPart)HediffMaker.MakeHediff(HediffDefOf.MissingBodyPart, __instance, head); - 98", true);
+                    Hediff_MissingPart hediff_MissingPart = (Hediff_MissingPart)HediffMaker.MakeHediff(HediffDefOf.MissingBodyPart, __instance, head);
+                    Log.Message("Pawn_Kill_Patch - Postfix - hediff_MissingPart.lastInjury = HediffDefOf.SurgicalCut; - 99", true);
+                    hediff_MissingPart.lastInjury = HediffDefOf.SurgicalCut;
+                    Log.Message("Pawn_Kill_Patch - Postfix - hediff_MissingPart.IsFresh = true; - 100", true);
+                    hediff_MissingPart.IsFresh = true;
+                    Log.Message("Pawn_Kill_Patch - Postfix - __instance.health.AddHediff(hediff_MissingPart); - 101", true);
+                    __instance.health.AddHediff(hediff_MissingPart);
+                }
+                __instance.health.RemoveHediff(stackHediff);
+            }
         }
 
-	}
+    }
 
-	[HarmonyPatch(typeof(LookTargets), MethodType.Constructor, new Type[] { typeof(Thing) })]
-	public static class LookTargets_Patch
-	{
-		public static Dictionary<Pawn, List<LookTargets>> targets = new Dictionary<Pawn, List<LookTargets>>();
-		public static void Postfix(LookTargets __instance, Thing t)
-		{
-			if (t is Pawn pawn)
-			{
-				if (targets.ContainsKey(pawn))
-				{
-					targets[pawn].Add(__instance);
-				}
-				else
-				{
-					targets[pawn] = new List<LookTargets> { __instance };
-				}
-			}
-		}
-	}
+    [HarmonyPatch(typeof(LookTargets), MethodType.Constructor, new Type[] { typeof(Thing) })]
+    public static class LookTargets_Patch
+    {
+                public static Dictionary<Pawn, List<LookTargets>> targets = new Dictionary<Pawn, List<LookTargets>>();
+        public static void Postfix(LookTargets __instance, Thing t)
+        {
+            Log.Message("LookTargets_Patch - Postfix - if (t is Pawn pawn) - 104", true);
+            if (t is Pawn pawn)
+            {
+                Log.Message("LookTargets_Patch - Postfix - if (targets.ContainsKey(pawn)) - 105", true);
+                if (targets.ContainsKey(pawn))
+                {
+                    Log.Message("LookTargets_Patch - Postfix - targets[pawn].Add(__instance); - 106", true);
+                    targets[pawn].Add(__instance);
+                }
+                else
+                {
+                    Log.Message("LookTargets_Patch - Postfix - targets[pawn] = new List<LookTargets> { __instance }; - 107", true);
+                    targets[pawn] = new List<LookTargets> { __instance };
+                }
+            }
+        }
+    }
 
 	[HarmonyPatch(typeof(ColonistBarColonistDrawer), "HandleClicks")]
 	public static class HandleClicks_Patch

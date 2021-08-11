@@ -5,7 +5,9 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
+using Verse.AI.Group;
 
 namespace AlteredCarbon
 {
@@ -147,6 +149,84 @@ namespace AlteredCarbon
             }
             return HediffMaker.MakeHediff(hediffDef, pawn, part);
         }
-	}
+
+        public static void Resurrect(Pawn pawn)
+        {
+            Log.Message(" - Resurrect - if (!pawn.Dead) - 1", true);
+            if (!pawn.Dead)
+            {
+                Log.Message(" - Resurrect - Log.Error(\"Tried to resurrect a pawn who is not dead: \" + pawn.ToStringSafe()); - 2", true);
+                Log.Error("Tried to resurrect a pawn who is not dead: " + pawn.ToStringSafe());
+                Log.Message(" - Resurrect - return; - 3", true);
+                return;
+            }
+            Log.Message(" - Resurrect - if (pawn.Discarded) - 4", true);
+            if (pawn.Discarded)
+            {
+                Log.Message(" - Resurrect - Log.Error(\"Tried to resurrect a discarded pawn: \" + pawn.ToStringSafe()); - 5", true);
+                Log.Error("Tried to resurrect a discarded pawn: " + pawn.ToStringSafe());
+                Log.Message(" - Resurrect - return; - 6", true);
+                return;
+            }
+            Corpse corpse = pawn.Corpse;
+            Log.Message(" - Resurrect - bool flag = false; - 8", true);
+            bool flag = false;
+            Log.Message(" - Resurrect - IntVec3 loc = IntVec3.Invalid; - 9", true);
+            IntVec3 loc = IntVec3.Invalid;
+            Log.Message(" - Resurrect - Map map = null; - 10", true);
+            Map map = null;
+            Log.Message(" - Resurrect - if (corpse != null) - 11", true);
+            if (corpse != null)
+            {
+                Log.Message(" - Resurrect - flag = corpse.Spawned; - 12", true);
+                flag = corpse.Spawned;
+                Log.Message(" - Resurrect - loc = corpse.Position; - 13", true);
+                loc = corpse.Position;
+                Log.Message(" - Resurrect - map = corpse.Map; - 14", true);
+                map = corpse.Map;
+                Log.Message(" - Resurrect - corpse.InnerPawn = null; - 15", true);
+                corpse.InnerPawn = null;
+                Log.Message(" - Resurrect - corpse.Destroy(); - 16", true);
+                corpse.Destroy();
+            }
+            Log.Message(" - Resurrect - if (flag && pawn.IsWorldPawn()) - 17", true);
+            if (flag && pawn.IsWorldPawn())
+            {
+                Log.Message(" - Resurrect - Find.WorldPawns.RemovePawn(pawn); - 18", true);
+                Find.WorldPawns.RemovePawn(pawn);
+            }
+            pawn.ForceSetStateToUnspawned();
+
+            if (flag)
+            {
+                Log.Message(" - Resurrect - GenSpawn.Spawn(pawn, loc, map); - 25", true);
+                GenSpawn.Spawn(pawn, loc, map);
+                Log.Message(" - Resurrect - if (pawn.Faction != null && pawn.Faction != Faction.OfPlayer && pawn.HostileTo(Faction.OfPlayer)) - 26", true);
+                if (pawn.Faction != null && pawn.Faction != Faction.OfPlayer && pawn.HostileTo(Faction.OfPlayer))
+                {
+                    Log.Message(" - Resurrect - LordMaker.MakeNewLord(pawn.Faction, new LordJob_AssaultColony(pawn.Faction), pawn.Map, Gen.YieldSingle(pawn)); - 27", true);
+                    LordMaker.MakeNewLord(pawn.Faction, new LordJob_AssaultColony(pawn.Faction), pawn.Map, Gen.YieldSingle(pawn));
+                }
+                Log.Message(" - Resurrect - if (pawn.apparel != null) - 28", true);
+                if (pawn.apparel != null)
+                {
+                    Log.Message(" - Resurrect - List<Apparel> wornApparel = pawn.apparel.WornApparel; - 29", true);
+                    List<Apparel> wornApparel = pawn.apparel.WornApparel;
+                    for (int j = 0; j < wornApparel.Count; j++)
+                    {
+                        Log.Message(" - Resurrect - wornApparel[j].Notify_PawnResurrected(); - 30", true);
+                        wornApparel[j].Notify_PawnResurrected();
+                    }
+                }
+            }
+
+            Log.Message(" - Resurrect - if (pawn.royalty != null) - 31", true);
+            if (pawn.royalty != null)
+            {
+                Log.Message(" - Resurrect - pawn.royalty.Notify_Resurrected(); - 32", true);
+                pawn.royalty.Notify_Resurrected();
+            }
+        }
+    }
 }
 

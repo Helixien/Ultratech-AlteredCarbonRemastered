@@ -661,10 +661,27 @@ namespace AlteredCarbon
 
             pawnToOverwrite.story.title = this.title;
 
-            if (pawnToOverwrite.workSettings == null) pawnToOverwrite.workSettings = new Pawn_WorkSettings();
+            if (pawnToOverwrite.workSettings == null)
+            {
+                pawnToOverwrite.workSettings = new Pawn_WorkSettings(pawnToOverwrite);
+            }
+
+            var pawnField = Traverse.Create(pawnToOverwrite.workSettings).Field("pawn");
+            if (pawnField.GetValue() is null)
+            {
+                pawnField.SetValue(pawnToOverwrite);
+            }
+
+            var prioritiesField = Traverse.Create(pawnToOverwrite.workSettings).Field("priorities");
+            if (prioritiesField.GetValue() is null)
+            {
+                prioritiesField.SetValue(new DefMap<WorkTypeDef, int>());
+            }
+
             pawnToOverwrite.Notify_DisabledWorkTypesChanged();
             if (priorities != null)
             {
+
                 foreach (var priority in priorities)
                 {
                     pawnToOverwrite.workSettings.SetPriority(priority.Key, priority.Value);

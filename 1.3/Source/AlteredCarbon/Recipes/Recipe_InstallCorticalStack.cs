@@ -67,16 +67,9 @@ namespace AlteredCarbon
                 {
                     hediff.PersonaData.gender = corticalStack.PersonaData.gender;
                     hediff.PersonaData.race = corticalStack.PersonaData.race;
-                    if (pawn.IsColonist)
-                    {
-                        Find.StoryWatcher.statsRecord.Notify_ColonistKilled();
-                    }
-                    if (!pawn.IsEmptySleeve())
-                    {
-                        PawnDiedOrDownedThoughtsUtility.TryGiveThoughts(pawn, null, PawnDiedOrDownedThoughtsKind.Died);
-                    }
-                    pawn.health.NotifyPlayerOfKilled(null, null, null);
+                    pawn.Kill(null, hediff);
                     corticalStack.PersonaData.OverwritePawn(pawn, corticalStack.def.GetModExtension<StackSavingOptionsModExtension>());
+                    ACUtils.Resurrect(pawn);
                     hediff.PersonaData.stackGroupID = corticalStack.PersonaData.stackGroupID;
                     pawn.health.AddHediff(hediff, part);
                     AlteredCarbonManager.Instance.stacksIndex.Remove(corticalStack.PersonaData.pawnID);
@@ -117,6 +110,7 @@ namespace AlteredCarbon
                 {
                     additionalSleeveBodyData.ApplyEffects();
                 }
+
                 if (AlteredCarbonManager.Instance.emptySleeves != null && AlteredCarbonManager.Instance.emptySleeves.Contains(pawn))
                 {
                     AlteredCarbonManager.Instance.emptySleeves.Remove(pawn);
