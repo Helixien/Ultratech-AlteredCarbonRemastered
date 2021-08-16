@@ -64,7 +64,7 @@
 		<thingClass>AlteredCarbon.CorticalStack</thingClass>
 		<graphicData>
 			<texPath>Things/Item/Stacks/EmptyStack</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
+			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
 		<tradeTags Inherit="False">
 			<li>UT_StacksUltra</li>
