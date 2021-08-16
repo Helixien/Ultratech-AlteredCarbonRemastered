@@ -4,16 +4,13 @@
 	<ConceptDef ParentName="NotedOpportunisticBase">
 		<defName>UT_SleeveGrowing</defName>
 		<label>Growing Sleeves</label>
-		<helpText>SLEEVE INCUBATORS can be used to create new sleeves from scratch. It requires NEUTROAMINE as fuel.
-		\n\nTo start growing a new sleeve select the sleeve incubator and click CREATE SLEEVE. This will open the sleeve designer. Here you can customize the new sleeve to your liking, choose its race (supports HAR 2.0) and choose its level of QUALITY and BEAUTY. When you are happy with the design, click ACCEPT to start growing the pawn.\n\nBEAUTY defines how beautiful the new sleeve will be. This will add the appropriate trait to the new sleeve. NORMAL will not add beauty trait.
-		\n\nQUALITY will influence how long the sleeve takes to grow and apply a hediff that effects how effective the new sleeve is. NORMAL will not add a hediff.
-		\n\nNew sleeves are basically brain dead and wont be able to care for themselves. Its recommended to have a SLEEVE CASKET ready to store them until you install a stack.</helpText>
+		<helpText>SLEEVE INCUBATORS can be used to create new sleeves from scratch. It requires NEUTROAMINE as fuel.\n\nTo start growing a new sleeve select the sleeve incubator and click CREATE SLEEVE. This will open the sleeve designer. Here you can customize the new sleeve to your liking, choose its race (supports HAR 2.0) and choose its level of QUALITY and BEAUTY. When you are happy with the design, click ACCEPT to start growing the pawn.\n\nBEAUTY defines how beautiful the new sleeve will be. This will add the appropriate trait to the new sleeve. NORMAL will not add the beauty trait.\n\nQUALITY will influence how long the sleeve takes to grow and apply a hediff that effects how effective the new sleeve is. NORMAL will not add a hediff.\n\nNew sleeves are basically brain dead and won't be able to care for themselves. Its recommended to have a SLEEVE CASKET ready to store them until you install a stack.</helpText>
 	</ConceptDef>
 
 	<ConceptDef ParentName="NotedOpportunisticBase">
 		<defName>UT_UsingSleeveCaskets</defName>
 		<label>Sleeve Caskets</label>
-		<helpText>SLEEVE CASKETS are ultra tech med beds that basically "freeze" the pawn using it. This means their needs will not decay and you can take your time installing IMPLANTS and STACKS into new empty sleeves.
+		<helpText>SLEEVE CASKETS are Ultratech med beds that basically "freeze" the pawn using it. This means their needs will not decay and you can take your time installing IMPLANTS and STACKS into new empty sleeves.
 		\n\nSLEEVE CASKETS can ONLY be used as medical beds and should be used for empty sleeves only.</helpText>
 	</ConceptDef>
 
@@ -28,8 +25,8 @@
 	<ConceptDef ParentName="NotedOpportunisticBase">
 		<defName>UT_EmptyStacks</defName>
 		<label>Cortical Stacks</label>
-		<helpText>CORTICAL STACKS are a new IMPLANT you can install in any pawn via SURGERY. They will store the pawns consciousness and prevent them from dying when their body is destoryed.
-		\n\nIn game terms this means: When a empty stack is installed, it saves the pawns date on it. This includes, but is not limited to: Name, age, traits (not all, some are excluded!), skills, relationships, bonds, and much more! Including ROYALTY DLC information.
+		<helpText>CORTICAL STACKS are a new IMPLANT you can install in any pawn via SURGERY. They will store the pawns consciousness and prevent them from dying when their body is destroyed.
+		\n\nIn game terms this means: When a empty stack is installed, it saves the pawns data on it. This includes, but is not limited to: Name, age, traits (not all, some are excluded!), skills, relationships, bonds, and much more! Including Royalty and Ideology DLC information.
 		\nIt also supports multiple popular mods by default.
 		\n\nWhen a pawn with a stack dies, you can EXTRACT the stack from the corpse via either the new EXTRACT STACK ORDER or simply right clicking a pawn with a colonist selected. Similarly to how stripping clothes work.
 		\n\nCORTICAL STACKS can NOT be crafted. You will have to find or "acquire" them from other people.

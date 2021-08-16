@@ -5,8 +5,37 @@
 		<defName>UT_EmptySleeveChildhood</defName>
 		<title>Empty Sleeve</title>
 		<titleShort>Empty Sleeve</titleShort>
-		<baseDescription>Grown in a vat, this body is basically brain-dead and can not live on its own.</baseDescription>
+		<baseDescription>A laboratory grown brain dead body that is unable to live on its own.</baseDescription>
 		<slot>Childhood</slot>
+		<workDisables>
+			<li>Animals</li>
+			<li>Artistic</li>
+			<li>Caring</li>
+			<li>Cleaning</li>
+			<li>Cooking</li>
+			<li>Crafting</li>
+			<li>Firefighting</li>
+			<li>Hauling</li>
+			<li>Intellectual</li>
+			<li>ManualDumb</li>
+			<li>ManualSkilled</li>
+			<li>Mining</li>
+			<li>PlantWork</li>
+			<li>Social</li>
+		</workDisables>
+		<spawnCategories>
+			<li>Civil</li>
+		</spawnCategories>
+		<shuffleable>false</shuffleable>
+		<saveKeyIdentifier>UT_VatGrown45</saveKeyIdentifier>
+	</AlteredCarbon.BackstoryDef>
+	
+	<AlteredCarbon.BackstoryDef>
+		<defName>UT_EmptySleeveAdulthood</defName>
+		<title>Empty Sleeve</title>
+		<titleShort>Empty Sleeve</titleShort>
+		<baseDescription>A laboratory grown brain dead body that is unable to live on its own.</baseDescription>
+		<slot>Adulthood</slot>
 		<workDisables>
 			<li>Animals</li>
 			<li>Artistic</li>

@@ -5,8 +5,8 @@
 		<defName>UT_MyOriginalLostMale</defName>
 		<stages>
 			<li>
-				<label>my original copy {0} lost</label>
-				<description>My original copy has gone lost. I hope he will get back to us someday.</description>
+				<label>my original copy {0} is missing</label>
+				<description>My original copy has gone missing. I hope he will get back to us someday.</description>
 				<baseMoodEffect>-14</baseMoodEffect>
 			</li>
 		</stages>
@@ -16,8 +16,8 @@
 		<defName>UT_MyOriginalLostFemale</defName>
 		<stages>
 			<li>
-				<label>my original copy {0} lost</label>
-				<description>My original copy has gone lost. I hope she will get back to us someday.</description>
+				<label>my original copy {0} is missing</label>
+				<description>My original copy has gone missing. I hope she will get back to us someday.</description>
 				<baseMoodEffect>-14</baseMoodEffect>
 			</li>
 		</stages>
@@ -27,8 +27,8 @@
 		<defName>UT_MyCopyLostMale</defName>
 		<stages>
 			<li>
-				<label>my copy {0} lost</label>
-				<description>My copy has gone lost. I hope he will get back to us someday.</description>
+				<label>my copy {0} is missing</label>
+				<description>My copy has gone missing. I hope he will get back to us someday.</description>
 				<baseMoodEffect>-14</baseMoodEffect>
 			</li>
 		</stages>
@@ -38,8 +38,8 @@
 		<defName>UT_MyCopyLostFemale</defName>
 		<stages>
 			<li>
-				<label>my copy {0} lost</label>
-				<description>My copy has gone lost. I hope she will get back to us someday.</description>
+				<label>my copy {0} is missing</label>
+				<description>My copy has gone missing. I hope she will get back to us someday.</description>
 				<baseMoodEffect>-14</baseMoodEffect>
 			</li>
 		</stages>

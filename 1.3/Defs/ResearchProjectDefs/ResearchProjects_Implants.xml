@@ -35,7 +35,7 @@
 	<ResearchProjectDef ParentName="UT_ResearchBase">
 		<defName>UT_OrganProduction</defName>
 		<label>organ growing</label>
-		<description>Growing human organs in organ incubators.</description>
+		<description>Grow human organs in organ incubators.</description>
 		<baseCost>1500</baseCost>
 		<prerequisites>
 			<li>Fabrication</li>

@@ -131,7 +131,7 @@
 	<HediffDef ParentName="DiseaseBase">
 		<defName>UT_SleeveShock</defName>
 		<label>sleeve shock</label>
-		<description>Shock from switching bodies.</description>
+		<description>In shock due to switching bodies.</description>
 		<isBad>true</isBad>
 		<initialSeverity>1</initialSeverity>
 		<maxSeverity>1</maxSeverity>

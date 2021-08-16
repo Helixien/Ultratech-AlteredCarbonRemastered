@@ -7,7 +7,7 @@
 			<graphicClass>Graphic_Single</graphicClass>
 			<drawSize>0.85</drawSize>
 		</graphicData>
-		<description>A modification chip that can be installed in sleeve incubators that tune a sleeves brain to a specific skill, no matter the stack installed. Only one template can be installed in an incubator at a time without overloading it.</description>
+		<description>A modification chip that can be installed in sleeve incubators that adapts a sleeves brain to a specific skill, no matter the stack installed. Only one template can be installed in an incubator at a time without overloading it.</description>
 		<soundInteract>Standard_Drop</soundInteract>
 		<soundDrop>Standard_Drop</soundDrop>
 		<statBases>

@@ -4,7 +4,7 @@
 	<ThingDef ParentName="ResourceBase">
 		<defName>UT_AncientStack</defName>
 		<label>ancient cortical stack</label>
-		<description>An ancient, ultra tech implant that once store a human's consciousness. For whatever reason, is it age, lack of maintenance or damage, it is corrupted, but there might still be data worth salvaging on it.</description>
+		<description>An ancient, ultra tech implant that once stored a human's consciousness. Due to its age and having not been maintained in years, it is corrupted, but there might still be data worth salvaging on it</description>
 		<graphicData>
 			<texPath>Things/Item/Stacks/AncientStack</texPath>
 			<graphicClass>Graphic_Single</graphicClass>

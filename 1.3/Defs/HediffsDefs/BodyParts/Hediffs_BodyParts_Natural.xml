@@ -17,7 +17,7 @@
 	<RecipeDef ParentName="SurgeryInstallBodyPartNaturalBase">
 		<defName>UT_InstallOrganicArm</defName>
 		<label>install arm</label>
-		<description>Install a biological arm.</description>
+		<description>Install a arm.</description>
 		<descriptionHyperlinks>
 			<ThingDef>UT_OrganicArm</ThingDef>
 		</descriptionHyperlinks>
@@ -62,7 +62,7 @@
 	<RecipeDef ParentName="SurgeryInstallBodyPartNaturalBase">
 		<defName>UT_InstallOrganicLeg</defName>
 		<label>install leg</label>
-		<description>Install a biological leg.</description>
+		<description>Install a leg.</description>
 		<descriptionHyperlinks>
 			<ThingDef>UT_OrganicLeg</ThingDef>
 		</descriptionHyperlinks>
@@ -107,7 +107,7 @@
 	<RecipeDef ParentName="SurgeryInstallBodyPartNaturalBase">
 		<defName>UT_InstallOrganicStomach</defName>
 		<label>install stomach</label>
-		<description>Install biological stomach.</description>
+		<description>Install stomach.</description>
 		<descriptionHyperlinks>
 			<ThingDef>UT_OrganicStomach</ThingDef>
 		</descriptionHyperlinks>
@@ -152,7 +152,7 @@
 	<RecipeDef ParentName="SurgeryInstallBodyPartNaturalBase">
 		<defName>UT_InstallOrganicEye</defName>
 		<label>install eye</label>
-		<description>Install a biological eye.</description>
+		<description>Install an eye.</description>
 		<descriptionHyperlinks>
 			<ThingDef>UT_OrganicEye</ThingDef>
 		</descriptionHyperlinks>
@@ -229,7 +229,7 @@
 	<ThingDef ParentName="BodyPartNaturalBase">
 		<defName>UT_OrganicNose</defName>
 		<label>nose</label>
-		<description>A biological human nose. Recognizes and identifies smells in thr air and transmits them to the brain.</description>
+		<description>A biological human nose. Recognizes and identifies smells in the air and transmits them to the brain.</description>
 		<descriptionHyperlinks>
 			<RecipeDef>UT_InstallOrganicNose</RecipeDef>
 		</descriptionHyperlinks>
@@ -242,7 +242,7 @@
 	<RecipeDef ParentName="SurgeryInstallBodyPartNaturalBase">
 		<defName>UT_InstallOrganicNose</defName>
 		<label>install nose</label>
-		<description>Install a biological nose.</description>
+		<description>Install a nose.</description>
 		<descriptionHyperlinks>
 			<ThingDef>UT_OrganicNose</ThingDef>
 		</descriptionHyperlinks>
