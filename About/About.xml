@@ -20,7 +20,7 @@ Check the workshop page for information.</description>
 			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2196278117</steamWorkshopUrl>
 		</li>
 		<li>
-			<packageId>Ultratech.TOT.Core</packageId>
+			<packageId>Ultratech.Core</packageId>
 			<displayName>Ultratech: Core and Framework</displayName>
 			<downloadUrl></downloadUrl>
 			<steamWorkshopUrl></steamWorkshopUrl>
@@ -33,7 +33,7 @@ Check the workshop page for information.</description>
 		<li>Ludeon.RimWorld.Ideology</li>
 		<li>UnlimitedHugs.HugsLib</li>		
 		<li>OskarPotocki.VanillaExpandedFramework</li>
-		<li>Ultratech.TOT.Core</li>
+		<li>Ultratech.Core</li>
 	</loadAfter>
 
 </ModMetaData>
