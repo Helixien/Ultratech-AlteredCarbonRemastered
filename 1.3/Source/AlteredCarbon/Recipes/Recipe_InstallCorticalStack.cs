@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace AlteredCarbon
@@ -43,19 +44,19 @@ namespace AlteredCarbon
         {
             if (billDoer != null)
             {
-                if (CheckSurgeryFail(billDoer, pawn, ingredients, part, bill))
-                {
-                    foreach (var i in ingredients)
-                    {
-                        if (i is CorticalStack c)
-                        {
-                            c.stackCount = 1;
-                            Traverse.Create(c).Field("mapIndexOrState").SetValue((sbyte)-1);
-                            GenPlace.TryPlaceThing(c, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
-                        }
-                    }
-                    return;
-                }
+                //if (CheckSurgeryFail(billDoer, pawn, ingredients, part, bill))
+                //{
+                //    foreach (var i in ingredients)
+                //    {
+                //        if (i is CorticalStack c)
+                //        {
+                //            c.stackCount = 1;
+                //            Traverse.Create(c).Field("mapIndexOrState").SetValue((sbyte)-1);
+                //            GenPlace.TryPlaceThing(c, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
+                //        }
+                //    }
+                //    return;
+                //}
                 TaleRecorder.RecordTale(TaleDefOf.DidSurgery, billDoer, pawn);
             }
 
@@ -67,38 +68,51 @@ namespace AlteredCarbon
                 {
                     hediff.PersonaData.gender = corticalStack.PersonaData.gender;
                     hediff.PersonaData.race = corticalStack.PersonaData.race;
-                    pawn.Kill(null, hediff);
-                    corticalStack.PersonaData.OverwritePawn(pawn, corticalStack.def.GetModExtension<StackSavingOptionsModExtension>());
-                    ACUtils.Resurrect(pawn);
-                    hediff.PersonaData.stackGroupID = corticalStack.PersonaData.stackGroupID;
-                    pawn.health.AddHediff(hediff, part);
-                    AlteredCarbonManager.Instance.stacksIndex.Remove(corticalStack.PersonaData.pawnID);
-                    AlteredCarbonManager.Instance.ReplaceStackWithPawn(corticalStack, pawn);
+                    
+                    var dummyPawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Colonist, Faction.OfPlayer);
+                    Log.Message("Dummy pawn: " + dummyPawn.thingIDNumber + " - pawn: " + pawn.thingIDNumber);
+                    var copy = new PersonaData(); 
+                    copy.CopyPawn(pawn); // we create a copy of original pawn
+                    copy.OverwritePawn(pawnToOverwrite: dummyPawn, null, original: pawn);
 
-                    var naturalMood = pawn.story.traits.GetTrait(TraitDefOf.NaturalMood);
-                    var nerves = pawn.story.traits.GetTrait(TraitDefOf.Nerves);
+                    //corticalStack.PersonaData.ErasePawn(pawn);
+                    Log.Message("Dummy pawn is being eneragetd:" + PawnGenerator.IsBeingGenerated(dummyPawn));
+                    dummyPawn.Kill(null, hediff);
 
-                    if ((naturalMood != null && naturalMood.Degree == -2)
-                            || pawn.story.traits.HasTrait(TraitDefOf.BodyPurist)
-                            || (nerves != null && nerves.Degree == -2))
-                    {
-                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_NewSleeveDouble);
-                    }
-                    else
-                    {
-                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_NewSleeve);
-                    }
+                    //corticalStack.PersonaData.OverwritePawn(pawn, corticalStack.def.GetModExtension<StackSavingOptionsModExtension>(), dummyPawn);
 
-                    if (corticalStack.PersonaData.diedFromCombat.HasValue && corticalStack.PersonaData.diedFromCombat.Value)
-                    {
-                        pawn.health.AddHediff(HediffMaker.MakeHediff(AC_DefOf.UT_SleeveShock, pawn));
-                        corticalStack.PersonaData.diedFromCombat = null;
-                    }
-                    if (corticalStack.PersonaData.hackedWhileOnStack)
-                    {
-                        pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_SomethingIsWrong);
-                        corticalStack.PersonaData.hackedWhileOnStack = false;
-                    }
+                    //pawn.Kill(null, hediff);
+
+                    //ACUtils.Resurrect(pawn);
+                    //hediff.PersonaData.stackGroupID = corticalStack.PersonaData.stackGroupID;
+                    //pawn.health.AddHediff(hediff, part);
+                    //AlteredCarbonManager.Instance.stacksIndex.Remove(corticalStack.PersonaData.pawnID);
+                    //AlteredCarbonManager.Instance.ReplaceStackWithPawn(corticalStack, pawn);
+                    //
+                    //var naturalMood = pawn.story.traits.GetTrait(TraitDefOf.NaturalMood);
+                    //var nerves = pawn.story.traits.GetTrait(TraitDefOf.Nerves);
+                    //
+                    //if ((naturalMood != null && naturalMood.Degree == -2)
+                    //        || pawn.story.traits.HasTrait(TraitDefOf.BodyPurist)
+                    //        || (nerves != null && nerves.Degree == -2))
+                    //{
+                    //    pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_NewSleeveDouble);
+                    //}
+                    //else
+                    //{
+                    //    pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_NewSleeve);
+                    //}
+                    //
+                    //if (corticalStack.PersonaData.diedFromCombat.HasValue && corticalStack.PersonaData.diedFromCombat.Value)
+                    //{
+                    //    pawn.health.AddHediff(HediffMaker.MakeHediff(AC_DefOf.UT_SleeveShock, pawn));
+                    //    corticalStack.PersonaData.diedFromCombat = null;
+                    //}
+                    //if (corticalStack.PersonaData.hackedWhileOnStack)
+                    //{
+                    //    pawn.needs.mood.thoughts.memories.TryGainMemory(AC_DefOf.UT_SomethingIsWrong);
+                    //    corticalStack.PersonaData.hackedWhileOnStack = false;
+                    //}
                 }
                 else
                 {

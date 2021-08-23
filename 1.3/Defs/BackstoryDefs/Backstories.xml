@@ -16,18 +16,9 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Animals</defName>
-				<amount>4</amount>
-			</li>
-			<li>
-				<defName>Plants</defName>
-				<amount>4</amount>
-			</li>
-			<li>
-				<defName>Social</defName>
-				<amount>-2</amount>
-			</li>
+			<Animals>4</Animals>
+			<Plants>4</Plants>
+			<Social>4</Social>
 		</skillGains>
 		<disallowedTraits>
 			<li>
@@ -54,22 +45,10 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Intellectual</defName>
-				<amount>4</amount>
-			</li>
-			<li>
-				<defName>Social</defName>
-				<amount>2</amount>
-			</li>
-			<li>
-				<defName>Animals</defName>
-				<amount>-2</amount>
-			</li>
-			<li>
-				<defName>Plants</defName>
-				<amount>-2</amount>
-			</li>
+			<Intellectual>4</Intellectual>
+			<Social>2</Social>
+			<Animals>-2</Animals>
+			<Plants>-2</Plants>
 		</skillGains>
 		<disallowedTraits>
 			<li>
@@ -94,18 +73,9 @@
 			<li>ImperialCommon</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Social</defName>
-				<amount>1</amount>
-			</li>
-			<li>
-				<defName>Crafting</defName>
-				<amount>2</amount>
-			</li>
-			<li>
-				<defName>Melee</defName>
-				<amount>2</amount>
-			</li>
+			<Social>1</Social>
+			<Crafting>2</Crafting>
+			<Melee>2</Melee>
 		</skillGains>
 		<workDisables>
 			<li>Intellectual</li>
@@ -131,14 +101,8 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Intellectual</defName>
-				<amount>5</amount>
-			</li>
-			<li>
-				<defName>Artistic</defName>
-				<amount>2</amount>
-			</li>
+			<Intellectual>5</Intellectual>
+			<Artistic>2</Artistic>
 		</skillGains>
 		<workDisables>
 			<li>Social</li>
@@ -159,18 +123,9 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Intellectual</defName>
-				<amount>2</amount>
-			</li>
-			<li>
-				<defName>Melee</defName>
-				<amount>2</amount>
-			</li>
-			<li>
-				<defName>Social</defName>
-				<amount>-2</amount>
-			</li>
+			<Intellectual>2</Intellectual>
+			<Melee>2</Melee>
+			<Social>-2</Social>
 		</skillGains>
 		<forcedTraits>
 			<li>
@@ -194,14 +149,8 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Intellectual</defName>
-				<amount>4</amount>
-			</li>
-			<li>
-				<defName>Social</defName>
-				<amount>4</amount>
-			</li>
+			<Intellectual>4</Intellectual>
+			<Social>4</Social>
 		</skillGains>
 		<workDisables>
 			<li>Cleaning</li>
@@ -230,14 +179,8 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Intellectual</defName>
-				<amount>6</amount>
-			</li>
-			<li>
-				<defName>Social</defName>
-				<amount>2</amount>
-			</li>
+			<Intellectual>6</Intellectual>
+			<Social>2</Social>
 		</skillGains>
 		<workDisables>
 			<li>Cleaning</li>
@@ -265,18 +208,9 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Shooting</defName>
-				<amount>5</amount>
-			</li>
-			<li>
-				<defName>Melee</defName>
-				<amount>5</amount>
-			</li>
-			<li>
-				<defName>Medicine</defName>
-				<amount>2</amount>
-			</li>
+			<Shooting>5</Shooting>
+			<Melee>5</Melee>
+			<Medicine>2</Medicine>
 		</skillGains>
 		<workDisables>
 			<li>Social</li>
@@ -312,18 +246,9 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Animals</defName>
-				<amount>3</amount>
-			</li>
-			<li>
-				<defName>Plants</defName>
-				<amount>2</amount>
-			</li>
-			<li>
-				<defName>Construction</defName>
-				<amount>3</amount>
-			</li>
+			<Animals>3</Animals>
+			<Plants>2</Plants>
+			<Construction>3</Construction>
 		</skillGains>
 		<workDisables>
 			<li>Intellectual</li>
@@ -344,18 +269,9 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Melee</defName>
-				<amount>3</amount>
-			</li>
-			<li>
-				<defName>Shooting</defName>
-				<amount>2</amount>
-			</li>
-			<li>
-				<defName>Crafting</defName>
-				<amount>3</amount>
-			</li>
+			<Melee>3</Melee>
+			<Shooting>2</Shooting>
+			<Crafting>3</Crafting>
 		</skillGains>
 		<forcedTraits>
 			<li>
@@ -379,14 +295,8 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Social</defName>
-				<amount>2</amount>
-			</li>
-			<li>
-				<defName>Intellectual</defName>
-				<amount>1</amount>
-			</li>
+			<Social>2</Social>
+			<Intellectual>1</Intellectual>
 		</skillGains>
 		<forcedTraits>
 			<li>
@@ -416,22 +326,10 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Social</defName>
-				<amount>-4</amount>
-			</li>
-			<li>
-				<defName>Shooting</defName>
-				<amount>4</amount>
-			</li>
-			<li>
-				<defName>Intellectual</defName>
-				<amount>2</amount>
-			</li>
-			<li>
-				<defName>Melee</defName>
-				<amount>-3</amount>
-			</li>
+			<Social>-4</Social>
+			<Shooting>4</Shooting>
+			<Intellectual>2</Intellectual>
+			<Melee>-3</Melee>
 		</skillGains>
 		<workDisables>
 			<li>Cleaning</li>
@@ -454,28 +352,18 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Social</defName>
-				<amount>4</amount>
-			</li>
-			<li>
-				<defName>Intellectual</defName>
-				<amount>7</amount>
-			</li>
-			<li>
-				<defName>Melee</defName>
-				<amount>-5</amount>
-			</li>
+			<Social>4</Social>
+			<Intellectual>7</Intellectual>
+			<Melee>-5</Melee>
 		</skillGains>
 		<workDisables>
 			<li>Cleaning</li>
 			<li>Crafting</li>
 			<li>Artistic</li>
-			<li>Medicine</li>
-			<li>Animals</li>
 			<li>Caring</li>
-			<li>Plants</li>
-			<li>Construction</li>
+			<li>Animals</li>
+			<li>PlantWork</li>
+			<li>Constructing</li>
 		</workDisables>
 		<forcedTraits>
 			<li>
@@ -502,18 +390,9 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Shooting</defName>
-				<amount>8</amount>
-			</li>
-			<li>
-				<defName>Melee</defName>
-				<amount>7</amount>
-			</li>
-			<li>
-				<defName>Crafting</defName>
-				<amount>2</amount>
-			</li>
+			<Shooting>8</Shooting>
+			<Melee>7</Melee>
+			<Crafting>2</Crafting>
 		</skillGains>
 		<workDisables>
 			<li>Cleaning</li>
@@ -545,24 +424,15 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Melee</defName>
-				<amount>6</amount>
-			</li>
-			<li>
-				<defName>Intellectual</defName>
-				<amount>-3</amount>
-			</li>
-			<li>
-				<defName>Shooting</defName>
-				<amount>6</amount>
-			</li>
+			<Melee>6</Melee>
+			<Intellectual>-3</Intellectual>
+			<Shooting>6</Shooting>
 		</skillGains>
 		<workDisables>
 			<li>Artistic</li>
 			<li>Caring</li>
 			<li>Animals</li>
-			<li>Plants</li>
+			<li>PlantWork</li>
 		</workDisables>
 		<forcedTraits>
 			<li>
@@ -592,14 +462,8 @@
 			<li>ImperialFighter</li>
 		</spawnCategories>
 		<skillGains>
-			<li>
-				<defName>Social</defName>
-				<amount>-1</amount>
-			</li>
-			<li>
-				<defName>Artistic</defName>
-				<amount>6</amount>
-			</li>
+			<Social>-1</Social>
+			<Artistic>6</Artistic>
 		</skillGains>
 		<workDisables>
 			<li>Intellectual</li>

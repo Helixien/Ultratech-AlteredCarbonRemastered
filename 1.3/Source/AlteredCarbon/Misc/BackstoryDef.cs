@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using RimWorld;
 using Verse;
@@ -26,6 +27,25 @@ namespace AlteredCarbon
 				return;
 			}
 			Backstory backstory = new Backstory();
+
+			if (this.forcedTraits?.Any() ?? false)
+            {
+				backstory.forcedTraits = new List<TraitEntry>();
+				foreach (var trait in this.forcedTraits.Where(x => Rand.RangeInclusive(0, 100) < x.chance))
+				{
+					backstory.forcedTraits.Add(new TraitEntry(trait.defName, trait.degree));
+				}
+			}
+
+			if (this.disallowedTraits?.Any() ?? false)
+            {
+				backstory.disallowedTraits = new List<TraitEntry>();
+				foreach (var trait in this.disallowedTraits.Where(x => Rand.RangeInclusive(0, 100) < x.chance))
+				{
+					backstory.disallowedTraits.Add(new TraitEntry(trait.defName, trait.degree));
+				}
+			}
+
 			if (GenText.NullOrEmpty(this.title))
 			{
 				return;
@@ -50,6 +70,10 @@ namespace AlteredCarbon
 			Traverse.Create(backstory).Field("bodyTypeGlobal").SetValue(this.bodyTypeGlobal);
 			Traverse.Create(backstory).Field("bodyTypeMale").SetValue(this.bodyTypeMale);
 			Traverse.Create(backstory).Field("bodyTypeFemale").SetValue(this.bodyTypeFemale);
+			if (skillGains?.Any() ?? false)
+            {
+				Traverse.Create(backstory).Field("skillGains").SetValue(skillGains.ToDictionary(x => x.skill.defName, y => y.minLevel));
+            }
 			backstory.slot = this.slot;
 			backstory.shuffleable = this.shuffleable;
 			if (GenList.NullOrEmpty<string>(this.spawnCategories))
@@ -57,7 +81,7 @@ namespace AlteredCarbon
 				return;
 			}
 			backstory.spawnCategories = this.spawnCategories;
-			if (this.workDisables.Count > 0)
+			if (this.workDisables.Any())
 			{
 				using (List<WorkTags>.Enumerator enumerator2 = this.workDisables.GetEnumerator())
 				{
@@ -66,12 +90,13 @@ namespace AlteredCarbon
 						WorkTags workTags2 = enumerator2.Current;
 						backstory.workDisables |= workTags2;
 					}
-					goto IL_1E9;
 				}
 			}
-			backstory.workDisables = 0;
-		IL_1E9:
-			backstory.ResolveReferences();
+			else
+            {
+				backstory.workDisables = WorkTags.None;
+            }
+
 			backstory.PostLoad();
 			backstory.identifier = this.saveKeyIdentifier;
 			bool flag = false;
@@ -106,16 +131,25 @@ namespace AlteredCarbon
 
 		public bool addToDatabase = true;
 
-		public List<WorkTags> workAllows = new List<WorkTags>();
-
 		public List<WorkTags> workDisables = new List<WorkTags>();
 
 		public List<string> spawnCategories = new List<string>();
 
-		public List<TraitEntry> forcedTraits = new List<TraitEntry>();
+		public List<SkillRequirement> skillGains;
 
-		public List<TraitEntry> disallowedTraits = new List<TraitEntry>();
+		public List<TraitEntryBackstory> forcedTraits = new List<TraitEntryBackstory>();
+
+		public List<TraitEntryBackstory> disallowedTraits = new List<TraitEntryBackstory>();
 
 		public string saveKeyIdentifier;
+	}
+
+	public class TraitEntryBackstory
+	{
+		public TraitDef defName;
+
+		public int degree;
+
+		public int chance;
 	}
 }

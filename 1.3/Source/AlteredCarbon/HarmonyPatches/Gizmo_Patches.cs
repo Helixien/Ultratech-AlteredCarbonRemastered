@@ -34,5 +34,14 @@ namespace AlteredCarbon
             return true;
         }
     }
+
+    [HarmonyPatch(typeof(MemoryThoughtHandler), "RemoveMemory")]
+    public static class RemoveMemory_Patch
+    {
+        public static void Postfix(MemoryThoughtHandler __instance, Thought_Memory th)
+        {
+            Log.Message("Removing " + th.def + " from " + __instance.pawn);
+        }
+    }
 }
 
