@@ -4,7 +4,7 @@
 	<ThingDef ParentName="BuildingBase">
 		<defName>UT_SleeveIncubator</defName>
 		<label>sleeve incubator</label>
-		<description>An ultra-tech vat tank connected to advanced life support systems and an AI core. Used by the rich 1% on ultra-tech worlds and less trustworthy individuals on rimworlds to grow custom sleeves. the sleeve incubator is capable of growing any human body one can imagine.</description>
+		<description>An ultratech vat tank connected to advanced life support systems and an AI core. Used by the rich 1% on ultratech worlds and less trustworthy individuals on rimworlds to grow custom sleeves. the sleeve incubator is capable of growing any human body one can imagine.</description>
 		<thingClass>AlteredCarbon.Building_SleeveGrower</thingClass>
 		<tickerType>Normal</tickerType>
 		<drawerType>RealtimeOnly</drawerType>
@@ -99,7 +99,7 @@
 	<ThingDef ParentName="BuildingBase">
 		<defName>UT_OrganIncubator</defName>
 		<label>organ incubator</label>
-		<description>A small ultra-tech vat tank used to grow organs of any kind in a short period of time. Requires neutroamine to work.</description>
+		<description>A small ultratech vat tank used to grow organs of any kind in a short period of time. Requires neutroamine to work.</description>
 		<tickerType>Normal</tickerType>
 		<thingClass>AlteredCarbon.Building_OrganIncubator</thingClass>
 		<drawerType>RealtimeOnly</drawerType>
@@ -191,7 +191,7 @@
 	<ThingDef ParentName="BedWithQualityBase">
 		<defName>UT_SleeveCasket</defName>
 		<label>sleeve casket</label>
-		<description>An ultra-tech casket used for storing grown sleeves before their stack is installed. It uses crypto tech technology to suspend the needs of the sleeves body, while still allowing for the installation of implants or bionics.</description>
+		<description>An ultratech casket used for storing grown sleeves before their stack is installed. It uses crypto technology to suspend the needs of the sleeves body, while still allowing for the installation of implants or bionics.</description>
 		<thingClass>AlteredCarbon.Building_SleeveCasket</thingClass>
 		<tickerType>Normal</tickerType>
 		<drawerType>RealtimeOnly</drawerType>
@@ -262,7 +262,7 @@
 	<ThingDef ParentName="BuildingBase">
 		<defName>UT_CorticalStackStorage</defName>
 		<label>quantum storage matrix</label>
-		<description>A ultra-tech, quantum computing matrix made to store cortical stacks. If in range of auto-linked stacks, the matrix can make emergency backups in case of catastrophic stack faliure. Can be linked to a rVR server.</description>
+		<description>A ultratech, quantum computing matrix made to store cortical stacks. If in range of auto-linked stacks, the matrix can make emergency backups in case of catastrophic stack faliure. Can be linked to a rVR server.</description>
 		<thingClass>AlteredCarbon.Building_StackStorage</thingClass>
 		<tickerType>Normal</tickerType>
 		<drawerType>RealtimeOnly</drawerType>
@@ -357,7 +357,7 @@
 	<ThingDef ParentName="BenchBase">
 		<defName>UT_DecryptionBench</defName>
 		<label>decryption bench</label>
-		<description>A workbench equipped with advanced tools for decrypting ultra-tech gear and items.</description>
+		<description>A workbench equipped with advanced tools for decrypting ultratech gear and items.</description>
 		<thingClass>AlteredCarbon.Building_DecryptionBench</thingClass>
 		<graphicData>
 			<texPath>Things/Building/Production/HackingWorkbench</texPath>
