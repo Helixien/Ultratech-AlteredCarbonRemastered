@@ -69,7 +69,6 @@ namespace AlteredCarbon
         public static bool disableKilledEffect = false;
         private static bool Prefix(Pawn_HealthTracker __instance, Pawn ___pawn, DamageInfo? dinfo, Hediff hediff, Caravan caravan)
         {
-            Log.Message("disableKilledEffect: " + disableKilledEffect);
             if (disableKilledEffect)
             {
                 try
@@ -99,30 +98,35 @@ namespace AlteredCarbon
 
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator ilg)
         {
-            Log.Message("Start");
-            //Label label = ilg.DefineLabel();
-            //var isSleeveOrHasStack = AccessTools.Method(typeof(NotifyPlayerOfKilled_Patch), "IsSleeveOrHasStack");
-            //var pawnField = AccessTools.Field(typeof(Pawn_HealthTracker), "pawn");
+            var isSleeveOrHasStack = AccessTools.Method(typeof(NotifyPlayerOfKilledPatch), "ShouldSkip");
+            var pawnField = AccessTools.Field(typeof(Pawn_HealthTracker), "pawn");
             var getIdeo = AccessTools.Method(typeof(Pawn), "get_Ideo");
             bool found = false;
-
             var codes = instructions.ToList();
+
             for (var i = 0; i < codes.Count; i++)
             {
                 var instr = codes[i];
                 if (!found && i > 2 && codes[i].opcode == OpCodes.Brfalse && codes[i - 1].Calls(getIdeo))
                 {
-                    Log.Message(i + " - " + instr);
+                    found = true;
+                    yield return new CodeInstruction(OpCodes.Brfalse_S, instr.operand);
+                    yield return new CodeInstruction(OpCodes.Ldarg_0);
+                    yield return new CodeInstruction(OpCodes.Ldfld, pawnField);
+                    yield return new CodeInstruction(OpCodes.Call, isSleeveOrHasStack);
+                    yield return new CodeInstruction(OpCodes.Brtrue_S, instr.operand);
                 }
-                yield return instr;
+                else
+                {
+                    yield return instr;
+                }
             }
-            Log.Message("End");
-
         }
 
-        public static bool IsSleeveOrHasStack(Pawn pawn)
+        public static Pawn pawnToSkip;
+        public static bool ShouldSkip(Pawn pawn)
         {
-            return pawn.IsEmptySleeve() || pawn.HasStack();
+            return pawn == pawnToSkip;
         }
     }
 
@@ -320,7 +324,6 @@ namespace AlteredCarbon
                     AlteredCarbonManager.Instance.RegisterStack(corticalStackThing);
                     AlteredCarbonManager.Instance.RegisterSleeve(__instance, corticalStackThing.PersonaData.stackGroupID);
                     CaravanInventoryUtility.GiveThing(__state, corticalStackThing);
-                    Log.Message(corticalStackThing + " - " + corticalStackThing.PersonaData.ContainsInnerPersona);
                 }
                 var head = __instance.health.hediffSet.GetNotMissingParts().FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Head);
                 if (head != null)

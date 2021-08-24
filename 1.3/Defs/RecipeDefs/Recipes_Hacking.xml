@@ -14,6 +14,7 @@
 		<jobString>decrypting ancient stack.</jobString>
 		<workerClass>AlteredCarbon.Recipe_DecryptAncientCorticalStack</workerClass>
 		<workAmount>15000</workAmount>
+		<unfinishedThingDef>UT_UnfinishedAncientStack</unfinishedThingDef>
 		<ingredients>
 			<li>
 				<filter>

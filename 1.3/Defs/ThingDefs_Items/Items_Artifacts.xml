@@ -40,4 +40,19 @@
 		<storedConceptLearnOpportunity>UT_AncientStacks</storedConceptLearnOpportunity>
 	</ThingDef>
 
+  <ThingDef ParentName="UnfinishedBase">
+    <defName>UT_UnfinishedAncientStack</defName>
+    <label>unfinished ancient stack</label>
+    <description>An unfinished ancient stack.</description>
+	<thingClass>AlteredCarbon.UnfinishedAncientStack</thingClass>
+    <statBases>
+      <Flammability>0</Flammability>
+    </statBases>
+    <graphicData>
+			<texPath>Things/Item/Stacks/AncientStack</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.80</drawSize>
+    </graphicData>
+    <stuffCategories Inherit="false" />
+  </ThingDef>
 </Defs>

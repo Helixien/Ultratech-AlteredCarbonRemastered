@@ -420,15 +420,19 @@ namespace AlteredCarbon
 			{
 				rjwData = new RJWData();
 				var pawnData = dataStore.GetPawnData(pawn);
-				foreach (var fieldInfo in typeof(rjw.PawnData).GetFields())
+				if (pawnData != null)
 				{
-					try
+					foreach (var fieldInfo in typeof(rjw.PawnData).GetFields())
 					{
-						var newField = rjwData.GetType().GetField(fieldInfo.Name);
-						newField.SetValue(rjwData, fieldInfo.GetValue(pawnData));
+						try
+						{
+							var newField = rjwData.GetType().GetField(fieldInfo.Name);
+							newField.SetValue(rjwData, fieldInfo.GetValue(pawnData));
+						}
+						catch { }
 					}
-					catch { }
 				}
+
 			}
 			var comp = ThingCompUtility.TryGetComp<rjw.CompRJW>(pawn);
 			if (comp != null)

@@ -9,8 +9,22 @@ using Verse;
 
 namespace AlteredCarbon
 {
+    public class UnfinishedAncientStack : UnfinishedThing
+    {
+        public override string LabelNoCount
+        {
+            get
+            {
+                return GenLabel.ThingLabel(this, 1);
+            }
+        }
+    }
     public class Recipe_DecryptAncientCorticalStack : RecipeWorker
     {
+        public override void ConsumeIngredient(Thing ingredient, RecipeDef recipe, Map map)
+        {
+            base.ConsumeIngredient(ingredient, recipe, map);
+        }
         public override void Notify_IterationCompleted(Pawn billDoer, List<Thing> ingredients)
         {
             base.Notify_IterationCompleted(billDoer, ingredients);

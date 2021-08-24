@@ -190,7 +190,7 @@ namespace AlteredCarbon
                         stackData.originalStack = null;
                         stackData.originalPawn = pawn;
                     }
-                    else if (stackData.copiedStacks.Contains(stack))
+                    else if (stackData.copiedStacks?.Contains(stack) ?? false)
                     {
                         stackData.copiedStacks.Remove(stack);
                         if (stackData.copiedPawns == null) stackData.copiedPawns = new List<Pawn>();
@@ -210,7 +210,8 @@ namespace AlteredCarbon
             }
             if (stack.PersonaData.isCopied)
             {
-                if (this.stacksRelationships[stack.PersonaData.stackGroupID].copiedStacks == null) this.stacksRelationships[stack.PersonaData.stackGroupID].copiedStacks = new List<CorticalStack>();
+                if (this.stacksRelationships[stack.PersonaData.stackGroupID].copiedStacks == null) 
+                    this.stacksRelationships[stack.PersonaData.stackGroupID].copiedStacks = new List<CorticalStack>();
                 this.stacksRelationships[stack.PersonaData.stackGroupID].copiedStacks.Add(stack);
             }
             else

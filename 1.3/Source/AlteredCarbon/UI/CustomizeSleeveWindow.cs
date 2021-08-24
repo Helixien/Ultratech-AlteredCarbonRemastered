@@ -1489,10 +1489,6 @@ namespace AlteredCarbon
             pawn.workSettings = new Pawn_WorkSettings(pawn);
             pawn.needs.mood.thoughts = new ThoughtHandler(pawn);
             pawn.timetable = new Pawn_TimetableTracker(pawn);
-            if (BackstoryDatabase.TryGetWithIdentifier("UT_VatGrown45", out Backstory bs))
-            {
-                pawn.story.childhood = bs;
-            }
 
             if (pawn.needs?.mood?.thoughts?.memories?.Memories != null)
             {
@@ -1516,6 +1512,7 @@ namespace AlteredCarbon
             {
                 pawn.needs.mood.thoughts.situational.Notify_SituationalThoughtsDirty();
             }
+            pawn.ideo = new Pawn_IdeoTracker(pawn);
             //align sliders
             Color.RGBToHSV(pawn.story.hairColor, out hairHue, out hairSaturation, out hairValue);
             if (ModCompatibility.AlienRacesIsActive)
