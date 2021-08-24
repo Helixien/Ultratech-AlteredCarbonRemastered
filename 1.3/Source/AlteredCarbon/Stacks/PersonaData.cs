@@ -34,6 +34,8 @@ namespace AlteredCarbon
         public string adulthood;
         public string title;
 
+        public bool everSeenByPlayer;
+
         private Dictionary<WorkTypeDef, int> priorities;
         private GuestStatus guestStatusInt;
         private PrisonerInteractionModeDef interactionMode;
@@ -204,6 +206,7 @@ namespace AlteredCarbon
 
             if (pawn.relations != null)
             {
+                this.everSeenByPlayer = pawn.relations.everSeenByPlayer;
                 this.relations = pawn.relations.DirectRelations ?? new List<DirectPawnRelation>();
                 this.relatedPawns = pawn.relations.RelatedPawns?.ToHashSet() ?? new HashSet<Pawn>();
                 foreach (var otherPawn in pawn.relations.RelatedPawns)
@@ -238,6 +241,7 @@ namespace AlteredCarbon
                     this.priorities[w] = pawn.workSettings.GetPriority(w);
                 }
             }
+
             if (pawn.guest != null)
             {
                 this.guestStatusInt = pawn.guest.GuestStatus;
@@ -376,6 +380,7 @@ namespace AlteredCarbon
             this.isFactionLeader = other.isFactionLeader;
             this.traits = other.traits;
             this.relations = other.relations;
+            this.everSeenByPlayer = other.everSeenByPlayer;
             this.relatedPawns = other.relatedPawns;
             this.skills = other.skills;
 
@@ -578,8 +583,7 @@ namespace AlteredCarbon
             
             
             pawnToOverwrite.relations = new Pawn_RelationsTracker(pawnToOverwrite);
-
-            pawnToOverwrite.relations.everSeenByPlayer = true;
+            pawnToOverwrite.relations.everSeenByPlayer = this.everSeenByPlayer;
 
             var origPawn = GetOriginalPawn(pawnToOverwrite);
 
@@ -588,6 +592,17 @@ namespace AlteredCarbon
                 var otherPawn = GetTruePawn(rel.otherPawn);
                 if (otherPawn != null && rel != null)
                 {
+                    if (otherPawn.needs?.mood?.thoughts?.memories != null)
+                    {
+                        foreach (var thought in otherPawn.needs.mood.thoughts.memories.Memories)
+                        {
+                            if (thought.otherPawn != null && thought.otherPawn?.Name.ToStringFull == pawnToOverwrite.Name.ToStringFull && thought.otherPawn != pawnToOverwrite)
+                            {
+                                thought.otherPawn = pawnToOverwrite;
+                            }
+                        }
+                    }
+
                     var oldRelation = otherPawn.relations.DirectRelations.Where(r => r.def == rel.def && r.otherPawn.Name.ToStringFull == pawnToOverwrite.Name.ToStringFull).FirstOrDefault();
                     if (oldRelation != null && oldRelation.otherPawn != pawnToOverwrite)
                     {
@@ -607,6 +622,17 @@ namespace AlteredCarbon
                 var otherPawn = GetTruePawn(pawn2);
                 if (otherPawn != null)
                 {
+                    if (otherPawn.needs?.mood?.thoughts?.memories != null)
+                    {
+                        foreach (var thought in otherPawn.needs.mood.thoughts.memories.Memories)
+                        {
+                            if (thought.otherPawn != null && thought.otherPawn?.Name.ToStringFull == pawnToOverwrite.Name.ToStringFull && thought.otherPawn != pawnToOverwrite)
+                            {
+                                thought.otherPawn = pawnToOverwrite;
+                            }
+                        }
+                    }
+
                     foreach (var rel in otherPawn.relations.DirectRelations)
                     {
                         if (this.name.ToStringFull == rel.otherPawn?.Name.ToStringFull && rel.otherPawn != pawnToOverwrite)
@@ -619,9 +645,6 @@ namespace AlteredCarbon
                                 Log.Message("1 Adding direct relation: " + rel.def + " - " + otherPawn);
                                 pawnToOverwrite.relations.AddDirectRelation(rel.def, otherPawn);
                             }
-
-                            DirectPawnRelation directPawnRelation = LovePartnerRelationUtility.ExistingMostLikedLovePartnerRel(otherPawn, allowDead: false);
-                            Log.Message("directPawnRelation: " + directPawnRelation + " - " + directPawnRelation.def + " - " + directPawnRelation.otherPawn + " - " + directPawnRelation.otherPawn.thingIDNumber);
                         }
                     }
 
@@ -636,7 +659,6 @@ namespace AlteredCarbon
                                 if (pawnToOverwrite.relations.GetDirectRelation(rel2.def, otherPawn) is null)
                                 {
                                     Log.Message("2 Adding direct relation: " + rel2.def + " - " + otherPawn);
-
                                     pawnToOverwrite.relations.AddDirectRelation(rel2.def, otherPawn);
                                 }
                             }
@@ -645,12 +667,21 @@ namespace AlteredCarbon
                 }
             }
 
-
-
             if (original != null)
             {
                 foreach (var otherPawn in pawnToOverwrite.relations.PotentiallyRelatedPawns)
                 {
+                    if (otherPawn.needs?.mood?.thoughts?.memories != null)
+                    {
+                        foreach (var thought in otherPawn.needs.mood.thoughts.memories.Memories)
+                        {
+                            if (thought.otherPawn != null && thought.otherPawn?.Name.ToStringFull == pawnToOverwrite.Name.ToStringFull && thought.otherPawn != pawnToOverwrite)
+                            {
+                                thought.otherPawn = pawnToOverwrite;
+                            }
+                        }
+                    }
+
                     if (otherPawn?.relations != null)
                     {
                         foreach (var rel in otherPawn.relations.DirectRelations)
@@ -680,11 +711,6 @@ namespace AlteredCarbon
                     }
                 }
             }
-
-            //if (origPawn != null)
-            //{
-            //    origPawn.relations = new Pawn_RelationsTracker(origPawn);
-            //}
 
             pawnToOverwrite.skills.skills.Clear();
             if (this.skills != null)
@@ -1024,6 +1050,8 @@ namespace AlteredCarbon
             Scribe_Collections.Look<Trait>(ref this.traits, "traits");
             Scribe_Collections.Look<SkillRecord>(ref this.skills, "skills");
             Scribe_Collections.Look<DirectPawnRelation>(ref this.relations, "relations");
+            Scribe_Values.Look(ref this.everSeenByPlayer, "everSeenByPlayer");
+
             Scribe_Collections.Look<Pawn>(ref this.relatedPawns, saveDestroyedThings: true, "relatedPawns", LookMode.Reference);
 
             Scribe_Collections.Look<WorkTypeDef, int>(ref this.priorities, "priorities");

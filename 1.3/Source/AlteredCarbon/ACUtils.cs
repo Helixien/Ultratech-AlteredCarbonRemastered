@@ -149,59 +149,6 @@ namespace AlteredCarbon
             }
             return HediffMaker.MakeHediff(hediffDef, pawn, part);
         }
-
-        public static void Resurrect(Pawn pawn)
-        {
-            if (!pawn.Dead)
-            {
-                Log.Error("Tried to resurrect a pawn who is not dead: " + pawn.ToStringSafe());
-                return;
-            }
-            if (pawn.Discarded)
-            {
-                Log.Error("Tried to resurrect a discarded pawn: " + pawn.ToStringSafe());
-                return;
-            }
-            Corpse corpse = pawn.Corpse;
-            bool flag = false;
-            IntVec3 loc = IntVec3.Invalid;
-            Map map = null;
-            if (corpse != null)
-            {
-                flag = corpse.Spawned;
-                loc = corpse.Position;
-                map = corpse.Map;
-                corpse.InnerPawn = null;
-                corpse.Destroy();
-            }
-            if (flag && pawn.IsWorldPawn())
-            {
-                Find.WorldPawns.RemovePawn(pawn);
-            }
-            pawn.ForceSetStateToUnspawned();
-            Traverse.Create(pawn.health).Field("healthState").SetValue(PawnHealthState.Mobile);
-            if (flag)
-            {
-                GenSpawn.Spawn(pawn, loc, map);
-                if (pawn.Faction != null && pawn.Faction != Faction.OfPlayer && pawn.HostileTo(Faction.OfPlayer))
-                {
-                    LordMaker.MakeNewLord(pawn.Faction, new LordJob_AssaultColony(pawn.Faction), pawn.Map, Gen.YieldSingle(pawn));
-                }
-                if (pawn.apparel != null)
-                {
-                    List<Apparel> wornApparel = pawn.apparel.WornApparel;
-                    for (int j = 0; j < wornApparel.Count; j++)
-                    {
-                        wornApparel[j].Notify_PawnResurrected();
-                    }
-                }
-            }
-
-            if (pawn.royalty != null)
-            {
-                pawn.royalty.Notify_Resurrected();
-            }
-        }
     }
 }
 
