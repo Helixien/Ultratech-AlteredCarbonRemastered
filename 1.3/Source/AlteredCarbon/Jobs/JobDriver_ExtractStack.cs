@@ -31,7 +31,7 @@ namespace AlteredCarbon
                         if (hediff.def.spawnThingOnRemoved != null)
                         {
                             var corticalStack = ThingMaker.MakeThing(hediff.def.spawnThingOnRemoved) as CorticalStack;
-                            if (hediff.PersonaData.hasPawn)
+                            if (hediff.PersonaData.ContainsInnerPersona)
                             {
                                 corticalStack.PersonaData.CopyDataFrom(hediff.PersonaData);
                             }

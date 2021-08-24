@@ -40,7 +40,7 @@ namespace AlteredCarbon
             get
             {
                 var personaData = this.PersonaData;
-                if (personaData.hasPawn)
+                if (personaData.ContainsInnerPersona)
                 {
                     if (personaData.faction == Faction.OfPlayer)
                     {
@@ -117,7 +117,8 @@ namespace AlteredCarbon
             corticalStacks.Add(this);
             try
             {
-                if (!respawningAfterLoad && !PersonaData.hasPawn && this.def == AC_DefOf.UT_FilledCorticalStack)
+
+                if (!respawningAfterLoad && !PersonaData.ContainsInnerPersona && this.def == AC_DefOf.UT_FilledCorticalStack)
                 {
                     var pawnKind = DefDatabase<PawnKindDef>.AllDefs.Where(x => x.RaceProps.Humanlike).RandomElement();
                     var faction = Find.FactionManager.AllFactions.Where(x => x.def.humanlikeFaction).RandomElement();
@@ -270,7 +271,7 @@ namespace AlteredCarbon
         public override string GetInspectString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            if (PersonaData.hasPawn)
+            if (PersonaData.ContainsInnerPersona)
             {
                 stringBuilder.AppendLineTagged("AlteredCarbon.Name".Translate() + ": " + personaData.PawnNameColored);
                 stringBuilder.AppendLineTagged("AlteredCarbon.faction".Translate() + ": " + PersonaData.faction.NameColored);
@@ -325,7 +326,7 @@ namespace AlteredCarbon
         {
             corticalStacks.Remove(this);
             base.Destroy(mode);
-            if (PersonaData.hasPawn && !dontKillThePawn)
+            if (PersonaData.ContainsInnerPersona && !dontKillThePawn)
             {
                 this.KillInnerPawn();
             }
@@ -333,7 +334,7 @@ namespace AlteredCarbon
 
         public void KillInnerPawn(bool affectFactionRelationship = false, Pawn affecter = null)
         {
-            if (PersonaData.hasPawn)
+            if (PersonaData.ContainsInnerPersona)
             {
                 Pawn pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(PawnKindDefOf.Colonist, Faction.OfPlayer));
                 PersonaData.OverwritePawn(pawn, this.def.GetModExtension<StackSavingOptionsModExtension>());
@@ -353,7 +354,6 @@ namespace AlteredCarbon
                 catch { }
             
             }
-            PersonaData.hasPawn = false;
         }
         public void EmptyStack(Pawn affecter, bool affectFactionRelationship = false)
         {

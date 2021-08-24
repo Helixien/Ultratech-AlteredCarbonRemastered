@@ -15,7 +15,7 @@ namespace AlteredCarbon
 		public override bool Matches(Thing t)
 		{
 			var stack = t as CorticalStack;
-			if (stack != null && stack.PersonaData.hasPawn && stack.PersonaData.faction == Faction.OfPlayer)
+			if (stack != null && stack.PersonaData.ContainsInnerPersona && stack.PersonaData.faction == Faction.OfPlayer)
 			{
 				return true;
 			}

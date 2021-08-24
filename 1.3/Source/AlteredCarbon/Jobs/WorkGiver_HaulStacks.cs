@@ -15,7 +15,7 @@ namespace AlteredCarbon
         }
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
         {
-            return CorticalStack.corticalStacks.Where(x => x.Spawned && pawn.Map == x.Map && x.PersonaData.hasPawn 
+            return CorticalStack.corticalStacks.Where(x => x.Spawned && pawn.Map == x.Map && x.PersonaData.ContainsInnerPersona 
             && !pawn.Map.mapPawns.AllPawnsSpawned.Any(y => y.BillStack.Bills.Any(c => c is Bill_InstallStack installStack && installStack.stackToInstall == x))
             && pawn.CanReserveAndReach(x, PathEndMode.Touch, Danger.Deadly));
         }

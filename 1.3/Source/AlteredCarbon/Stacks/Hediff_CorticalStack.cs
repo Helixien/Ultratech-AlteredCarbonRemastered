@@ -63,7 +63,7 @@ namespace AlteredCarbon
 
         public override void Notify_PawnDied()
         {
-            if (!PersonaData.hasPawn)
+            if (!PersonaData.ContainsInnerPersona)
             {
                 PersonaData.CopyPawn(this.pawn);
             }
@@ -72,7 +72,7 @@ namespace AlteredCarbon
 
         public override void Notify_PawnKilled()
         {
-            if (!PersonaData.hasPawn)
+            if (!PersonaData.ContainsInnerPersona)
             {
                 PersonaData.CopyPawn(this.pawn);
             }

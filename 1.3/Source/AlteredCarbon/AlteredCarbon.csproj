@@ -390,7 +390,7 @@
     <Compile Include="Thoughts\ThoughtWorker_WomansBody.cs" />
     <Compile Include="Thoughts\ThoughtWorker_MansBody.cs" />
     <Compile Include="HarmonyPatches\SpawnStacks.cs" />
-    <Compile Include="HarmonyPatches\DeadPawnMessageReplacement.cs" />
+    <Compile Include="HarmonyPatches\NotifyPlayerOfKilledPatch.cs" />
     <Compile Include="Jobs\JobDriver_ExtractStack.cs" />
     <Compile Include="HarmonyPatches\FloatMenuMakerMap_Patch.cs" />
     <Compile Include="Stacks\CorticalStack.cs" />

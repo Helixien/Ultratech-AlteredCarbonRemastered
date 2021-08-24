@@ -184,7 +184,6 @@ namespace AlteredCarbon
             if (Rand.Chance(successChance))
             {
                 var stackCopyTo = (CorticalStack)ThingMaker.MakeThing(AC_DefOf.UT_FilledCorticalStack);
-                stackCopyTo.PersonaData.hasPawn = true;
                 this.innerContainer.TryAdd(stackCopyTo);
                 stackCopyTo.PersonaData.CopyDataFrom(stackToDuplicate.PersonaData, true);
                 AlteredCarbonManager.Instance.RegisterStack(stackCopyTo);
@@ -195,7 +194,6 @@ namespace AlteredCarbon
         public void PerformStackBackup(Hediff_CorticalStack hediff_CorticalStack)
         {
             var stackCopyTo = (CorticalStack)ThingMaker.MakeThing(AC_DefOf.UT_FilledCorticalStack);
-            stackCopyTo.PersonaData.hasPawn = true;
             this.innerContainer.TryAdd(stackCopyTo);
             stackCopyTo.PersonaData.CopyDataFrom(hediff_CorticalStack.PersonaData);
             AlteredCarbonManager.Instance.RegisterStack(stackCopyTo);
@@ -203,7 +201,6 @@ namespace AlteredCarbon
         public void PerformStackRestoration(Pawn doer)
         {
             var stackRestoreTo = (CorticalStack)ThingMaker.MakeThing(AC_DefOf.UT_FilledCorticalStack);
-            stackRestoreTo.PersonaData.hasPawn = true;
             var personaDataToRestore = FirstPersonaStackToRestore;
             stackRestoreTo.PersonaData.CopyDataFrom(personaDataToRestore, true);
             AlteredCarbonManager.Instance.RegisterStack(stackRestoreTo);
@@ -301,7 +298,7 @@ namespace AlteredCarbon
                 {
                     return false;
                 }
-                if (!stack.PersonaData.hasPawn)
+                if (!stack.PersonaData.ContainsInnerPersona)
                 {
                     return false;
                 }

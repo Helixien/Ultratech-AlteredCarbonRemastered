@@ -26,21 +26,12 @@ namespace AlteredCarbon
     {
         public static bool Prefix(ref Pawn __result)
         {
-            if (Find.Selector.SingleSelectedThing is CorticalStack stack && stack.PersonaData.hasPawn)
+            if (Find.Selector.SingleSelectedThing is CorticalStack stack && stack.PersonaData.ContainsInnerPersona)
             {
                 __result = stack.PersonaData.GetDummyPawn;
                 return false;
             }
             return true;
-        }
-    }
-
-    [HarmonyPatch(typeof(MemoryThoughtHandler), "RemoveMemory")]
-    public static class RemoveMemory_Patch
-    {
-        public static void Postfix(MemoryThoughtHandler __instance, Thought_Memory th)
-        {
-            Log.Message("Removing " + th.def + " from " + __instance.pawn);
         }
     }
 }

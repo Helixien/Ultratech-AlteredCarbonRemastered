@@ -147,19 +147,19 @@ namespace AlteredCarbon
         {
             if (billDoer != null)
             {
-                if (CheckSurgeryFail(billDoer, pawn, ingredients, part, bill))
-                {
-                    foreach (var i in ingredients)
-                    {
-                        if (i is CorticalStack c)
-                        {
-                            c.stackCount = 1;
-                            Traverse.Create(c).Field("mapIndexOrState").SetValue((sbyte)-1);
-                            GenPlace.TryPlaceThing(c, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
-                        }
-                    }
-                    return;
-                }
+                //if (CheckSurgeryFail(billDoer, pawn, ingredients, part, bill))
+                //{
+                //    foreach (var i in ingredients)
+                //    {
+                //        if (i is CorticalStack c)
+                //        {
+                //            c.stackCount = 1;
+                //            Traverse.Create(c).Field("mapIndexOrState").SetValue((sbyte)-1);
+                //            GenPlace.TryPlaceThing(c, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
+                //        }
+                //    }
+                //    return;
+                //}
                 TaleRecorder.RecordTale(TaleDefOf.DidSurgery, billDoer, pawn);
             }
 
@@ -167,7 +167,7 @@ namespace AlteredCarbon
             if (thing is CorticalStack corticalStack)
             {
                 var hediff = HediffMaker.MakeHediff(recipe.addsHediff, pawn) as Hediff_CorticalStack;
-                if (corticalStack.PersonaData.hasPawn)
+                if (corticalStack.PersonaData.ContainsInnerPersona)
                 {
                     //foreach (Pawn item in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive)
                     //{
@@ -181,35 +181,43 @@ namespace AlteredCarbon
                     hediff.PersonaData.gender = corticalStack.PersonaData.gender;
                     hediff.PersonaData.race = corticalStack.PersonaData.race;
                     
-                    var gender = pawn.gender;
-                    var kindDef = pawn.kindDef;
-                    var faction = pawn.Faction;
-                    var dummyPawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kindDef, faction, fixedGender: gender, 
-                        fixedBiologicalAge: pawn.ageTracker.AgeBiologicalYearsFloat, fixedChronologicalAge: pawn.ageTracker.AgeChronologicalYearsFloat));
-                    var copy = new PersonaData();
-                    
-                    corticalStack.PersonaData.ErasePawn(dummyPawn);
-                    copy.CopyPawn(pawn); // we create a copy of original pawn
-                    copy.OverwritePawn(pawnToOverwrite: dummyPawn, null, original: pawn);
-                    CopyAllPhysicalDataFrom(pawn, dummyPawn);
-                    corticalStack.PersonaData.ErasePawn(pawn);
-
-                    GenSpawn.Spawn(dummyPawn, pawn.Position, pawn.Map);
-                    dummyPawn.needs.mood.thoughts.situational.Notify_SituationalThoughtsDirty();
-
-                    foreach (Pawn item in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive)
+                    if (pawn.IsEmptySleeve())
                     {
-                        if (item.needs != null && item.RaceProps.IsFlesh && item.needs.mood != null && PawnUtility.ShouldGetThoughtAbout(item, dummyPawn))
-                        {
-                            item.needs.mood.thoughts.situational.Notify_SituationalThoughtsDirty();
-                            //Log.Message("dummyPawn: " + OpinionOf("dummyPawn: ", dummyPawn, item));
-                            //Log.Message("dummyPawn (rev): " + OpinionOf("dummyPawn (rev): ", item, dummyPawn));
-                        }
+                        corticalStack.PersonaData.OverwritePawn(pawn, corticalStack.def.GetModExtension<StackSavingOptionsModExtension>(), null);
                     }
+                    else
+                    {
+                        var gender = pawn.gender;
+                        var kindDef = pawn.kindDef;
+                        var faction = pawn.Faction;
+                        var dummyPawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kindDef, faction, fixedGender: gender,
+                            fixedBiologicalAge: pawn.ageTracker.AgeBiologicalYearsFloat, fixedChronologicalAge: pawn.ageTracker.AgeChronologicalYearsFloat));
+                        var copy = new PersonaData();
 
-                    dummyPawn.Kill(null, hediff);
-                    dummyPawn.Corpse.DeSpawn();
-                    corticalStack.PersonaData.OverwritePawn(pawn, corticalStack.def.GetModExtension<StackSavingOptionsModExtension>(), dummyPawn);
+                        corticalStack.PersonaData.ErasePawn(dummyPawn);
+                        copy.CopyPawn(pawn); // we create a copy of original pawn
+                        copy.OverwritePawn(pawnToOverwrite: dummyPawn, null, original: pawn);
+                        CopyAllPhysicalDataFrom(pawn, dummyPawn);
+                        corticalStack.PersonaData.ErasePawn(pawn);
+
+                        GenSpawn.Spawn(dummyPawn, pawn.Position, pawn.Map);
+                        dummyPawn.needs.mood.thoughts.situational.Notify_SituationalThoughtsDirty();
+
+                        foreach (Pawn item in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive)
+                        {
+                            if (item.needs != null && item.RaceProps.IsFlesh && item.needs.mood != null && PawnUtility.ShouldGetThoughtAbout(item, dummyPawn))
+                            {
+                                item.needs.mood.thoughts.situational.Notify_SituationalThoughtsDirty();
+                                //Log.Message("dummyPawn: " + OpinionOf("dummyPawn: ", dummyPawn, item));
+                                //Log.Message("dummyPawn (rev): " + OpinionOf("dummyPawn (rev): ", item, dummyPawn));
+                            }
+                        }
+
+                        dummyPawn.Kill(null, hediff);
+                        dummyPawn.Corpse.DeSpawn();
+
+                        corticalStack.PersonaData.OverwritePawn(pawn, corticalStack.def.GetModExtension<StackSavingOptionsModExtension>(), dummyPawn);
+                    }
 
                     hediff.PersonaData.stackGroupID = corticalStack.PersonaData.stackGroupID;
                     pawn.health.AddHediff(hediff, part);

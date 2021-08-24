@@ -18,7 +18,7 @@ namespace AlteredCarbon
             {
                 foreach (var corticalStack in CorticalStack.corticalStacks)
                 {
-                    if (corticalStack.PersonaData.hasPawn && corticalStack.PersonaData.faction != Faction.OfPlayer 
+                    if (corticalStack.PersonaData.ContainsInnerPersona && corticalStack.PersonaData.faction != Faction.OfPlayer 
                         && !decryptionBench.billStack.Bills.Any(x => x is Bill_HackStack hackStack 
                             && hackStack.corticalStack == corticalStack && hackStack.recipe == AC_DefOf.UT_HackFilledCorticalStack)
                         && corticalStack.MapHeld == Find.CurrentMap)
@@ -41,7 +41,7 @@ namespace AlteredCarbon
             {
                 foreach (var corticalStack in CorticalStack.corticalStacks)
                 {
-                    if (corticalStack.PersonaData.hasPawn && corticalStack.PersonaData.ideo != Faction.OfPlayer.ideos.PrimaryIdeo 
+                    if (corticalStack.PersonaData.ContainsInnerPersona && corticalStack.PersonaData.ideo != Faction.OfPlayer.ideos.PrimaryIdeo 
                         && corticalStack.MapHeld == Find.CurrentMap && !decryptionBench.billStack.Bills
                         .Any(x => x is Bill_HackStack bill && bill.corticalStack == corticalStack 
                         && bill.recipe == ACUtils.UT_ConvertFilledCorticalStackToIdeo))
@@ -64,7 +64,7 @@ namespace AlteredCarbon
             {
                 foreach (var corticalStack in CorticalStack.corticalStacks)
                 {
-                    if (corticalStack.PersonaData.hasPawn && !decryptionBench.billStack.Bills.Any(x => x is Bill_HackStack hackStack
+                    if (corticalStack.PersonaData.ContainsInnerPersona && !decryptionBench.billStack.Bills.Any(x => x is Bill_HackStack hackStack
                             && hackStack.corticalStack == corticalStack && hackStack.recipe == AC_DefOf.UT_WipeFilledCorticalStack)
                             && corticalStack.MapHeld == Find.CurrentMap)
                     {
@@ -85,7 +85,7 @@ namespace AlteredCarbon
             TargetingParameters targetingParameters = new TargetingParameters();
             targetingParameters.canTargetItems = true;
             targetingParameters.mapObjectTargetsMustBeAutoAttackable = false;
-            targetingParameters.validator = (TargetInfo x) => x.Thing is CorticalStack stack && stack.PersonaData.hasPawn && stack.PersonaData.faction != Faction.OfPlayer;
+            targetingParameters.validator = (TargetInfo x) => x.Thing is CorticalStack stack && stack.PersonaData.ContainsInnerPersona && stack.PersonaData.faction != Faction.OfPlayer;
             return targetingParameters;
         }
         public TargetingParameters ForWipableStack()
@@ -93,7 +93,7 @@ namespace AlteredCarbon
             TargetingParameters targetingParameters = new TargetingParameters();
             targetingParameters.canTargetItems = true;
             targetingParameters.mapObjectTargetsMustBeAutoAttackable = false;
-            targetingParameters.validator = (TargetInfo x) => x.Thing is CorticalStack stack && stack.PersonaData.hasPawn;
+            targetingParameters.validator = (TargetInfo x) => x.Thing is CorticalStack stack && stack.PersonaData.ContainsInnerPersona;
             return targetingParameters;
         }
         public TargetingParameters ForConvertableStack()
@@ -101,7 +101,7 @@ namespace AlteredCarbon
             TargetingParameters targetingParameters = new TargetingParameters();
             targetingParameters.canTargetItems = true;
             targetingParameters.mapObjectTargetsMustBeAutoAttackable = false;
-            targetingParameters.validator = (TargetInfo x) => x.Thing is CorticalStack stack && stack.PersonaData.hasPawn;
+            targetingParameters.validator = (TargetInfo x) => x.Thing is CorticalStack stack && stack.PersonaData.ContainsInnerPersona;
             return targetingParameters;
         }
         public override IEnumerable<Gizmo> GetGizmos()

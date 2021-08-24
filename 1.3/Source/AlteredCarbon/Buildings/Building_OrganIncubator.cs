@@ -80,15 +80,9 @@ namespace AlteredCarbon
 					{
 						continue;
 					}
-					if (recipe.researchPrerequisites != null)
+					if (recipe.researchPrerequisites != null && recipe.researchPrerequisites.Any(x => !x.IsFinished))
 					{
-						foreach (var research in recipe.researchPrerequisites)
-						{
-							if (!research.IsFinished)
-							{
-								continue;
-							}
-						}
+						continue;
 					}
 					yield return recipe;
 				}

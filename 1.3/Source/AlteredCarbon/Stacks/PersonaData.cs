@@ -62,7 +62,14 @@ namespace AlteredCarbon
         private Battle battleActive;
         private int battleExitTick;
 
-        public bool hasPawn = false;
+        public bool ContainsInnerPersona
+        {
+            get
+            {
+                return origPawn != null || name != null;
+            }
+        }
+
         public Gender gender;
         public ThingDef race;
         public int pawnID;
@@ -271,7 +278,7 @@ namespace AlteredCarbon
                 this.battleActive = pawn.records.BattleActive;
                 this.battleExitTick = pawn.records.LastBattleTick;
             }
-            this.hasPawn = true;
+
             this.pawnID = pawn.thingIDNumber;
             if (ModsConfig.RoyaltyActive && pawn.royalty != null)
             {
@@ -361,7 +368,6 @@ namespace AlteredCarbon
                 this.rjwData = ModCompatibility.GetRjwData(pawn);
             }
         }
-
         public void CopyDataFrom(PersonaData other, bool isDuplicateOperation = false)
         {
             this.name = other.name;
@@ -458,8 +464,6 @@ namespace AlteredCarbon
             this.records = other.records;
             this.battleActive = other.battleActive;
             this.battleExitTick = other.battleExitTick;
-
-            this.hasPawn = true;
 
             if (this.gender == Gender.None)
             {
@@ -725,9 +729,7 @@ namespace AlteredCarbon
                     pawnToOverwrite.skills.skills.Add(newSkill);
                 }
             }
-            if (pawnToOverwrite.playerSettings == null) pawnToOverwrite.playerSettings = new Pawn_PlayerSettings(pawnToOverwrite);
-            pawnToOverwrite.playerSettings.hostilityResponse = (HostilityResponseMode)this.hostilityMode;
-            
+
             if (!this.childhood.NullOrEmpty())
             {
                 BackstoryDatabase.TryGetWithIdentifier(this.childhood, out var newChildhood, true);
@@ -814,6 +816,7 @@ namespace AlteredCarbon
             {
                 pawnToOverwrite.playerSettings = new Pawn_PlayerSettings(pawnToOverwrite);
             }
+            pawnToOverwrite.playerSettings.hostilityResponse = (HostilityResponseMode)this.hostilityMode;
             pawnToOverwrite.playerSettings.AreaRestriction = this.areaRestriction;
             pawnToOverwrite.playerSettings.medCare = this.medicalCareCategory;
             pawnToOverwrite.playerSettings.selfTend = this.selfTend;
@@ -1082,7 +1085,6 @@ namespace AlteredCarbon
             Scribe_References.Look(ref battleActive, "battleActive");
             Scribe_Values.Look(ref battleExitTick, "battleExitTick", 0);
 
-            Scribe_Values.Look<bool>(ref this.hasPawn, "hasPawn", false, false);
             Scribe_Values.Look<Gender>(ref this.gender, "gender");
             Scribe_Values.Look(ref lastTimeUpdated, "lastTimeUpdated");
             if (ModsConfig.RoyaltyActive)

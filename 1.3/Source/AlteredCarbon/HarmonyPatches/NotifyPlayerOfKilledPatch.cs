@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using HarmonyLib;
 using RimWorld;
 using RimWorld.Planet;
@@ -10,6 +11,19 @@ using Verse.AI;
 
 namespace AlteredCarbon
 {
+    [HarmonyPatch(typeof(PawnDiedOrDownedThoughtsUtility), "TryGiveThoughts", new Type[] { typeof(Pawn), typeof(DamageInfo?), typeof(PawnDiedOrDownedThoughtsKind) } )]
+    internal static class TryGiveThoughts_Patch
+    {
+        private static bool Prefix(Pawn victim, DamageInfo? dinfo, PawnDiedOrDownedThoughtsKind thoughtsKind)
+        {
+            if (victim.IsEmptySleeve())
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
     [HarmonyPatch(typeof(MapDeiniter))]
     [HarmonyPatch("PassPawnsToWorld")]
     internal static class PassPawnsToWorld_Patch
@@ -49,18 +63,17 @@ namespace AlteredCarbon
         }
     }
 
-    [HarmonyPatch(typeof(Pawn_HealthTracker))]
-    [HarmonyPatch("NotifyPlayerOfKilled")]
-    internal static class DeadPawnMessageReplacement
+    [HarmonyPatch(typeof(Pawn_HealthTracker), "NotifyPlayerOfKilled")]
+    internal static class NotifyPlayerOfKilledPatch
     {
         public static bool disableKilledEffect = false;
         private static bool Prefix(Pawn_HealthTracker __instance, Pawn ___pawn, DamageInfo? dinfo, Hediff hediff, Caravan caravan)
         {
+            Log.Message("disableKilledEffect: " + disableKilledEffect);
             if (disableKilledEffect)
             {
                 try
                 {
-
                     if (!___pawn.IsEmptySleeve() && ___pawn.HasStack())
                     {
                         TaggedString taggedString = "";
@@ -82,6 +95,34 @@ namespace AlteredCarbon
                 return false;
             }
             return true;
+        }
+
+        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator ilg)
+        {
+            Log.Message("Start");
+            //Label label = ilg.DefineLabel();
+            //var isSleeveOrHasStack = AccessTools.Method(typeof(NotifyPlayerOfKilled_Patch), "IsSleeveOrHasStack");
+            //var pawnField = AccessTools.Field(typeof(Pawn_HealthTracker), "pawn");
+            var getIdeo = AccessTools.Method(typeof(Pawn), "get_Ideo");
+            bool found = false;
+
+            var codes = instructions.ToList();
+            for (var i = 0; i < codes.Count; i++)
+            {
+                var instr = codes[i];
+                if (!found && i > 2 && codes[i].opcode == OpCodes.Brfalse && codes[i - 1].Calls(getIdeo))
+                {
+                    Log.Message(i + " - " + instr);
+                }
+                yield return instr;
+            }
+            Log.Message("End");
+
+        }
+
+        public static bool IsSleeveOrHasStack(Pawn pawn)
+        {
+            return pawn.IsEmptySleeve() || pawn.HasStack();
         }
     }
 
@@ -233,7 +274,7 @@ namespace AlteredCarbon
                     Notify_LeaderDied_Patch.disableKilledEffect = true;
                     AppendThoughts_ForHumanlike_Patch.disableKilledEffect = true;
                     AppendThoughts_Relations_Patch.disableKilledEffect = true;
-                    DeadPawnMessageReplacement.disableKilledEffect = true;
+                    NotifyPlayerOfKilledPatch.disableKilledEffect = true;
                 }
                 var stackHediff = __instance.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
                 if (stackHediff != null)
@@ -268,17 +309,18 @@ namespace AlteredCarbon
                 if (stackHediff.def.spawnThingOnRemoved != null)
                 {
                     var corticalStackThing = ThingMaker.MakeThing(stackHediff.def.spawnThingOnRemoved) as CorticalStack;
-                    if (stackHediff.PersonaData.hasPawn)
+                    if (stackHediff.PersonaData.ContainsInnerPersona)
                     {
-                        stackHediff.PersonaData.CopyDataFrom(stackHediff.PersonaData);
+                        corticalStackThing.PersonaData.CopyDataFrom(stackHediff.PersonaData);
                     }
                     else
                     {
-                        stackHediff.PersonaData.CopyPawn(__instance);
+                        corticalStackThing.PersonaData.CopyPawn(__instance);
                     }
                     AlteredCarbonManager.Instance.RegisterStack(corticalStackThing);
                     AlteredCarbonManager.Instance.RegisterSleeve(__instance, corticalStackThing.PersonaData.stackGroupID);
                     CaravanInventoryUtility.GiveThing(__state, corticalStackThing);
+                    Log.Message(corticalStackThing + " - " + corticalStackThing.PersonaData.ContainsInnerPersona);
                 }
                 var head = __instance.health.hediffSet.GetNotMissingParts().FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Head);
                 if (head != null)
