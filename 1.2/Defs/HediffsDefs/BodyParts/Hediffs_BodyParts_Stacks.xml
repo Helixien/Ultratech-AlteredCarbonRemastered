@@ -48,7 +48,7 @@
 	<ThingDef ParentName="AC_StackBase">
 		<defName>AC_EmptyCorticalStack</defName>
 		<label>empty cortical stack</label>
-		<description>An empty, ultra tech implant which can store a human's consciousness. Being implanted directly into a person's neck, blunt force trauma and bullets to the head and neck should be avoided at all cost. Extremely rare and hard to make.</description>
+		<description>An empty, ultratech implant which can store a human's consciousness. Being implanted directly into a person's neck, blunt force trauma and bullets to the head and neck should be avoided at all cost. Extremely rare and hard to make.</description>
 		<descriptionHyperlinks>
 			<RecipeDef>AC_InstallCorticalStack</RecipeDef>
 		</descriptionHyperlinks>
@@ -76,7 +76,7 @@
 	<ThingDef ParentName="AC_StackBase">
 		<defName>AC_FilledCorticalStack</defName>
 		<label>cortical stack</label>
-		<description>An ultra tech implant with a human's consciousness stored on it. Can be implanted into an empty sleeve or random body to bring back the person stored on it.</description>
+		<description>An ultratech implant with a human's consciousness stored on it. Can be implanted into an empty sleeve or random body to bring back the person stored on it.</description>
 		<descriptionHyperlinks>
 			<RecipeDef>AC_InstallCorticalStack</RecipeDef>
 		</descriptionHyperlinks>
