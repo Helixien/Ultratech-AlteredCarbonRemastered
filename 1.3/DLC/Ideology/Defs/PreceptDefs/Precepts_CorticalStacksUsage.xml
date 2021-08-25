@@ -20,7 +20,7 @@
 		<defName>UT_StackUsage_Abhorrent</defName>
 		<issue>UT_StackUsage</issue>
 		<label>abhorrent</label>
-		<description>To make oneself immortal with technology is against moral laws.</description>
+		<description>Immortality through technology is against moral laws.</description>
 		<impact>High</impact>
 		<displayOrderInIssue>20</displayOrderInIssue>
 		<displayOrderInImpact>100</displayOrderInImpact>
@@ -53,6 +53,7 @@
 		<issue>UT_StackUsage</issue>
 		<label>disapproved</label>
 		<description>To make oneself immortal with technology is an ugly, dirty act.</description>
+		<description>Immortalty through technology is an ugly, dirty act.</description>
 		<impact>Medium</impact>
 		<displayOrderInIssue>10</displayOrderInIssue>
 		<displayOrderInImpact>100</displayOrderInImpact>
