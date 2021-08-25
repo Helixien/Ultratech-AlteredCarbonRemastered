@@ -7,7 +7,7 @@
 		<defName>UT_FrontierUpbringing</defName>
 		<title>Frontier Upbringing</title>
 		<titleShort>Colonial</titleShort>
-		<baseDescription>[PAWN_nameDef] was raised on a remote colony that had been recently discovered as habitable, if somewhat difficult to integrate for human life. Thanks to this hardship and the struggle to put food on the table, [PAWN_pronoun] learned to appreciate the simple things and never shunned a day on the fields or with the barn animals.</baseDescription>
+		<baseDescription>[PAWN_nameDef] was raised on a remote colony that had been recently discovered as habitable. It is somewhat difficult to integrate for human life. Thanks to this hardship and the struggle to put food on the table, [PAWN_pronoun] learned to appreciate the simple things and never shunned a day on the fields or with the barn animals.</baseDescription>
 		<slot>Childhood</slot>
 		<spawnCategories>
 			<li>Tribal</li>
@@ -36,7 +36,7 @@
 		<defName>UT_UrbanUpbringing</defName>
 		<title>Urban Upbringing</title>
 		<titleShort>Grounder</titleShort>
-		<baseDescription>[PAWN_nameDef] was raised on one of the Core Worlds as a lowly Grounder to a family just wealthy enough to avoid living in the Slums. Having never eaten anything other than processed foods, [PAWN_pronoun] attended schools and learned a broad education of the history of humanity.</baseDescription>
+		<baseDescription>[PAWN_nameDef] was raised on one of the core worlds as a lowly grounder to a family just wealthy enough to avoid living in the slums. Having never eaten anything other than processed foods, [PAWN_pronoun] attended schools and learned a broad education of the history of humanity.</baseDescription>
 		<slot>Childhood</slot>
 		<spawnCategories>
 			<li>Offworld</li>
@@ -65,7 +65,7 @@
 		<defName>UT_SlumDweller</defName>
 		<title>Slum Dweller</title>
 		<titleShort>Favelado</titleShort>
-		<baseDescription>[PAWN_nameDef] was raised in one of the many shanty towns on a highly populated Industrial World in a local community. Food was hard to come by and had to be scavenged, [PAWN_pronoun] used numerous methods to survive without drawing too much attention from law enforcement.</baseDescription>
+		<baseDescription>[PAWN_nameDef] was raised in one of the many shanty towns on a highly populated industrial world in a local community. Food was hard to come by and had to be scavenged, [PAWN_pronoun] used numerous methods to survive without drawing too much attention from law enforcement.</baseDescription>
 		<slot>Childhood</slot>
 		<spawnCategories>
 			<li>Offworld</li>
@@ -92,7 +92,7 @@
 		<defName>UT_DigitalUpbringing</defName>
 		<title>Digital Upbringing</title>
 		<titleShort>Virtual</titleShort>
-		<baseDescription>[PAWN_nameDef] experienced Sleeve Death not long after their Stack was integrated, and [PAWN_possessive] parents were unable to afford an appropriate Sleeve. As such, [PAWN_pronoun] was given what little virtual lessons and experience as could be afforded and has developed insecurities and a lack of identity.</baseDescription>
+		<baseDescription>[PAWN_nameDef] experienced sleeve death not long after their stack was integrated, and [PAWN_possessive] parents were unable to afford an appropriate sleeve. As such, [PAWN_pronoun] was given what little virtual lessons and experience as could be afforded and has developed insecurities and a lack of identity.</baseDescription>
 		<slot>Childhood</slot>
 		<spawnCategories>
 			<li>Offworld</li>
@@ -114,7 +114,7 @@
 		<defName>UT_EarlyResleeving</defName>
 		<title>Early Resleeving</title>
 		<titleShort>Resleeved</titleShort>
-		<baseDescription>[PAWN_nameDef] experienced accidental Sleeve Death during [PAWN_possessive] early years and was given a new sleeve as per Victim Restitution. The Sleeve was completely different in all aspects but lasted for the rest of their childhood, the imbalance between the Sleeve and the Stack meant [PAWN_pronoun] experienced life in a chaotic manner.</baseDescription>
+		<baseDescription>[PAWN_nameDef] experienced accidental sleeve death during [PAWN_possessive] early years and was given a new sleeve as per victim restitution. The sleeve was completely different in all aspects. The imbalance between the sleeve and the stack meant [PAWN_pronoun] experienced life in a chaotic manner.</baseDescription>
 		<slot>Childhood</slot>
 		<spawnCategories>
 			<li>Offworld</li>
@@ -140,7 +140,7 @@
 		<defName>UT_RichAspirant</defName>
 		<title>Rich Aspirant</title>
 		<titleShort>Aspirant</titleShort>
-		<baseDescription>[PAWN_nameDef] had a single experience with someone rich during a charity event that impacted [PAWN_possessive] life in such a manner that [PAWN_possessive] was willing to do whatever it took to also become just as rich. The viability of this dream might be somewhat difficult, as [PAWN_pronoun] wants to use the power to help others rather than hoard wealth.</baseDescription>
+		<baseDescription>[PAWN_nameDef] had a single encounter with someone rich during a charity event that impacted [PAWN_possessive] life. [PAWN_possessive] was willing to do whatever it took to also become equally rich. The viability of this dream might be somewhat difficult, as [PAWN_pronoun] wants to use the power to help others rather than hoard wealth.</baseDescription>
 		<slot>Childhood</slot>
 		<spawnCategories>
 			<li>Offworld</li>
@@ -260,7 +260,7 @@
 		<defName>UT_SettledWorldRefugee</defName>
 		<title>Settled World Refugee</title>
 		<titleShort>Refugee</titleShort>
-		<baseDescription>[PAWN_nameDef] managed to obtain transit to a remote Settled World under a resettlement program. Fleeing from a life of danger and conflict, [PAWN_pronoun] hoped to start a new life without having to worry about raiders and criminals coming to take [PAWN_possessive] hard-earned belongings.</baseDescription>
+		<baseDescription>[PAWN_nameDef] managed to obtain transit to a remote settled world under a resettlement program. Fleeing from a life of danger and conflict, [PAWN_pronoun] hoped to start a new life without having to worry about raiders and criminals coming to take [PAWN_possessive] hard-earned belongings.</baseDescription>
 		<slot>Adulthood</slot>
 		<spawnCategories>
 			<li>Offworld</li>
@@ -286,7 +286,7 @@
 		<defName>UT_SettledWorldCivilian</defName>
 		<title>Settled World Civilian</title>
 		<titleShort>Urbanite</titleShort>
-		<baseDescription>[PAWN_nameDef] grew tired of the drab and boring lifestyle of living in cities ruled over by the rich rather than the local authorities. Disillusioned with the government failures, [PAWN_pronoun] took the first affordable transit off [PAWN_possessive] world in order to gain some semblance of control over [PAWN_possessive] life.</baseDescription>
+		<baseDescription>[PAWN_nameDef] grew tired of the drab and boring lifestyle of living in cities ruled by the rich, rather than the local authorities. Disillusioned with the government failures, [PAWN_pronoun] took the first affordable transit off [PAWN_possessive] world in order to gain some semblance of control over [PAWN_possessive] life.</baseDescription>
 		<slot>Adulthood</slot>
 		<spawnCategories>
 			<li>Offworld</li>
@@ -317,7 +317,7 @@
 		<defName>UT_VirtualAddict</defName>
 		<title>Virtual Addict</title>
 		<titleShort>Addict</titleShort>
-		<baseDescription>[PAWN_nameDef] spent an astronomical amount of money on experiencing all that Virtual could offer. Whether it was other worlds, blood arenas, sexperiences or the lives of Meths, [PAWN_pronoun] was eventually forced to go cold-turkey when [PAWN_possessive] debtors started trying to collect.</baseDescription>
+		<baseDescription>[PAWN_nameDef] spent an astronomical amount of money on experiencing all that virtual reality could offer. Whether it was other worlds, blood arenas, sexperiences or the lives of meths, [PAWN_pronoun] was eventually forced to go cold-turkey when [PAWN_possessive] debtors started trying to collect what they were owed.</baseDescription>
 		<slot>Adulthood</slot>
 		<spawnCategories>
 			<li>Offworld</li>
@@ -343,7 +343,7 @@
 		<defName>UT_RichOutcast</defName>
 		<title>Rich Outcast</title>
 		<titleShort>Outcast</titleShort>
-		<baseDescription>[PAWN_nameDef] used to be rich and powerful before being cast out by their relatives for being an embarrassment. No longer privileged to obscene wealth and decadence, [PAWN_pronoun] has been forced to live as a lowly Grounder outside of the core worlds.</baseDescription>
+		<baseDescription>[PAWN_nameDef] used to be rich and powerful before being cast out by their relatives for being an embarrassment. No longer privileged to obscene wealth and decadence, [PAWN_pronoun] has been forced to live as a lowly grounder outside of the core worlds.</baseDescription>
 		<slot>Adulthood</slot>
 		<spawnCategories>
 			<li>Offworld</li>
@@ -379,7 +379,7 @@
 		<defName>UT_Praetorian</defName>
 		<title>Praetorian</title>
 		<titleShort>Praetorian</titleShort>
-		<baseDescription>[PAWN_nameDef] was part of the core world military forces and saw numerous battles on different worlds in different Sleeves. Relying on re-acclimation drugs, [PAWN_pronoun] was able to use many combat Sleeves over time but has developed numerous social deficiencies.</baseDescription>
+		<baseDescription>[PAWN_nameDef] was part of the core world military forces and saw numerous battles on different worlds in different sleeves. Relying on reacclimation drugs, [PAWN_pronoun] was able to use many combat sleeves over time but has developed numerous social deficiencies.</baseDescription>
 		<slot>Adulthood</slot>
 		<bodyTypeMale>Male</bodyTypeMale>
 		<bodyTypeFemale>Female</bodyTypeFemale>
