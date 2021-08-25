@@ -85,7 +85,7 @@
 	<ThingDef ParentName="UT_ApparelArmorHelmetProtectorateBase">
 		<defName>UT_Apparel_ProtectorateArmorHelmet</defName>
 		<label>protectorate helmet</label>
-		<description>A protectorate armor helmet, with a built-in status computer and layered plasteel-weave plates.</description>
+		<description>A protectorate armored helmet, with a built-in status computer and layered plasteel-weave plates.</description>
 		<apparel>
 			<tags>
 				<li>SpacerMilitary</li>
