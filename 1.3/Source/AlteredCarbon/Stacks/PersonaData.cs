@@ -115,25 +115,22 @@ namespace AlteredCarbon
         public List<SkillOffsets> negativeSkillPassionsOffsets;
 
         private Pawn dummyPawn;
-
         public Pawn GetDummyPawn
         {
             get
             {
                 if (dummyPawn is null)
                 {
-                    if (this.origPawn?.story != null)
-                    {
-                        dummyPawn = this.origPawn;
-                    }
-                    else
-                    {
-                        dummyPawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Colonist, Faction.OfPlayer);
-                        OverwritePawn(dummyPawn, null);
-                    }
+                    dummyPawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Colonist, Faction.OfPlayer);
+                    OverwritePawn(dummyPawn, null);
                 }
                 return dummyPawn;
             }
+        }
+        public void RefreshDummyPawn()
+        {
+            dummyPawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Colonist, Faction.OfPlayer);
+            OverwritePawn(dummyPawn, null);
         }
         public TaggedString PawnNameColored
         {

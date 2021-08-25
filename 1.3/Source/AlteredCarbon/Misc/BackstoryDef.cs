@@ -17,13 +17,15 @@ namespace AlteredCarbon
 
 		public override void ResolveReferences()
 		{
-			base.ResolveReferences();
 			if (!this.addToDatabase)
 			{
+				Log.Error("0 Not Adding backstory " + this.saveKeyIdentifier);
 				return;
 			}
+
 			if (BackstoryDatabase.allBackstories.ContainsKey(this.saveKeyIdentifier))
 			{
+				Log.Error("1 Not Adding backstory " + this.saveKeyIdentifier);
 				return;
 			}
 			Backstory backstory = new Backstory();
@@ -46,10 +48,6 @@ namespace AlteredCarbon
 				}
 			}
 
-			if (GenText.NullOrEmpty(this.title))
-			{
-				return;
-			}
 			backstory.SetTitle(this.title, this.title);
 			if (!GenText.NullOrEmpty(this.titleShort))
 			{
@@ -63,24 +61,20 @@ namespace AlteredCarbon
 			{
 				backstory.baseDesc = this.baseDescription;
 			}
-			else
-			{
-				backstory.baseDesc = "Empty.";
-			}
+
 			Traverse.Create(backstory).Field("bodyTypeGlobal").SetValue(this.bodyTypeGlobal);
 			Traverse.Create(backstory).Field("bodyTypeMale").SetValue(this.bodyTypeMale);
 			Traverse.Create(backstory).Field("bodyTypeFemale").SetValue(this.bodyTypeFemale);
 			if (skillGains?.Any() ?? false)
             {
-				Traverse.Create(backstory).Field("skillGains").SetValue(skillGains.ToDictionary(x => x.skill.defName, y => y.minLevel));
+				var skillGainsDict = skillGains.ToDictionary(x => x.skill.defName, y => y.minLevel);
+				Traverse.Create(backstory).Field("skillGains").SetValue(skillGainsDict);
             }
+
 			backstory.slot = this.slot;
 			backstory.shuffleable = this.shuffleable;
-			if (GenList.NullOrEmpty<string>(this.spawnCategories))
-			{
-				return;
-			}
 			backstory.spawnCategories = this.spawnCategories;
+
 			if (this.workDisables.Any())
 			{
 				using (List<WorkTags>.Enumerator enumerator2 = this.workDisables.GetEnumerator())
@@ -98,22 +92,24 @@ namespace AlteredCarbon
             }
 
 			backstory.PostLoad();
+			backstory.ResolveReferences();
 			backstory.identifier = this.saveKeyIdentifier;
-			bool flag = false;
-			foreach (string text in backstory.ConfigErrors(false))
-			{
-				if (!flag)
-				{
-					flag = true;
-				}
-			}
-			if (!flag)
+
+			if (!backstory.ConfigErrors(true).Any())
 			{
 				BackstoryDatabase.AddBackstory(backstory);
 			}
+			else
+			{
+				Log.Error("2 Not Adding backstory " + backstory + " with id " + backstory.identifier);
+				foreach (var err in backstory.ConfigErrors(true))
+                {
+					Log.Error(backstory + " - " + err);
+                }
+			}
 		}
 
-		public string baseDescription;
+        public string baseDescription;
 
 		public string bodyTypeGlobal = "";
 

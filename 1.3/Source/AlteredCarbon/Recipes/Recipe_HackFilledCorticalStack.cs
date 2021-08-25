@@ -32,6 +32,7 @@ namespace AlteredCarbon
             {
                 corticalStack.PersonaData.faction = Faction.OfPlayer;
                 corticalStack.PersonaData.hackedWhileOnStack = true;
+                corticalStack.PersonaData.RefreshDummyPawn();
             }
             else
             {

@@ -32,6 +32,7 @@ namespace AlteredCarbon
             {
                 corticalStack.PersonaData.ideo = Faction.OfPlayer.ideos.PrimaryIdeo;
                 corticalStack.PersonaData.certainty = 1f;
+                corticalStack.PersonaData.RefreshDummyPawn();
             }
             else
             {

@@ -1478,6 +1478,7 @@ namespace AlteredCarbon
             pawn.story.childhood = null;
             pawn.story.adulthood = null;
             pawn.Name = new NameSingle("AlteredCarbon.EmptySleeve".Translate());
+            pawn.story.title = "";
             pawn?.equipment.DestroyAllEquipment();
             pawn?.inventory.DestroyAll();
             pawn.apparel.DestroyAll();
@@ -1512,7 +1513,16 @@ namespace AlteredCarbon
             {
                 pawn.needs.mood.thoughts.situational.Notify_SituationalThoughtsDirty();
             }
+            if (BackstoryDatabase.TryGetWithIdentifier("UT_VatGrown45", out Backstory bs))
+            {
+                pawn.story.childhood = bs;
+            }
+            if (BackstoryDatabase.TryGetWithIdentifier("UT_VatGrown46", out Backstory bsAdult))
+            {
+                pawn.story.adulthood = bsAdult;
+            }
             pawn.ideo = new Pawn_IdeoTracker(pawn);
+            pawn.story.favoriteColor = null;
             //align sliders
             Color.RGBToHSV(pawn.story.hairColor, out hairHue, out hairSaturation, out hairValue);
             if (ModCompatibility.AlienRacesIsActive)
