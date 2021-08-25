@@ -28,8 +28,8 @@
 	<ConceptDef ParentName="NotedOpportunisticBase">
 		<defName>AC_EmptyStacks</defName>
 		<label>Cortical Stacks</label>
-		<helpText>CORTICAL STACKS are a new IMPLANT you can install in any pawn via SURGERY. They will store the pawns consciousness and prevent them from dying when their body is destoryed.
-		\n\nIn game terms this means: When a empty stack is installed, it saves the pawns date on it. This includes, but is not limited to: Name, age, traits (not all, some are excluded!), skills, relationships, bonds, and much more! Including ROYALTY DLC information.
+		<helpText>CORTICAL STACKS are a new IMPLANT you can install in any pawn via SURGERY. They will store the pawns consciousness and prevent them from dying when their body is destroyed.
+		\n\nIn game terms this means: When a empty stack is installed, it saves the pawns data on it. This includes, but is not limited to: Name, age, traits (not all, some are excluded!), skills, relationships, bonds, and much more! Including ROYALTY DLC information.
 		\nIt also supports multiple popular mods by default.
 		\n\nWhen a pawn with a stack dies, you can EXTRACT the stack from the corpse via either the new EXTRACT STACK ORDER or simply right clicking a pawn with a colonist selected. Similarly to how stripping clothes work.
 		\n\nCORTICAL STACKS can NOT be crafted. You will have to find or "acquire" them from other people.
