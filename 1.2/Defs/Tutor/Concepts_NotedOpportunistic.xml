@@ -13,7 +13,7 @@
 	<ConceptDef ParentName="NotedOpportunisticBase">
 		<defName>AC_UsingSleeveCaskets</defName>
 		<label>Sleeve Caskets</label>
-		<helpText>SLEEVE CASKETS are ultra tech med beds that basically "freeze" the pawn using it. This means their needs will not decay and you can take your time installing IMPLANTS and STACKS into new empty sleeves.
+		<helpText>SLEEVE CASKETS are Ultratech med beds that puts the sleeve in a cryogenic sleep. This means their needs will not decay and you can take your time installing IMPLANTS and STACKS into new empty sleeves.
 		\n\nSLEEVE CASKETS can ONLY be used as medical beds and should be used for empty sleeves only.</helpText>
 	</ConceptDef>
 
