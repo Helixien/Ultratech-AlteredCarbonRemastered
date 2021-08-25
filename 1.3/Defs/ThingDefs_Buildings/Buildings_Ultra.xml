@@ -4,7 +4,7 @@
 	<ThingDef ParentName="BuildingBase">
 		<defName>UT_SleeveIncubator</defName>
 		<label>sleeve incubator</label>
-		<description>An ultratech vat tank connected to advanced life support systems and an AI core. Used by the rich 1% on ultratech worlds and less trustworthy individuals on rimworlds to grow custom sleeves. the sleeve incubator is capable of growing any human body one can imagine.</description>
+		<description>An ultratech vat tank connected to advanced life support systems and an AI core. Used by the rich 1% on ultratech worlds and less trustworthy individuals on rimworlds to grow custom sleeves. The sleeve incubator is capable of growing human bodies tailored to any task needed.</description>
 		<thingClass>AlteredCarbon.Building_SleeveGrower</thingClass>
 		<tickerType>Normal</tickerType>
 		<drawerType>RealtimeOnly</drawerType>

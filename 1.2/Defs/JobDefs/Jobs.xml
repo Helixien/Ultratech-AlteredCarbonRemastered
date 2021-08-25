@@ -4,7 +4,7 @@
 	<JobDef>
 		<defName>AC_ExtractStack</defName>
 		<driverClass>AlteredCarbon.JobDriver_ExtractStack</driverClass>
-		<reportString>extracts cortical stack from TargetA</reportString>
+		<reportString>extracts cortical stack from Target</reportString>
 	</JobDef>
 
 	<JobDef>

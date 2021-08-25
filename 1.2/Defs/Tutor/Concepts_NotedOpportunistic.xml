@@ -13,8 +13,7 @@
 	<ConceptDef ParentName="NotedOpportunisticBase">
 		<defName>AC_UsingSleeveCaskets</defName>
 		<label>Sleeve Caskets</label>
-		<helpText>SLEEVE CASKETS are Ultratech med beds that puts the sleeve in a cryogenic sleep. This means their needs will not decay and you can take your time installing IMPLANTS and STACKS into new empty sleeves.
-		\n\nSLEEVE CASKETS can ONLY be used as medical beds and should be used for empty sleeves only.</helpText>
+		<helpText>SLEEVE CASKETS are Ultratech med beds that induces the sleeve in a cryogenic sleep. This means their needs will not decay and you can take your time installing IMPLANTS and STACKS into new empty sleeves.</helpText>
 	</ConceptDef>
 
 	<ConceptDef ParentName="NotedOpportunisticBase">
@@ -28,12 +27,12 @@
 	<ConceptDef ParentName="NotedOpportunisticBase">
 		<defName>AC_EmptyStacks</defName>
 		<label>Cortical Stacks</label>
-		<helpText>CORTICAL STACKS are a new IMPLANT you can install in any pawn via SURGERY. They will store the pawns consciousness and prevent them from dying when their body is destoryed.
-		\n\nIn game terms this means: When a empty stack is installed, it saves the pawns date on it. This includes, but is not limited to: Name, age, traits (not all, some are excluded!), skills, relationships, bonds, and much more! Including ROYALTY DLC information.
+		<helpText>CORTICAL STACKS are a new IMPLANT you can install in any pawn via SURGERY. They store the pawns consciousness and prevent them from dying if their body is destroyed.
+		\n\nIn game terms this means: When a empty stack is installed, it saves the pawns data on it. This includes, but is not limited to: name, age, traits (not all, some are excluded!), skills, relationships, bonds, and much more! Including ROYALTY DLC information.
 		\nIt also supports multiple popular mods by default.
 		\n\nWhen a pawn with a stack dies, you can EXTRACT the stack from the corpse via either the new EXTRACT STACK ORDER or simply right clicking a pawn with a colonist selected. Similarly to how stripping clothes work.
-		\n\nCORTICAL STACKS can NOT be crafted. You will have to find or "acquire" them from other people.
-		\n\nCORTICAL STACKS can be DUPLICATED. This makes an exact copy of the pawn on STACK ONE to a new empty stack, STACK TWO. Be crafeul, not everyone likes being basically cloned. To DUPLICATE a stack, select a colonist and then click on the stack you want to duplicate. This requires a pawn with at least an INTELLECTUAL skill of 10. Be aware, this can fail and destroy the stack!</helpText>
+		\n\nCORTICAL STACKS can't be crafted. You will have to find or "acquire" them from pawns.
+		\n\nCORTICAL STACKS can be DUPLICATED. This makes an exact copy of the pawn on STACK ONE to a new empty stack, STACK TWO. Be careful, not everyone likes being cloned. To DUPLICATE a stack, select a colonist and click on the stack you want to duplicate. This requires a pawn with at least an INTELLECTUAL skill of 10. Be aware, this can fail and destroy the stack!</helpText>
 	</ConceptDef>
 
 	<ConceptDef ParentName="NotedOpportunisticBase">
@@ -42,7 +41,7 @@
 		<helpText>FILLED CORTICAL STACKS are stacks with a pawns consciousness stored on them.
 		\n\nAs long as the stack with a pawn stored on it exists, the pawn on it is considerd alive by the game. You can IMPLANT filled stacks into a new body (or sleeve if you want) via SURGERY. This can be ANYONE, even a PRISONER! Due to game limitations, you cant select which stack you want to install, so its recommended you FORBID all filled stacks you have BUT the one you want to install.
 		\n\nFILLED CORTICAL STACKS can also be WIPED and turned into EMPTY CORTICAL STACKS. This progress kills the pawn stored on it. To WIPE a stack, select a colonist and then click on the stack you want to wipe. This requires a pawn with at least an INTELLECTUAL skill of 10. Be aware, this can fail and destroy the stack!
-		\n\nCORTICAL STACKS can NOT be crafted. You will have to find or "acquire" them from other people.</helpText>
+		\n\nCORTICAL STACKS can't be crafted. You will have to find or "acquire" them from other pawns.</helpText>
 	</ConceptDef>
 
 	<ConceptDef ParentName="NotedOpportunisticBase">

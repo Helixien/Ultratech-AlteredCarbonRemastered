@@ -6,7 +6,7 @@
 		<stages>
 			<li>
 				<label>my original copy {0} lost</label>
-				<description>My original copy has gone lost. I hope he will get back to us someday.</description>
+				<description>My original copy has gone missing. I hope he will get back to us someday.</description>
 				<baseMoodEffect>-14</baseMoodEffect>
 			</li>
 		</stages>
@@ -17,7 +17,7 @@
 		<stages>
 			<li>
 				<label>my original copy {0} lost</label>
-				<description>My original copy has gone lost. I hope she will get back to us someday.</description>
+				<description>My original copy has gone missing. I hope she will get back to us someday.</description>
 				<baseMoodEffect>-14</baseMoodEffect>
 			</li>
 		</stages>
@@ -28,7 +28,7 @@
 		<stages>
 			<li>
 				<label>my copy {0} lost</label>
-				<description>My copy has gone lost. I hope he will get back to us someday.</description>
+				<description>My copy has gone missing. I hope he will get back to us someday.</description>
 				<baseMoodEffect>-14</baseMoodEffect>
 			</li>
 		</stages>
@@ -39,7 +39,7 @@
 		<stages>
 			<li>
 				<label>my copy {0} lost</label>
-				<description>My copy has gone lost. I hope she will get back to us someday.</description>
+				<description>My copy has gone missing. I hope she will get back to us someday.</description>
 				<baseMoodEffect>-14</baseMoodEffect>
 			</li>
 		</stages>

@@ -5,7 +5,7 @@
 		<defName>AC_EmptySleeveChildhood</defName>
 		<title>Empty Sleeve</title>
 		<titleShort>Empty Sleeve</titleShort>
-		<baseDescription>Grown in a vat, this body is basically brain-dead and can not live on its own.</baseDescription>
+		<baseDescription>Grown in a vat, this body is basically brain dead and cannot live on its own.</baseDescription>
 		<slot>Childhood</slot>
 		<workDisables>
 			<li>Animals</li>

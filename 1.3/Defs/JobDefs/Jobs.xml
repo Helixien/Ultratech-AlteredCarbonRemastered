@@ -138,7 +138,7 @@
 		<workType>BasicWorker</workType>
 		<priorityInType>50</priorityInType>
 		<verb>starting growing process</verb>
-		<gerund>starting growing process at</gerund>
+		<gerund>starting growth process at</gerund>
 		<requiredCapacities>
 			<li>Manipulation</li>
 		</requiredCapacities>
@@ -152,7 +152,7 @@
 		<workType>BasicWorker</workType>
 		<priorityInType>50</priorityInType>
 		<verb>canceling growing process</verb>
-		<gerund>canceling growing process at</gerund>
+		<gerund>canceling growth process at</gerund>
 		<requiredCapacities>
 			<li>Manipulation</li>
 		</requiredCapacities>

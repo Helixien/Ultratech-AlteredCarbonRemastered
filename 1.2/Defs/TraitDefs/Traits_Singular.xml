@@ -37,7 +37,7 @@
 		<degreeDatas>
 			<li>
 				<label>One Soul</label>
-				<description>[PAWN_nameDef] considers the use of stacks and sleeves as amoral. [PAWN_pronoun] believes that humans only get one life and that the extension of their lives via technology is a sin.</description>
+				<description>[PAWN_nameDef] considers the use of stacks and sleeves as amoral. [PAWN_pronoun] believes that humans only get one life and that prolonging it via technology is a sin.</description>
 			</li>
 		</degreeDatas>
 		<conflictingTraits>
