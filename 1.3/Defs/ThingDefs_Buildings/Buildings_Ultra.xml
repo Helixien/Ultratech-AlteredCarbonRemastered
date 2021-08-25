@@ -191,7 +191,7 @@
 	<ThingDef ParentName="BedWithQualityBase">
 		<defName>UT_SleeveCasket</defName>
 		<label>sleeve casket</label>
-		<description>An ultratech casket used for storing grown sleeves before their stack is installed. It uses cryo technology to suspend the needs of the sleeves body, while still allowing for the installation of implants or bionics.</description>
+		<description>An ultratech casket used for storing grown sleeves before their stack is installed. It uses crypto technology to suspend the needs of the sleeves body, while still allowing for the installation of implants or bionics.</description>
 		<thingClass>AlteredCarbon.Building_SleeveCasket</thingClass>
 		<tickerType>Normal</tickerType>
 		<drawerType>RealtimeOnly</drawerType>
