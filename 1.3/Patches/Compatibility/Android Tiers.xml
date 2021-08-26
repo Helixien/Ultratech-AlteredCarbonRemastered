@@ -2,15 +2,14 @@
 <Patch>
 	<Operation Class="PatchOperationFindMod">
 		<mods>
-			<li>Android Tiers</li>
+			<li>Android tiers</li>
 		</mods>
 		<success>Always</success>
 		<match Class="PatchOperationSequence">
 			<success>Always</success>
 			<operations>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='Android1Tier']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='Android1Tier']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -18,9 +17,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='Android2Tier']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='Android2Tier']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -28,9 +26,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='Android3Tier']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='Android3Tier']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -38,9 +35,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='Android4Tier']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='Android4Tier']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -48,9 +44,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='Android5Tier']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='Android5Tier']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -58,9 +53,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='M7Mech']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='M7Mech' or defName='M8Mech']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -79,9 +73,8 @@
 		<match Class="PatchOperationSequence">
 			<success>Always</success>
 			<operations>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android2TX']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android2TX']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -89,9 +82,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android2ITX']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android2ITX']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -99,9 +91,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android2KTX']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android2KTX']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -109,9 +100,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android2KITX']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android2KITX']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -119,9 +109,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android3TX']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android3TX']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -129,9 +118,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android3ITX']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android3ITX']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -139,9 +127,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android4TX']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android4TX']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
@@ -149,9 +136,8 @@
 						</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android4ITX']/modExtensions</xpath>
-					<order>Append</order>
+				<li Class="PatchOperationAddModExtension">
+					<xpath>/Defs/AlienRace.ThingDef_AlienRace[defName='ATPP_Android4ITX']</xpath>
 					<value>
 						<li Class="AlteredCarbon.ExcludeRacesModExtension">
 							<canBeGrown>false</canBeGrown>
