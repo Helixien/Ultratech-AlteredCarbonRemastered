@@ -23,6 +23,7 @@ namespace AlteredCarbon
 				return glass;
 			}
 		}
+
 		public override void PostDraw()
 		{
 			base.PostDraw();

@@ -128,7 +128,7 @@ namespace AlteredCarbon
                     PersonaData.race = pawn.kindDef.race;
                     PersonaData.stackGroupID = AlteredCarbonManager.Instance.GetStackGroupID(this);
                     AlteredCarbonManager.Instance.RegisterStack(this);
-                    AlteredCarbonManager.Instance.stacksIndex[pawn.thingIDNumber] = this;
+                    AlteredCarbonManager.Instance.StacksIndex[pawn.thingIDNumber] = this;
 
                     if (LookTargets_Patch.targets.TryGetValue(pawn, out var targets))
                     {
@@ -275,18 +275,17 @@ namespace AlteredCarbon
             {
                 stringBuilder.AppendLineTagged("AlteredCarbon.Name".Translate() + ": " + personaData.PawnNameColored);
                 stringBuilder.AppendLineTagged("AlteredCarbon.faction".Translate() + ": " + PersonaData.faction.NameColored);
-                if (ModCompatibility.AlienRacesIsActive)
+                if (ModCompatibility.AlienRacesIsActive && PersonaData.race != null)
                 {
                     stringBuilder.AppendLineTagged("AlteredCarbon.race".Translate() + ": " + PersonaData.race.LabelCap);
                 }
-                Backstory newChildhood = null;
-                BackstoryDatabase.TryGetWithIdentifier(PersonaData.childhood, out newChildhood, true);
-                stringBuilder.Append("AlteredCarbon.childhood".Translate() + ": " + newChildhood.title.CapitalizeFirst() + "\n");
-
-                if (PersonaData.adulthood?.Length > 0)
+                if (PersonaData.childhood?.Length > 0 && BackstoryDatabase.TryGetWithIdentifier(PersonaData.childhood, out Backstory newChildhood, true))
                 {
-                    Backstory newAdulthood = null;
-                    BackstoryDatabase.TryGetWithIdentifier(PersonaData.adulthood, out newAdulthood, true);
+                    stringBuilder.Append("AlteredCarbon.childhood".Translate() + ": " + newChildhood.title.CapitalizeFirst() + "\n");
+                }
+
+                if (PersonaData.adulthood?.Length > 0 && BackstoryDatabase.TryGetWithIdentifier(PersonaData.adulthood, out Backstory newAdulthood, true))
+                {
                     stringBuilder.Append("AlteredCarbon.adulthood".Translate() + ": " + newAdulthood.title.CapitalizeFirst() + "\n");
                 }
                 stringBuilder.Append("AlteredCarbon.ageChronologicalTicks".Translate() + ": " + (int)(PersonaData.ageChronologicalTicks / 3600000) + "\n");
@@ -359,7 +358,7 @@ namespace AlteredCarbon
         {
             var newStack = ThingMaker.MakeThing(AC_DefOf.UT_EmptyCorticalStack);
             GenPlace.TryPlaceThing(newStack, affecter.Position, affecter.Map, ThingPlaceMode.Near);
-            AlteredCarbonManager.Instance.stacksIndex.Remove(PersonaData.pawnID);
+            AlteredCarbonManager.Instance.StacksIndex.Remove(PersonaData.pawnID);
             this.KillInnerPawn(affectFactionRelationship, affecter);
             this.Destroy();
         }

@@ -298,6 +298,10 @@ namespace AlteredCarbon
         {
             get
             {
+                if (pawnsWithStacks is null)
+                {
+                    pawnsWithStacks = new HashSet<Pawn>();
+                }
                 return pawnsWithStacks.Where(x => x != null).ToHashSet();
             }
         }
@@ -305,7 +309,18 @@ namespace AlteredCarbon
         public HashSet<Pawn> emptySleeves = new HashSet<Pawn>();
         public HashSet<Pawn> deadPawns = new HashSet<Pawn>();
 
-        public Dictionary<int, CorticalStack> stacksIndex;
+        private Dictionary<int, CorticalStack> stacksIndex;
+        public Dictionary<int, CorticalStack> StacksIndex
+        {
+            get
+            {
+                if (stacksIndex is null)
+                {
+                    stacksIndex = new Dictionary<int, CorticalStack>();
+                }
+                return stacksIndex;
+            }
+        }
         private List<int> pawnKeys = new List<int>();
         private List<CorticalStack> stacksValues = new List<CorticalStack>();
     }

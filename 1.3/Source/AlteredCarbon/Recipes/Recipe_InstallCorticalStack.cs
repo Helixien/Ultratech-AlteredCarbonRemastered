@@ -222,7 +222,7 @@ namespace AlteredCarbon
 
                     hediff.PersonaData.stackGroupID = corticalStack.PersonaData.stackGroupID;
                     pawn.health.AddHediff(hediff, part);
-                    AlteredCarbonManager.Instance.stacksIndex.Remove(corticalStack.PersonaData.pawnID);
+                    AlteredCarbonManager.Instance.StacksIndex.Remove(corticalStack.PersonaData.pawnID);
                     AlteredCarbonManager.Instance.ReplaceStackWithPawn(corticalStack, pawn);
                     
                     var naturalMood = pawn.story.traits.GetTrait(TraitDefOf.NaturalMood);

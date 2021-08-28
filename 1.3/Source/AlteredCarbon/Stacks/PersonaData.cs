@@ -825,10 +825,12 @@ namespace AlteredCarbon
             {
                 pawnToOverwrite.records = new Pawn_RecordsTracker(pawnToOverwrite);
             }
-
-            Traverse.Create(pawnToOverwrite.records).Field("records").SetValue(this.records);
-            Traverse.Create(pawnToOverwrite.records).Field("battleActive").SetValue(this.battleActive);
-            Traverse.Create(pawnToOverwrite.records).Field("battleExitTick").SetValue(this.battleExitTick);
+            if (this.records != null)
+            {
+                Traverse.Create(pawnToOverwrite.records).Field("records").SetValue(this.records);
+                Traverse.Create(pawnToOverwrite.records).Field("battleActive").SetValue(this.battleActive);
+                Traverse.Create(pawnToOverwrite.records).Field("battleExitTick").SetValue(this.battleExitTick);
+            }
 
             if (pawnToOverwrite.playerSettings is null)
             {

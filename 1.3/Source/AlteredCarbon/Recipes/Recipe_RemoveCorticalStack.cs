@@ -44,8 +44,7 @@ namespace AlteredCarbon
 					corticalStack.PersonaData.gender = hediff.PersonaData.gender;
 					corticalStack.PersonaData.race = hediff.PersonaData.race;
 					GenPlace.TryPlaceThing(corticalStack, billDoer.Position, billDoer.Map, ThingPlaceMode.Near);
-					if (AlteredCarbonManager.Instance.stacksIndex == null) AlteredCarbonManager.Instance.stacksIndex = new Dictionary<int, CorticalStack>();
-					AlteredCarbonManager.Instance.stacksIndex[pawn.thingIDNumber] = corticalStack;
+					AlteredCarbonManager.Instance.StacksIndex[pawn.thingIDNumber] = corticalStack;
 
 					NotifyPlayerOfKilledPatch.disableKilledEffect = true;
 					var head = pawn.health.hediffSet.GetNotMissingParts().FirstOrDefault((BodyPartRecord x) => x.def == BodyPartDefOf.Head);

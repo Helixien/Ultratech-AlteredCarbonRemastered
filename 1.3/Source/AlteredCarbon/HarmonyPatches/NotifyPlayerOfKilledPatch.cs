@@ -165,7 +165,7 @@ namespace AlteredCarbon
     {
         public static bool Prefix(Pawn pawn, Pawn fromPOV, ref string __result)
         {
-            if (AlteredCarbonManager.Instance.deadPawns.Contains(pawn) && AlteredCarbonManager.Instance.stacksIndex.ContainsKey(pawn.thingIDNumber))
+            if (AlteredCarbonManager.Instance.deadPawns.Contains(pawn) && AlteredCarbonManager.Instance.StacksIndex.ContainsKey(pawn.thingIDNumber))
             {
                 __result = "AlteredCarbon.NoSleeve".Translate();
                 return false;
@@ -291,7 +291,7 @@ namespace AlteredCarbon
                     AlteredCarbonManager.Instance.deadPawns.Add(__instance);
                     __state = __instance.GetCaravan();
                 }
-                if (AlteredCarbonManager.Instance.stacksIndex.TryGetValue(__instance.thingIDNumber, out var corticalStack))
+                if (AlteredCarbonManager.Instance.StacksIndex.TryGetValue(__instance.thingIDNumber, out var corticalStack))
                 {
                     if (LookTargets_Patch.targets.TryGetValue(__instance, out var targets))
                     {
@@ -370,7 +370,7 @@ namespace AlteredCarbon
                 if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && Event.current.clickCount == 1 && Mouse.IsOver(rect))
                 {
                     Event.current.Use();
-                    if (AlteredCarbonManager.Instance.stacksIndex.TryGetValue(colonist.thingIDNumber, out var corticalStack))
+                    if (AlteredCarbonManager.Instance.StacksIndex.TryGetValue(colonist.thingIDNumber, out var corticalStack))
                     {
                         if (corticalStack != null)
                         {
@@ -382,7 +382,7 @@ namespace AlteredCarbon
                 if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && Event.current.clickCount == 2 && Mouse.IsOver(rect))
                 {
                     Event.current.Use();
-                    if (AlteredCarbonManager.Instance.stacksIndex.TryGetValue(colonist.thingIDNumber, out var corticalStack))
+                    if (AlteredCarbonManager.Instance.StacksIndex.TryGetValue(colonist.thingIDNumber, out var corticalStack))
                     {
                         if (corticalStack is null)
                         {

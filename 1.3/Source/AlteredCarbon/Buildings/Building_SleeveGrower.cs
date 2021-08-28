@@ -173,6 +173,7 @@ namespace AlteredCarbon
 				return adult_dead;
 			}
 		}
+
 		public override void DrawAt(Vector3 drawLoc, bool flip = false)
 		{
 			base.DrawAt(drawLoc, flip);
@@ -180,6 +181,7 @@ namespace AlteredCarbon
 			{
 				Vector3 newPos = drawLoc;
 				newPos.z += 0.2f;
+				newPos.y += 1;
 				var growthValue = GrowthProgress;
 				if (!this.innerPawnIsDead)
 				{
