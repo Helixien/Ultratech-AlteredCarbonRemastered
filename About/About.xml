@@ -8,7 +8,7 @@
 		<li>1.2</li>
 	</supportedVersions>
 	<packageId>Hlx.UltratechAlteredCarbon</packageId>
-	<description>Mod Version: 3.1a3
+	<description>Mod Version: 3.1b1
 	
 Check the workshop page for information.</description>
 	<url>https://steamcommunity.com/sharedfiles/filedetails/?id=2196278117</url>
@@ -18,12 +18,6 @@ Check the workshop page for information.</description>
 			<displayName>Harmony</displayName>
 			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld</downloadUrl>
 			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2196278117</steamWorkshopUrl>
-		</li>
-		<li>
-			<packageId>Ultratech.Core</packageId>
-			<displayName>Ultratech: Core and Framework</displayName>
-			<downloadUrl></downloadUrl>
-			<steamWorkshopUrl></steamWorkshopUrl>
 		</li>
 	</modDependencies>
 	<loadAfter>
