@@ -27,8 +27,8 @@
 	<AlteredCarbon.SleeveCustomization>Sleeve Customization</AlteredCarbon.SleeveCustomization>
 	<AlteredCarbon.NoSleeve>No Sleeve</AlteredCarbon.NoSleeve>
 	<AlteredCarbon.Sleeve>Sleeve</AlteredCarbon.Sleeve>
-	<AlteredCarbon.CannotCopyNoIntellectual>Duplicate Stack (requires intellectual skill of 10 or higher)</AlteredCarbon.CannotCopyNoIntellectual>
-	<AlteredCarbon.CannotCopyNoOtherEmptyStacks>Duplicate Stack (no empty stacks on the map)</AlteredCarbon.CannotCopyNoOtherEmptyStacks>
+	<AlteredCarbon.CannotCopyNoIntellectual>(requires intellectual skill of 10 or higher)</AlteredCarbon.CannotCopyNoIntellectual>
+	<AlteredCarbon.CannotCopyNoOtherEmptyStacks>(no empty stacks on the map)</AlteredCarbon.CannotCopyNoOtherEmptyStacks>
 	<AlteredCarbon.GoodwillChangedReason_ErasedPawn>erased {PAWN_labelShort}</AlteredCarbon.GoodwillChangedReason_ErasedPawn>
 	<AlteredCarbon.CantWipeStackTooDumb>Wipe Stack (requires intellectual skill of 5 or higher)</AlteredCarbon.CantWipeStackTooDumb>
 	<AlteredCarbon.CancelSleeveBodyGrowing>Cancel the sleeve growing process.</AlteredCarbon.CancelSleeveBodyGrowing>

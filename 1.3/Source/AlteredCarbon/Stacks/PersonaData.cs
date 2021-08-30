@@ -132,6 +132,11 @@ namespace AlteredCarbon
             dummyPawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Colonist, Faction.OfPlayer);
             OverwritePawn(dummyPawn, null);
         }
+
+        public bool IsMatchingPawn(Pawn pawn)
+        {
+            return pawn.thingIDNumber == this.pawnID || this.name.ToString() == pawn.Name.ToString();
+        }
         public TaggedString PawnNameColored
         {
             get
@@ -185,7 +190,7 @@ namespace AlteredCarbon
             }
         }
 
-        public void CopyPawn(Pawn pawn)
+        public void CopyPawn(Pawn pawn, bool copyRaceGenderInfo = false)
         {
             this.name = pawn.Name;
             this.origPawn = pawn;
@@ -286,6 +291,21 @@ namespace AlteredCarbon
             }
 
             this.pawnID = pawn.thingIDNumber;
+
+            if (copyRaceGenderInfo)
+            {
+                var hediff = pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) as Hediff_CorticalStack;
+                if (hediff != null)
+                {
+                    this.race = hediff.PersonaData.race;
+                    this.gender = hediff.PersonaData.gender;
+                }
+                else
+                {
+                    this.race = pawn.def;
+                    this.gender = pawn.gender;
+                }
+            }
             if (ModsConfig.RoyaltyActive && pawn.royalty != null)
             {
                 this.royalTitles = pawn.royalty?.AllTitlesForReading;
@@ -1143,6 +1163,11 @@ namespace AlteredCarbon
 
         private List<Faction> tmpPermitFactions;
         private List<int> tmpPermitPointsAmounts;
+
+        public override string ToString()
+        {
+            return this.name + " - " + this.faction + " - " + this.pawnID;
+        }
     }
 }
 

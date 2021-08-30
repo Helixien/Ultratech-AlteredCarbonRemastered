@@ -78,7 +78,7 @@ namespace AlteredCarbon
                 {
                     foreach (var pawn in pawns)
                     {
-                        if (pawn != null && pawn.thingIDNumber == personaData.pawnID)
+                        if (pawn != null && personaData.IsMatchingPawn(pawn))
                         {
                             if (pawn.Destroyed || pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is null)
                             {
@@ -258,7 +258,7 @@ namespace AlteredCarbon
         public void Backup(Pawn pawn)
         {
             var copy = new PersonaData();
-            copy.CopyPawn(pawn);
+            copy.CopyPawn(pawn, copyRaceGenderInfo: true);
             copy.isCopied = true;
             copy.lastTimeUpdated = Find.TickManager.TicksGame;
             this.backedUpStacks[copy.pawnID] = copy;
