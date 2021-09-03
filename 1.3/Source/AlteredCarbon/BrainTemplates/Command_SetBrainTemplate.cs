@@ -2,6 +2,7 @@
 using UnityEngine;
 using Verse;
 using System.Linq;
+using RimWorld;
 
 namespace AlteredCarbon
 {
@@ -21,33 +22,41 @@ namespace AlteredCarbon
         public override void ProcessInput(Event ev)
         {
             base.ProcessInput(ev);
-            List<FloatMenuOption> list = new List<FloatMenuOption>();
-            HashSet<ThingDef> brainTemplates = new HashSet<ThingDef>();
-            brainTemplates.AddRange(this.map.listerThings.AllThings.Where(x => x.TryGetComp<CompBrainTemplate>() != null).Select(x => x.def));
-            foreach (ThingDef brainTemplate in brainTemplates)
+            if (building.incubatorState == IncubatorState.Inactive)
             {
-                if (brainTemplate != building.ActiveBrainTemplate?.def)
+                List<FloatMenuOption> list = new List<FloatMenuOption>();
+                HashSet<ThingDef> brainTemplates = new HashSet<ThingDef>();
+                brainTemplates.AddRange(this.map.listerThings.AllThings.Where(x => x.TryGetComp<CompBrainTemplate>() != null).Select(x => x.def));
+                foreach (ThingDef brainTemplate in brainTemplates)
                 {
-                    list.Add(new FloatMenuOption(brainTemplate.LabelCap, delegate
+                    if (brainTemplate != building.ActiveBrainTemplate?.def)
                     {
-                        this.InsertBrainTemplate(brainTemplate);
+                        list.Add(new FloatMenuOption(brainTemplate.LabelCap, delegate
+                        {
+                            this.InsertBrainTemplate(brainTemplate);
+                        }, MenuOptionPriority.Default, null, null, 29f, null, null));
+                    }
+                }
+
+                if (allowRemoveActiveBrain && building.ActiveBrainTemplate != null)
+                {
+                    list.Add(new FloatMenuOption("AlteredCarbon.RemoveCurrentBrainTemplate".Translate(), delegate
+                    {
+                        this.RemoveActiveBrainTemplate();
                     }, MenuOptionPriority.Default, null, null, 29f, null, null));
                 }
-            }
 
-            if (allowRemoveActiveBrain && building.ActiveBrainTemplate != null)
-            {
-                list.Add(new FloatMenuOption("AlteredCarbon.RemoveCurrentBrainTemplate".Translate(), delegate
+                if (list.Count == 0)
                 {
-                    this.RemoveActiveBrainTemplate();
-                }, MenuOptionPriority.Default, null, null, 29f, null, null));
-            }
+                    list.Add(new FloatMenuOption("None".Translate(), null, MenuOptionPriority.Default, null, null, 29f, null, null));
+                }
 
-            if (list.Count == 0)
-            {
-                list.Add(new FloatMenuOption("None".Translate(), null, MenuOptionPriority.Default, null, null, 29f, null, null));
+                Find.WindowStack.Add(new FloatMenu(list));
             }
-            Find.WindowStack.Add(new FloatMenu(list));
+            else
+            {
+                Messages.Message("AlteredCarbon.BrainTemplateIsUsedCurrently".Translate(), MessageTypeDefOf.CautionInput);
+            }
         }
         private void InsertBrainTemplate(ThingDef brainTemplate)
         {

@@ -80,7 +80,7 @@ namespace AlteredCarbon
                     {
                         if (pawn != null && personaData.IsMatchingPawn(pawn))
                         {
-                            if (pawn.Destroyed || pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is null)
+                            if (pawn.Destroyed && pawn.Corpse is null || pawn.Corpse != null && pawn.Corpse.Destroyed || pawn.ParentHolder is null || pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is null)
                             {
                                 if (!CorticalStack.corticalStacks.Any(x => x.PersonaData.pawnID == personaData.pawnID && x.Spawned && !x.Destroyed))
                                 {

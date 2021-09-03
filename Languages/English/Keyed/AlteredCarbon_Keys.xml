@@ -142,4 +142,7 @@
 	<AlteredCarbon.OrganGrowingRecipesRequiresResearch>You need to research at least one organ growing recipe.</AlteredCarbon.OrganGrowingRecipesRequiresResearch>
 	<AlteredCarbon.BackupsCompleted>Quantum Storage Matrix: Backups Completed! {0} colonists were backed up!</AlteredCarbon.BackupsCompleted>
 	<AlteredCarbon.race>Race</AlteredCarbon.race>
+	<AlteredCarbon.ActiveBrainTemplateDesc>Active brain template: </AlteredCarbon.ActiveBrainTemplateDesc>
+	<AlteredCarbon.AwaitingBrainTemplateDesc>Awaiting brain template: </AlteredCarbon.AwaitingBrainTemplateDesc>
+	<AlteredCarbon.BrainTemplateIsUsedCurrently>Brain template is active and cannot be removed or changed during sleeve growth process. Abort sleeve growth in order to remove/change brain template.</AlteredCarbon.BrainTemplateIsUsedCurrently>
 </LanguageData>

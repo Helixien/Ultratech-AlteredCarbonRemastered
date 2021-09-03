@@ -29,10 +29,10 @@ namespace AlteredCarbon
 		{
 			get
 			{
-				return this.innerContainer.Where(x => x.TryGetComp<CompBrainTemplate>() != null).FirstOrDefault();
+				return this.innerContainer.FirstOrDefault(x => x.TryGetComp<CompBrainTemplate>() != null);
 			}
 		}
-		public override Thing InnerThing => this.innerContainer.Where(x => x.TryGetComp<CompBrainTemplate>() is null).FirstOrDefault();
+		public override Thing InnerThing => this.innerContainer.FirstOrDefault(x => x.TryGetComp<CompBrainTemplate>() is null);
         public override IEnumerable<Gizmo> GetGizmos()
 		{
 			foreach (Gizmo gizmo in base.GetGizmos())
@@ -87,6 +87,10 @@ namespace AlteredCarbon
 					command_Action.defaultDesc = "AlteredCarbon.InsertBrainTemplateDesc".Translate();
 					command_Action.hotKey = KeyBindingDefOf.Misc8;
 					command_Action.icon = ContentFinder<Texture2D>.Get("UI/Icons/None", true);
+					if (this.incubatorState != IncubatorState.Inactive)
+                    {
+						command_Action.Disable("AlteredCarbon.BrainTemplateIsUsedCurrently".Translate());
+                    }
 					yield return command_Action;
 				}
 				if (this.ActiveBrainTemplate != null)
@@ -96,6 +100,10 @@ namespace AlteredCarbon
 					command_Action.defaultDesc = "AlteredCarbon.ActiveBrainTemplateDesc".Translate() + this.ActiveBrainTemplate.LabelCap;
 					command_Action.hotKey = KeyBindingDefOf.Misc8;
 					command_Action.icon = this.ActiveBrainTemplate.def.uiIcon;
+					if (this.incubatorState != IncubatorState.Inactive)
+					{
+						command_Action.Disable("AlteredCarbon.BrainTemplateIsUsedCurrently".Translate());
+					}
 					yield return command_Action;
 				}
 				else if (this.activeBrainTemplateToBeProcessed != null)
@@ -105,6 +113,10 @@ namespace AlteredCarbon
 					command_Action.defaultDesc = "AlteredCarbon.AwaitingBrainTemplateDesc".Translate() + this.activeBrainTemplateToBeProcessed.LabelCap;
 					command_Action.hotKey = KeyBindingDefOf.Misc8;
 					command_Action.icon = this.activeBrainTemplateToBeProcessed.uiIcon;
+					if (this.incubatorState != IncubatorState.Inactive)
+					{
+						command_Action.Disable("AlteredCarbon.BrainTemplateIsUsedCurrently".Translate());
+					}
 					yield return command_Action;
 				}
 			}
@@ -237,7 +249,12 @@ namespace AlteredCarbon
 			this.totalTicksToGrow = 0;
 			this.curTicksToGrow = 0;
 			this.innerPawnIsDead = false;
-			this.innerContainer.ClearAndDestroyContents(DestroyMode.Vanish);
+			var innerPawn = this.InnerPawn;
+			if (innerPawn != null)
+            {
+				innerPawn.Destroy();
+				this.innerContainer.Remove(innerPawn);
+            }
 			ResetGraphics();
 		}
 		public void CreateSleeve()
@@ -372,7 +389,7 @@ namespace AlteredCarbon
 		}
 		public void DropActiveBrainTemplate()
 		{
-			this.innerContainer.TryDrop(this.ActiveBrainTemplate, ThingPlaceMode.Near, out Thing result);
+			this.innerContainer.TryDrop(this.ActiveBrainTemplate, this.InteractionCell, this.Map, ThingPlaceMode.Near, 1, out Thing result);
 			this.removeActiveBrainTemplate = false;
 		}
 		public void AcceptBrainTemplate(Thing brainTemplate)
