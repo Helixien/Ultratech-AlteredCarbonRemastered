@@ -348,6 +348,12 @@ namespace AlteredCarbon
                 }
                 try
                 {
+                    Notify_ColonistKilled_Patch.disableKilledEffect = true;
+                    Notify_PawnKilled_Patch.disableKilledEffect = true;
+                    Notify_LeaderDied_Patch.disableKilledEffect = true;
+                    AppendThoughts_ForHumanlike_Patch.disableKilledEffect = true;
+                    AppendThoughts_Relations_Patch.disableKilledEffect = true;
+                    NotifyPlayerOfKilledPatch.disableKilledEffect = true;
                     pawn.Kill(null);
                 }
                 catch { }

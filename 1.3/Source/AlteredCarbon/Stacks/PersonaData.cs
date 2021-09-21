@@ -677,7 +677,7 @@ namespace AlteredCarbon
                     {
                         foreach (var rel in otherPawn.relations.DirectRelations)
                         {
-                            if (this.name.ToStringFull.Length > 0 && this.name.ToStringFull == rel.otherPawn?.Name.ToStringFull && rel.otherPawn != pawnToOverwrite)
+                            if (this.name?.ToStringFull.Length > 0 && this.name.ToStringFull == rel.otherPawn?.Name?.ToStringFull && rel.otherPawn != pawnToOverwrite)
                             {
                                 rel.otherPawn = pawnToOverwrite;
 
@@ -695,7 +695,7 @@ namespace AlteredCarbon
                         {
                             foreach (var rel2 in otherPawn.relations.DirectRelations)
                             {
-                                if (rel.def == rel2.def && rel2.otherPawn?.Name.ToStringFull.Length > 0 && rel2.otherPawn.Name.ToStringFull == pawnToOverwrite.Name.ToStringFull 
+                                if (rel.def == rel2.def && rel2.otherPawn?.Name?.ToStringFull.Length > 0 && rel2.otherPawn.Name.ToStringFull == pawnToOverwrite.Name.ToStringFull 
                                     && rel2.otherPawn != pawnToOverwrite)
                                 {
                                     rel2.otherPawn = pawnToOverwrite;
@@ -719,7 +719,7 @@ namespace AlteredCarbon
                     {
                         foreach (var thought in otherPawn.needs.mood.thoughts.memories.Memories)
                         {
-                            if (thought.otherPawn != null && thought.otherPawn?.Name.ToStringFull.Length > 0 && thought.otherPawn.Name.ToStringFull == pawnToOverwrite.Name?.ToStringFull 
+                            if (thought.otherPawn != null && thought.otherPawn?.Name?.ToStringFull.Length > 0 && thought.otherPawn.Name.ToStringFull == pawnToOverwrite.Name?.ToStringFull 
                                 && thought.otherPawn != pawnToOverwrite)
                             {
                                 thought.otherPawn = pawnToOverwrite;
@@ -863,7 +863,11 @@ namespace AlteredCarbon
             if (pawnToOverwrite.foodRestriction == null) pawnToOverwrite.foodRestriction = new Pawn_FoodRestrictionTracker();
             pawnToOverwrite.foodRestriction.CurrentFoodRestriction = this.foodRestriction;
             if (pawnToOverwrite.outfits == null) pawnToOverwrite.outfits = new Pawn_OutfitTracker();
-            pawnToOverwrite.outfits.CurrentOutfit = this.outfit;
+            try
+            {
+                pawnToOverwrite.outfits.CurrentOutfit = this.outfit;
+            }
+            catch { }
             if (pawnToOverwrite.drugs == null) pawnToOverwrite.drugs = new Pawn_DrugPolicyTracker();
             pawnToOverwrite.drugs.CurrentPolicy = this.drugPolicy;
             pawnToOverwrite.ageTracker.AgeChronologicalTicks = this.ageChronologicalTicks;
@@ -1037,7 +1041,7 @@ namespace AlteredCarbon
             }
             foreach (var otherPawn in PawnsFinder.AllMaps)
             {
-                if (otherPawn?.Name != null && otherPawn.Name.ToStringFull == pawn.Name.ToStringFull && otherPawn != pawn)
+                if (otherPawn?.Name != null && otherPawn.Name.ToStringFull == pawn.Name?.ToStringFull && otherPawn != pawn)
                 {
                     return otherPawn;
                 }
@@ -1054,7 +1058,7 @@ namespace AlteredCarbon
             {
                 foreach (var otherPawn in AlteredCarbonManager.Instance.PawnsWithStacks)
                 {
-                    if (otherPawn != null && otherPawn.Name != null && otherPawn.Name.ToStringFull == pawn.Name.ToStringFull)
+                    if (otherPawn?.Name != null && otherPawn.Name.ToStringFull == pawn.Name?.ToStringFull)
                     {
                         return otherPawn;
                     }

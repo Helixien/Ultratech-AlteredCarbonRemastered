@@ -80,8 +80,17 @@ namespace AlteredCarbon
                     {
                         if (pawn != null && personaData.IsMatchingPawn(pawn))
                         {
-                            if (pawn.Destroyed && pawn.Corpse is null || pawn.Corpse != null && pawn.Corpse.Destroyed || pawn.ParentHolder is null || pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is null)
+                            if (pawn.Destroyed && pawn.Corpse is null || pawn.Corpse != null && pawn.Corpse.Destroyed || pawn.ParentHolder is null || 
+                                pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is null)
                             {
+                                //Log.Message(pawn + " - pawn.thingIDNumber: " + pawn.thingIDNumber);
+                                //Log.Message(pawn + " - pawn.Destroyed: " + pawn.Destroyed);
+                                //Log.Message(pawn + " - pawn.Position: " + pawn.Position);
+                                //Log.Message(pawn + " - pawn.Map: " + pawn.Map);
+                                //Log.Message(pawn + " - pawn.Corpse: " + pawn.Corpse);
+                                //Log.Message(pawn + " - pawn.Corpse.Destroyed: " + pawn.Corpse?.Destroyed);
+                                //Log.Message(pawn + " - pawn.ParentHolder: " + pawn.ParentHolder);
+                                //Log.Message(pawn + " - pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is null): " + (pawn.health.hediffSet.GetFirstHediffOfDef(AC_DefOf.UT_CorticalStack) is null));
                                 if (!CorticalStack.corticalStacks.Any(x => x.PersonaData.pawnID == personaData.pawnID && x.Spawned && !x.Destroyed))
                                 {
                                     return personaData;
